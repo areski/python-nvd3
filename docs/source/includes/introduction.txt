@@ -1,0 +1,90 @@
+:Version: |version|
+:Date: |today|
+:Keywords: python, tts, speech, text2speech
+:Author: Arezqui Belaid
+:Description: Python wrapper for nvd3, build re-usable charts and chart components for d3.js
+:NVD3: Visit NVD3 website for futher information : http://nvd3.org/
+
+--
+
+.. _python-nvd3-synopsis:
+
+Python-nvd3 is a Python wrapper for NVD3 graph library.
+NVD3 is an attempt to build re-usable charts and chart components
+for d3.js without taking away the power that d3.js gives you.
+
+The license is MIT.
+
+
+.. _overview:
+
+Overview
+========
+
+Python-nvd3 is a Python wrapper for NVD3 graph library.
+Visit NVD3 website for futher information : http://nvd3.org/
+
+
+.. _usage:
+
+Usage
+-----
+
+After installation use python-nvd3 as follow ::
+
+    from nvd3 import pieChart
+
+    chart = pieChart(name="pieChart", height=450, width=450)
+    xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+    ydata = [1, 2, 3, 4, 5, 3, 4]
+
+    chart.add_serie(y=ydata, x=xdata)
+    chart.buildhtml()
+
+    output_file.write("\n\n<h2> pieChart Graph </h2>\n\n")
+    output_file.write(chart.html)
+
+    #close Html file
+    output_file.close()
+
+
+
+See our examples directory for more usage.
+
+
+.. _documentation:
+
+Documentation
+=============
+
+Documentation is available on 'Read the Docs':
+http://python-nvd3.readthedocs.org
+
+
+.. _contributing:
+
+Contributing
+============
+
+If you've found a bug, add a feature or improve python-nv3 and
+think it is useful then please consider contributing.
+Patches, pull requests or just suggestions are always welcome!
+
+Source code: http://github.com/areski/python-nvd3
+
+
+If you don’t like Github and Git you’re welcome to send regular patches.
+
+Bug tracker: http://github.com/areski/python-nvd3/issues
+
+
+.. _license:
+
+License
+=======
+
+Copyright (c) 2013 Arezqui Belaid <areski@gmail.com>
+
+Python-nvd3 is licensed under MIT, see `MIT-LICENSE.txt`.
+
+
