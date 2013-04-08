@@ -59,7 +59,7 @@ After installation use python-nvd3 as follow ::
 
 
 
-See our examples directory for more samples.
+See the file examples.py for more samples.
 
 
 Screenshot

@@ -2,8 +2,9 @@
 :Date: |today|
 :Keywords: python, plot, graph, nvd3, d3
 :Author: Arezqui Belaid
+:License: MIT
 :Description: Python wrapper for nvd3, build re-usable charts and chart components for d3.js
-:NVD3: Visit NVD3 website for futher information : http://nvd3.org/
+:NVD3: NVD3 http://nvd3.org/
 
 --
 
@@ -12,8 +13,6 @@
 Python-nvd3 is a Python wrapper for NVD3 graph library.
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js gives you.
-
-The license is MIT.
 
 
 .. _overview:

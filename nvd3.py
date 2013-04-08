@@ -26,6 +26,7 @@ General aims :
 __version__ = '0.1.0'
 
 import json
+from optparse import OptionParser
 
 
 #for template we might want to use something like Jinja2
@@ -38,6 +39,20 @@ template_header_nvd3 = """
 <script src="http://nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
 <script src="http://nvd3.org/nv.d3.js" type="text/javascript"></script>
 </head>
+<body>
+"""
+
+template_page_nvd3 = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link media="all" href="http://nvd3.org/src/nv.d3.css" type="text/css" rel="stylesheet" />
+<script src="http://nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
+<script src="http://nvd3.org/nv.d3.js" type="text/javascript"></script>
+{additionaljs}
+</head>
+<body>
+{content}
 <body>
 """
 
@@ -85,7 +100,7 @@ class NVD3Chart:
     """
     count = 0
     dateformat = '%x'
-    data = []
+    series = []
     axislist = {}
     style = ''  # Special style
     htmlcontent = ''  # This will contain the htmloutput
@@ -97,6 +112,9 @@ class NVD3Chart:
     resize = False
     stacked = False
 
+    header_css = ['http://nvd3.org/src/nv.d3.css']
+    header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
+
     def __init__(self, name=None, **kwargs):
         """
         Constructor
@@ -105,7 +123,7 @@ class NVD3Chart:
         self.model = self.__class__.__name__
 
         #Init Data
-        self.data = []
+        self.series = []
         self.axislist = {}
 
         if not name:
@@ -125,38 +143,38 @@ class NVD3Chart:
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
         """
         if not name:
-            name = "Serie %d" % (len(self.data) + 1)
+            name = "Serie %d" % (len(self.series) + 1)
 
         if self.x_axis_date:
             #x = [d.isoformat() for d in x]
             x = [str(d) + '000' for d in x]
 
         serie = [{"x":x[i], "y":y} for i, y in enumerate(y)]
-        data = {"values": serie, "key": name}
+        data_keyvalue = {"values": serie, "key": name}
 
         #multiChart
         try:
-            data["type"] = kwargs["type"]
+            data_keyvalue["type"] = kwargs["type"]
         except:
             pass
 
         try:
-            data["yAxis"] = kwargs["axis"]
+            data_keyvalue["yAxis"] = kwargs["axis"]
         except:
-            data["yAxis"] = "1"
+            data_keyvalue["yAxis"] = "1"
 
         try:
             if kwargs["bar"]:
-                data["bar"] = 'true'
+                data_keyvalue["bar"] = 'true'
         except:
             pass
 
         try:
-            data["disabled"] = kwargs["disabled"]
+            data_keyvalue["disabled"] = kwargs["disabled"]
         except:
             pass
 
-        self.data.append(data)
+        self.series.append(data_keyvalue)
 
     def set_graph_height(self, height):
         """Set Graph height"""
@@ -167,6 +185,7 @@ class NVD3Chart:
         self.width = width
 
     def __str__(self):
+        """return htmlcontent"""
         self.buildhtml()
         return self.htmlcontent
 
@@ -236,11 +255,11 @@ class NVD3Chart:
             nvhtml += "    nv.utils.windowResize(chart.update);\n"
         nvhtml += "    return chart;\n});\n"
         nvhtml += """data_%s=%s;\n</script>""" % (
-            self.name, json.dumps(self.data))
+            self.name, json.dumps(self.series))
         self.htmlcontent = nvhtml
 
     #TODO : Check if it might not make sense to have create_x_axis, create_y_axis
-    def create_axis(self, name, label=None, format=".2f", date=False):
+    def set_axis(self, name, label=None, format=".2f", date=False):
         """
         Create axis
         """
@@ -275,17 +294,20 @@ Currently implemented nvd3 chart:
 """
 
 
+#TODO: Add extensive documentation on lineWithFocusChart
+#settings supported
+#examples
 class lineWithFocusChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.create_axis('xAxis', format='%d %b %y', date=True)
-            self.create_axis('x2Axis', format='%d %b %y', date=True)
+            self.set_axis('xAxis', format='%d %b %y', date=True)
+            self.set_axis('x2Axis', format='%d %b %y', date=True)
         else:
-            self.create_axis('xAxis', format=".2f")
-            self.create_axis('x2Axis', format=".2f")
-        self.create_axis('yAxis', format=".2f")
-        self.create_axis('y2Axis', format=".2f")
+            self.set_axis('xAxis', format=".2f")
+            self.set_axis('x2Axis', format=".2f")
+        self.set_axis('yAxis', format=".2f")
+        self.set_axis('y2Axis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -293,14 +315,17 @@ class lineWithFocusChart(NVD3Chart):
             self.set_graph_width(width)
 
 
+#TODO: Add extensive documentation on lineChart
+#settings supported
+#examples
 class lineChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.create_axis('xAxis', format='%d %b %y', date=True)
+            self.set_axis('xAxis', format='%d %b %y', date=True)
         else:
-            self.create_axis('xAxis', format=".2f")
-        self.create_axis('yAxis', format=".2f")
+            self.set_axis('xAxis', format=".2f")
+        self.set_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -308,14 +333,17 @@ class lineChart(NVD3Chart):
             self.set_graph_width(width)
 
 
+#TODO: Add extensive documentation on multiBarChart
+#settings supported
+#examples
 class multiBarChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.create_axis('xAxis', format='%d %b %y', date=True)
+            self.set_axis('xAxis', format='%d %b %y', date=True)
         else:
-            self.create_axis('xAxis', format=".2f")
-        self.create_axis('yAxis', format=".2f")
+            self.set_axis('xAxis', format=".2f")
+        self.set_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -323,13 +351,34 @@ class multiBarChart(NVD3Chart):
             self.set_graph_width(width)
 
 
+#TODO: Add extensive documentation on pieChart
+#settings supported
+#examples
 class pieChart(NVD3Chart):
     def __init__(self, height=450, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.create_axis('xAxis')
-        self.create_axis('yAxis')
+        self.set_axis('xAxis')
+        self.set_axis('yAxis')
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+
+def _main():
+    """
+    Parse options and process commands
+    """
+    # Parse arguments
+    usage = "usage: nvd3.py [options]"
+    parser = OptionParser(usage=usage, version="python-nvd3 " + __version__ + " - Python wrapper for nvd3 ")
+    parser.add_option("-q", "--quiet",
+                  action="store_false", dest="verbose", default=True,
+                  help="don't print messages to stdout")
+
+    (options, args) = parser.parse_args()
+
+
+if __name__ == '__main__':
+    _main()
