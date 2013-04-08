@@ -27,6 +27,10 @@ After installation use python-nvd3 as follow ::
 
     from nvd3 import pieChart
 
+    #Open File to write the D3 Graph
+    output_file = open('testnvd3.html', 'w')
+    output_file.write(nvd3.template_header_nvd3)
+
     chart = pieChart(name="pieChart", height=450, width=450)
     xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
     ydata = [1, 2, 3, 4, 5, 3, 4]

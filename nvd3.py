@@ -6,22 +6,24 @@ Python-nvd3 is a Python wrapper for NVD3 graph library.
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js gives you.
 
+Project location : https://github.com/areski/python-nvd3
+
 Part of this code is inspired from goulib
 https://github.com/goulu/Goulib/blob/master/Goulib/nvd3.py
 
 This project aims to be reusuable with less dependencies and with the aim
 to power more library using it. For instance Django-Nvd3.
 
-Major aims :
-- to keep a separation between the templating and the output generation
-- don't tie to many dependencies
+General aims :
+- keep a separation between the templating and the output generation
+- don't tie with too many dependencies
 - easy to use
 - clean APIs
 - Documented
 - Clean code / PEP8
-
 """
 
+__version__ = '0.1.0'
 
 import json
 
@@ -83,7 +85,6 @@ class NVD3Chart:
     """
     count = 0
     dateformat = '%x'
-    args = None
     data = []
     axislist = {}
     style = ''  # Special style
@@ -93,6 +94,8 @@ class NVD3Chart:
     model = ''  # LineWithFocusChart, MultiBarChart
     d3_select_extra = ''
     x_axis_date = False
+    resize = False
+    stacked = False
 
     def __init__(self, name=None, **kwargs):
         """
@@ -110,9 +113,13 @@ class NVD3Chart:
             name = "chart%d" % (self.count)
         self.name = name
 
-        self.args = kwargs
+        if 'stacked' in kwargs and kwargs["stacked"]:
+            self.stacked = True
 
-    def add_serie(self, y, x=None, name=None, **kwargs):
+        if 'resize' in kwargs and kwargs["resize"]:
+            self.resize = True
+
+    def add_serie(self, y, x, name=None, **kwargs):
         """
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
@@ -194,11 +201,8 @@ class NVD3Chart:
             if self.height:
                 nvhtml += stab(2) + 'chart.height(%s);\n' % self.height
 
-        try:
-            if self.args["stacked"]:
-                nvhtml += stab(2) + "chart.stacked(true);"
-        except:
-            pass
+        if self.stacked:
+            nvhtml += stab(2) + "chart.stacked(true);"
 
         """
         We want now to loop through all the defined Axis and add:
@@ -228,11 +232,7 @@ class NVD3Chart:
             stab(3) + self.d3_select_extra + \
             stab(3) + ".call(chart);\n\n"
 
-        try:
-            resize = self.args["resize"]
-        except:
-            resize = True
-        if resize:
+        if self.resize:
             nvhtml += "    nv.utils.windowResize(chart.update);\n"
         nvhtml += "    return chart;\n});\n"
         nvhtml += """data_%s=%s;\n</script>""" % (
@@ -336,6 +336,8 @@ class pieChart(NVD3Chart):
 
 if __name__ == '__main__':  # tests
 
+    import random
+
     #Open File for test
     output_file = open('test.html', 'w')
     output_file.write(template_header_nvd3)
@@ -343,19 +345,21 @@ if __name__ == '__main__':  # tests
     type = "lineWithFocusChart"
     #chart = LineWithFocusChart(name=type, x=X, y=Waves)
     chart = lineWithFocusChart(name=type, date=True)
-    xdata = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    nb_element = 100
+    xdata = range(nb_element)
     xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
-    ydata = [1, 2, 3, 4, 5, 3, 4, 5, 5, 3, 4, 5, 5, 3, 4, 5]
+    ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
+    #ydata = [1, 2, 3, 4, 5, 3, 4, 5, 5, 3, 4, 5, 5, 3, 4, 5]
     ydata2 = map(lambda x: x * 2, ydata)
     ydata3 = map(lambda x: x * 3, ydata)
     ydata4 = map(lambda x: x * 4, ydata)
 
     # for w in Waves:
     #     chart.add(w, x=Date)
-    chart.add_serie(ydata, x=xdata)
-    chart.add_serie(ydata2, x=xdata)
-    chart.add_serie(ydata3, x=xdata)
-    chart.add_serie(ydata4, x=xdata)
+    chart.add_serie(y=ydata, x=xdata)
+    chart.add_serie(y=ydata2, x=xdata)
+    chart.add_serie(y=ydata3, x=xdata)
+    chart.add_serie(y=ydata4, x=xdata)
     chart.buildhtml()
 
     output_file.write("\n\n<h2>" + type + "</h2>\n\n")
@@ -364,16 +368,17 @@ if __name__ == '__main__':  # tests
     #---------------------------------------
     type = "lineChart"
     #chart = LineWithFocusChart(name=type, x=X, y=Waves)
-    chart = lineChart(name="lineChart", date=True)
-    xdata = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    chart = lineChart(name=type, date=True)
+    nb_element = 100
+    xdata = range(nb_element)
     xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
-    ydata = [1, 2, 3, 4, 5, 3, 4, 5, 5, 3, 4, 5, 5, 3, 4, 5]
+    ydata = [i + random.randint(1, 10) for i in range(nb_element)]
     ydata2 = map(lambda x: x * 2, ydata)
 
     # for w in Waves:
     #     chart.add(w, x=Date)
-    chart.add_serie(ydata, x=xdata)
-    chart.add_serie(ydata2, x=xdata)
+    chart.add_serie(y=ydata, x=xdata)
+    chart.add_serie(y=ydata2, x=xdata)
     chart.buildhtml()
 
     output_file.write("\n\n<h2>" + type + "</h2>\n\n")
@@ -382,19 +387,19 @@ if __name__ == '__main__':  # tests
     #---------------------------------------
     type = "MultiBarChart"
     #chart = LineWithFocusChart(name=type, x=X, y=Waves)
-    chart = multiBarChart(name=type)
-    xdata = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    ydata = [1, 2, 3, 4, 5, 3, 4, 5, 5, 3, 4, 5, 5, 3, 4, 5]
+    chart = multiBarChart(name=type, height=150)
+    nb_element = 20
+    xdata = range(nb_element)
+    ydata = [random.randint(1, 10) for i in range(nb_element)]
     ydata2 = map(lambda x: x * 2, ydata)
     ydata3 = map(lambda x: x * 3, ydata)
     ydata4 = map(lambda x: x * 4, ydata)
 
     # for w in Waves:
     #     chart.add(w, x=Date)
-    chart.add_serie(ydata, x=xdata)
-    chart.add_serie(ydata2, x=xdata)
-    chart.add_serie(ydata3, x=xdata)
-    chart.add_serie(ydata4, x=xdata)
+    chart.add_serie(y=ydata, x=xdata)
+    chart.add_serie(y=ydata2, x=xdata)
+    chart.add_serie(y=ydata3, x=xdata)
     chart.buildhtml()
 
     output_file.write("\n\n<h2>" + type + "</h2>\n\n")
@@ -402,13 +407,11 @@ if __name__ == '__main__':  # tests
     #---------------------------------------
 
     type = "pieChart"
-    chart = pieChart(name=type, height=450, width=450)
+    chart = pieChart(name=type, height=400, width=400)
     xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
     ydata = [1, 2, 3, 4, 5, 3, 4]
 
-    # for w in Waves:
-    #     chart.add(w, x=Date)
-    chart.add_serie(ydata, x=xdata)
+    chart.add_serie(y=ydata, x=xdata)
     chart.buildhtml()
 
     output_file.write("\n\n<h2>" + type + "</h2>\n\n")
