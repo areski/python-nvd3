@@ -59,6 +59,14 @@ After installation use python-nvd3 as follow ::
 See our examples directory for more usage.
 
 
+.. _screenshot:
+
+Screenshot
+----------
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/screenshot-01.png
+
+
 .. _documentation:
 
 Documentation
