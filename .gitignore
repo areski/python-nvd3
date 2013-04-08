@@ -34,4 +34,4 @@ nosetests.xml
 .project
 .pydevproject
 archive
-test.html
+test*.html

@@ -27,35 +27,22 @@ __version__ = '0.1.1'
 
 import json
 from optparse import OptionParser
+from string import Template
 
-
-#for template we might want to use something like Jinja2
-#http://docs.python.org/2/library/string.html#template-strings
-template_header_nvd3 = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link media="all" href="http://nvd3.org/src/nv.d3.css" type="text/css" rel="stylesheet" />
-<script src="http://nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
-<script src="http://nvd3.org/nv.d3.js" type="text/javascript"></script>
-</head>
-<body>
-"""
 
 template_page_nvd3 = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link media="all" href="http://nvd3.org/src/nv.d3.css" type="text/css" rel="stylesheet" />
-<script src="http://nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
-<script src="http://nvd3.org/nv.d3.js" type="text/javascript"></script>
-{additionaljs}
+$header
 </head>
 <body>
-{content}
-<body>
+$container
+$jschart
+</body>
 """
 
+#TODO: Maybe using a similar skel will improve a lot buildjschart
 template_graph_nvd3 = """
 nv.addGraph(function() {
     var chart = nv.models.linePlusBarChart()
@@ -104,6 +91,7 @@ class NVD3Chart:
     axislist = {}
     style = ''  # Special style
     htmlcontent = ''  # This will contain the htmloutput
+    htmlheader = ''  # This will contain the html header
     height = None
     width = None
     model = ''  # LineWithFocusChart, MultiBarChart
@@ -111,6 +99,9 @@ class NVD3Chart:
     x_axis_date = False
     resize = False
     stacked = False
+    template_page_nvd3 = None
+    container = None
+    jschart = None
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -125,6 +116,7 @@ class NVD3Chart:
         #Init Data
         self.series = []
         self.axislist = {}
+        self.template_page_nvd3 = Template(template_page_nvd3)
 
         if not name:
             self.count += 1
@@ -185,9 +177,18 @@ class NVD3Chart:
         self.buildhtml()
         return self.htmlcontent
 
-    def buildhtml(self):
-        """generate HTML div"""
+    def buildhtmlheader(self):
+        """generate HTML header"""
 
+        self.htmlheader = ''
+        for css in self.header_css:
+            self.htmlheader += '<link media="all" href="%s" type="text/css" rel="stylesheet" />' % css
+        for js in self.header_js:
+            self.htmlheader += '<script src="%s" type="text/javascript"></script>' % js
+
+    def buildcontainer(self):
+        """generate HTML div"""
+        self.container = ''
         #Create SVG div with style
         if self.width:
             self.style += 'width:%spx;' % self.width
@@ -196,28 +197,32 @@ class NVD3Chart:
 
         if self.style:
             self.style = ' style="%s"' % self.style
-        nvhtml = '<div id="%s"><svg%s></svg></div>\n' % (self.name, self.style)
 
-        #Generate Javascript
-        nvhtml += '\n<script type="text/javascript">\n' + \
+        self.container = '<div id="%s"><svg%s></svg></div>\n' % (self.name, self.style)
+
+    def buildjschart(self):
+        """generate javascript code for the chart"""
+
+        self.jschart = ''
+        self.jschart += '\n<script type="text/javascript">\n' + \
             stab() + 'nv.addGraph(function() {\n'
 
-        nvhtml += stab(2) + 'var chart = nv.models.%s();\n' % self.model
+        self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
         #TODO: Move to pieChart
         if self.model == 'pieChart':
-            nvhtml += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
+            self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
                 stab(3) + '.y(function(d) { return d.y })\n' + \
                 stab(3) + '.values(function(d) { return d })\n' + \
                 stab(3) + '.color(d3.scale.category10().range());\n'
 
             if self.width:
-                nvhtml += stab(2) + 'chart.width(%s);\n' % self.width
+                self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
             if self.height:
-                nvhtml += stab(2) + 'chart.height(%s);\n' % self.height
+                self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
 
         if self.stacked:
-            nvhtml += stab(2) + "chart.stacked(true);"
+            self.jschart += stab(2) + "chart.stacked(true);"
 
         """
         We want now to loop through all the defined Axis and add:
@@ -226,9 +231,9 @@ class NVD3Chart:
         """
         if self.model != 'pieChart':
             for axis_name, a in self.axislist.iteritems():
-                nvhtml += stab(2) + "chart.%s\n" % axis_name
+                self.jschart += stab(2) + "chart.%s\n" % axis_name
                 for attr, value in a.iteritems():
-                    nvhtml += stab(3) + ".%s(%s)\n" % (attr, value)
+                    self.jschart += stab(3) + ".%s(%s)\n" % (attr, value)
 
         if self.model == 'pieChart':
             if self.width:
@@ -241,18 +246,27 @@ class NVD3Chart:
             datum = "[data_%s[0].values]" % self.name
 
         #Inject data to D3
-        nvhtml += stab(2) + "d3.select('#%s svg')\n" % self.name + \
+        self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
             stab(3) + ".datum(%s)\n" % datum + \
             stab(3) + ".transition().duration(500)\n" + \
             stab(3) + self.d3_select_extra + \
             stab(3) + ".call(chart);\n\n"
 
         if self.resize:
-            nvhtml += "    nv.utils.windowResize(chart.update);\n"
-        nvhtml += "    return chart;\n});\n"
-        nvhtml += """data_%s=%s;\n</script>""" % (
-            self.name, json.dumps(self.series))
-        self.htmlcontent = nvhtml
+            self.jschart += stab(1) + "nv.utils.windowResize(chart.update);\n"
+        self.jschart += stab(1) + "return chart;\n});\n"
+
+        #Include data
+        self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
+
+    def buildhtml(self):
+        """generate all HTML page"""
+
+        self.buildhtmlheader()
+        self.buildcontainer()
+        self.buildjschart()
+
+        self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
 
     #TODO : Check if it might not make sense to have create_x_axis, create_y_axis
     def set_axis(self, name, label=None, format=".2f", date=False):
@@ -286,6 +300,7 @@ Currently implemented nvd3 chart:
 * lineChart
 * multiBarChart
 * pieChart
+* stackedAreaChart
 * stackedAreaChart
 
 """
