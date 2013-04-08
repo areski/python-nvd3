@@ -68,6 +68,12 @@ Screenshot
 .. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/screenshot-01.png
 
 
+Demo
+----
+
+See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
+
+
 Supported graph
 ---------------
 
