@@ -38,12 +38,12 @@ chart.add_serie(y=ydata4, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")
-output_file.write(chart.html)
+output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "lineChart"
 #chart = LineWithFocusChart(name=type, x=X, y=Waves)
-chart = nvd3.lineChart(name=type, date=True)
+chart = nvd3.lineChart(name=type, date=True, height=350)
 nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
@@ -57,13 +57,13 @@ chart.add_serie(y=ydata2, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")
-output_file.write(chart.html)
+output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "MultiBarChart"
 #chart = LineWithFocusChart(name=type, x=X, y=Waves)
-chart = nvd3.multiBarChart(name=type, height=150)
-nb_element = 20
+chart = nvd3.multiBarChart(name=type, height=350)
+nb_element = 10
 xdata = range(nb_element)
 ydata = [random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
@@ -78,20 +78,21 @@ chart.add_serie(y=ydata3, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")
-output_file.write(chart.html)
+output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "pieChart"
 chart = nvd3.pieChart(name=type, height=400, width=400)
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
-ydata = [1, 2, 3, 4, 5, 3, 4]
+ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")
-output_file.write(chart.html)
+output_file.write(chart.htmlcontent)
 
-#---------------------------------------
 #close Html file
 output_file.close()
+
+#---------------------------------------

@@ -88,7 +88,7 @@ class NVD3Chart:
     data = []
     axislist = {}
     style = ''  # Special style
-    html = ''  # This will contain the htmloutput
+    htmlcontent = ''  # This will contain the htmloutput
     height = None
     width = None
     model = ''  # LineWithFocusChart, MultiBarChart
@@ -168,7 +168,7 @@ class NVD3Chart:
 
     def __str__(self):
         self.buildhtml()
-        return self.html
+        return self.htmlcontent
 
     def buildhtml(self):
         """generate HTML div"""
@@ -237,7 +237,7 @@ class NVD3Chart:
         nvhtml += "    return chart;\n});\n"
         nvhtml += """data_%s=%s;\n</script>""" % (
             self.name, json.dumps(self.data))
-        self.html = nvhtml
+        self.htmlcontent = nvhtml
 
     #TODO : Check if it might not make sense to have create_x_axis, create_y_axis
     def create_axis(self, name, label=None, format=".2f", date=False):
@@ -265,11 +265,12 @@ class NVD3Chart:
 The following classes correspond to those defined in nv.d3.js
 Examples : http://nvd3.org/ghpages/examples.html
 
-Currently implemented:
-    lineWithFocusChart
-    lineChart
-    multiBarChart
-    pieChart
+Currently implemented nvd3 chart:
+
+* lineWithFocusChart
+* lineChart
+* multiBarChart
+* pieChart
 
 """
 
@@ -287,9 +288,9 @@ class lineWithFocusChart(NVD3Chart):
         self.create_axis('y2Axis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
-            self.set_graph_height(450)
+            self.set_graph_height(height)
         if width:
-            self.set_graph_width(450)
+            self.set_graph_width(width)
 
 
 class lineChart(NVD3Chart):
@@ -302,9 +303,9 @@ class lineChart(NVD3Chart):
         self.create_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
-            self.set_graph_height(450)
+            self.set_graph_height(height)
         if width:
-            self.set_graph_width(450)
+            self.set_graph_width(width)
 
 
 class multiBarChart(NVD3Chart):
@@ -317,9 +318,9 @@ class multiBarChart(NVD3Chart):
         self.create_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
-            self.set_graph_height(450)
+            self.set_graph_height(height)
         if width:
-            self.set_graph_width(450)
+            self.set_graph_width(width)
 
 
 class pieChart(NVD3Chart):
@@ -329,6 +330,6 @@ class pieChart(NVD3Chart):
         self.create_axis('yAxis')
         # must have a specified height, otherwise it superimposes both chars
         if height:
-            self.set_graph_height(450)
+            self.set_graph_height(height)
         if width:
-            self.set_graph_width(450)
+            self.set_graph_width(width)
