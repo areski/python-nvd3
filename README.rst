@@ -1,7 +1,7 @@
 Python Wrapper for NVD3 - Create beautiful charts effortlessly
 ==============================================================
 
-:Description: Python-nvd3 is a Python wrapper for NVD3 graph library.
+:Description: Python-nvd3 is a wrapper for NVD3 graph library
 :nvd3: for futher information on nvd3 : http://nvd3.org/
 :d3: Data-Driven Documents http://d3js.org/
 

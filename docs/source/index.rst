@@ -8,7 +8,7 @@ Python-nvd3 Documentation!
 
 :Release: |version|
 :Date: |today|
-:Keywords: plot, graph, nvd3, d3
+:Keywords: python, plot, graph, nvd3, d3
 :Author: Arezqui Belaid
 :Description: Python wrapper for nvd3, build re-usable charts and chart components for d3.js
 
