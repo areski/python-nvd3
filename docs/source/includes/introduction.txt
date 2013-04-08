@@ -29,7 +29,7 @@ Visit NVD3 website for futher information : http://nvd3.org/
 Usage
 -----
 
-After installation use python-nvd3 as follow ::
+After installation use python-nvd3 as follows ::
 
     import nvd3
 
