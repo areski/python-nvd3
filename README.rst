@@ -21,3 +21,40 @@ Or if you don't have `pip`::
 
   $ sudo easy_install python-nvd3
 
+
+Usage
+-----
+
+After installation use python-nvd3 as follow ::
+
+    from nvd3 import pieChart
+
+    chart = pieChart(name="pieChart", height=450, width=450)
+    xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+    ydata = [1, 2, 3, 4, 5, 3, 4]
+
+    chart.add_serie(y=ydata, x=xdata)
+    chart.buildhtml()
+
+    output_file.write("\n\n<h2> pieChart Graph </h2>\n\n")
+    output_file.write(chart.html)
+
+    #close Html file
+    output_file.close()
+
+
+
+See our examples directory for more usage.
+
+
+Documentation
+-------------
+
+Documentation is available on 'Read the Docs':
+http://python-nvd3.readthedocs.org
+
+
+License
+-------
+
+Python-nvd3 is licensed under MIT, see `MIT-LICENSE.txt`.
