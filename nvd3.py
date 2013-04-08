@@ -153,26 +153,22 @@ class NVD3Chart:
         data_keyvalue = {"values": serie, "key": name}
 
         #multiChart
-        try:
+        #Histogram type="bar" for the series
+        if 'type' in kwargs and kwargs["type"]:
             data_keyvalue["type"] = kwargs["type"]
-        except:
-            pass
 
-        try:
-            data_keyvalue["yAxis"] = kwargs["axis"]
-        except:
+        #Define on which Y axis the serie is related
+        #a chart can have 2 Y axis, left and right, by default only one Y Axis is used
+        if 'yaxis' in kwargs and kwargs["yaxis"]:
+            data_keyvalue["yAxis"] = kwargs["yaxis"]
+        else:
             data_keyvalue["yAxis"] = "1"
 
-        try:
-            if kwargs["bar"]:
-                data_keyvalue["bar"] = 'true'
-        except:
-            pass
+        if 'bar' in kwargs and kwargs["bar"]:
+            data_keyvalue["bar"] = 'true'
 
-        try:
-            data_keyvalue["disabled"] = kwargs["disabled"]
-        except:
-            pass
+        if 'disabled' in kwargs and kwargs["disabled"]:
+            data_keyvalue["disabled"] = 'true'
 
         self.series.append(data_keyvalue)
 
@@ -290,6 +286,7 @@ Currently implemented nvd3 chart:
 * lineChart
 * multiBarChart
 * pieChart
+* stackedAreaChart
 
 """
 
@@ -337,6 +334,24 @@ class lineChart(NVD3Chart):
 #settings supported
 #examples
 class multiBarChart(NVD3Chart):
+    def __init__(self, height=450, width=None, date=False, **kwargs):
+        NVD3Chart.__init__(self, **kwargs)
+        if date:
+            self.set_axis('xAxis', format='%d %b %y', date=True)
+        else:
+            self.set_axis('xAxis', format=".2f")
+        self.set_axis('yAxis', format=".2f")
+        # must have a specified height, otherwise it superimposes both chars
+        if height:
+            self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+
+#TODO: Add extensive documentation on StackedAreaChart
+#settings supported
+#examples
+class stackedAreaChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:

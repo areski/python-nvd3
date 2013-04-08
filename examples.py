@@ -18,7 +18,6 @@ output_file = open('test.html', 'w')
 output_file.write(nvd3.template_header_nvd3)
 
 type = "lineWithFocusChart"
-#chart = LineWithFocusChart(name=type, x=X, y=Waves)
 chart = nvd3.lineWithFocusChart(name=type, date=True)
 nb_element = 100
 xdata = range(nb_element)
@@ -42,11 +41,26 @@ output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "lineChart"
-#chart = LineWithFocusChart(name=type, x=X, y=Waves)
 chart = nvd3.lineChart(name=type, date=True, height=350)
 nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+
+chart.add_serie(y=ydata, x=xdata)
+chart.add_serie(y=ydata2, x=xdata)
+chart.buildhtml()
+
+output_file.write("\n\n<h2>" + type + "</h2>\n\n")
+output_file.write(chart.htmlcontent)
+
+#---------------------------------------
+type = "stackedAreaChart"
+chart = nvd3.stackedAreaChart(name=type, height=350)
+nb_element = 100
+xdata = range(nb_element)
+xdata = map(lambda x: 100 + x, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
@@ -61,7 +75,6 @@ output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "MultiBarChart"
-#chart = LineWithFocusChart(name=type, x=X, y=Waves)
 chart = nvd3.multiBarChart(name=type, height=350)
 nb_element = 10
 xdata = range(nb_element)
@@ -70,11 +83,9 @@ ydata2 = map(lambda x: x * 2, ydata)
 ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
-# for w in Waves:
-#     chart.add(w, x=Date)
 chart.add_serie(y=ydata, x=xdata)
-chart.add_serie(y=ydata2, x=xdata)
-chart.add_serie(y=ydata3, x=xdata)
+# chart.add_serie(y=ydata2, x=xdata)
+# chart.add_serie(y=ydata3, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")

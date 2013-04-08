@@ -77,6 +77,7 @@ Currently implemented nvd3 chart:
 * lineChart
 * multiBarChart
 * pieChart
+* stackedAreaChart
 
 
 Documentation
