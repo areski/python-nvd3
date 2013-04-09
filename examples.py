@@ -17,6 +17,23 @@ import random
 output_file = open('test.html', 'w')
 output_file.write(nvd3.template_page_nvd3)
 
+#---------------------------------------
+type = "lineChart"
+chart = nvd3.lineChart(name=type, date=True, height=350)
+nb_element = 100
+xdata = range(nb_element)
+xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+
+chart.add_serie(y=ydata, x=xdata)
+chart.add_serie(y=ydata2, x=xdata)
+chart.buildhtml()
+
+output_file.write("\n\n<h2>" + type + "</h2>\n\n")
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
 type = "lineWithFocusChart"
 chart = nvd3.lineWithFocusChart(name=type, date=True)
 nb_element = 100
@@ -34,22 +51,6 @@ chart.add_serie(y=ydata, x=xdata)
 chart.add_serie(y=ydata2, x=xdata)
 chart.add_serie(y=ydata3, x=xdata)
 chart.add_serie(y=ydata4, x=xdata)
-chart.buildhtml()
-
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
-output_file.write(chart.htmlcontent)
-
-#---------------------------------------
-type = "lineChart"
-chart = nvd3.lineChart(name=type, date=True, height=350)
-nb_element = 100
-xdata = range(nb_element)
-xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
-ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-
-chart.add_serie(y=ydata, x=xdata)
-chart.add_serie(y=ydata2, x=xdata)
 chart.buildhtml()
 
 output_file.write("\n\n<h2>" + type + "</h2>\n\n")

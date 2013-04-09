@@ -71,8 +71,6 @@ nv.addGraph(function() {
 
     return chart;
 });
-
-</script>
 """
 
 
@@ -211,7 +209,7 @@ class NVD3Chart:
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
-        #TODO: Move to pieChart
+        #TODO: Move this code to pieChart
         if self.model == 'pieChart':
             self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
                 stab(3) + '.y(function(d) { return d.y })\n' + \
