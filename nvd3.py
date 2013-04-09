@@ -215,16 +215,15 @@ class NVD3Chart:
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
         #TODO: Move this code to pieChart
-        if self.model == 'pieChart':
-            self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
-                stab(3) + '.y(function(d) { return d.y })\n' + \
-                stab(3) + '.values(function(d) { return d })\n' + \
-                stab(3) + '.color(d3.scale.category10().range());\n'
-
-            if self.width:
-                self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
-            if self.height:
-                self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
+        #if self.model == 'pieChart':
+        #    self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
+        #        stab(3) + '.y(function(d) { return d.y })\n' + \
+        #        stab(3) + '.values(function(d) { return d })\n' + \
+        #        stab(3) + '.color(d3.scale.category10().range());\n'
+        #    if self.width:
+        #        self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
+        #    if self.height:
+        #        self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
 
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
@@ -240,15 +239,15 @@ class NVD3Chart:
                 for attr, value in a.iteritems():
                     self.jschart += stab(3) + ".%s(%s)\n" % (attr, value)
 
-        if self.model == 'pieChart':
-            if self.width:
-                self.d3_select_extra += ".attr('width', %s)\n" % self.width
-            if self.height:
-                self.d3_select_extra += ".attr('height', %s)\n" % self.height
+        #if self.model == 'pieChart':
+        #    if self.width:
+        #        self.d3_select_extra += ".attr('width', %s)\n" % self.width
+        #    if self.height:
+        #        self.d3_select_extra += ".attr('height', %s)\n" % self.height
 
         datum = "data_%s" % self.name
-        if self.model == 'pieChart':
-            datum = "[data_%s[0].values]" % self.name
+        #if self.model == 'pieChart':
+        #    datum = "[data_%s[0].values]" % self.name
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
@@ -623,6 +622,44 @@ class pieChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+    def buildjschart(self):
+        """generate javascript code for the chart"""
+
+        self.jschart = ''
+        self.jschart += '\n<script type="text/javascript">\n' + \
+            stab() + 'nv.addGraph(function() {\n'
+
+        self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
+
+        self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
+            stab(3) + '.y(function(d) { return d.y })\n' + \
+            stab(3) + '.values(function(d) { return d })\n' + \
+            stab(3) + '.color(d3.scale.category10().range());\n'
+
+        if self.width:
+            self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
+            self.d3_select_extra += ".attr('width', %s)\n" % self.width
+        if self.height:
+            self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
+            self.d3_select_extra += ".attr('height', %s)\n" % self.height
+
+        datum = "data_%s" % self.name
+        datum = "[data_%s[0].values]" % self.name
+
+        #Inject data to D3
+        self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
+            stab(3) + ".datum(%s)\n" % datum + \
+            stab(3) + ".transition().duration(500)\n" + \
+            stab(3) + self.d3_select_extra + \
+            stab(3) + ".call(chart);\n\n"
+
+        if self.resize:
+            self.jschart += stab(1) + "nv.utils.windowResize(chart.update);\n"
+        self.jschart += stab(1) + "return chart;\n});\n"
+
+        #Include data
+        self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
 
 
 def _main():
