@@ -198,9 +198,9 @@ class NVD3Chart:
             self.style += 'height:%spx;' % self.height
 
         if self.style:
-            self.style = ' style="%s"' % self.style
+            self.style = 'style="%s"' % self.style
 
-        self.container = '<div id="%s"><svg%s></svg></div>\n' % (self.name, self.style)
+        self.container = '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
     def buildjschart(self):
         """generate javascript code for the chart"""
