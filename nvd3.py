@@ -241,6 +241,9 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
+        # custom tooltip can goes here
+        #chart.tooltipContent(function(key, y, e, graph) { return 'Some String' });
+
         """
         We want now to loop through all the defined Axis and add:
             chart.y2Axis
