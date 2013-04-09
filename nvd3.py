@@ -326,7 +326,7 @@ class lineWithFocusChart(NVD3Chart):
 
     js-code ::
 
-        [{ "key" : "Serie 1",
+        data_lineWithFocusChart = [{ "key" : "Serie 1",
            "values" : [
                 { "x" : "1365026400000000",
                   "y" : -6
@@ -381,7 +381,44 @@ class lineWithFocusChart(NVD3Chart):
 #examples
 class lineChart(NVD3Chart):
     """
-    usage : nvd3.lineChart(name='lineChart', height=400, width=400, date=True)
+    usage ::
+
+        chart = nvd3.lineChart(name='lineChart', height=400, width=400, date=True)
+        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
+        ydata = [-6, 5, -1]
+        chart.add_serie(y=ydata, x=xdata)
+        chart.buildhtml()
+
+    js-code ::
+
+        data_lineChart = [{ "key" : "Serie 1",
+           "values" : [
+                { "x" : "1365026400000000",
+                  "y" : -6
+                },
+                { "x" : "1365026500000000",
+                  "y" : -5
+                },
+                { "x" : "1365026600000000",
+                  "y" : -1
+                },
+              ],
+            "yAxis" : "1"
+        }]
+
+        nv.addGraph(function() {
+                var chart = nv.models.lineChart();
+                chart.xAxis
+                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) })
+                chart.yAxis
+                    .tickFormat(d3.format(',.2f'))
+                d3.select('#lineChart svg')
+                    .datum(data_lineChart)
+                    .transition()
+                    .duration(500)
+                    .call(chart);
+            return chart;
+        });
     """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
@@ -402,7 +439,44 @@ class lineChart(NVD3Chart):
 #examples
 class multiBarChart(NVD3Chart):
     """
-    usage : nvd3.multiBarChart(name='multiBarChart', height=400, width=400)
+    usage ::
+
+        chart = nvd3.multiBarChart(name='multiBarChart', height=400, width=400)
+        xdata = [0, 1, 3, 4]
+        ydata = [6, 12, 9, 16]
+        chart.add_serie(y=ydata, x=xdata)
+        chart.buildhtml()
+
+    js-code ::
+
+        data_MultiBarChart = [{ "key" : "Serie 1",
+           "values" : [
+                { "x" : 0
+                  "y" : 6
+                },
+                { "x" : 1,
+                  "y" : 12
+                },
+                { "x" : 3,
+                  "y" : 9
+                },
+              ],
+            "yAxis" : "1"
+        }]
+
+        nv.addGraph(function() {
+            var chart = nv.models.multiBarChart();
+            chart.xAxis
+                .tickFormat(d3.format(',.2f'))
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'))
+            d3.select('#MultiBarChart svg')
+                .datum(data_MultiBarChart)
+                .transition()
+                .duration(500)
+                .call(chart);
+            return chart;
+        });
     """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
@@ -424,6 +498,7 @@ class multiBarChart(NVD3Chart):
 class stackedAreaChart(NVD3Chart):
     """
     usage ::
+
         chart = nvd3.stackedAreaChart(name='stackedAreaChart', height=400, width=400)
         xdata = [100, 101, 102, 103, 104, 105, 106,]
         ydata = [6, 11, 12, 7, 11, 10, 11]
@@ -502,7 +577,6 @@ class pieChart(NVD3Chart):
         chart = nvd3.pieChart(name='pieChart', height=400, width=400)
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
-
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
