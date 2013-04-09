@@ -23,6 +23,9 @@ ydata = [3, 4, 0, 1, 5, 7, 3]
 chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
 
+#print(chart.htmlheader)
+print(chart.jschart)
+
 output_file.write(chart.htmlcontent)
 
 #close Html file

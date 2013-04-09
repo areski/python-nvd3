@@ -200,9 +200,9 @@ class NVD3Chart:
 
         self.htmlheader = ''
         for css in self.header_css:
-            self.htmlheader += '<link media="all" href="%s" type="text/css" rel="stylesheet" />' % css
+            self.htmlheader += '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % css
         for js in self.header_js:
-            self.htmlheader += '<script src="%s" type="text/javascript"></script>' % js
+            self.htmlheader += '<script src="%s" type="text/javascript"></script>\n' % js
 
     def buildcontainer(self):
         """generate HTML div"""
