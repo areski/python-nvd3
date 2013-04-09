@@ -101,6 +101,7 @@ class NVD3Chart:
     stacked = False
     template_page_nvd3 = None
     container = None
+    containerheader = ''
     jschart = None
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
@@ -172,6 +173,10 @@ class NVD3Chart:
         """Set Graph width"""
         self.width = width
 
+    def set_containerheader(self, containerheader):
+        """Set containerheader"""
+        self.containerheader = containerheader
+
     def __str__(self):
         """return htmlcontent"""
         self.buildhtml()
@@ -188,7 +193,7 @@ class NVD3Chart:
 
     def buildcontainer(self):
         """generate HTML div"""
-        self.container = ''
+        self.container = self.containerheader
         #Create SVG div with style
         if self.width:
             self.style += 'width:%spx;' % self.width
@@ -198,7 +203,7 @@ class NVD3Chart:
         if self.style:
             self.style = 'style="%s"' % self.style
 
-        self.container = '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
+        self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
     def buildjschart(self):
         """generate javascript code for the chart"""

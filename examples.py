@@ -15,11 +15,10 @@ import random
 
 #Open File for test
 output_file = open('test.html', 'w')
-output_file.write(nvd3.template_page_nvd3)
-
 #---------------------------------------
 type = "lineChart"
 chart = nvd3.lineChart(name=type, date=True, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
@@ -30,12 +29,12 @@ chart.add_serie(y=ydata, x=xdata)
 chart.add_serie(y=ydata2, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
 chart = nvd3.lineWithFocusChart(name=type, date=True)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
@@ -53,12 +52,12 @@ chart.add_serie(y=ydata3, x=xdata)
 chart.add_serie(y=ydata4, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "stackedAreaChart"
 chart = nvd3.stackedAreaChart(name=type, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: 100 + x, xdata)
@@ -71,12 +70,12 @@ chart.add_serie(y=ydata, x=xdata)
 chart.add_serie(y=ydata2, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
 
 #---------------------------------------
 type = "MultiBarChart"
 chart = nvd3.multiBarChart(name=type, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = range(nb_element)
 ydata = [random.randint(1, 10) for i in range(nb_element)]
@@ -89,22 +88,20 @@ chart.add_serie(y=ydata, x=xdata)
 # chart.add_serie(y=ydata3, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "pieChart"
 chart = nvd3.pieChart(name=type, height=400, width=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
+#---------------------------------------
 
 #close Html file
 output_file.close()
-
-#---------------------------------------

@@ -13,17 +13,16 @@ import nvd3
 
 #Open File for test
 output_file = open('test1.html', 'w')
-output_file.write(nvd3.template_header_nvd3)
 
 type = "pieChart"
 chart = nvd3.pieChart(name=type, height=400, width=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
 
-output_file.write("\n\n<h2>" + type + "</h2>\n\n")
 output_file.write(chart.htmlcontent)
 
 #close Html file
