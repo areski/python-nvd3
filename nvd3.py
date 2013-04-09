@@ -310,6 +310,9 @@ Currently implemented nvd3 chart:
 #settings supported
 #examples
 class lineWithFocusChart(NVD3Chart):
+    """
+    usage : nvd3.lineWithFocusChart(name='lineWithFocusChart', date=True)
+    """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
@@ -331,6 +334,9 @@ class lineWithFocusChart(NVD3Chart):
 #settings supported
 #examples
 class lineChart(NVD3Chart):
+    """
+    usage : nvd3.lineChart(name='lineChart', height=400, width=400, date=True)
+    """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
@@ -349,6 +355,9 @@ class lineChart(NVD3Chart):
 #settings supported
 #examples
 class multiBarChart(NVD3Chart):
+    """
+    usage : nvd3.multiBarChart(name='multiBarChart', height=400, width=400)
+    """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
@@ -367,6 +376,9 @@ class multiBarChart(NVD3Chart):
 #settings supported
 #examples
 class stackedAreaChart(NVD3Chart):
+    """
+    usage : nvd3.stackedAreaChart(name='stackedAreaChart', height=400, width=400)
+    """
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
@@ -385,6 +397,45 @@ class stackedAreaChart(NVD3Chart):
 #settings supported
 #examples
 class pieChart(NVD3Chart):
+    """
+    usage ::
+
+        nvd3.pieChart(name='pieChart', height=400, width=400)
+
+    js example::
+
+        data = [{ key: "Cumulative Return",
+                  values: [
+                    {
+                      "label": "One",
+                      "value" : 29.765957771107
+                    },
+                    {
+                      "label": "Two",
+                      "value" : 0
+                    },
+                    {
+                      "label": "Three",
+                      "value" : 32.807804682612
+                    },
+                  ]
+                }]
+
+
+        nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .showLabels(true);
+
+            d3.select("#div_id")
+                .datum(data)
+                .transition().duration(1200)
+                .call(chart);
+
+          return chart;
+        });
+    """
     def __init__(self, height=450, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         self.set_axis('xAxis')
