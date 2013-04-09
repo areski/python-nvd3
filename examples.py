@@ -15,7 +15,7 @@ import random
 
 #Open File for test
 output_file = open('test.html', 'w')
-output_file.write(nvd3.template_header_nvd3)
+output_file.write(nvd3.template_page_nvd3)
 
 type = "lineWithFocusChart"
 chart = nvd3.lineWithFocusChart(name=type, date=True)
