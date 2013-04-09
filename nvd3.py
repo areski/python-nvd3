@@ -182,6 +182,19 @@ class NVD3Chart:
         self.buildhtml()
         return self.htmlcontent
 
+    def buildhtml(self):
+        """Build the HTML page
+        Create the htmlheader with css / js
+        Create html page
+        Add Js code for nvd3
+        """
+
+        self.buildhtmlheader()
+        self.buildcontainer()
+        self.buildjschart()
+
+        self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
+
     def buildhtmlheader(self):
         """generate HTML header"""
 
@@ -262,15 +275,6 @@ class NVD3Chart:
 
         #Include data
         self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
-
-    def buildhtml(self):
-        """generate all HTML page"""
-
-        self.buildhtmlheader()
-        self.buildcontainer()
-        self.buildjschart()
-
-        self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
 
     #TODO : Check if it might not make sense to have create_x_axis, create_y_axis
     def set_axis(self, name, label=None, format=".2f", date=False):
