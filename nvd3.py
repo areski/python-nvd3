@@ -228,7 +228,10 @@ class NVD3Chart:
     def buildtooltip(self):
         """generate custom chart tooltip the chart"""
         if self.custom_tooltip_flag:
-            self.charttooltip = stab(1) + 'chart.tooltipContent(function(key, y, e, graph) { return "Some String" });'
+            self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+             stab(3) + "var x = d3.time.format('%s')(new Date(graph.point.x/1000));\n" % self.dateformat +\
+             stab(3) + "return x;\n" + \
+             stab(2) + "});\n"
 
     def buildjschart(self):
         """generate javascript code for the chart"""
@@ -253,12 +256,6 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
-
-        # add custom tooltip string in jschart
-        if self.custom_tooltip_flag:
-            self.buildtooltip()
-            self.jschart += self.charttooltip
-
         """
         We want now to loop through all the defined Axis and add:
             chart.y2Axis
@@ -279,6 +276,11 @@ class NVD3Chart:
         datum = "data_%s" % self.name
         if self.model == 'pieChart':
             datum = "[data_%s[0].values]" % self.name
+
+        # add custom tooltip string in jschart
+        if self.custom_tooltip_flag:
+            self.buildtooltip()
+            self.jschart += self.charttooltip
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
