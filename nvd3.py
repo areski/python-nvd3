@@ -103,6 +103,8 @@ class NVD3Chart:
     container = None
     containerheader = ''
     jschart = None
+    custom_tooltip_flag = False
+    charttooltip = None
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -177,6 +179,10 @@ class NVD3Chart:
         """Set containerheader"""
         self.containerheader = containerheader
 
+    def set_custom_tooltip_flag(self, custom_tooltip_flag):
+        """Set custom_tooltip_flag"""
+        self.custom_tooltip_flag = custom_tooltip_flag
+
     def __str__(self):
         """return htmlcontent"""
         self.buildhtml()
@@ -218,6 +224,12 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
+
+    def buildtooltip(self):
+        """generate custom chart tooltip the chart"""
+        if self.custom_tooltip_flag:
+            self.charttooltip = stab(1) + 'chart.tooltipContent(function(key, y, e, graph) { return "Some String" });'
+
     def buildjschart(self):
         """generate javascript code for the chart"""
 
@@ -241,8 +253,11 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
-        # custom tooltip can goes here
-        #chart.tooltipContent(function(key, y, e, graph) { return 'Some String' });
+
+        # add custom tooltip string in jschart
+        if self.custom_tooltip_flag:
+            self.buildtooltip()
+            self.jschart += self.charttooltip
 
         """
         We want now to loop through all the defined Axis and add:
@@ -370,6 +385,7 @@ class lineWithFocusChart(NVD3Chart):
         if date:
             self.set_axis('xAxis', format='%d %b %y', date=True)
             self.set_axis('x2Axis', format='%d %b %y', date=True)
+            self.set_custom_tooltip_flag(True)
         else:
             self.set_axis('xAxis', format=".2f")
             self.set_axis('x2Axis', format=".2f")
