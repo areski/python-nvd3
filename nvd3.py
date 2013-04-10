@@ -142,9 +142,12 @@ class NVD3Chart:
 
         if self.x_axis_date:
             #x = [d.isoformat() for d in x]
-            x = [str(d) + '000' for d in x]
+            #x = [str(d) + '000' for d in x]
+            x = [str(d) for d in x]
 
-        serie = [{"x":x[i], "y":y} for i, y in enumerate(y)]
+        x = sorted(x)
+        serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
+
         data_keyvalue = {"values": serie, "key": name}
 
         #multiChart
@@ -229,7 +232,7 @@ class NVD3Chart:
         """generate custom chart tooltip the chart"""
         if self.custom_tooltip_flag:
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-             stab(3) + "var x = d3.time.format('%s')(new Date(graph.point.x / 1000));\n" % self.dateformat +\
+             stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
              stab(3) + "return x;\n" + \
              stab(2) + "});\n"
 
@@ -329,7 +332,6 @@ Currently implemented nvd3 chart:
 * multiBarChart
 * pieChart
 * stackedAreaChart
-* stackedAreaChart
 
 """
 
@@ -385,8 +387,8 @@ class lineWithFocusChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %y', date=True)
-            self.set_axis('x2Axis', format='%d %b %y', date=True)
+            self.set_axis('xAxis', format='%d %b %Y', date=True)
+            self.set_axis('x2Axis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.set_axis('xAxis', format=".2f")
@@ -447,7 +449,7 @@ class lineChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %y', date=True)
+            self.set_axis('xAxis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.set_axis('xAxis', format=".2f")
