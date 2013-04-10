@@ -8,10 +8,10 @@ for d3.js without taking away the power that d3.js gives you.
 
 Project location : https://github.com/areski/python-nvd3
 """
-
-
 import nvd3
 import random
+import datetime
+import time
 
 #Open File for test
 output_file = open('test.html', 'w')
@@ -19,9 +19,12 @@ output_file = open('test.html', 'w')
 type = "lineChart"
 chart = nvd3.lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-nb_element = 100
+
+start_time = int(time.mktime(datetime.datetime(2013, 1, 1).timetuple())) * 1000
+
+nb_element = 10
 xdata = range(nb_element)
-xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+xdata = map(lambda x: start_time + x, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
@@ -35,9 +38,9 @@ output_file.write(chart.htmlcontent)
 type = "lineWithFocusChart"
 chart = nvd3.lineWithFocusChart(name=type, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-nb_element = 100
+nb_element = 10
 xdata = range(nb_element)
-xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+xdata = map(lambda x: start_time + x, xdata)
 ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
 #ydata = [1, 2, 3, 4, 5, 3, 4, 5, 5, 3, 4, 5, 5, 3, 4, 5]
 ydata2 = map(lambda x: x * 2, ydata)

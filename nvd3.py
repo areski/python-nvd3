@@ -229,7 +229,7 @@ class NVD3Chart:
         """generate custom chart tooltip the chart"""
         if self.custom_tooltip_flag:
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-             stab(3) + "var x = d3.time.format('%s')(new Date(graph.point.x/1000));\n" % self.dateformat +\
+             stab(3) + "var x = d3.time.format('%s')(new Date(graph.point.x / 1000));\n" % self.dateformat +\
              stab(3) + "return x;\n" + \
              stab(2) + "});\n"
 
@@ -448,6 +448,7 @@ class lineChart(NVD3Chart):
         NVD3Chart.__init__(self, **kwargs)
         if date:
             self.set_axis('xAxis', format='%d %b %y', date=True)
+            self.set_custom_tooltip_flag(True)
         else:
             self.set_axis('xAxis', format=".2f")
         self.set_axis('yAxis', format=".2f")
