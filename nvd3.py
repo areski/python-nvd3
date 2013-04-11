@@ -227,15 +227,14 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
-
     def buildtooltip(self):
         """generate custom chart tooltip the chart"""
         if self.custom_tooltip_flag:
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-             stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
-             stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
-             stab(3) + "return tooltip_str;\n" + \
-             stab(2) + "});\n"
+                stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
+                stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
+                stab(3) + "return tooltip_str;\n" + \
+                stab(2) + "});\n"
 
     def buildjschart(self):
         """generate javascript code for the chart"""
@@ -245,18 +244,6 @@ class NVD3Chart:
             stab() + 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
-        """
-        #TODO: Move this code to pieChart
-        if self.model == 'pieChart':
-            self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
-                stab(3) + '.y(function(d) { return d.y })\n' + \
-                stab(3) + '.values(function(d) { return d })\n' + \
-                stab(3) + '.color(d3.scale.category10().range());\n'
-            if self.width:
-                self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
-            if self.height:
-                self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
-        """
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 

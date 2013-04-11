@@ -84,6 +84,7 @@ Currently implemented nvd3 chart:
 * multiBarChart
 * pieChart
 * stackedAreaChart
+* multiBarHorizontalChart
 
 
 Documentation
