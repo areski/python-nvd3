@@ -10,6 +10,9 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 import nvd3
+import random
+import datetime
+import time
 
 #Open File for test
 output_file = open('test1.html', 'w')
@@ -22,11 +25,29 @@ ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
 
-#print(chart.htmlheader)
-print(chart.jschart)
+
+type = "MultiBarChart"
+chart = nvd3.multiBarChart(name=type, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+nb_element = 10
+xdata = range(nb_element)
+ydata = [random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+ydata3 = map(lambda x: x * 3, ydata)
+ydata4 = map(lambda x: x * 4, ydata)
+
+chart.add_serie(y=ydata, x=xdata)
+chart.add_serie(y=ydata2, x=xdata)
+chart.add_serie(y=ydata3, x=xdata)
+chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+
 
 #close Html file
 output_file.close()
