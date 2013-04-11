@@ -245,7 +245,7 @@ class NVD3Chart:
             stab() + 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
-
+        """
         #TODO: Move this code to pieChart
         if self.model == 'pieChart':
             self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
@@ -256,7 +256,7 @@ class NVD3Chart:
                 self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
             if self.height:
                 self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
-
+        """
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
@@ -652,43 +652,23 @@ class pieChart(NVD3Chart):
         if width:
             self.set_graph_width(width)
 
-    # def buildjschart(self):
-    #     """generate javascript code for the chart"""
+    def buildjschart(self):
+        NVD3Chart.buildjschart(self)
 
-    #     self.jschart = ''
-    #     self.jschart += '\n<script type="text/javascript">\n' + \
-    #         stab() + 'nv.addGraph(function() {\n'
+        pie_jschart = '\n' + stab(2) + 'chart.x(function(d) { return d.x })\n' + \
+            stab(3) + '.y(function(d) { return d.y })\n' + \
+            stab(3) + '.values(function(d) { return d })\n' + \
+            stab(3) + '.color(d3.scale.category10().range());\n'
+        if self.width:
+            pie_jschart += stab(2) + 'chart.width(%s);\n' % self.width
+        if self.height:
+            pie_jschart += stab(2) + 'chart.height(%s);\n' % self.height
 
-    #     self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
-
-    #     self.jschart += stab(2) + 'chart.x(function(d) { return d.x })\n' + \
-    #         stab(3) + '.y(function(d) { return d.y })\n' + \
-    #         stab(3) + '.values(function(d) { return d })\n' + \
-    #         stab(3) + '.color(d3.scale.category10().range());\n'
-
-    #     if self.width:
-    #         self.jschart += stab(2) + 'chart.width(%s);\n' % self.width
-    #         self.d3_select_extra += ".attr('width', %s)\n" % self.width
-    #     if self.height:
-    #         self.jschart += stab(2) + 'chart.height(%s);\n' % self.height
-    #         self.d3_select_extra += ".attr('height', %s)\n" % self.height
-
-    #     datum = "data_%s" % self.name
-    #     datum = "[data_%s[0].values]" % self.name
-
-    #     #Inject data to D3
-    #     self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
-    #         stab(3) + ".datum(%s)\n" % datum + \
-    #         stab(3) + ".transition().duration(500)\n" + \
-    #         stab(3) + self.d3_select_extra + \
-    #         stab(3) + ".call(chart);\n\n"
-
-    #     if self.resize:
-    #         self.jschart += stab(1) + "nv.utils.windowResize(chart.update);\n"
-    #     self.jschart += stab(1) + "return chart;\n});\n"
-
-    #     #Include data
-    #     self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
+        start_index = self.jschart.find('.pieChart();')
+        string_len = len('.pieChart();')
+        replace_index = start_index + string_len
+        if start_index > 0:
+            self.jschart = self.jschart[:replace_index] + pie_jschart + self.jschart[replace_index:]
 
 
 def _main():
