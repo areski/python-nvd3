@@ -233,7 +233,8 @@ class NVD3Chart:
         if self.custom_tooltip_flag:
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
              stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
-             stab(3) + "return x;\n" + \
+             stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
+             stab(3) + "return tooltip_str;\n" + \
              stab(2) + "});\n"
 
     def buildjschart(self):
