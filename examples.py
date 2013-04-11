@@ -86,8 +86,8 @@ ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
 chart.add_serie(y=ydata, x=xdata)
-# chart.add_serie(y=ydata2, x=xdata)
-# chart.add_serie(y=ydata3, x=xdata)
+chart.add_serie(y=ydata2, x=xdata)
+chart.add_serie(y=ydata3, x=xdata)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
