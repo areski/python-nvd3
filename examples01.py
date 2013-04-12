@@ -28,7 +28,6 @@ chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
-
 type = "MultiBarChart"
 chart = nvd3.multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -41,12 +40,11 @@ ydata4 = map(lambda x: x * 4, ydata)
 
 chart.add_serie(y=ydata, x=xdata)
 chart.add_serie(y=ydata2, x=xdata)
-chart.add_serie(y=ydata3, x=xdata)
+#chart.add_serie(y=ydata3, x=xdata)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-
 
 
 #close Html file
