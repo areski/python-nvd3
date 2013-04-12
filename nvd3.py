@@ -403,6 +403,7 @@ class lineWithFocusChart(NVD3Chart):
             self.create_x_axis('x2Axis', format=".2f")
 
         self.create_y_axis('yAxis', format=".2f")
+        self.create_y_axis('y2Axis', format=".2f")
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
@@ -426,8 +427,9 @@ class lineChart(NVD3Chart):
 
     js-code ::
 
-        data_lineChart = [{ "key" : "Serie 1",
-           "values" : [
+        data_lineChart = [{
+            "key" : "Serie 1",
+            "values" : [
                 { "x" : "1365026400000000",
                   "y" : -6
                 },
