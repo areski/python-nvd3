@@ -98,7 +98,7 @@ nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [i + random.randint(1, 10) for i in reversed(range(nb_element))]
 kwargs = {}
 kwargs['bar'] = True
 chart.add_serie(y=ydata, x=xdata, **kwargs)
