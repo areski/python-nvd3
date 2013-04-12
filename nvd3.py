@@ -141,8 +141,6 @@ class NVD3Chart:
             name = "Serie %d" % (len(self.series) + 1)
 
         if self.x_axis_date:
-            #x = [d.isoformat() for d in x]
-            #x = [str(d) + '000' for d in x]
             x = [str(d) for d in x]
 
         x = sorted(x)
@@ -197,7 +195,6 @@ class NVD3Chart:
         Create html page
         Add Js code for nvd3
         """
-
         self.buildhtmlheader()
         self.buildcontainer()
         self.buildjschart()
@@ -258,7 +255,6 @@ class NVD3Chart:
                 for attr, value in a.iteritems():
                     self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
 
-        #if self.model == 'pieChart':
         if self.width:
             self.d3_select_extra += ".attr('width', %s)\n" % self.width
         if self.height:
@@ -287,17 +283,14 @@ class NVD3Chart:
         #Include data
         self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
 
-    #TODO : Check if it might not make sense to have create_x_axis, create_y_axis
-    def set_axis(self, name, label=None, format=".2f", date=False, custom_format=False):
+
+    def create_x_axis(self, name, label=None, format=None, date=False):
         """
-        Create axis
+        Create X-axis
         """
         axis = {}
-        if custom_format:
-            axis["tickFormat"] = format
-        else:
-            if format:
-                axis["tickFormat"] = "d3.format(',%s')" % format
+        if format:
+            axis["tickFormat"] = "d3.format(',%s')" % format
 
         if label:
             axis["axisLabel"] = label
@@ -309,6 +302,25 @@ class NVD3Chart:
             #flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True
+
+        #Add new axis to list of axis
+        self.axislist[name] = axis
+
+
+    def create_y_axis(self, name, label=None, format=None, custom_format=False):
+        """
+        Create Y-axis
+        """
+        axis = {}
+
+        if custom_format and format:
+            axis["tickFormat"] = format
+        else:
+            if format:
+                axis["tickFormat"] = "d3.format(',%s')" % format
+
+        if label:
+            axis["axisLabel"] = label
 
         #Add new axis to list of axis
         self.axislist[name] = axis
@@ -383,14 +395,15 @@ class lineWithFocusChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %Y', date=True)
-            self.set_axis('x2Axis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('x2Axis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.set_axis('xAxis', format=".2f")
-            self.set_axis('x2Axis', format=".2f")
-        self.set_axis('yAxis', format=".2f")
-        self.set_axis('y2Axis', format=".2f")
+            self.create_x_axis('xAxis', format=".2f")
+            self.create_x_axis('x2Axis', format=".2f")
+
+        self.create_y_axis('yAxis', format=".2f")
+
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -445,11 +458,12 @@ class lineChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.set_axis('xAxis', format="r")
-        self.set_axis('yAxis', format=".02f")
+            self.create_x_axis('xAxis', format="r")
+        self.create_y_axis('yAxis', format=".02f")
+
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -504,10 +518,10 @@ class multiBarChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %y', date=True)
         else:
-            self.set_axis('xAxis', format=".2f")
-        self.set_axis('yAxis', format=".2f")
+            self.create_x_axis('xAxis', format=".2f")
+        self.create_y_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -579,10 +593,10 @@ class stackedAreaChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %y', date=True)
         else:
-            self.set_axis('xAxis', format=".2f")
-        self.set_axis('yAxis', format=".2f")
+            self.create_x_axis('xAxis', format=".2f")
+        self.create_y_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -649,8 +663,8 @@ class multiBarHorizontalChart(NVD3Chart):
     """
     def __init__(self, height=450, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.set_axis('xAxis', format=".2f")
-        self.set_axis('yAxis', format=".2f")
+        self.create_x_axis('xAxis', format=".2f")
+        self.create_y_axis('yAxis', format=".2f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -725,13 +739,13 @@ class linePlusBarChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.set_axis('xAxis', format=".2f")
+            self.create_x_axis('xAxis', format=".2f")
 
-        self.set_axis('y1Axis', format="f")
-        self.set_axis('y2Axis', format="function(d) { return '$' + d3.format(',f')(d) }", custom_format=True)
+        self.create_y_axis('y1Axis', format="f")
+        self.create_y_axis('y2Axis', format="function(d) { return '$' + d3.format(',f')(d) }", custom_format=True)
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
@@ -804,13 +818,12 @@ class cumulativeLineChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.set_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.set_axis('xAxis', format=".2f")
+            self.create_x_axis('xAxis', format=".2f")
 
-        self.set_axis('yAxis', format=".1%")
-
+        self.create_y_axis('yAxis', format=".1%")
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
@@ -865,8 +878,8 @@ class discreteBarChart(NVD3Chart):
     """
     def __init__(self, height=450, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.set_axis('xAxis', format=None)
-        self.set_axis('yAxis', format=None)
+        self.create_x_axis('xAxis', format=None)
+        self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
@@ -923,8 +936,8 @@ class pieChart(NVD3Chart):
     """
     def __init__(self, height=450, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.set_axis('xAxis')
-        self.set_axis('yAxis')
+        self.create_x_axis('xAxis', format=None)
+        self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
