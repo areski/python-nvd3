@@ -904,9 +904,14 @@ class scatterChart(NVD3Chart):
     usage ::
 
         chart = nvd3.scatterChart(name='scatterChart', height=400, width=400)
-        xdata = ["A", "B", "C", "D", "E"]
-        ydata = [3, 4, 0, -3, 5, 7]
-        chart.add_serie(y=ydata, x=xdata)
+        xdata = [3, 4, 0, -3, 5, 7]
+        ydata = [-1, 2, 3, 3, 15, 2]
+        ydata = [1, -2, 4, 7, -5, 3]
+
+        kwargs1 = {'shape': 'circle'}
+        kwargs2 = {'shape': 'cross'}
+        chart.add_serie(y=ydata, x=xdata, **kwargs1)
+        chart.add_serie(y=ydata, x=xdata, **kwargs2)
         chart.buildhtml()
 
     js example::
