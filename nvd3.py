@@ -25,10 +25,11 @@ General aims :
 
 __version__ = '0.1.1'
 
-import json
+
 from optparse import OptionParser
 from string import Template
-
+import json
+import random
 
 template_page_nvd3 = """
 <!DOCTYPE html>
@@ -144,7 +145,10 @@ class NVD3Chart:
             x = [str(d) for d in x]
 
         x = sorted(x)
-        serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
+        if 'shape' in kwargs:
+            serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
+        else:
+            serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 
         data_keyvalue = {"values": serie, "key": name}
 
@@ -244,6 +248,11 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
+        if self.model == 'scatterChart':
+            self.jschart += stab(2) + "chart.showDistX(true);"
+            self.jschart += stab(2) + "chart.showDistY(true);"
+            self.jschart += stab(2) + "chart.color(d3.scale.category10().range());"
+
         """
         We want now to loop through all the defined Axis and add:
             chart.y2Axis
@@ -340,6 +349,7 @@ Currently implemented nvd3 chart:
 * multiBarHorizontalChart
 * linePlusBarChart
 * cumulativeLineChart
+* scatterChart
 
 """
 
@@ -882,6 +892,84 @@ class discreteBarChart(NVD3Chart):
         NVD3Chart.__init__(self, **kwargs)
         self.create_x_axis('xAxis', format=None)
         self.create_y_axis('yAxis', format=None)
+        # must have a specified height, otherwise it superimposes both chars
+        if height:
+            self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+
+class scatterChart(NVD3Chart):
+    """
+    usage ::
+
+        chart = nvd3.scatterChart(name='scatterChart', height=400, width=400)
+        xdata = ["A", "B", "C", "D", "E"]
+        ydata = [3, 4, 0, -3, 5, 7]
+        chart.add_serie(y=ydata, x=xdata)
+        chart.buildhtml()
+
+    js example::
+
+        data = [{ key: "series 1",
+                  values: [
+                    {
+                      "x": 2,
+                      "y": 10,
+                      "shape": "circle"
+                    },
+                    {
+                      "x": -2,
+                      "y" : 0,
+                      "shape": "circle"
+                    },
+                    {
+                      "x": 5,
+                      "y" : -3,
+                      "shape": "circle"
+                    },
+                  ]
+                },
+                { key: "series 2",
+                  values: [
+                    {
+                      "x": 4,
+                      "y": 10,
+                      "shape": "cross"
+                    },
+                    {
+                      "x": 4,
+                      "y" : 0,
+                      "shape": "cross"
+                    },
+                    {
+                      "x": 3,
+                      "y" : -3,
+                      "shape": "cross"
+                    },
+                  ]
+                }]
+
+        nv.addGraph(function() {
+            var chart = nv.models.scatterChart()
+                .showLabels(true);
+
+            chart.showDistX(true);
+            chart.showDistY(true);
+
+            d3.select("#div_id")
+                .datum(data)
+                .transition()
+                .duration(1200)
+                .call(chart);
+
+            return chart;
+        });
+    """
+    def __init__(self, height=450, width=None, **kwargs):
+        NVD3Chart.__init__(self, **kwargs)
+        self.create_x_axis('xAxis', format=".02f")
+        self.create_y_axis('yAxis', format=".02f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
