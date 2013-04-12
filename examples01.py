@@ -17,6 +17,17 @@ import time
 #Open File for test
 output_file = open('test1.html', 'w')
 
+type = "discreteBarChart"
+chart = nvd3.discreteBarChart(name=type, height=400, width=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = ["A", "B", "C", "D", "E", "F", "G"]
+ydata = [3, 12, -10, 5, 35, -7, 2]
+
+chart.add_serie(y=ydata, x=xdata)
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
 type = "pieChart"
 chart = nvd3.pieChart(name=type, height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")

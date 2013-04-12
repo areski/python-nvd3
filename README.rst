@@ -87,6 +87,7 @@ Currently implemented nvd3 chart:
 * multiBarHorizontalChart
 * linePlusBarChart
 * cumulativeLineChart
+* discreteBarChart
 
 
 Documentation

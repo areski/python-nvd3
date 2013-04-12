@@ -296,7 +296,8 @@ class NVD3Chart:
         if custom_format:
             axis["tickFormat"] = format
         else:
-            axis["tickFormat"] = "d3.format(',%s')" % format
+            if format:
+                axis["tickFormat"] = "d3.format(',%s')" % format
 
         if label:
             axis["axisLabel"] = label
@@ -811,6 +812,61 @@ class cumulativeLineChart(NVD3Chart):
         self.set_axis('yAxis', format=".1%")
 
 
+        # must have a specified height, otherwise it superimposes both chars
+        if height:
+            self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+
+class discreteBarChart(NVD3Chart):
+    """
+    usage ::
+
+        chart = nvd3.discreteBarChart(name='discreteBarChart', height=400, width=400)
+        xdata = ["A", "B", "C", "D", "E"]
+        ydata = [3, 4, 0, -3, 5, 7]
+        chart.add_serie(y=ydata, x=xdata)
+        chart.buildhtml()
+
+    js example::
+
+        data = [{ key: "Cumulative Return",
+                  values: [
+                    {
+                      "label": "A",
+                      "value" : 10
+                    },
+                    {
+                      "label": "B",
+                      "value" : 0
+                    },
+                    {
+                      "label": "C",
+                      "value" : -3
+                    },
+                  ]
+                }]
+
+        nv.addGraph(function() {
+            var chart = nv.models.discreteBarChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true);
+
+            d3.select("#div_id")
+                .datum(data)
+                .transition()
+                .duration(1200)
+                .call(chart);
+
+            return chart;
+        });
+    """
+    def __init__(self, height=450, width=None, **kwargs):
+        NVD3Chart.__init__(self, **kwargs)
+        self.set_axis('xAxis', format=None)
+        self.set_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
