@@ -58,5 +58,6 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 
+
 #close Html file
 output_file.close()

@@ -448,8 +448,8 @@ class lineChart(NVD3Chart):
             self.set_axis('xAxis', format='%d %b %Y', date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.set_axis('xAxis', format=".2f")
-        self.set_axis('yAxis', format=".2f")
+            self.set_axis('xAxis', format="r")
+        self.set_axis('yAxis', format=".02f")
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
