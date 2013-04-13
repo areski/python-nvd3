@@ -9,16 +9,16 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-import nvd3
+from nvd3 import discreteBarChart
+from nvd3 import pieChart
+from nvd3 import multiBarChart
 import random
-import datetime
-import time
 
 #Open File for test
 output_file = open('test1.html', 'w')
 
 type = "discreteBarChart"
-chart = nvd3.discreteBarChart(name=type, height=400, width=400)
+chart = discreteBarChart(name=type, height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 35, -7, 2]
@@ -29,7 +29,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "pieChart"
-chart = nvd3.pieChart(name=type, height=400, width=400)
+chart = pieChart(name=type, height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
@@ -40,7 +40,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "MultiBarChart"
-chart = nvd3.multiBarChart(name=type, height=350)
+chart = multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = range(nb_element)
@@ -56,8 +56,6 @@ chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-
-
 
 #close Html file
 output_file.close()

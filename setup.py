@@ -11,7 +11,7 @@ def read(*parts):
 
 
 def get_version():
-    f = open('nvd3.py')
+    f = open('nvd3/__init__.py')
     try:
         for line in f:
             if line.startswith('__version__'):

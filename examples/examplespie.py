@@ -9,34 +9,22 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-import nvd3
-import random
-import math
+from pieChart import pieChart
+
 
 #Open File for test
-output_file = open('test2.html', 'w')
-#---------------------------------------
-type = "lineChart"
-chart = nvd3.lineChart(name=type, date=False, height=350)
+output_file = open('test1.html', 'w')
+
+type = "pieChart"
+chart = pieChart(name=type, height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+ydata = [3, 4, 0, 1, 5, 7, 3]
 
-xdata = []
-ydata = []
-ydata2 = []
-
-for i in range(0, 101):
-    xdata.append(i)
-    x = i * 0.1
-    ydata.append(math.sin(math.pi * x))
-    ydata2.append(0.5 * math.cos(math.pi * x))
-
-chart.add_serie(y=ydata, x=xdata, name='sine')
-chart.add_serie(y=ydata2, x=xdata, name='cose')
+chart.add_serie(y=ydata, x=xdata)
 chart.buildhtml()
-
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-
 
 #close Html file
 output_file.close()

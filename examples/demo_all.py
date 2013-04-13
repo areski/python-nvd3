@@ -8,7 +8,13 @@ for d3.js without taking away the power that d3.js gives you.
 
 Project location : https://github.com/areski/python-nvd3
 """
-import nvd3
+from nvd3 import lineChart
+from nvd3 import lineWithFocusChart
+from nvd3 import stackedAreaChart
+from nvd3 import multiBarHorizontalChart
+from nvd3 import linePlusBarChart
+from nvd3 import cumulativeLineChart
+from nvd3 import scatterChart
 import random
 import datetime
 import time
@@ -18,7 +24,7 @@ output_file = open('test.html', 'w')
 #---------------------------------------
 
 type = "lineChart"
-chart = nvd3.lineChart(name=type, date=True, height=350)
+chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
@@ -37,7 +43,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = nvd3.lineWithFocusChart(name=type, date=True)
+chart = lineWithFocusChart(name=type, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 xdata = range(nb_element)
@@ -59,7 +65,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = nvd3.stackedAreaChart(name=type, height=350)
+chart = stackedAreaChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 xdata = range(nb_element)
@@ -75,7 +81,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "multiBarHorizontalChart"
-chart = nvd3.multiBarHorizontalChart(name=type, height=350)
+chart = multiBarHorizontalChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = range(nb_element)
@@ -89,7 +95,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "linePlusBarChart"
-chart = nvd3.linePlusBarChart(name=type, height=350, date=True)
+chart = linePlusBarChart(name=type, height=350, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
@@ -108,7 +114,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "cumulativeLineChart"
-chart = nvd3.cumulativeLineChart(name=type, height=350, date=True)
+chart = cumulativeLineChart(name=type, height=350, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
@@ -127,7 +133,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "scatterChart"
-chart = nvd3.scatterChart(name=type, height=350, date=False)
+chart = scatterChart(name=type, height=350, date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
