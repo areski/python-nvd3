@@ -66,7 +66,33 @@ def stab(tab=1):
 
 class NVD3Chart:
     """
-    Chart Base class
+    NVD3Chart Base class
+
+    **Attributes**:
+
+        * ``count`` -
+        * ``dateformat`` -
+        * ``series`` -
+        * ``axislist`` -
+        * ``style`` -
+        * ``htmlcontent`` -
+        * ``htmlheader`` -
+        * ``height`` -
+        * ``width`` -
+        * ``model`` -
+        * ``d3_select_extra`` -
+        * ``x_axis_date`` - False/True
+        * ``resize`` - False/True
+        * ``stacked`` - False/True
+        * ``template_page_nvd3`` -
+        * ``container`` -
+        * ``containerheader`` -
+        * ``jschart`` -
+        * ``custom_tooltip_flag`` - False/True
+        * ``charttooltip`` - custom tooltip string
+        * ``header_css`` - False/True
+        * ``header_js`` - custom tooltip string
+
     """
     count = 0
     dateformat = '%x'
