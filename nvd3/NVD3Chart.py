@@ -230,11 +230,6 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
-        if self.model == 'scatterChart':
-            self.jschart += stab(2) + "chart.showDistX(true);"
-            self.jschart += stab(2) + "chart.showDistY(true);"
-            self.jschart += stab(2) + "chart.color(d3.scale.category10().range());"
-
         """
         We want now to loop through all the defined Axis and add:
             chart.y2Axis

@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from NVD3Chart import NVD3Chart
+from NVD3Chart import NVD3Chart, stab
 
 
 class scatterChart(NVD3Chart):
@@ -93,3 +93,16 @@ class scatterChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+    def buildjschart(self):
+        NVD3Chart.buildjschart(self)
+
+        scatter_jschart = '\n' + stab(3) + '.showDistX(true)\n' + \
+            stab(3) + '.showDistY(true)\n' + \
+            stab(3) + '.color(d3.scale.category10().range())'
+
+        start_index = self.jschart.find('.scatterChart()')
+        string_len = len('.scatterChart()')
+        replace_index = start_index + string_len
+        if start_index > 0:
+            self.jschart = self.jschart[:replace_index] + scatter_jschart + self.jschart[replace_index:]
