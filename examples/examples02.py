@@ -10,7 +10,9 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from nvd3 import lineChart
+from nvd3 import scatterChart
 import math
+import random
 
 #Open File for test
 output_file = open('test2.html', 'w')
@@ -36,6 +38,28 @@ chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
+type = "scatterChart"
+chart = scatterChart(name=type, height=350, date=False)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+nb_element = 50
+xdata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata = [i * random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+ydata3 = map(lambda x: x * 5, ydata)
+
+kwargs1 = {'shape': 'circle'}
+kwargs2 = {'shape': 'cross'}
+kwargs3 = {'shape': 'triangle-up'}
+
+#kwargs['size'] = True
+chart.add_serie(y=ydata, x=xdata, **kwargs1)
+chart.add_serie(y=ydata2, x=xdata, **kwargs2)
+chart.add_serie(y=ydata3, x=xdata, **kwargs3)
+
+chart.buildhtml()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
 
 #close Html file
 output_file.close()
