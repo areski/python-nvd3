@@ -31,28 +31,24 @@ Usage
 
 After installation use python-nvd3 as follows ::
 
-    import nvd3
+    from nvd3 import pieChart
 
     #Open File to write the D3 Graph
     output_file = open('test-nvd3.html', 'w')
-    output_file.write(nvd3.template_header_nvd3)
 
-    chart = nvd3.pieChart(name="pieChart", height=450, width=450)
-    #Create the keys
+    type = 'pieChart'
+    chart = pieChart(name=type, height=450, width=450)
+    chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+
     xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
-    #Set a value for each key
     ydata = [3, 4, 0, 1, 5, 7, 3]
 
-    #Add the serie
     chart.add_serie(y=ydata, x=xdata)
     chart.buildhtml()
-
-    output_file.write("<h2> pieChart Graph </h2>")
     output_file.write(chart.htmlcontent)
 
     #close Html file
     output_file.close()
-
 
 
 See our examples directory for more usage.
