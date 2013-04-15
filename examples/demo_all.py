@@ -79,20 +79,6 @@ chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
-type = "multiBarHorizontalChart"
-chart = multiBarHorizontalChart(name=type, height=350)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-nb_element = 10
-xdata = range(nb_element)
-ydata = [random.randint(-10, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-chart.add_serie(y=ydata, x=xdata)
-chart.add_serie(y=ydata2, x=xdata)
-chart.buildhtml()
-
-output_file.write(chart.htmlcontent)
-#---------------------------------------
-
 type = "linePlusBarChart"
 chart = linePlusBarChart(name=type, height=350, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
