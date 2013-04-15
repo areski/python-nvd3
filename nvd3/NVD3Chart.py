@@ -11,7 +11,6 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
-import json
 import random
 
 template_page_nvd3 = """
@@ -273,7 +272,7 @@ class NVD3Chart:
         self.jschart += stab(1) + "return chart;\n});\n"
 
         #Include data
-        self.jschart += """data_%s=%s;\n</script>""" % (self.name, json.dumps(self.series))
+        self.jschart += """data_%s=%s;\n</script>""" % (self.name, self.series)
 
     def create_x_axis(self, name, label=None, format=None, date=False):
         """
