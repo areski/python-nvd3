@@ -16,7 +16,8 @@ class discreteBarChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.discreteBarChart(name='discreteBarChart', height=400, width=400)
+        from nvd3 import discreteBarChart
+        chart = discreteBarChart(name='discreteBarChart', height=400, width=400)
         xdata = ["A", "B", "C", "D", "E"]
         ydata = [3, 4, 0, -3, 5, 7]
         chart.add_serie(y=ydata, x=xdata)

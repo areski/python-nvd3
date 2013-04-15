@@ -16,7 +16,8 @@ class multiBarHorizontalChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.multiBarHorizontalChart(name='multiBarHorizontalChart', height=400, width=400)
+        from nvd3 import multiBarHorizontalChart
+        chart = multiBarHorizontalChart(name='multiBarHorizontalChart', height=400, width=400)
         xdata = [-14, -7, 7, 14]
         ydata = [-6, 5, -1, 9]
         y2data = [-23, -6, -32, 9]

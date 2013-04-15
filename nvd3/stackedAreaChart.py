@@ -19,7 +19,8 @@ class stackedAreaChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.stackedAreaChart(name='stackedAreaChart', height=400, width=400)
+        from nvd3 import stackedAreaChart
+        chart = stackedAreaChart(name='stackedAreaChart', height=400, width=400)
         xdata = [100, 101, 102, 103, 104, 105, 106,]
         ydata = [6, 11, 12, 7, 11, 10, 11]
         ydata2 = [8, 20, 16, 12, 20, 28, 28]

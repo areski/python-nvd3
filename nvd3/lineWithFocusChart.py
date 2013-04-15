@@ -19,7 +19,8 @@ class lineWithFocusChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.lineWithFocusChart(name='lineWithFocusChart', date=True)
+        from nvd3 import lineWithFocusChart
+        chart = lineWithFocusChart(name='lineWithFocusChart', date=True)
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         chart.add_serie(y=ydata, x=xdata)

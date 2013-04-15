@@ -8,7 +8,6 @@ for d3.js without taking away the power that d3.js gives you.
 
 Project location : https://github.com/areski/python-nvd3
 """
-
 from NVD3Chart import NVD3Chart
 
 
@@ -19,7 +18,8 @@ class lineChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.lineChart(name='lineChart', height=400, width=400, date=True)
+        from nvd3 import lineChart
+        chart = lineChart(name='lineChart', height=400, width=400, date=True)
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         chart.add_serie(y=ydata, x=xdata)

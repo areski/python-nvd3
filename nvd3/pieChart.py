@@ -33,7 +33,8 @@ class pieChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.pieChart(name='pieChart', height=400, width=400)
+        from nvd3 import pieChart
+        chart = pieChart(name='pieChart', height=400, width=400)
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)

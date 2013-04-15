@@ -16,7 +16,8 @@ class scatterChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.scatterChart(name='scatterChart', height=400, width=400)
+        from nvd3 import scatterChart
+        chart = scatterChart(name='scatterChart', height=400, width=400)
         xdata = [3, 4, 0, -3, 5, 7]
         ydata = [-1, 2, 3, 3, 15, 2]
         ydata = [1, -2, 4, 7, -5, 3]

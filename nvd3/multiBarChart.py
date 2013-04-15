@@ -19,7 +19,8 @@ class multiBarChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.multiBarChart(name='multiBarChart', height=400, width=400)
+        from nvd3 import multiBarChart
+        chart = multiBarChart(name='multiBarChart', height=400, width=400)
         xdata = [0, 1, 3, 4]
         ydata = [6, 12, 9, 16]
         chart.add_serie(y=ydata, x=xdata)

@@ -16,7 +16,8 @@ class linePlusBarChart(NVD3Chart):
     """
     usage ::
 
-        chart = nvd3.linePlusBarChart(name='linePlusBarChart', date=True)
+        from nvd3 import linePlusBarChart
+        chart = linePlusBarChart(name='linePlusBarChart', date=True)
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         y2data = [36, 55, 11]
