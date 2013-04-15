@@ -2,7 +2,7 @@
 TODO
 ====
 
-* Improve documentation, explain in details each class : lineWithFocusChart, lineChart, multiBarChart, pieChart, stackedAreaChart, stackedAreaChart
+* Improve documentation, explain in details each class : lineWithFocusChart, lineChart, multiBarChart, pieChart, stackedAreaChart
 
 * Add Test
 
