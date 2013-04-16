@@ -1,14 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
-
 from optparse import OptionParser
 from string import Template
 import random
@@ -92,22 +83,6 @@ class NVD3Chart:
         * ``charttooltip`` - custom tooltip string
         * ``header_css`` - False/True
         * ``header_js`` - custom tooltip string
-
-    **Methods**:
-
-        * ``__init__()`` - Constructor
-        * ``__str__()`` - Return htmlcontent
-        * ``add_serie()`` - Series are list of data that will be plotted
-        * ``set_graph_height()`` - Set graph height
-        * ``set_graph_width()`` - Set graph width
-        * ``set_containerheader()`` - Set header of html page
-        * ``set_custom_tooltip_flag()`` - Set custom tooltip flag
-        * ``buildhtml()`` - Build the HTML page / Create the htmlheader with css-js / Add Js code for nvd3
-        * ``buildhtmlheader()`` - Generate HTML header
-        * ``buildcontainer()`` - Generate HTML div
-        * ``buildtooltip()`` - Generate custom tooltip for the chart
-        * ``create_x_axis()`` - Generate x axis
-        * ``create_y_axis()`` - Generate y axis
     """
     count = 0
     dateformat = '%x'
