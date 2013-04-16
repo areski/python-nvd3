@@ -11,6 +11,7 @@ Project location : https://github.com/areski/python-nvd3
 from nvd3 import lineChart
 from nvd3 import lineWithFocusChart
 from nvd3 import stackedAreaChart
+#TODO: demo_all.py should have an example for all charts
 from nvd3 import multiBarHorizontalChart
 from nvd3 import linePlusBarChart
 from nvd3 import cumulativeLineChart
@@ -116,8 +117,6 @@ chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-
-
 
 #close Html file
 output_file.close()
