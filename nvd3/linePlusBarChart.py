@@ -8,7 +8,7 @@ class linePlusBarChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/linePlusBarChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import linePlusBarChart
         chart = linePlusBarChart(name='linePlusBarChart', date=True)
@@ -19,7 +19,7 @@ class linePlusBarChart(NVD3Chart):
         chart.add_serie(y=y2data, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data_lineWithFocusChart = [
             {

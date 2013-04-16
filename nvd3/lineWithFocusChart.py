@@ -7,7 +7,7 @@ class lineWithFocusChart(NVD3Chart):
     """
     .. image:: ../_static/screenshot/lineWithFocusChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import lineWithFocusChart
         chart = lineWithFocusChart(name='lineWithFocusChart', date=True)
@@ -16,7 +16,7 @@ class lineWithFocusChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data_lineWithFocusChart = [{ "key" : "Serie 1",
            "values" : [

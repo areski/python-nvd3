@@ -10,7 +10,7 @@ class lineChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/lineChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import lineChart
         chart = lineChart(name='lineChart', height=400, width=400, date=True)
@@ -19,7 +19,7 @@ class lineChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data_lineChart = [{
             "key" : "Serie 1",

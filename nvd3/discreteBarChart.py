@@ -10,7 +10,7 @@ class discreteBarChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/discreteBarChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import discreteBarChart
         chart = discreteBarChart(name='discreteBarChart', height=400, width=400)
@@ -19,7 +19,7 @@ class discreteBarChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data = [{ key: "Cumulative Return",
                   values: [

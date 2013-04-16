@@ -10,7 +10,7 @@ class cumulativeLineChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/cumulativeLineChart.png
 
-    Python Example ::
+    Python example::
 
         from nvd3 import cumulativeLineChart
         chart = cumulativeLineChart(name='cumulativeLineChart', date=True)
@@ -21,7 +21,7 @@ class cumulativeLineChart(NVD3Chart):
         chart.add_serie(y=y2data, x=xdata)
         chart.buildhtml()
 
-    Javascript Example ::
+    Javascript generated::
 
         data_lineWithFocusChart = [
             {

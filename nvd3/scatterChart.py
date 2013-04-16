@@ -13,7 +13,7 @@ class scatterChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/scatterChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import scatterChart
         chart = scatterChart(name='scatterChart', height=400, width=400)
@@ -27,7 +27,7 @@ class scatterChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata, **kwargs2)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data = [{ key: "series 1",
                   values: [

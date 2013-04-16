@@ -12,7 +12,7 @@ class multiBarChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/multiBarChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import multiBarChart
         chart = multiBarChart(name='multiBarChart', height=400, width=400)
@@ -21,7 +21,7 @@ class multiBarChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data_MultiBarChart = [{ "key" : "Serie 1",
            "values" : [

@@ -9,7 +9,7 @@ class multiBarHorizontalChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/multiBarHorizontalChart.png
 
-    Python Example::
+    Python example::
 
         from nvd3 import multiBarHorizontalChart
         chart = multiBarHorizontalChart(name='multiBarHorizontalChart', height=400, width=400)
@@ -20,7 +20,7 @@ class multiBarHorizontalChart(NVD3Chart):
         chart.add_serie(y=y2data, x=xdata)
         chart.buildhtml()
 
-    Javascript example::
+    Javascript generated::
 
         data_lineChart = [ { "key" : "Serie 1",
             "values" : [ { "x" : 0,
