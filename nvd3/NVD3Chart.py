@@ -61,39 +61,39 @@ class NVD3Chart:
 
     **Attributes**:
 
-        * ``count`` -
-        * ``dateformat`` -
-        * ``series`` -
-        * ``axislist`` -
-        * ``style`` -
-        * ``htmlcontent`` -
-        * ``htmlheader`` -
-        * ``height`` -
-        * ``width`` -
-        * ``model`` -
+        * ``count`` - chart count
+        * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
+        * ``series`` - Series are list of data that will be plotted
+        * ``axislist`` - All X, Y axis list
+        * ``style`` - Special style
+        * ``htmlcontent`` - Contain the htmloutput
+        * ``htmlheader`` - Contain the html header
+        * ``height`` - Set graph height
+        * ``width`` - Set graph width
+        * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
         * ``d3_select_extra`` -
-        * ``x_axis_date`` - False/True
-        * ``resize`` - False/True
-        * ``stacked`` - False/True
-        * ``template_page_nvd3`` -
-        * ``container`` -
-        * ``containerheader`` -
-        * ``jschart`` -
-        * ``custom_tooltip_flag`` - False/True
-        * ``charttooltip`` - custom tooltip string
-        * ``header_css`` - False/True
-        * ``header_js`` - custom tooltip string
+        * ``x_axis_date`` - False / True
+        * ``resize`` - False / True
+        * ``stacked`` - False / True
+        * ``template_page_nvd3`` - template variable
+        * ``container`` - Place for graph
+        * ``containerheader`` - Header for javascript code
+        * ``jschart`` - Javascript code as string
+        * ``custom_tooltip_flag`` - False / True
+        * ``charttooltip`` - Custom tooltip string
+        * ``header_css`` - False / True
+        * ``header_js`` - Custom tooltip string
     """
     count = 0
     dateformat = '%x'
     series = []
     axislist = {}
-    style = ''  # Special style
-    htmlcontent = ''  # This will contain the htmloutput
-    htmlheader = ''  # This will contain the html header
+    style = ''
+    htmlcontent = ''
+    htmlheader = ''
     height = None
     width = None
-    model = ''  # LineWithFocusChart, MultiBarChart
+    model = ''
     d3_select_extra = ''
     x_axis_date = False
     resize = False
