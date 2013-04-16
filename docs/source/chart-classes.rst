@@ -9,7 +9,7 @@ Contents:
 .. toctree::
     :maxdepth: 1
 
-
+    ./classes-doc/NVD3Chart
     ./classes-doc/cumulative-line-chart
     ./classes-doc/discrete-bar-chart
     ./classes-doc/line-chart
@@ -20,5 +20,3 @@ Contents:
     ./classes-doc/pie-chart
     ./classes-doc/scatter-chart
     ./classes-doc/stacked-area-chart
-    ./classes-doc/NVD3Chart
-
