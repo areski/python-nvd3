@@ -1,26 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
-
 from NVD3Chart import NVD3Chart
 
 
-#TODO: Add extensive documentation on StackedAreaChart
-#settings supported
-#examples
 class stackedAreaChart(NVD3Chart):
     """
     The stacked area chart is identical to the area chart, except the areas are stacked
     on top of each other, rather than overlapping. This can make the chart much easier to read.
 
-    usage ::
+    .. image:: ../_static/screenshot/stackedAreaChart.png
+
+    Python Example::
 
         from nvd3 import stackedAreaChart
         chart = stackedAreaChart(name='stackedAreaChart', height=400, width=400)
@@ -31,7 +21,7 @@ class stackedAreaChart(NVD3Chart):
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
 
-    js example::
+    Javascript example::
 
         data_stackedAreaChart = [{
                   "values":[

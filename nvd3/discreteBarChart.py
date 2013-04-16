@@ -1,14 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
-
 from NVD3Chart import NVD3Chart
 
 
@@ -17,7 +8,9 @@ class discreteBarChart(NVD3Chart):
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
 
-    usage ::
+    .. image:: ../_static/screenshot/discreteBarChart.png
+
+    Python Example::
 
         from nvd3 import discreteBarChart
         chart = discreteBarChart(name='discreteBarChart', height=400, width=400)
@@ -26,7 +19,7 @@ class discreteBarChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    js example::
+    Javascript example::
 
         data = [{ key: "Cumulative Return",
                   values: [

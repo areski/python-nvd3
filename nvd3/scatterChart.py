@@ -1,14 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
-
 from NVD3Chart import NVD3Chart, stab
 
 
@@ -20,7 +11,9 @@ class scatterChart(NVD3Chart):
     determining the position on the horizontal axis and the value of the other variable
     determining the position on the vertical axis.
 
-    usage ::
+    .. image:: ../_static/screenshot/scatterChart.png
+
+    Python Example::
 
         from nvd3 import scatterChart
         chart = scatterChart(name='scatterChart', height=400, width=400)
@@ -34,7 +27,7 @@ class scatterChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata, **kwargs2)
         chart.buildhtml()
 
-    js example::
+    Javascript example::
 
         data = [{ key: "series 1",
                   values: [

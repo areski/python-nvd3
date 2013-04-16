@@ -11,7 +11,7 @@ class pieChart(NVD3Chart):
 
     .. image:: ../_static/screenshot/pieChart.png
 
-    Python Example ::
+    Python Example::
 
         from nvd3 import pieChart
         chart = pieChart(name='pieChart', height=400, width=400)

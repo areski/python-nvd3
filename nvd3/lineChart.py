@@ -1,25 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
 from NVD3Chart import NVD3Chart
 
 
-#TODO: Add extensive documentation on lineChart
-#settings supported
-#examples
 class lineChart(NVD3Chart):
     """
     A line chart or line graph is a type of chart which displays information
     as a series of data points connected by straight line segments.
 
-    usage ::
+    .. image:: ../_static/screenshot/lineChart.png
+
+    Python Example::
 
         from nvd3 import lineChart
         chart = lineChart(name='lineChart', height=400, width=400, date=True)
@@ -28,7 +19,7 @@ class lineChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    js-code ::
+    Javascript example::
 
         data_lineChart = [{
             "key" : "Serie 1",

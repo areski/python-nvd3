@@ -1,20 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-Python-nvd3 is a Python wrapper for NVD3 graph library.
-NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
-
-Project location : https://github.com/areski/python-nvd3
-"""
-
 from NVD3Chart import NVD3Chart
 
 
-#TODO: Add extensive documentation on multiBarChart
-#settings supported
-#examples
 class multiBarChart(NVD3Chart):
     """
     A multiple bar graph contains comparisons of two or more categories or bars.
@@ -22,7 +10,9 @@ class multiBarChart(NVD3Chart):
     about the categories. Reading a multiple bar graph includes looking at extremes
     (tallest/longest vs. shortest) in each grouping.
 
-    usage ::
+    .. image:: ../_static/screenshot/multiBarChart.png
+
+    Python Example::
 
         from nvd3 import multiBarChart
         chart = multiBarChart(name='multiBarChart', height=400, width=400)
@@ -31,7 +21,7 @@ class multiBarChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
-    js-code ::
+    Javascript example::
 
         data_MultiBarChart = [{ "key" : "Serie 1",
            "values" : [
