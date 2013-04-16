@@ -20,6 +20,7 @@ Contents:
 
     introduction
     installation-overview
+    chart-classes
     resources
 
 
