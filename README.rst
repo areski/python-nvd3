@@ -72,24 +72,27 @@ See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
 Supported graph
 ---------------
 
-Currently implemented nvd3 chart:
-
-* lineWithFocusChart
+Currently implemented nvd3 charts:
 
 .. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineWithFocusChart.png
 
-* lineChart
-
 .. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineChart.png
 
-* multiBarChart
-* pieChart
-* stackedAreaChart
-* multiBarHorizontalChart
-* linePlusBarChart
-* cumulativeLineChart
-* discreteBarChart
-* scatterChart
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/multiBarChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/pieChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/stackedAreaChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/multiBarHorizontalChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/linePlusBarChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/cumulativeLineChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/discreteBarChart.png
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/scatterChart.png
 
 
 Documentation
