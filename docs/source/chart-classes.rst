@@ -10,4 +10,6 @@ Contents:
     :maxdepth: 1
 
 
+    ./classes-doc/line-chart
+    ./classes-doc/line-with-focus-chart
     ./classes-doc/pie-chart
