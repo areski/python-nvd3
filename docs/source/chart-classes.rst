@@ -20,3 +20,5 @@ Contents:
     ./classes-doc/pie-chart
     ./classes-doc/scatter-chart
     ./classes-doc/stacked-area-chart
+    ./classes-doc/NVD3Chart
+

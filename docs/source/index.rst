@@ -21,7 +21,6 @@ Contents:
     introduction
     installation-overview
     chart-classes
-    NVD3Chart
     resources
 
 
