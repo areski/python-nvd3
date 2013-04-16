@@ -63,12 +63,6 @@ After installation use python-nvd3 as follows ::
 See the file examples.py for more samples.
 
 
-Screenshot
-----------
-
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/screenshot-01.png
-
-
 Demo
 ----
 
@@ -81,7 +75,13 @@ Supported graph
 Currently implemented nvd3 chart:
 
 * lineWithFocusChart
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineWithFocusChart.png
+
 * lineChart
+
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineChart.png
+
 * multiBarChart
 * pieChart
 * stackedAreaChart
