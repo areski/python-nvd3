@@ -20,7 +20,6 @@ Contents:
 
     introduction
     chart-classes
-    NVD3Chart
     resources
 
 
