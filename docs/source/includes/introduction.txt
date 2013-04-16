@@ -107,7 +107,6 @@ Supported nvd3 charts
 .. image:: _static/screenshot/scatterChart.png
 
 
-
 .. _demo:
 
 Demo
