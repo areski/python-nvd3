@@ -69,10 +69,8 @@ Demo
 See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
 
 
-Supported graph
----------------
-
-Currently implemented nvd3 charts:
+Supported nvd3 charts
+---------------------
 
 .. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineWithFocusChart.png
 
