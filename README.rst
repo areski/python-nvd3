@@ -72,7 +72,7 @@ See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
 Supported nvd3 charts
 ---------------------
 
-::
+Charts list:
 
 .. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineWithFocusChart.png
 
