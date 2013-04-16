@@ -19,7 +19,6 @@ Contents:
     :maxdepth: 2
 
     introduction
-    installation-overview
     chart-classes
     NVD3Chart
     resources
