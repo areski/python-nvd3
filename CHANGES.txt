@@ -2,7 +2,24 @@ Changelog
 =========
 
 
+0.2 (2013-04-16)
+----------------
+
+    * Proper project release including support for the following chart:
+
+        lineWithFocusChart
+        lineChart
+        multiBarChart
+        pieChart
+        stackedAreaChart
+        multiBarHorizontalChart
+        linePlusBarChart
+        cumulativeLineChart
+        discreteBarChart
+        scatterChart
+
+
 0.1 (2013-04-08)
 ----------------
 
-* First release
+    * First release
