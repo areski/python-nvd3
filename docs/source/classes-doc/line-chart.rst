@@ -48,4 +48,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/lineChart.png
+.. image:: ../_static/screenshot/lineChart.png

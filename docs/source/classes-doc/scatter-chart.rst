@@ -79,4 +79,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/scatterChart.png
+.. image:: ../_static/screenshot/scatterChart.png

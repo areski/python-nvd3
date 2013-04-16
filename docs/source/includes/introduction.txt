@@ -59,25 +59,37 @@ See our examples directory for more usage.
 Supported nvd3 charts
 ---------------------
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineWithFocusChart.png
+::
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/lineChart.png
+.. image:: ../_static/screenshot/lineWithFocusChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/multiBarChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/pieChart.png
+.. image:: ../_static/screenshot/lineChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/stackedAreaChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/multiBarHorizontalChart.png
+.. image:: ../_static/screenshot/multiBarChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/linePlusBarChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/cumulativeLineChart.png
+.. image:: ../_static/screenshot/pieChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/discreteBarChart.png
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/scatterChart.png
+.. image:: ../_static/screenshot/stackedAreaChart.png
+
+
+.. image:: ../_static/screenshot/multiBarHorizontalChart.png
+
+
+.. image:: ../_static/screenshot/linePlusBarChart.png
+
+
+.. image:: ../_static/screenshot/cumulativeLineChart.png
+
+
+.. image:: ../_static/screenshot/discreteBarChart.png
+
+
+.. image:: ../_static/screenshot/scatterChart.png
+
 
 
 .. _demo:

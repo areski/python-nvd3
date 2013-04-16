@@ -70,4 +70,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/linePlusBarChart.png
+.. image:: ../_static/screenshot/linePlusBarChart.png

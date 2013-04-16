@@ -50,4 +50,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/pieChart.png
+.. image:: ../_static/screenshot/pieChart.png

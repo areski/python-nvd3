@@ -64,4 +64,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/stackedAreaChart.png
+.. image:: ../_static/screenshot/stackedAreaChart.png

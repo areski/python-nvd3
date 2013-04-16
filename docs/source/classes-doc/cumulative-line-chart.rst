@@ -67,4 +67,4 @@ js example::
 
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/cumulativeLineChart.png
+.. image:: ../_static/screenshot/cumulativeLineChart.png

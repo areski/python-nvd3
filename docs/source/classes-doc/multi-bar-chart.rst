@@ -46,4 +46,4 @@ js example::
         });
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/multiBarChart.png
+.. image:: ../_static/screenshot/multiBarChart.png

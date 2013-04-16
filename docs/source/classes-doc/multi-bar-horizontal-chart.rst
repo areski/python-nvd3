@@ -62,4 +62,4 @@ js example::
         });
 
 
-.. image:: https://raw.github.com/areski/python-nvd3/master/screenshot/multiBarHorizontalChart.png
+.. image:: ../_static/screenshot/multiBarHorizontalChart.png
