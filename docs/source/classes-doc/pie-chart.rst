@@ -7,4 +7,4 @@
 
 .. autoclass:: pieChart
 
-.. image:: ../_static/screenshot/pieChart.png
+
