@@ -93,6 +93,21 @@ class NVD3Chart:
         * ``header_css`` - False/True
         * ``header_js`` - custom tooltip string
 
+    **Methods**:
+
+        * ``__init__()`` - Constructor
+        * ``__str__()`` - Return htmlcontent
+        * ``add_serie()`` - Series are list of data that will be plotted
+        * ``set_graph_height()`` - Set graph height
+        * ``set_graph_width()`` - Set graph width
+        * ``set_containerheader()`` - Set header of html page
+        * ``set_custom_tooltip_flag()`` - Set custom tooltip flag
+        * ``buildhtml()`` - Build the HTML page / Create the htmlheader with css-js / Add Js code for nvd3
+        * ``buildhtmlheader()`` - Generate HTML header
+        * ``buildcontainer()`` - Generate HTML div
+        * ``buildtooltip()`` - Generate custom tooltip for the chart
+        * ``create_x_axis()`` - Generate x axis
+        * ``create_y_axis()`` - Generate y axis
     """
     count = 0
     dateformat = '%x'
@@ -237,7 +252,7 @@ class NVD3Chart:
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
     def buildtooltip(self):
-        """generate custom chart tooltip the chart"""
+        """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                 stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
