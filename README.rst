@@ -12,6 +12,11 @@ for d3.js without taking away the power that d3.js gives you.
 
 .. image:: https://www.travis-ci.org/areski/python-nvd3.png?branch=master
 
+|endorse|
+
+.. |endorse| image:: https://api.coderwall.com/areski/endorsecount.png
+   :target: https://coderwall.com/areski
+
 
 Installation
 ------------
