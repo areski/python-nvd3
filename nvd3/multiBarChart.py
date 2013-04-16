@@ -17,6 +17,11 @@ from NVD3Chart import NVD3Chart
 #examples
 class multiBarChart(NVD3Chart):
     """
+    A multiple bar graph contains comparisons of two or more categories or bars.
+    One axis represents a quantity and the other axis identifies a specific feature
+    about the categories. Reading a multiple bar graph includes looking at extremes
+    (tallest/longest vs. shortest) in each grouping.
+
     usage ::
 
         from nvd3 import multiBarChart

@@ -3,7 +3,7 @@
 :class:`stackedAreaChart`
 -------------------------
 
-A pie chart (or a circle graph) is a circular chart divided into sectors, illustrating numerical proportion. In chart, the arc length of each sector is proportional to the quantity it represents.
+The stacked area chart is identical to the area chart, except the areas are stacked on top of each other, rather than overlapping. This can make the chart much easier to read.
 
 python-example ::
 

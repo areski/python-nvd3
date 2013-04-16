@@ -14,6 +14,9 @@ from NVD3Chart import NVD3Chart
 
 class discreteBarChart(NVD3Chart):
     """
+    A discrete bar chart or bar graph is a chart with rectangular bars with
+    lengths proportional to the values that they represent.
+
     usage ::
 
         from nvd3 import discreteBarChart

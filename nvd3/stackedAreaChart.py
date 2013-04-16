@@ -17,6 +17,9 @@ from NVD3Chart import NVD3Chart
 #examples
 class stackedAreaChart(NVD3Chart):
     """
+    The stacked area chart is identical to the area chart, except the areas are stacked
+    on top of each other, rather than overlapping. This can make the chart much easier to read.
+
     usage ::
 
         from nvd3 import stackedAreaChart

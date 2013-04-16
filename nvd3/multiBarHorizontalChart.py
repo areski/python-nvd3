@@ -14,6 +14,8 @@ from NVD3Chart import NVD3Chart
 
 class multiBarHorizontalChart(NVD3Chart):
     """
+    A multiple horizontal bar graph contains comparisons of two or more categories or bars.
+
     usage ::
 
         from nvd3 import multiBarHorizontalChart

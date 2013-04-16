@@ -31,6 +31,10 @@ from NVD3Chart import NVD3Chart, stab
 #examples
 class pieChart(NVD3Chart):
     """
+    A pie chart (or a circle graph) is a circular chart divided into sectors,
+    illustrating numerical proportion. In chart, the arc length of each sector
+    is proportional to the quantity it represents.
+
     usage ::
 
         from nvd3 import pieChart

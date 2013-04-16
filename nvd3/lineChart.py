@@ -16,6 +16,9 @@ from NVD3Chart import NVD3Chart
 #examples
 class lineChart(NVD3Chart):
     """
+    A line chart or line graph is a type of chart which displays information
+    as a series of data points connected by straight line segments.
+
     usage ::
 
         from nvd3 import lineChart

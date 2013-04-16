@@ -14,6 +14,9 @@ from NVD3Chart import NVD3Chart
 
 class cumulativeLineChart(NVD3Chart):
     """
+    A cumulative line chart is used when you have one important grouping representing
+    an ordered set of data and one value to show, summed over time.
+
     usage ::
 
         from nvd3 import cumulativeLineChart

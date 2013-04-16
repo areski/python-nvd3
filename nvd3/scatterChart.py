@@ -14,6 +14,12 @@ from NVD3Chart import NVD3Chart, stab
 
 class scatterChart(NVD3Chart):
     """
+    A scatter plot or scattergraph is a type of mathematical diagram using Cartesian
+    coordinates to display values for two variables for a set of data.
+    The data is displayed as a collection of points, each having the value of one variable
+    determining the position on the horizontal axis and the value of the other variable
+    determining the position on the vertical axis.
+
     usage ::
 
         from nvd3 import scatterChart
