@@ -21,21 +21,11 @@ for d3.js without taking away the power that d3.js gives you.
 Installation
 ------------
 
-Install, upgrade and uninstall python-nvd3.py with these commands::
+Install, upgrade and uninstall python-nvd3 with these commands::
 
-    #Install
-    $ sudo pip install python-nvd3
-
-    #Upgrade
-    $ sudo pip install --upgrade python-nvd3
-
-    #Uninstall
-    $ sudo pip uninstall python-nvd3
-
-
-Or if you don't have `pip`, use easy_install to install python-nvd3::
-
-    $ sudo easy_install python-nvd3
+    $ pip install python-nvd3
+    $ pip install --upgrade python-nvd3
+    $ pip uninstall python-nvd3
 
 
 Usage

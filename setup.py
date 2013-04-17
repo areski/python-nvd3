@@ -112,7 +112,7 @@ setup(
     description="Python NVD3",
     long_description=read('README.rst'),
     keywords='plot, graph, nvd3, d3',
-    author='Arezqui Belaid',
+    author='Belaid Arezqui',
     author_email='areski@gmail.com',
     url='http://github.com/areski/python-nvd3',
     license='MIT license',
