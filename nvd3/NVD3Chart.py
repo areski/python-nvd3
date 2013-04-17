@@ -248,15 +248,15 @@ class NVD3Chart:
 
             if self.model == 'pieChart':
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end +";\n" +\
-                    stab(3) + "var x = " + x_start + " String(key) " + x_end +";\n" +\
+                    stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end + ";\n" +\
+                    stab(3) + "var x = " + x_start + " String(key) " + x_end + ";\n" +\
                     stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
             else:
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end +";\n" +\
-                    stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end +";\n" +\
+                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
+                    stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end + ";\n" +\
                     stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
@@ -360,7 +360,7 @@ def _main():
     """
     # Parse arguments
     usage = "usage: nvd3.py [options]"
-    parser = OptionParser(usage=usage, version="python-nvd3 " + __version__ + " - Python wrapper for nvd3 ")
+    parser = OptionParser(usage=usage, version="python-nvd3 0.2.2 - Python wrapper for nvd3 ")
     parser.add_option("-q", "--quiet",
                   action="store_false", dest="verbose", default=True,
                   help="don't print messages to stdout")
