@@ -23,7 +23,7 @@ General aims :
 - Clean code / PEP8
 """
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 
 from lineChart import lineChart
