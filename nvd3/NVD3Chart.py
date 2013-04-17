@@ -239,12 +239,15 @@ class NVD3Chart:
         """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
 
+            x_start = ("'" + str(x_start) + "' + ") if x_start else ''
+            x_end = (" + '" + str(x_end) + "'") if x_end else ''
             y_start = ("'" + str(y_start) + "' + ") if y_start else ''
             y_end = (" + '" + str(y_end) + "'") if y_end else ''
 
             self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                 stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end +";\n" +\
-                stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y  ;\n" +\
+                stab(3) + "var x = " + x_start + " String(key) " + x_end +";\n" +\
+                stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
                 stab(3) + "return tooltip_str;\n" + \
                 stab(2) + "});\n"
 
