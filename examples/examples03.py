@@ -18,6 +18,8 @@ output_file = open('test3.html', 'w')
 type = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_custom_tooltip_flag(True)
+chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='')
 nb_element = 10
 xdata = range(nb_element)
 ydata = [random.randint(-10, 10) for i in range(nb_element)]

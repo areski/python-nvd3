@@ -103,6 +103,7 @@ class NVD3Chart:
     containerheader = ''
     jschart = None
     custom_tooltip_flag = False
+    date_flag = False
     charttooltip = None
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
@@ -182,9 +183,10 @@ class NVD3Chart:
         """Set containerheader"""
         self.containerheader = containerheader
 
-    def set_custom_tooltip_flag(self, custom_tooltip_flag):
-        """Set custom_tooltip_flag"""
+    def set_custom_tooltip_flag(self, custom_tooltip_flag, date_flag=False):
+        """Set custom_tooltip_flag & date_flag"""
         self.custom_tooltip_flag = custom_tooltip_flag
+        self.date_flag = date_flag
 
     def __str__(self):
         """return htmlcontent"""
@@ -244,12 +246,20 @@ class NVD3Chart:
             y_start = ("'" + str(y_start) + "' + ") if y_start else ''
             y_end = (" + '" + str(y_end) + "'") if y_end else ''
 
-            self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end +";\n" +\
-                stab(3) + "var x = " + x_start + " String(key) " + x_end +";\n" +\
-                stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
-                stab(3) + "return tooltip_str;\n" + \
-                stab(2) + "});\n"
+            if self.model == 'pieChart':
+                self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+                    stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end +";\n" +\
+                    stab(3) + "var x = " + x_start + " String(key) " + x_end +";\n" +\
+                    stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
+                    stab(3) + "return tooltip_str;\n" + \
+                    stab(2) + "});\n"
+            else:
+                self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end +";\n" +\
+                    stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end +";\n" +\
+                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
+                    stab(3) + "return tooltip_str;\n" + \
+                    stab(2) + "});\n"
 
     def buildjschart(self):
         """generate javascript code for the chart"""
@@ -283,12 +293,11 @@ class NVD3Chart:
             datum = "[data_%s[0].values]" % self.name
 
         # add custom tooltip string in jschart
-        if self.custom_tooltip_flag and self.model == 'pieChart':
+        if self.custom_tooltip_flag and self.date_flag:
+            self.buildtooltip()
             self.jschart += self.charttooltip
-        else:
-            if self.custom_tooltip_flag:
-                self.buildtooltip()
-                self.jschart += self.charttooltip
+        if self.custom_tooltip_flag and not self.date_flag:
+            self.jschart += self.charttooltip
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
