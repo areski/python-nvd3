@@ -39,7 +39,7 @@ chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
-type = "MultiBarChart"
+type = "multiBarChart"
 chart = multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
