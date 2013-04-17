@@ -104,7 +104,7 @@ class NVD3Chart:
     jschart = None
     custom_tooltip_flag = False
     date_flag = False
-    charttooltip = None
+    charttooltip = ''
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
