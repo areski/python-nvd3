@@ -106,6 +106,7 @@ class NVD3Chart:
     custom_tooltip_flag = False
     date_flag = False
     charttooltip = ''
+    tooltip_condition_string = ''
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -133,7 +134,7 @@ class NVD3Chart:
         if 'resize' in kwargs and kwargs["resize"]:
             self.resize = True
 
-    def add_serie(self, y, x, name=None, **kwargs):
+    def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
@@ -171,6 +172,17 @@ class NVD3Chart:
         if 'disabled' in kwargs and kwargs["disabled"]:
             data_keyvalue["disabled"] = 'true'
 
+        if extra and self.model != 'pieChart':
+            _start = extra['tooltip']['y_start']
+            _end = extra['tooltip']['y_end']
+            _start = ("'" + str(_start) + "' + ") if _start else ''
+            _end = (" + '" + str(_end) + "'") if _end else ''
+            self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
+                stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                stab(3) + "}\n"
+
+        #print self.tooltip_condition_string
+        #print "----------------------------"
         self.series.append(data_keyvalue)
 
     def set_graph_height(self, height):
@@ -233,33 +245,29 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
-    def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end='', axis_data={}):
+    def build_custom_tooltip(self):
         """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
-            x_start = ("'" + str(x_start) + "' + ") if x_start else ''
-            x_end = (" + '" + str(x_end) + "'") if x_end else ''
-            y_start = ("'" + str(y_start) + "' + ") if y_start else ''
-            y_end = (" + '" + str(y_end) + "'") if y_end else ''
 
             if not self.date_flag:
                 if self.model == 'pieChart':
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end + ";\n" +\
-                        stab(3) + "var x = " + x_start + " String(key) " + x_end + ";\n" +\
+                        stab(3) + "var y = String(e.point.y);\n" +\
+                        stab(3) + "var x = String(key);\n" +\
                         stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
                 else:
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
-                        stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end + ";\n" +\
+                        stab(3) + "var y = String(graph.point.y);\n" +\
+                        stab(3) + "var x = String(graph.point.x);\n" +\
                         stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
             else:
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                     stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
-                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
+                    self.tooltip_condition_string +\
                     stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x ;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"

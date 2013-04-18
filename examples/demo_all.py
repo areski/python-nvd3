@@ -26,9 +26,7 @@ output_file = open('test.html', 'w')
 type = "lineChart"
 chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-axis_data = {"key1": "Count", "y1_start": "There is ", "y1_end": " calls",
-             "key2": "Duration", "y2_start": "", "y2_end": " min"}
-chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='', axis_data=axis_data)
+
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
 nb_element = 100
@@ -37,10 +35,12 @@ xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
-extra_serie = {"tooltip": {"key": "Count", "y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
-extra_serie = {"tooltip": {"key": "Duration", "y_start": "", "y_end": " min"}}
+extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+chart.build_custom_tooltip()
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
