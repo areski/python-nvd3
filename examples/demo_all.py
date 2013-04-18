@@ -11,7 +11,6 @@ Project location : https://github.com/areski/python-nvd3
 from nvd3 import lineChart
 from nvd3 import lineWithFocusChart
 from nvd3 import stackedAreaChart
-#TODO: demo_all.py should have an example for all charts
 from nvd3 import multiBarHorizontalChart
 from nvd3 import linePlusBarChart
 from nvd3 import cumulativeLineChart
@@ -39,7 +38,6 @@ extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-chart.build_custom_tooltip()
 
 chart.buildhtml()
 
@@ -58,10 +56,13 @@ ydata2 = map(lambda x: x * 2, ydata)
 ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
-chart.add_serie(name="serie 1", y=ydata, x=xdata)
-chart.add_serie(name="serie 2", y=ydata2, x=xdata)
-chart.add_serie(name="serie 3", y=ydata3, x=xdata)
-chart.add_serie(name="serie 4", y=ydata4, x=xdata)
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+#extra_serie = None
+chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 4", y=ydata4, x=xdata, extra=extra_serie)
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
@@ -77,8 +78,10 @@ xdata = map(lambda x: 100 + x, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
-chart.add_serie(name="serie 1", y=ydata, x=xdata)
-chart.add_serie(name="serie 2", y=ydata2, x=xdata)
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
@@ -123,6 +126,23 @@ chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
+type = "multiBarHorizontalChart"
+chart = multiBarHorizontalChart(name=type, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+
+nb_element = 10
+xdata = range(nb_element)
+ydata = [random.randint(-10, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+
+chart.buildhtml()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
 
 #close Html file
 output_file.close()

@@ -66,4 +66,3 @@ class lineChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-

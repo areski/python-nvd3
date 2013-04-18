@@ -70,7 +70,9 @@ class stackedAreaChart(NVD3Chart):
     def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
-            self.create_x_axis('xAxis', format='%d %b %y', date=True)
+            self.set_date_flag(True)
+            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
+            self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=".2f")
         self.create_y_axis('yAxis', format=".2f")
