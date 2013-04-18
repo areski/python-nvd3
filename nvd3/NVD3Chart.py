@@ -235,13 +235,12 @@ class NVD3Chart:
     def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end=''):
         """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
+            x_start = ("'" + str(x_start) + "' + ") if x_start else ''
+            x_end = (" + '" + str(x_end) + "'") if x_end else ''
+            y_start = ("'" + str(y_start) + "' + ") if y_start else ''
+            y_end = (" + '" + str(y_end) + "'") if y_end else ''
 
             if not self.date_flag:
-                x_start = ("'" + str(x_start) + "' + ") if x_start else ''
-                x_end = (" + '" + str(x_end) + "'") if x_end else ''
-                y_start = ("'" + str(y_start) + "' + ") if y_start else ''
-                y_end = (" + '" + str(y_end) + "'") if y_end else ''
-
                 if self.model == 'pieChart':
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                         stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end + ";\n" +\
@@ -259,9 +258,11 @@ class NVD3Chart:
             else:
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                     stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
-                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
+                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
+                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x ;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
+
 
     def buildjschart(self):
         """generate javascript code for the chart"""
@@ -295,12 +296,12 @@ class NVD3Chart:
             datum = "[data_%s[0].values]" % self.name
 
         # add custom tooltip string in jschart
-        if self.custom_tooltip_flag and self.date_flag:
-            self.build_custom_tooltip()
+        # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
+        if self.custom_tooltip_flag and self.date_flag and self.charttooltip == '':
+            self.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='')
             self.jschart += self.charttooltip
         else:
             self.jschart += self.charttooltip
-
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \

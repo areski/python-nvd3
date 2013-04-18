@@ -26,7 +26,7 @@ output_file = open('test.html', 'w')
 type = "lineChart"
 chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-
+chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='')
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
 nb_element = 100
