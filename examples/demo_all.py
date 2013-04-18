@@ -37,8 +37,10 @@ xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
-chart.add_serie(name="Count", y=ydata, x=xdata)
-chart.add_serie(name="Duration", y=ydata2, x=xdata)
+extra_serie = {"tooltip": {"key": "Count", "y_start": "There is ", "y_end": " calls"}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
+extra_serie = {"tooltip": {"key": "Duration", "y_start": "", "y_end": " min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
