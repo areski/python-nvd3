@@ -146,7 +146,7 @@ class NVD3Chart:
             x = [str(d) for d in x]
 
         x = sorted(x)
-        #TODO: Add comments
+        # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs:
             serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
         else:
@@ -177,9 +177,14 @@ class NVD3Chart:
             _end = extra['tooltip']['y_end']
             _start = ("'" + str(_start) + "' + ") if _start else ''
             _end = (" + '" + str(_end) + "'") if _end else ''
-            self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
-                stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                stab(3) + "}\n"
+            if self.model == 'linePlusBarChart':
+                self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
+                    stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                    stab(3) + "}\n"
+            else:
+                self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
+                    stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                    stab(3) + "}\n"
 
         if extra and self.model == 'pieChart':
             _start = extra['tooltip']['y_start']
@@ -280,6 +285,7 @@ class NVD3Chart:
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
 
+
     def buildjschart(self):
         """generate javascript code for the chart"""
 
@@ -313,8 +319,10 @@ class NVD3Chart:
 
         # add custom tooltip string in jschart
         # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
-        if self.custom_tooltip_flag and self.date_flag and self.charttooltip == '':
-            self.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='')
+        if self.custom_tooltip_flag and self.date_flag \
+            and self.charttooltip == '' and self.tooltip_condition_string == '':
+            self.tooltip_condition_string = 'var y = String(graph.point.y);\n'
+            self.build_custom_tooltip()
             self.jschart += self.charttooltip
         else:
             self.jschart += self.charttooltip
