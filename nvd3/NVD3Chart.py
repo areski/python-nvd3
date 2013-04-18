@@ -145,6 +145,7 @@ class NVD3Chart:
             x = [str(d) for d in x]
 
         x = sorted(x)
+        #TODO: Add comments
         if 'shape' in kwargs:
             serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
         else:
@@ -262,7 +263,6 @@ class NVD3Chart:
                     stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x ;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
-
 
     def buildjschart(self):
         """generate javascript code for the chart"""

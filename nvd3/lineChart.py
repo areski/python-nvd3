@@ -83,7 +83,6 @@ class lineChart(NVD3Chart):
                 stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                 stab(3) + "}\n"
 
-
         if self.custom_tooltip_flag:
             x_start = ("'" + str(x_start) + "' + ") if x_start else ''
             x_end = (" + '" + str(x_end) + "'") if x_end else ''
@@ -98,7 +97,6 @@ class lineChart(NVD3Chart):
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
             else:
-
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                     stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
                     stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
