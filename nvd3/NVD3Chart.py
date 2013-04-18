@@ -181,10 +181,15 @@ class NVD3Chart:
                 self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
                     stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                     stab(3) + "}\n"
+            if self.model == 'cumulativeLineChart':
+                self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
+                    stab(4) + "var y = " + _start + " String(e) " + _end + ";\n" +\
+                    stab(3) + "}\n"
             else:
                 self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
                     stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                     stab(3) + "}\n"
+
 
         if extra and self.model == 'pieChart':
             _start = extra['tooltip']['y_start']

@@ -103,26 +103,26 @@ chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-"""
+
 type = "cumulativeLineChart"
 chart = cumulativeLineChart(name=type, height=350, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
-nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
-chart.add_serie(y=ydata, x=xdata)
-chart.add_serie(y=ydata2, x=xdata)
-
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+chart.build_custom_tooltip()
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-"""
+
 
 #close Html file
 output_file.close()
