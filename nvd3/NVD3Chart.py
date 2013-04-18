@@ -233,7 +233,7 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
-    def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end='', **kwargs):
+    def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end='', axis_data={}):
         """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
             x_start = ("'" + str(x_start) + "' + ") if x_start else ''

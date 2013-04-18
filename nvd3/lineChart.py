@@ -67,7 +67,7 @@ class lineChart(NVD3Chart):
         if width:
             self.set_graph_width(width)
 
-    def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end='', **axis_data):
+    def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end='', axis_data={}):
         """generate custom tooltip for the chart"""
 
         axis_key_list = [d for d in axis_data.keys() if 'key' in d]

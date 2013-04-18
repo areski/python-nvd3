@@ -28,7 +28,7 @@ chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 axis_data = {"key1": "Count", "y1_start": "There is ", "y1_end": " calls",
              "key2": "Duration", "y2_start": "", "y2_end": " min"}
-chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='', **axis_data)
+chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='', axis_data=axis_data)
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 
 nb_element = 100
