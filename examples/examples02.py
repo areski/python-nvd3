@@ -18,7 +18,6 @@ output_file = open('test2.html', 'w')
 #---------------------------------------
 type = "lineChart"
 chart = lineChart(name=type, date=False, height=350)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = []
 ydata = []
@@ -30,13 +29,17 @@ for i in range(0, 101):
     ydata.append(math.sin(math.pi * x))
     ydata2.append(0.5 * math.cos(math.pi * x))
 
-chart.add_serie(y=ydata, x=xdata, name='sine')
-chart.add_serie(y=ydata2, x=xdata, name='cose')
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+chart.add_serie(y=ydata, x=xdata, name='sine', extra=extra_serie)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
+chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie)
+chart.set_custom_tooltip_flag(True)
+chart.build_custom_tooltip()
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-
+"""
 type = "scatterChart"
 chart = scatterChart(name=type, height=350, date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -50,13 +53,12 @@ kwargs1 = {'shape': 'circle'}
 kwargs2 = {'shape': 'cross'}
 kwargs3 = {'shape': 'triangle-up'}
 
-#kwargs['size'] = True
-chart.add_serie(y=ydata, x=xdata, **kwargs1)
-chart.add_serie(y=ydata2, x=xdata, **kwargs2)
-chart.add_serie(y=ydata3, x=xdata, **kwargs3)
+chart.add_serie(name="serie 1", y=ydata, x=xdata, **kwargs1)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, **kwargs2)
+chart.add_serie(name="serie 3", y=ydata3, x=xdata, **kwargs3)
 
 chart.buildhtml()
-
+"""
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 

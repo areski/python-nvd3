@@ -177,6 +177,7 @@ class NVD3Chart:
             _end = extra['tooltip']['y_end']
             _start = ("'" + str(_start) + "' + ") if _start else ''
             _end = (" + '" + str(_end) + "'") if _end else ''
+
             if self.model == 'linePlusBarChart':
                 self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
                     stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
@@ -189,7 +190,6 @@ class NVD3Chart:
                 self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
                     stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                     stab(3) + "}\n"
-
 
         if extra and self.model == 'pieChart':
             _start = extra['tooltip']['y_start']
@@ -277,9 +277,9 @@ class NVD3Chart:
                         stab(2) + "});\n"
                 else:
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var y = String(graph.point.y);\n" +\
-                        stab(3) + "var x = String(graph.point.x);\n" +\
-                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
+                        stab(3) + "var x = String(e);\n" +\
+                        self.tooltip_condition_string +\
+                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' at ' + y  ;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
             else:
