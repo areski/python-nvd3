@@ -181,6 +181,14 @@ class NVD3Chart:
                 stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                 stab(3) + "}\n"
 
+        if extra and self.model == 'pieChart':
+            _start = extra['tooltip']['y_start']
+            _end = extra['tooltip']['y_end']
+            _start = ("'" + str(_start) + "' + ") if _start else ''
+            _end = (" + '" + str(_end) + "'") if _end else ''
+            self.tooltip_condition_string += \
+                "var y = " + _start + " String(e.point.y) " + _end + ";\n"
+
         #print self.tooltip_condition_string
         #print "----------------------------"
         self.series.append(data_keyvalue)
@@ -252,8 +260,8 @@ class NVD3Chart:
             if not self.date_flag:
                 if self.model == 'pieChart':
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var y = String(e.point.y);\n" +\
                         stab(3) + "var x = String(key);\n" +\
+                        stab(3) + self.tooltip_condition_string +\
                         stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"

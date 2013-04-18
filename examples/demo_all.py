@@ -19,6 +19,10 @@ import random
 import datetime
 import time
 
+
+start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
+nb_element = 100
+
 #Open File for test
 output_file = open('test.html', 'w')
 #---------------------------------------
@@ -26,10 +30,6 @@ output_file = open('test.html', 'w')
 type = "lineChart"
 chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-
-start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
-
-nb_element = 100
 xdata = range(nb_element)
 xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
