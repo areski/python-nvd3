@@ -79,6 +79,7 @@ class NVD3Chart:
         * ``container`` - Place for graph
         * ``containerheader`` - Header for javascript code
         * ``jschart`` - Javascript code as string
+        * ``date_flag`` - x-axis contain date format or not
         * ``custom_tooltip_flag`` - False / True
         * ``charttooltip`` - Custom tooltip string
         * ``header_css`` - False / True
@@ -183,10 +184,13 @@ class NVD3Chart:
         """Set containerheader"""
         self.containerheader = containerheader
 
-    def set_custom_tooltip_flag(self, custom_tooltip_flag, date_flag=False):
+    def set_date_flag(self, date_flag=False):
+        """Set date falg"""
+        self.date_flag = date_flag
+
+    def set_custom_tooltip_flag(self, custom_tooltip_flag):
         """Set custom_tooltip_flag & date_flag"""
         self.custom_tooltip_flag = custom_tooltip_flag
-        self.date_flag = date_flag
 
     def __str__(self):
         """return htmlcontent"""
@@ -228,36 +232,34 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
-    def buildtooltip(self):
-        """generate custom tooltip for the chart"""
-        if self.custom_tooltip_flag:
-            self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
-                stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
-                stab(3) + "return tooltip_str;\n" + \
-                stab(2) + "});\n"
-
     def build_custom_tooltip(self, x_start='', x_end='', y_start='', y_end=''):
         """generate custom tooltip for the chart"""
         if self.custom_tooltip_flag:
 
-            x_start = ("'" + str(x_start) + "' + ") if x_start else ''
-            x_end = (" + '" + str(x_end) + "'") if x_end else ''
-            y_start = ("'" + str(y_start) + "' + ") if y_start else ''
-            y_end = (" + '" + str(y_end) + "'") if y_end else ''
+            if not self.date_flag:
+                x_start = ("'" + str(x_start) + "' + ") if x_start else ''
+                x_end = (" + '" + str(x_end) + "'") if x_end else ''
+                y_start = ("'" + str(y_start) + "' + ") if y_start else ''
+                y_end = (" + '" + str(y_end) + "'") if y_end else ''
 
-            if self.model == 'pieChart':
-                self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end + ";\n" +\
-                    stab(3) + "var x = " + x_start + " String(key) " + x_end + ";\n" +\
-                    stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
-                    stab(3) + "return tooltip_str;\n" + \
-                    stab(2) + "});\n"
+                if self.model == 'pieChart':
+                    self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+                        stab(3) + "var y = " + y_start + " String(e.point.y) " + y_end + ";\n" +\
+                        stab(3) + "var x = " + x_start + " String(key) " + x_end + ";\n" +\
+                        stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
+                        stab(3) + "return tooltip_str;\n" + \
+                        stab(2) + "});\n"
+                else:
+                    self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+                        stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
+                        stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end + ";\n" +\
+                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
+                        stab(3) + "return tooltip_str;\n" + \
+                        stab(2) + "});\n"
             else:
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var y = " + y_start + " String(graph.point.y) " + y_end + ";\n" +\
-                    stab(3) + "var x = " + x_start + " String(graph.point.x) " + x_end + ";\n" +\
-                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' <-> ' + y  ;\n" +\
+                    stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
+                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + graph.point.y +' on ' + x ;" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
 
@@ -294,10 +296,11 @@ class NVD3Chart:
 
         # add custom tooltip string in jschart
         if self.custom_tooltip_flag and self.date_flag:
-            self.buildtooltip()
+            self.build_custom_tooltip()
             self.jschart += self.charttooltip
-        if self.custom_tooltip_flag and not self.date_flag:
+        else:
             self.jschart += self.charttooltip
+
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
