@@ -25,8 +25,7 @@ ydata = [3, 12, -10, 5, 35, -7, 2]
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
+
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
@@ -40,8 +39,6 @@ xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
@@ -58,9 +55,6 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)

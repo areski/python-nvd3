@@ -33,8 +33,7 @@ extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
 chart.add_serie(y=ydata, x=xdata, name='sine', extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
@@ -57,8 +56,7 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)

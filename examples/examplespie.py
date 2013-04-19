@@ -24,8 +24,6 @@ xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------

@@ -172,32 +172,35 @@ class NVD3Chart:
         if 'disabled' in kwargs and kwargs["disabled"]:
             data_keyvalue["disabled"] = 'true'
 
-        if extra and self.model != 'pieChart':
-            _start = extra['tooltip']['y_start']
-            _end = extra['tooltip']['y_end']
-            _start = ("'" + str(_start) + "' + ") if _start else ''
-            _end = (" + '" + str(_end) + "'") if _end else ''
+        if extra.get('tooltip'):
+            self.custom_tooltip_flag = True
 
-            if self.model == 'linePlusBarChart':
-                self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
-                    stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                    stab(3) + "}\n"
-            elif self.model == 'cumulativeLineChart':
-                self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
-                    stab(4) + "var y = " + _start + " String(e) " + _end + ";\n" +\
-                    stab(3) + "}\n"
-            else:
-                self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
-                    stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                    stab(3) + "}\n"
+            if self.model != 'pieChart':
+                _start = extra['tooltip']['y_start']
+                _end = extra['tooltip']['y_end']
+                _start = ("'" + str(_start) + "' + ") if _start else ''
+                _end = (" + '" + str(_end) + "'") if _end else ''
 
-        if extra and self.model == 'pieChart':
-            _start = extra['tooltip']['y_start']
-            _end = extra['tooltip']['y_end']
-            _start = ("'" + str(_start) + "' + ") if _start else ''
-            _end = (" + '" + str(_end) + "'") if _end else ''
-            self.tooltip_condition_string += \
-                "var y = " + _start + " String(e.point.y) " + _end + ";\n"
+                if self.model == 'linePlusBarChart':
+                    self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
+                        stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                        stab(3) + "}\n"
+                elif self.model == 'cumulativeLineChart':
+                    self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
+                        stab(4) + "var y = " + _start + " String(e) " + _end + ";\n" +\
+                        stab(3) + "}\n"
+                else:
+                    self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
+                        stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                        stab(3) + "}\n"
+
+            if self.model == 'pieChart':
+                _start = extra['tooltip']['y_start']
+                _end = extra['tooltip']['y_end']
+                _start = ("'" + str(_start) + "' + ") if _start else ''
+                _end = (" + '" + str(_end) + "'") if _end else ''
+                self.tooltip_condition_string += \
+                    "var y = " + _start + " String(e.point.y) " + _end + ";\n"
 
         #print self.tooltip_condition_string
         #print "----------------------------"
@@ -274,7 +277,8 @@ class NVD3Chart:
                         stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
-                elif self.model == 'discreteBarChart' or self.model == 'multiBarChart':
+                elif self.model == 'discreteBarChart' or self.model == 'multiBarChart' \
+                    or self.model == 'stackedAreaChart' or self.model == 'scatterChart':
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                         stab(3) + "var x = String(graph.point.x);\n" +\
                         stab(3) + "var y = String(graph.point.y);\n" +\
@@ -287,7 +291,7 @@ class NVD3Chart:
                         stab(3) + "var x = String(e);\n" +\
                         stab(3) + "var y = String(graph.point.y);\n" +\
                         self.tooltip_condition_string +\
-                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' at ' + y;\n" +\
+                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
             else:
@@ -335,11 +339,8 @@ class NVD3Chart:
         if self.tooltip_condition_string == '':
             self.tooltip_condition_string = 'var y = String(graph.point.y);\n'
 
-        if (self.custom_tooltip_flag and self.date_flag and self.charttooltip == ''):
-            self.build_custom_tooltip()
-            self.jschart += self.charttooltip
-        else:
-            self.jschart += self.charttooltip
+        self.build_custom_tooltip()
+        self.jschart += self.charttooltip
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
