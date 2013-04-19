@@ -27,8 +27,7 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip()
+
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
