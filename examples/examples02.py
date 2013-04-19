@@ -37,32 +37,6 @@ chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
-
-type = "scatterChart"
-chart = scatterChart(name=type, height=350, date=False)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-nb_element = 50
-xdata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata = [i * random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-ydata3 = map(lambda x: x * 5, ydata)
-
-kwargs1 = {'shape': 'circle'}
-kwargs2 = {'shape': 'cross'}
-kwargs3 = {'shape': 'triangle-up'}
-
-extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
-chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
-chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
-chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
-
-chart.buildhtml()
-
-output_file.write(chart.htmlcontent)
-#---------------------------------------
-
-
 
 #close Html file
 output_file.close()
