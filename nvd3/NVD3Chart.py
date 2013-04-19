@@ -124,15 +124,15 @@ class NVD3Chart:
         self.series = []
         self.axislist = {}
         self.template_page_nvd3 = Template(template_page_nvd3)
+        self.color_category = 'category10'
 
         if not name:
             self.count += 1
             name = "chart%d" % (self.count)
         self.name = name
 
-        if not color_category:
-            color_category = 'category10'
-        self.color_category = color_category
+        if color_category:
+            self.color_category = color_category
 
         if 'stacked' in kwargs and kwargs["stacked"]:
             self.stacked = True
@@ -211,8 +211,6 @@ class NVD3Chart:
                 self.tooltip_condition_string += \
                     "var y = " + _start + " String(e.point.y) " + _end + ";\n"
 
-        #print self.tooltip_condition_string
-        #print "----------------------------"
         self.series.append(data_keyvalue)
 
     def set_graph_height(self, height):
