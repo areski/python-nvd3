@@ -14,7 +14,7 @@ class pieChart(NVD3Chart):
     Python example::
 
         from nvd3 import pieChart
-        chart = pieChart(name='pieChart', height=400, width=400)
+        chart = pieChart(name='pieChart', color_category='category20c', height=400, width=400)
 
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
@@ -48,6 +48,8 @@ class pieChart(NVD3Chart):
               .y(function(d) { return d.value })
               .showLabels(true);
 
+            chart.color(d3.scale.category20c().range());
+
             chart.tooltipContent(function(key, y, e, graph) {
                 var x = String(key);
                 var y =  String(e.point.y)  + ' cal';
@@ -79,8 +81,7 @@ class pieChart(NVD3Chart):
 
         pie_jschart = '\n' + stab(2) + 'chart.x(function(d) { return d.x })\n' + \
             stab(3) + '.y(function(d) { return d.y })\n' + \
-            stab(3) + '.values(function(d) { return d })\n' + \
-            stab(3) + '.color(d3.scale.category10().range());\n'
+            stab(3) + '.values(function(d) { return d });\n'
         if self.width:
             pie_jschart += stab(2) + 'chart.width(%s);\n' % self.width
         if self.height:

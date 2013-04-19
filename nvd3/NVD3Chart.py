@@ -84,6 +84,7 @@ class NVD3Chart:
         * ``charttooltip`` - Custom tooltip string
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
+        * ``color_category`` - Defien color category (eg. category10, category20, category20c)
     """
     count = 0
     dateformat = '%x'
@@ -320,7 +321,7 @@ class NVD3Chart:
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
         if self.color_category:
-            self.jschart += stab(3) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
+            self.jschart += stab(2) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
 
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
