@@ -16,7 +16,7 @@ from nvd3 import pieChart
 output_file = open('test_pieChart.html', 'w')
 
 type = "pieChart"
-chart = pieChart(name=type, height=400, width=400)
+chart = pieChart(name=type, color_category='category20c', height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}

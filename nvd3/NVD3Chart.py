@@ -107,11 +107,12 @@ class NVD3Chart:
     date_flag = False
     charttooltip = ''
     tooltip_condition_string = ''
+    color_category = '' # category10, category20, category20c
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
 
-    def __init__(self, name=None, **kwargs):
+    def __init__(self, name=None, color_category=None, **kwargs):
         """
         Constructor
         """
@@ -127,6 +128,10 @@ class NVD3Chart:
             self.count += 1
             name = "chart%d" % (self.count)
         self.name = name
+
+        if not color_category:
+            color_category = 'category10'
+        self.color_category = color_category
 
         if 'stacked' in kwargs and kwargs["stacked"]:
             self.stacked = True
@@ -313,6 +318,10 @@ class NVD3Chart:
             stab() + 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
+
+        if self.color_category:
+            self.jschart += stab(3) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
+
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
