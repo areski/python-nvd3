@@ -39,7 +39,7 @@ chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 #---------------------------------------
-"""
+
 type = "scatterChart"
 chart = scatterChart(name=type, height=350, date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -53,12 +53,14 @@ kwargs1 = {'shape': 'circle'}
 kwargs2 = {'shape': 'cross'}
 kwargs3 = {'shape': 'triangle-up'}
 
-chart.add_serie(name="serie 1", y=ydata, x=xdata, **kwargs1)
-chart.add_serie(name="serie 2", y=ydata2, x=xdata, **kwargs2)
-chart.add_serie(name="serie 3", y=ydata3, x=xdata, **kwargs3)
-
+extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
+chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
+chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
+chart.set_custom_tooltip_flag(True)
+chart.build_custom_tooltip()
 chart.buildhtml()
-"""
+
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
