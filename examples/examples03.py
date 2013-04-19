@@ -18,14 +18,17 @@ output_file = open('test3.html', 'w')
 type = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-chart.set_custom_tooltip_flag(True)
-chart.build_custom_tooltip(x_start='', x_end='', y_start='', y_end='')
+
 nb_element = 10
 xdata = range(nb_element)
 ydata = [random.randint(-10, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
-chart.add_serie(y=ydata, x=xdata)
-chart.add_serie(y=ydata2, x=xdata)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+chart.set_custom_tooltip_flag(True)
+chart.build_custom_tooltip()
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
