@@ -7,20 +7,6 @@ NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js gives you.
 
 Project location : https://github.com/areski/python-nvd3
-
-Part of this code is inspired from goulib
-https://github.com/goulu/Goulib/blob/master/Goulib/nvd3.py
-
-This project aims to be reusuable with less dependencies and with the aim
-to power more library using it. For instance Django-Nvd3.
-
-General aims :
-- keep a separation between the templating and the output generation
-- don't tie with too many dependencies
-- easy to use
-- clean APIs
-- Documented
-- Clean code / PEP8
 """
 
 __version__ = '0.3.1'
