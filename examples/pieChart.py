@@ -13,7 +13,7 @@ from nvd3 import pieChart
 
 
 #Open File for test
-output_file = open('test1.html', 'w')
+output_file = open('test_pieChart.html', 'w')
 
 type = "pieChart"
 chart = pieChart(name=type, height=400, width=400)
