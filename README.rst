@@ -59,8 +59,8 @@ After installation use python-nvd3 as follows ::
 See the file examples.py for more samples.
 
 
-Demo
-----
+Live demo of NVD3
+-----------------
 
 See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
 
