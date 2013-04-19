@@ -13,7 +13,7 @@ from nvd3 import multiBarChart
 import random
 
 #Open File for test
-output_file = open('test1.html', 'w')
+output_file = open('test_multiBarChart.html', 'w')
 
 type = "multiBarChart"
 chart = multiBarChart(name=type, height=350)
