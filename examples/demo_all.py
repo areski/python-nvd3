@@ -23,7 +23,7 @@ start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
 #Open File for test
-output_file = open('test.html', 'w')
+output_file = open('test_demo_all.html', 'w')
 #---------------------------------------
 
 type = "lineChart"
