@@ -13,7 +13,7 @@ from nvd3 import multiBarHorizontalChart
 import random
 
 #Open File for test
-output_file = open('test3.html', 'w')
+output_file = open('test_multiBarHorizontalChart.html', 'w')
 
 type = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(name=type, height=350)
