@@ -108,12 +108,13 @@ Supported nvd3 charts
 .. image:: _static/screenshot/scatterChart.png
 
 
-.. _demo:
+.. _live_demo:
 
-Demo
-----
+Live demo of NVD3
+-----------------
 
 See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
+
 
 
 .. _documentation:
