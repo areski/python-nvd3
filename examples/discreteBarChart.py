@@ -10,8 +10,7 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from nvd3 import discreteBarChart
-from nvd3 import multiBarChart
-import random
+
 
 #Open File for test
 output_file = open('test1.html', 'w')
@@ -26,23 +25,6 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
-output_file.write(chart.htmlcontent)
-#---------------------------------------
-
-type = "multiBarChart"
-chart = multiBarChart(name=type, height=350)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-nb_element = 10
-xdata = range(nb_element)
-ydata = [random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-
-extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
-chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
-extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
-chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-chart.buildhtml()
-
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
