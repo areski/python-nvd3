@@ -9,9 +9,8 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3 import lineChart, scatterChart, multiBarHorizontalChart
+from nvd3 import lineChart
 import math
-import random
 
 #Open File for test
 output_file = open('test2.html', 'w')
