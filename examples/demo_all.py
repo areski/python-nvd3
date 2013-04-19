@@ -34,6 +34,7 @@ xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
+#Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
@@ -48,7 +49,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, date=True)
+chart = lineWithFocusChart(name=type, color_category='category20b', date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)
@@ -59,16 +60,12 @@ ydata2 = map(lambda x: x * 2, ydata)
 ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
-kwargs1 = {'color': 'green'}
-kwargs2 = {'color': 'red'}
-kwargs3 = {'color': 'yellow'}
-kwargs4 = {'color': 'blue'}
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
 #extra_serie = None
-chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
-chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
-chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
-chart.add_serie(name="serie 4", y=ydata4, x=xdata, extra=extra_serie, **kwargs4)
+chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie)
+chart.add_serie(name="serie 4", y=ydata4, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
 
