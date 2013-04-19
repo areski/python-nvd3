@@ -14,6 +14,10 @@ from nvd3 import stackedAreaChart
 from nvd3 import multiBarHorizontalChart
 from nvd3 import linePlusBarChart
 from nvd3 import cumulativeLineChart
+from nvd3 import discreteBarChart
+from nvd3 import pieChart
+from nvd3 import multiBarChart
+from nvd3 import scatterChart
 import random
 import datetime
 import time
@@ -142,6 +146,72 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+
+chart.buildhtml()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+type = "discreteBarChart"
+chart = discreteBarChart(name=type, height=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = ["A", "B", "C", "D", "E", "F", "G"]
+ydata = [3, 12, -10, 5, 35, -7, 2]
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+type = "pieChart"
+chart = pieChart(name=type, color_category='category20c', height=400, width=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+ydata = [3, 4, 0, 1, 5, 7, 3]
+
+chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+type = "multiBarChart"
+chart = multiBarChart(name=type, height=350)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+nb_element = 10
+xdata = range(nb_element)
+ydata = [random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
+chart.buildhtml()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+type = "scatterChart"
+chart = scatterChart(name=type, height=350, date=False)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+nb_element = 50
+xdata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata = [i * random.randint(1, 10) for i in range(nb_element)]
+ydata2 = map(lambda x: x * 2, ydata)
+ydata3 = map(lambda x: x * 5, ydata)
+
+kwargs1 = {'shape': 'circle'}
+kwargs2 = {'shape': 'cross'}
+kwargs3 = {'shape': 'triangle-up'}
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
+chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
+chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
 
 chart.buildhtml()
 
