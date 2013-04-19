@@ -30,6 +30,32 @@ nb_element = 100
 output_file = open('test_demo_all.html', 'w')
 #---------------------------------------
 
+type = "discreteBarChart"
+chart = discreteBarChart(name=type, height=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = ["A", "B", "C", "D", "E", "F", "G"]
+ydata = [3, 12, -10, 5, 35, -7, 2]
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
+type = "pieChart"
+chart = pieChart(name=type, color_category='category20c', height=400, width=400)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+ydata = [3, 4, 0, 1, 5, 7, 3]
+
+chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
 type = "lineChart"
 chart = lineChart(name=type, date=True, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -149,32 +175,6 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
 
-output_file.write(chart.htmlcontent)
-#---------------------------------------
-
-type = "discreteBarChart"
-chart = discreteBarChart(name=type, height=400)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-xdata = ["A", "B", "C", "D", "E", "F", "G"]
-ydata = [3, 12, -10, 5, 35, -7, 2]
-
-extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
-chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-
-chart.buildhtml()
-output_file.write(chart.htmlcontent)
-#---------------------------------------
-
-type = "pieChart"
-chart = pieChart(name=type, color_category='category20c', height=400, width=400)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-
-extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
-xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
-ydata = [3, 4, 0, 1, 5, 7, 3]
-
-chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
