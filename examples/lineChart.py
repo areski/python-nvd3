@@ -28,10 +28,12 @@ for i in range(0, 101):
     ydata.append(math.sin(math.pi * x))
     ydata2.append(0.5 * math.cos(math.pi * x))
 
+kwargs1 = {'color': 'black'}
+kwargs2 = {'color': 'red'}
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
-chart.add_serie(y=ydata, x=xdata, name='sine', extra=extra_serie)
+chart.add_serie(y=ydata, x=xdata, name='sine', extra=extra_serie, **kwargs1)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
-chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie)
+chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie, **kwargs2)
 
 chart.buildhtml()
 

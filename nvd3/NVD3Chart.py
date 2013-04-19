@@ -172,6 +172,9 @@ class NVD3Chart:
         if 'disabled' in kwargs and kwargs["disabled"]:
             data_keyvalue["disabled"] = 'true'
 
+        if 'color' in kwargs and kwargs["color"]:
+            data_keyvalue["color"] = kwargs["color"]
+
         if extra.get('tooltip'):
             self.custom_tooltip_flag = True
 
