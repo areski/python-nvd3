@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from nvd3 import lineChart
 from nvd3 import lineWithFocusChart
 from nvd3 import stackedAreaChart
@@ -10,7 +11,6 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
-
 import random
 import unittest
 import datetime
@@ -41,7 +41,6 @@ class ChartTest(unittest.TestCase):
         xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
         ydata = [i + random.randint(1, 10) for i in range(nb_element)]
         ydata2 = map(lambda x: x * 2, ydata)
-
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -152,4 +151,5 @@ class ChartTest(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-# > python tests.py -v
+# Usage
+# python tests.py -v
