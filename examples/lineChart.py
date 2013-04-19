@@ -13,7 +13,7 @@ from nvd3 import lineChart
 import math
 
 #Open File for test
-output_file = open('test2.html', 'w')
+output_file = open('test_lineChart.html', 'w')
 #---------------------------------------
 type = "lineChart"
 chart = lineChart(name=type, date=False, height=350)
