@@ -277,10 +277,9 @@ class NVD3Chart:
                         stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
-                elif self.model == 'discreteBarChart' or self.model == 'multiBarChart' \
-                    or self.model == 'stackedAreaChart' or self.model == 'scatterChart':
+                elif self.model == 'lineChart':
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var x = String(graph.point.x);\n" +\
+                        stab(3) + "var x = String(e);\n" +\
                         stab(3) + "var y = String(graph.point.y);\n" +\
                         self.tooltip_condition_string +\
                         stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;\n" +\
@@ -288,7 +287,7 @@ class NVD3Chart:
                         stab(2) + "});\n"
                 else:
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var x = String(e);\n" +\
+                        stab(3) + "var x = String(graph.point.x);\n" +\
                         stab(3) + "var y = String(graph.point.y);\n" +\
                         self.tooltip_condition_string +\
                         stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;\n" +\
