@@ -14,11 +14,14 @@ class stackedAreaChart(NVD3Chart):
 
         from nvd3 import stackedAreaChart
         chart = stackedAreaChart(name='stackedAreaChart', height=400, width=400)
+
         xdata = [100, 101, 102, 103, 104, 105, 106,]
         ydata = [6, 11, 12, 7, 11, 10, 11]
         ydata2 = [8, 20, 16, 12, 20, 28, 28]
-        chart.add_serie(y=ydata, x=xdata)
-        chart.add_serie(y=ydata2, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
+        chart.add_serie(name="Serie 2", y=ydata2, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -56,9 +59,21 @@ class stackedAreaChart(NVD3Chart):
         nv.addGraph(function() {
             var chart = nv.models.stackedAreaChart();
             chart.xAxis
-                .tickFormat(d3.format(',.2f'))
+                .tickFormat(d3.format(',.2f'));
             chart.yAxis
-                .tickFormat(d3.format(',.2f'))
+                .tickFormat(d3.format(',.2f'));
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = String(graph.point.x);
+                var y = String(graph.point.y);
+                if(key == 'serie 1'){
+                    var y = 'There is ' +  String(graph.point.y)  + ' min';
+                }
+                if(key == 'serie 2'){
+                    var y = 'There is ' +  String(graph.point.y)  + ' min';
+                }
+                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                return tooltip_str;
+            });
             d3.select('#stackedAreaChart svg')
                 .datum(data_stackedAreaChart)
                 .transition()

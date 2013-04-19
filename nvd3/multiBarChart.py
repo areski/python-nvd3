@@ -18,7 +18,9 @@ class multiBarChart(NVD3Chart):
         chart = multiBarChart(name='multiBarChart', height=400, width=400)
         xdata = [0, 1, 3, 4]
         ydata = [6, 12, 9, 16]
-        chart.add_serie(y=ydata, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " balls"}}
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata)
         chart.buildhtml()
 
     Javascript generated::
@@ -41,9 +43,18 @@ class multiBarChart(NVD3Chart):
         nv.addGraph(function() {
             var chart = nv.models.multiBarChart();
             chart.xAxis
-                .tickFormat(d3.format(',.2f'))
+                .tickFormat(d3.format(',.2f'));
             chart.yAxis
-                .tickFormat(d3.format(',.2f'))
+                .tickFormat(d3.format(',.2f'));
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = String(graph.point.x);
+                var y = String(graph.point.y);
+                if(key == 'Serie 1'){
+                    var y =  String(graph.point.y)  + ' balls';
+                }
+                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                return tooltip_str;
+            });
             d3.select('#MultiBarChart svg')
                 .datum(data_MultiBarChart)
                 .transition()

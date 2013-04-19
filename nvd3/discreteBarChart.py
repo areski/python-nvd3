@@ -14,9 +14,12 @@ class discreteBarChart(NVD3Chart):
 
         from nvd3 import discreteBarChart
         chart = discreteBarChart(name='discreteBarChart', height=400, width=400)
+
         xdata = ["A", "B", "C", "D", "E"]
         ydata = [3, 4, 0, -3, 5, 7]
-        chart.add_serie(y=ydata, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " balls"}}
+        chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -43,7 +46,15 @@ class discreteBarChart(NVD3Chart):
                 .x(function(d) { return d.label })
                 .y(function(d) { return d.value })
                 .showLabels(true);
-
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = String(graph.point.x);
+                var y = String(graph.point.y);
+                if(key == 'Serie 1'){
+                    var y =  String(graph.point.y)  + ' balls';
+                }
+                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                return tooltip_str;
+            });
             d3.select("#div_id")
                 .datum(data)
                 .transition()

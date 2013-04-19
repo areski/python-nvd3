@@ -16,7 +16,9 @@ class lineChart(NVD3Chart):
         chart = lineChart(name='lineChart', height=400, width=400, date=True)
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
-        chart.add_serie(y=ydata, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -40,9 +42,18 @@ class lineChart(NVD3Chart):
         nv.addGraph(function() {
                 var chart = nv.models.lineChart();
                 chart.xAxis
-                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) })
+                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) });
                 chart.yAxis
-                    .tickFormat(d3.format(',.2f'))
+                    .tickFormat(d3.format(',.2f'));
+                chart.tooltipContent(function(key, y, e, graph) {
+                    var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
+                    var y = String(graph.point.y);
+                    if(key == 'Serie 1'){
+                        var y = 'There is ' +  String(graph.point.y)  + ' calls';
+                    }
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                    return tooltip_str;
+                });
                 d3.select('#lineChart svg')
                     .datum(data_lineChart)
                     .transition()

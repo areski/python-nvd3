@@ -23,8 +23,12 @@ class scatterChart(NVD3Chart):
 
         kwargs1 = {'shape': 'circle'}
         kwargs2 = {'shape': 'cross'}
-        chart.add_serie(y=ydata, x=xdata, **kwargs1)
-        chart.add_serie(y=ydata, x=xdata, **kwargs2)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
+        chart.add_serie(name="series 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
+        chart.add_serie(name="series 2", y=ydata, x=xdata, extra=extra_serie, **kwargs2)
         chart.buildhtml()
 
     Javascript generated::
@@ -74,6 +78,19 @@ class scatterChart(NVD3Chart):
 
             chart.showDistX(true);
             chart.showDistY(true);
+
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = String(graph.point.x);
+                var y = String(graph.point.y);
+                if(key == 'serie 1'){
+                    var y =  String(graph.point.y)  + ' calls';
+                }
+                if(key == 'serie 2'){
+                    var y =  String(graph.point.y)  + ' min';
+                }
+                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                return tooltip_str;
+            });
 
             d3.select("#div_id")
                 .datum(data)

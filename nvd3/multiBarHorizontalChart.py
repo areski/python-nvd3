@@ -16,8 +16,12 @@ class multiBarHorizontalChart(NVD3Chart):
         xdata = [-14, -7, 7, 14]
         ydata = [-6, 5, -1, 9]
         y2data = [-23, -6, -32, 9]
-        chart.add_serie(y=ydata, x=xdata)
-        chart.add_serie(y=y2data, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " balls"}}
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
+        chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -53,9 +57,21 @@ class multiBarHorizontalChart(NVD3Chart):
         nv.addGraph(function() {
                 var chart = nv.models.multiBarHorizontalChart();
                 chart.xAxis
-                    .tickFormat(d3.format(',.2f'))
+                    .tickFormat(d3.format(',.2f'));
                 chart.yAxis
-                    .tickFormat(d3.format(',.2f'))
+                    .tickFormat(d3.format(',.2f'));
+                chart.tooltipContent(function(key, y, e, graph) {
+                    var x = String(graph.point.x);
+                    var y = String(graph.point.y);
+                    if(key == 'Serie 1'){
+                        var y =  String(graph.point.y)  + ' balls';
+                    }
+                    if(key == 'Serie 2'){
+                        var y =  String(graph.point.y)  + ' calls';
+                    }
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                    return tooltip_str;
+                });
                 d3.select('#multiBarHorizontalChart svg')
                     .datum(data_multiBarHorizontalChart)
                     .transition().duration(500)

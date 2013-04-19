@@ -15,9 +15,12 @@ class pieChart(NVD3Chart):
 
         from nvd3 import pieChart
         chart = pieChart(name='pieChart', height=400, width=400)
+
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
-        chart.add_serie(y=ydata, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+        chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -40,10 +43,17 @@ class pieChart(NVD3Chart):
                 }]
 
         nv.addGraph(function() {
-          var chart = nv.models.pieChart()
+            var chart = nv.models.pieChart()
               .x(function(d) { return d.label })
               .y(function(d) { return d.value })
               .showLabels(true);
+
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = String(key);
+                var y =  String(e.point.y)  + ' cal';
+                tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                return tooltip_str;
+            });
 
             d3.select("#div_id")
                 .datum(data)

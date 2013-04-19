@@ -17,8 +17,12 @@ class cumulativeLineChart(NVD3Chart):
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         y2data = [36, 55, 11]
-        chart.add_serie(y=ydata, x=xdata)
-        chart.add_serie(y=y2data, x=xdata)
+
+        extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " calls"}}
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
+
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " mins"}}
+        chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     Javascript generated::
@@ -61,7 +65,18 @@ class cumulativeLineChart(NVD3Chart):
                 .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(d)) });
             chart.y1Axis
                 .tickFormat(d3.format('.1%'));
-
+            chart.tooltipContent(function(key, y, e, graph) {
+                var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
+                var y = String(graph.point.y);
+                if(key == 'Serie 1'){
+                    var y = 'There are ' + String(e)  + ' calls';
+                }
+                if(key == 'Serie 2'){
+                    var y =  String(e)  + ' mins';
+                }
+                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                return tooltip_str;
+            });
             d3.select('#cumulativeLineChart svg')
                 .datum(data_linePlusBarChart)
                 .transition().duration(500)
