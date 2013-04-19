@@ -18,13 +18,14 @@ output_file = open('test1.html', 'w')
 type = "pieChart"
 chart = pieChart(name=type, height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-chart.set_custom_tooltip_flag(True)
+
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 0, 1, 5, 7, 3]
 
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+chart.set_custom_tooltip_flag(True)
 chart.build_custom_tooltip()
 chart.buildhtml()
 output_file.write(chart.htmlcontent)

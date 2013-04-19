@@ -23,7 +23,10 @@ chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 35, -7, 2]
 
-chart.add_serie(y=ydata, x=xdata)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+chart.add_serie(name="discrete Bar", y=ydata, x=xdata, extra=extra_serie)
+chart.set_custom_tooltip_flag(True)
+chart.build_custom_tooltip()
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
 #---------------------------------------

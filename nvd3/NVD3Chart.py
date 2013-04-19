@@ -271,7 +271,15 @@ class NVD3Chart:
                     self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
                         stab(3) + "var x = String(key);\n" +\
                         stab(3) + self.tooltip_condition_string +\
-                        stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y  ;\n" +\
+                        stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y;\n" +\
+                        stab(3) + "return tooltip_str;\n" + \
+                        stab(2) + "});\n"
+                elif self.model == 'discreteBarChart':
+                    self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
+                        stab(3) + "var x = String(graph.point.x);\n" +\
+                        stab(3) + "var y = String(graph.point.y);\n" +\
+                        self.tooltip_condition_string +\
+                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
                 else:
@@ -279,7 +287,7 @@ class NVD3Chart:
                         stab(3) + "var x = String(e);\n" +\
                         stab(3) + "var y = String(graph.point.y);\n" +\
                         self.tooltip_condition_string +\
-                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' at ' + y  ;\n" +\
+                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + x + ' at ' + y;\n" +\
                         stab(3) + "return tooltip_str;\n" + \
                         stab(2) + "});\n"
             else:
@@ -287,7 +295,7 @@ class NVD3Chart:
                     stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
                     stab(3) + "var y = String(graph.point.y);\n" +\
                     self.tooltip_condition_string +\
-                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x ;\n" +\
+                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;\n" +\
                     stab(3) + "return tooltip_str;\n" + \
                     stab(2) + "});\n"
 
