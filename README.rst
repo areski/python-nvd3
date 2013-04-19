@@ -62,7 +62,7 @@ See the file examples.py for more samples.
 Live demo of NVD3
 -----------------
 
-See a live demo on jsfiddle : http://jsfiddle.net/4KuSx/
+See a live demo on jsfiddle : http://jsfiddle.net/areski/z4zuH/3/
 
 
 Supported nvd3 charts
