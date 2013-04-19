@@ -13,7 +13,7 @@ from nvd3 import discreteBarChart
 
 
 #Open File for test
-output_file = open('test1.html', 'w')
+output_file = open('test_discreteBarChart.html', 'w')
 
 type = "discreteBarChart"
 chart = discreteBarChart(name=type, height=400, width=400)
