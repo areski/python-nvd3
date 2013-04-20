@@ -14,6 +14,10 @@ from NVD3Chart import NVD3Chart
 
 class linePlusBarChart(NVD3Chart):
     """
+    A linePlusBarChart Chart is a type of chart which displays information
+    as a series of data points connected by straight line segments
+    and with some series with rectangular bars with lengths proportional
+    to the values that they represent
 
     .. image:: ../_static/screenshot/linePlusBarChart.png
 

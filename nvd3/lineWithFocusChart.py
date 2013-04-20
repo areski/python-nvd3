@@ -14,6 +14,11 @@ from NVD3Chart import NVD3Chart
 
 class lineWithFocusChart(NVD3Chart):
     """
+    A lineWithFocusChart or line graph is a type of chart which displays information
+    as a series of data points connected by straight line segments.
+    The lineWithFocusChart provide a smaller chart that act as a selector,
+    this is very useful if you want to zoom on a specific time period.
+
     .. image:: ../_static/screenshot/lineWithFocusChart.png
 
     Python example::
