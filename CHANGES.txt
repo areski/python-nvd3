@@ -1,9 +1,14 @@
 Changelog
 =========
 
+0.3.2 (2013-04-22)
+------------------
+
+* fix lineChart tooltip
+
 
 0.3.1 (2013-04-19)
-----------------
+------------------
 
 * Option to change the color schemes
 * Set a specific color per serie
