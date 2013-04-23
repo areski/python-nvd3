@@ -118,7 +118,8 @@ class NVD3Chart:
     date_flag = False
     charttooltip = ''
     tooltip_condition_string = ''
-    color_category = '' # category10, category20, category20c
+    color_category = ''  # category10, category20, category20c
+    tag_script_js = True
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -225,11 +226,11 @@ class NVD3Chart:
 
     def set_graph_height(self, height):
         """Set Graph height"""
-        self.height = height
+        self.height = str(height)
 
     def set_graph_width(self, width):
         """Set Graph width"""
-        self.width = width
+        self.width = str(width)
 
     def set_containerheader(self, containerheader):
         """Set containerheader"""
@@ -274,9 +275,13 @@ class NVD3Chart:
         self.container = self.containerheader
         #Create SVG div with style
         if self.width:
-            self.style += 'width:%spx;' % self.width
+            if self.width[-1] != '%':
+                self.width += 'px'
+            self.style += 'width:%s;' % self.width
         if self.height:
-            self.style += 'height:%spx;' % self.height
+            if self.height[-1] != '%':
+                self.height += 'px'
+            self.style += 'height:%s;' % self.height
 
         if self.style:
             self.style = 'style="%s"' % self.style
@@ -315,8 +320,9 @@ class NVD3Chart:
         """generate javascript code for the chart"""
 
         self.jschart = ''
-        self.jschart += '\n<script type="text/javascript">\n' + \
-            stab() + 'nv.addGraph(function() {\n'
+        if self.tag_script_js:
+            self.jschart += '\n<script type="text/javascript">\n'
+        self.jschart += stab() + 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
@@ -367,7 +373,9 @@ class NVD3Chart:
 
         #Include data
         series_js = json.dumps(self.series)
-        self.jschart += """data_%s=%s;\n</script>""" % (self.name, series_js)
+        self.jschart += """data_%s=%s;\n""" % (self.name, series_js)
+        if self.tag_script_js:
+            self.jschart += "</script>"
 
     def create_x_axis(self, name, label=None, format=None, date=False):
         """

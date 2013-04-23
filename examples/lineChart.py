@@ -16,7 +16,7 @@ import math
 output_file = open('test_lineChart.html', 'w')
 #---------------------------------------
 type = "lineChart"
-chart = lineChart(name=type, date=False, height=350)
+chart = lineChart(name=type, date=False, height='100%')
 
 xdata = []
 ydata = []
