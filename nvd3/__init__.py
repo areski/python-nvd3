@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 
 from lineChart import lineChart
