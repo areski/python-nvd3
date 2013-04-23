@@ -25,7 +25,7 @@ $jschart
 </body>
 """
 
-#TODO: Maybe using a similar skel will improve a lot buildjschart
+#TODO: Use a template to build the JS code, use something like Jinja2
 template_graph_nvd3 = """
 nv.addGraph(function() {
     var chart = nv.models.linePlusBarChart()
