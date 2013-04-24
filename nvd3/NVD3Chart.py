@@ -94,7 +94,7 @@ class NVD3Chart:
         * ``charttooltip`` - Custom tooltip string
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
-        * ``color_category`` - Defien color category (eg. category10, category20, category20c)
+        * ``color_category`` - Define color category (eg. category10, category20, category20c)
     """
     count = 0
     dateformat = '%x'
@@ -118,7 +118,7 @@ class NVD3Chart:
     date_flag = False
     charttooltip = ''
     tooltip_condition_string = ''
-    color_category = ''  # category10, category20, category20c
+    color_category = 'category10'  # category10, category20, category20c
     tag_script_js = True
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
@@ -135,7 +135,6 @@ class NVD3Chart:
         self.series = []
         self.axislist = {}
         self.template_page_nvd3 = Template(template_page_nvd3)
-        self.color_category = 'category10'
 
         if not name:
             self.count += 1
