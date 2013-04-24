@@ -80,7 +80,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y %H")
+chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)
@@ -92,7 +92,7 @@ ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
-               "date_format": "%d %b %Y %I:%M:%S %p"}
+               "date_format": "%d %b %Y %I:%M:%S"}
 #extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
