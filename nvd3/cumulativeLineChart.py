@@ -94,11 +94,11 @@ class cumulativeLineChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, date=False, **kwargs):
+    def __init__(self, height=450, width=None, date=False, x_axis_date_format="%d %b %Y", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format=x_axis_date_format, date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=".2f")

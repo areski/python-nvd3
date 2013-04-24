@@ -22,11 +22,12 @@ class lineChart(NVD3Chart):
     Python example::
 
         from nvd3 import lineChart
-        chart = lineChart(name='lineChart', height=400, width=400, date=True)
+        chart = lineChart(name='lineChart', height=400, width=400, date=True, x_axis_date_format="%d %b %Y %H")
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
 
-        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+                       "date_format": "%d %b %Y %H:%S"}
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
@@ -51,11 +52,11 @@ class lineChart(NVD3Chart):
         nv.addGraph(function() {
                 var chart = nv.models.lineChart();
                 chart.xAxis
-                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) });
+                    .tickFormat(function(d) { return d3.time.format('%d %b %y %H')(new Date(d)) });
                 chart.yAxis
                     .tickFormat(d3.format(',.2f'));
                 chart.tooltipContent(function(key, y, e, graph) {
-                    var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
+                    var x = d3.time.format('%d %b %Y %H:%S')(new Date(parseInt(graph.point.x)));
                     var y = String(graph.point.y);
                     if(key == 'Serie 1'){
                         var y = 'There is ' +  String(graph.point.y)  + ' calls';
@@ -71,11 +72,11 @@ class lineChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, date=False, **kwargs):
+    def __init__(self, height=450, width=None, date=False, x_axis_date_format="%d %b %Y", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format='%d %b %Y', date=True)
+            self.create_x_axis('xAxis', format=x_axis_date_format, date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format="r")

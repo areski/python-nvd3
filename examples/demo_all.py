@@ -57,7 +57,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineChart"
-chart = lineChart(name=type, date=True, height=350)
+chart = lineChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = range(nb_element)
 xdata = map(lambda x: start_time + x * 1000000000, xdata)
@@ -68,7 +68,8 @@ ydata2 = map(lambda x: x * 2, ydata)
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
-extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
@@ -79,7 +80,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', date=True)
+chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)
@@ -90,7 +91,8 @@ ydata2 = map(lambda x: x * 2, ydata)
 ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
-extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
 #extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
@@ -104,15 +106,16 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(name=type, height=350)
+chart = stackedAreaChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %I")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)
-xdata = map(lambda x: 100 + x, xdata)
+xdata = map(lambda x: start_time + x * 1000000000, xdata)
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = map(lambda x: x * 2, ydata)
 
-extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 
@@ -122,7 +125,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, date=True)
+chart = linePlusBarChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)
