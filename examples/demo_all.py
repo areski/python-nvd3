@@ -68,7 +68,8 @@ ydata2 = map(lambda x: x * 2, ydata)
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
-extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
 chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
@@ -90,7 +91,8 @@ ydata2 = map(lambda x: x * 2, ydata)
 ydata3 = map(lambda x: x * 3, ydata)
 ydata4 = map(lambda x: x * 4, ydata)
 
-extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
 #extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
@@ -104,7 +106,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(name=type, height=350)
+chart = stackedAreaChart(name=type, height=350, date=True, date_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = range(nb_element)

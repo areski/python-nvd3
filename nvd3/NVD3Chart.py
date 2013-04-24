@@ -120,6 +120,7 @@ class NVD3Chart:
     tooltip_condition_string = ''
     color_category = ''  # category10, category20, category20c
     tag_script_js = True
+    charttooltip_dateformat = None
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -136,6 +137,7 @@ class NVD3Chart:
         self.axislist = {}
         self.template_page_nvd3 = Template(template_page_nvd3)
         self.color_category = 'category10'
+        self.charttooltip_dateformat = '%d %b %Y'
 
         if not name:
             self.count += 1
@@ -191,6 +193,9 @@ class NVD3Chart:
 
         if 'color' in kwargs and kwargs["color"]:
             data_keyvalue["color"] = kwargs["color"]
+
+        if extra.get('date_format'):
+            self.charttooltip_dateformat = extra['date_format']
 
         if extra.get('tooltip'):
             self.custom_tooltip_flag = True
@@ -310,7 +315,8 @@ class NVD3Chart:
                         stab(2) + "});\n"
             else:
                 self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" % self.dateformat +\
+                    stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" \
+                    % self.charttooltip_dateformat +\
                     stab(3) + "var y = String(graph.point.y);\n" +\
                     self.tooltip_condition_string +\
                     stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;\n" +\
