@@ -95,6 +95,7 @@ class NVD3Chart:
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
         * ``color_category`` - Defien color category (eg. category10, category20, category20c)
+        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
     """
     count = 0
     dateformat = '%x'

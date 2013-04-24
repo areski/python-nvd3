@@ -24,11 +24,12 @@ class lineWithFocusChart(NVD3Chart):
     Python example::
 
         from nvd3 import lineWithFocusChart
-        chart = lineWithFocusChart(name='lineWithFocusChart', date=True)
+        chart = lineWithFocusChart(name='lineWithFocusChart', date=True, x_axis_date_format="%d %b %Y")
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
 
-        extra_serie = {"tooltip": {"y_start": "", "y_end": " ext"}}
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " ext"},
+                       "date_format": "%d %b %Y"}
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 

@@ -24,13 +24,14 @@ class linePlusBarChart(NVD3Chart):
     Python example::
 
         from nvd3 import linePlusBarChart
-        chart = linePlusBarChart(name='linePlusBarChart', date=True)
+        chart = linePlusBarChart(name='linePlusBarChart', date=True, x_axis_date_format="%d %b %Y")
 
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         y2data = [36, 55, 11]
 
-        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+                       "date_format": "%d %b %Y %H:%S" }
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
 
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
@@ -81,7 +82,7 @@ class linePlusBarChart(NVD3Chart):
             chart.y2Axis
                 .tickFormat(function(d) { return '$' + d3.format(',f')(d) });
             chart.tooltipContent(function(key, y, e, graph) {
-                var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
+                var x = d3.time.format('%d %b %Y %H:%S')(new Date(parseInt(graph.point.x)));
                 var y = String(graph.point.y);
                 if(key.indexOf('Serie 1') > -1 ){
                     var y = '$ ' +  String(graph.point.y) ;
