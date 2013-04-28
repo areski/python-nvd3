@@ -21,8 +21,8 @@ chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata = [i * random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-ydata3 = map(lambda x: x * 5, ydata)
+ydata2 = [x * 2 for x in ydata]
+ydata3 = [x * 5 for x in ydata]
 
 kwargs1 = {'shape': 'circle'}
 kwargs2 = {'shape': 'cross'}

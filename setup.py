@@ -1,13 +1,11 @@
+#! /usr/bin/env python
+# coding=utf-8
+
 import os
 import codecs
-import sys
 from setuptools import setup, find_packages
 from fnmatch import fnmatchcase
 from distutils.util import convert_path
-
-
-def read(*parts):
-    return codecs.open(os.path.join(os.path.dirname(__file__), *parts)).read()
 
 
 def get_version():
@@ -76,9 +74,7 @@ def find_package_data(where='.', package='',
                     if (fnmatchcase(name, pattern) or fn.lower() == pattern.lower()):
                         bad_name = True
                         if show_ignored:
-                            print >> sys.stderr, (
-                                "Directory %s ignored by pattern %s"
-                                % (fn, pattern))
+                            print ("Directory %s ignored by pattern %s" % (fn, pattern))
                         break
                 if bad_name:
                     continue
@@ -97,8 +93,7 @@ def find_package_data(where='.', package='',
                     if (fnmatchcase(name, pattern) or fn.lower() == pattern.lower()):
                         bad_name = True
                         if show_ignored:
-                            print >> sys.stderr, (
-                                "File %s ignored by pattern %s"
+                            print ("File %s ignored by pattern %s"
                                 % (fn, pattern))
                         break
                 if bad_name:
@@ -106,11 +101,13 @@ def find_package_data(where='.', package='',
                 out.setdefault(package, []).append(prefix + name)
     return out
 
+long_description = codecs.open("README.rst", "r", "utf-8").read()
+
 setup(
     name='python-nvd3',
     version=get_version(),
     description="Python NVD3",
-    long_description=read('README.rst'),
+    long_description=long_description,
     keywords='plot, graph, nvd3, d3',
     author='Belaid Arezqui',
     author_email='areski@gmail.com',
@@ -138,6 +135,10 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
         'Topic :: Multimedia :: Graphics :: Presentation',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],

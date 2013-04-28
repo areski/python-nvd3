@@ -345,9 +345,9 @@ class NVD3Chart:
                 .tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
         """
         if self.model != 'pieChart':
-            for axis_name, a in self.axislist.iteritems():
+            for axis_name, a in list(self.axislist.items()):
                 self.jschart += stab(2) + "chart.%s\n" % axis_name
-                for attr, value in a.iteritems():
+                for attr, value in list(a.items()):
                     self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
 
         if self.width:

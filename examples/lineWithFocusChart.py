@@ -25,13 +25,13 @@ type = "lineWithFocusChart"
 chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
 
-ydata2 = map(lambda x: x * 2, ydata)
-ydata3 = map(lambda x: x * 3, ydata)
-ydata4 = map(lambda x: x * 4, ydata)
+ydata2 = [x * 2 for x in ydata]
+ydata3 = [x * 3 for x in ydata]
+ydata4 = [x * 4 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %H:%M:%S %p"}

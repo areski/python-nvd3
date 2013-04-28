@@ -12,16 +12,16 @@ Project location : https://github.com/areski/python-nvd3
 __version__ = '0.3.6'
 
 
-from lineChart import lineChart
-from pieChart import pieChart
-from lineWithFocusChart import lineWithFocusChart
-from stackedAreaChart import stackedAreaChart
-from multiBarHorizontalChart import multiBarHorizontalChart
-from linePlusBarChart import linePlusBarChart
-from cumulativeLineChart import cumulativeLineChart
-from scatterChart import scatterChart
-from discreteBarChart import discreteBarChart
-from multiBarChart import multiBarChart
+from .lineChart import lineChart
+from .pieChart import pieChart
+from .lineWithFocusChart import lineWithFocusChart
+from .stackedAreaChart import stackedAreaChart
+from .multiBarHorizontalChart import multiBarHorizontalChart
+from .linePlusBarChart import linePlusBarChart
+from .cumulativeLineChart import cumulativeLineChart
+from .scatterChart import scatterChart
+from .discreteBarChart import discreteBarChart
+from .multiBarChart import multiBarChart
 
 
 class lineChart(lineChart):

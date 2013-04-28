@@ -59,10 +59,10 @@ output_file.write(chart.htmlcontent)
 type = "lineChart"
 chart = lineChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [x * 2 for x in ydata]
 
 #Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
@@ -83,13 +83,13 @@ type = "lineWithFocusChart"
 chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
-ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
+ydata = [i + random.randint(-10, 10) for i in list(range(nb_element))]
 
-ydata2 = map(lambda x: x * 2, ydata)
-ydata3 = map(lambda x: x * 3, ydata)
-ydata4 = map(lambda x: x * 4, ydata)
+ydata2 = [x * 2 for x in ydata]
+ydata3 = [x * 3 for x in ydata]
+ydata4 = [x * 4 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %I:%M:%S"}
@@ -109,10 +109,10 @@ type = "stackedAreaChart"
 chart = stackedAreaChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %I")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
-ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
+ydata = [i + random.randint(1, 10) for i in list(range(nb_element))]
+ydata2 = [x * 2 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %I:%M:%S %p"}
@@ -128,10 +128,10 @@ type = "linePlusBarChart"
 chart = linePlusBarChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = [i + random.randint(1, 10) for i in reversed(range(nb_element))]
+ydata2 = [i + random.randint(1, 10) for i in reversed(list(range(nb_element)))]
 kwargs = {}
 kwargs['bar'] = True
 extra_serie = {"tooltip": {"y_start": "$ ", "y_end": ""}}
@@ -148,10 +148,10 @@ type = "cumulativeLineChart"
 chart = cumulativeLineChart(name=type, height=350, date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-xdata = range(nb_element)
-xdata = map(lambda x: start_time + x * 1000000000, xdata)
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [x * 2 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
@@ -168,9 +168,9 @@ chart = multiBarHorizontalChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
-xdata = range(nb_element)
+xdata = list(range(nb_element))
 ydata = [random.randint(-10, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [x * 2 for x in ydata]
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
@@ -185,9 +185,9 @@ type = "multiBarChart"
 chart = multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
-xdata = range(nb_element)
+xdata = list(range(nb_element))
 ydata = [random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [x * 2 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
@@ -204,8 +204,8 @@ chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata = [i * random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
-ydata3 = map(lambda x: x * 5, ydata)
+ydata2 = [x * 2 for x in ydata]
+ydata3 = [x * 5 for x in ydata]
 
 kwargs1 = {'shape': 'circle'}
 kwargs2 = {'shape': 'cross'}

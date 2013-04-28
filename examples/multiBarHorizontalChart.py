@@ -20,9 +20,9 @@ chart = multiBarHorizontalChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
-xdata = range(nb_element)
+xdata = list(range(nb_element))
 ydata = [random.randint(-10, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = [x * 2 for x in ydata]
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Calls"}}
 chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie)
 extra_serie = {"tooltip": {"y_start": "", "y_end": " Min"}}
