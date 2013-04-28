@@ -24,10 +24,10 @@ class ChartTest(unittest.TestCase):
         type = "lineWithFocusChart"
         chart = lineWithFocusChart(name=type, date=True, height=350)
         nb_element = 100
-        xdata = range(nb_element)
-        xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+        xdata = list(range(nb_element))
+        xdata = [1365026400000 + x * 100000 for x in xdata]
         ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
+        ydata2 = [x * 2 for x in ydata]
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -37,10 +37,10 @@ class ChartTest(unittest.TestCase):
         type = "lineChart"
         chart = lineChart(name=type, date=True, height=350)
         nb_element = 100
-        xdata = range(nb_element)
-        xdata = map(lambda x: 1365026400000 + x * 100000, xdata)
+        xdata = list(range(nb_element))
+        xdata = [1365026400000 + x * 100000 for x in xdata]
         ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
+        ydata2 = [x * 2 for x in ydata]
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -51,10 +51,10 @@ class ChartTest(unittest.TestCase):
         chart = linePlusBarChart(name=type, date=True, height=350)
         start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
         nb_element = 100
-        xdata = range(nb_element)
-        xdata = map(lambda x: start_time + x * 1000000000, xdata)
+        xdata = list(range(nb_element))
+        xdata = [start_time + x * 1000000000 for x in xdata]
         ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-        ydata2 = [i + random.randint(1, 10) for i in reversed(range(nb_element))]
+        ydata2 = [i + random.randint(1, 10) for i in reversed(list(range(nb_element)))]
         kwargs = {}
         kwargs['bar'] = True
         chart.add_serie(y=ydata, x=xdata, **kwargs)
@@ -66,10 +66,10 @@ class ChartTest(unittest.TestCase):
         type = "stackedAreaChart"
         chart = stackedAreaChart(name=type, height=400)
         nb_element = 100
-        xdata = range(nb_element)
-        xdata = map(lambda x: 100 + x, xdata)
+        xdata = list(range(nb_element))
+        xdata = [100 + x for x in xdata]
         ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
+        ydata2 = [x * 2 for x in ydata]
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -79,7 +79,7 @@ class ChartTest(unittest.TestCase):
         type = "MultiBarChart"
         chart = multiBarChart(name=type, height=400)
         nb_element = 10
-        xdata = range(nb_element)
+        xdata = list(range(nb_element))
         ydata = [random.randint(1, 10) for i in range(nb_element)]
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
@@ -89,9 +89,9 @@ class ChartTest(unittest.TestCase):
         type = "multiBarHorizontalChart"
         chart = multiBarHorizontalChart(name=type, height=350)
         nb_element = 10
-        xdata = range(nb_element)
+        xdata = list(range(nb_element))
         ydata = [random.randint(-10, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
+        ydata2 = [x * 2 for x in ydata]
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -102,10 +102,10 @@ class ChartTest(unittest.TestCase):
         chart = cumulativeLineChart(name=type, height=400)
         start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
         nb_element = 100
-        xdata = range(nb_element)
-        xdata = map(lambda x: start_time + x * 1000000000, xdata)
+        xdata = list(range(nb_element))
+        xdata = [start_time + x * 1000000000 for x in xdata]
         ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
+        ydata2 = [x * 2 for x in ydata]
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
@@ -117,8 +117,8 @@ class ChartTest(unittest.TestCase):
         nb_element = 100
         xdata = [i + random.randint(1, 10) for i in range(nb_element)]
         ydata = [i * random.randint(1, 10) for i in range(nb_element)]
-        ydata2 = map(lambda x: x * 2, ydata)
-        ydata3 = map(lambda x: x * 5, ydata)
+        ydata2 = [x * 2 for x in ydata]
+        ydata3 = [x * 5 for x in ydata]
 
         kwargs1 = {'shape': 'circle'}
         kwargs2 = {'shape': 'cross'}
