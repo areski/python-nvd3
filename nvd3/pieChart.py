@@ -75,7 +75,7 @@ class pieChart(NVD3Chart):
           return chart;
         });
     """
-    def __init__(self, height=350, width=None, **kwargs):
+    def __init__(self, height=None, width=None, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         self.create_x_axis('xAxis', format=None)
         self.create_y_axis('yAxis', format=None)
