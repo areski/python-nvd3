@@ -164,7 +164,6 @@ class NVD3Chart:
         if self.x_axis_date:
             x = [str(d) for d in x]
 
-        x = sorted(x)
         # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs:
             serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
