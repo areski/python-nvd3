@@ -120,6 +120,7 @@ class NVD3Chart:
     charttooltip = ''
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
+    color_list = [] # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
 
@@ -172,10 +173,15 @@ class NVD3Chart:
 
         data_keyvalue = {"values": serie, "key": name}
 
+
         #multiChart
         #Histogram type="bar" for the series
         if 'type' in kwargs and kwargs["type"]:
             data_keyvalue["type"] = kwargs["type"]
+
+        if self.model == 'pieChart':
+            if 'color_list' in extra and extra["color_list"]:
+                self.color_list = extra["color_list"]
 
         #Define on which Y axis the serie is related
         #a chart can have 2 Y axis, left and right, by default only one Y Axis is used
@@ -332,8 +338,9 @@ class NVD3Chart:
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
-        if self.color_category:
-            self.jschart += stab(2) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
+        if self.model != 'pieChart' and not self.color_list:
+            if self.color_category:
+                self.jschart += stab(2) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
 
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"

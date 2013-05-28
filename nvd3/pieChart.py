@@ -88,6 +88,22 @@ class pieChart(NVD3Chart):
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
 
+        color_js = ''
+        if self.color_list:
+            color_js += "var mycolor = new Array();\n"
+            color_count = 0
+            for i in self.color_list:
+                color_js += stab(2) + "mycolor[" + str(color_count) + "] = '" + i + "';\n"
+                color_count = int(color_count) + 1
+
+        # add mycolor var in js before nv.addGraph starts
+        if self.color_list:
+            start_js = self.jschart.find('nv.addGraph')
+            start_js_len = len('nv.addGraph')
+            replace_index = start_js
+            if start_js > 0:
+                self.jschart = self.jschart[:replace_index] + color_js + self.jschart[replace_index:]
+
         pie_jschart = '\n' + stab(2) + 'chart.x(function(d) { return d.x })\n' + \
             stab(3) + '.y(function(d) { return d.y })\n' + \
             stab(3) + '.values(function(d) { return d });\n'
@@ -95,6 +111,9 @@ class pieChart(NVD3Chart):
             pie_jschart += stab(2) + 'chart.width(%s);\n' % self.width
         if self.height:
             pie_jschart += stab(2) + 'chart.height(%s);\n' % self.height
+
+        if self.color_list and color_js:
+            pie_jschart += stab(2) + 'chart.color(mycolor);\n'
 
         start_index = self.jschart.find('.pieChart();')
         string_len = len('.pieChart();')
