@@ -112,6 +112,7 @@ class pieChart(NVD3Chart):
         if self.height:
             pie_jschart += stab(2) + 'chart.height(%s);\n' % self.height
 
+        # add custom colors for pieChart
         if self.color_list and color_js:
             pie_jschart += stab(2) + 'chart.color(mycolor);\n'
 

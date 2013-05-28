@@ -95,6 +95,7 @@ class NVD3Chart:
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
         * ``color_category`` - Defien color category (eg. category10, category20, category20c)
+        * ``color_list`` - used by pieChart (eg. ['red', 'blue', 'orange'])
         * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
     """
     count = 0
