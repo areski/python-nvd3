@@ -47,7 +47,7 @@ type = "pieChart"
 chart = pieChart(name=type, color_category='category20c', height=400, width=400)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
-color_list = ['orange', 'yellow', 'blue', 'black', 'red', 'brown', 'pink']
+color_list = ['orange', 'yellow', '#C5E946', '#95b43f', 'red', '#FF2259', '#F6A641']
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}, "color_list": color_list}
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
 ydata = [3, 4, 2, 1, 5, 7, 3]
