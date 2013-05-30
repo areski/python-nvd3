@@ -405,7 +405,7 @@ class NVD3Chart:
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
             self.dateformat = format
-            axis["tickFormat"] = "function(d) { return d3.time.format('%s')(new Date(d)) }\n" % self.dateformat
+            axis["tickFormat"] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % self.dateformat
             #flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True
