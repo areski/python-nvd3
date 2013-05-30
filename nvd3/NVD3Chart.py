@@ -121,7 +121,7 @@ class NVD3Chart:
     charttooltip = ''
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
-    color_list = [] # for pie chart
+    color_list = []  # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
 
@@ -173,7 +173,6 @@ class NVD3Chart:
             serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 
         data_keyvalue = {"values": serie, "key": name}
-
 
         #multiChart
         #Histogram type="bar" for the series
