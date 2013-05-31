@@ -168,7 +168,7 @@ class NVD3Chart:
 
         # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs:
-            serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
+            serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": kwargs["size"]} for i, y in enumerate(y)]
         else:
             serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 
