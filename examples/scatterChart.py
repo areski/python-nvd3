@@ -24,9 +24,9 @@ ydata = [i * random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]
 ydata3 = [x * 5 for x in ydata]
 
-kwargs1 = {'shape': 'circle'}
-kwargs2 = {'shape': 'cross'}
-kwargs3 = {'shape': 'triangle-up'}
+kwargs1 = {'shape': 'circle', 'size': '1'}
+kwargs2 = {'shape': 'cross', 'size': '10'}
+kwargs3 = {'shape': 'triangle-up', 'size': '100'}
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
