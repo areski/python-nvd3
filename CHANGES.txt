@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+0.5.2 (2013-05-31)
+------------------
+
+* ScatterChat option to pass 'size': '10' as argument of the series
 * fix in setup.py for python3
 
 
