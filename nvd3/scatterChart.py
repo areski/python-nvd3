@@ -30,8 +30,8 @@ class scatterChart(NVD3Chart):
         ydata = [-1, 2, 3, 3, 15, 2]
         ydata = [1, -2, 4, 7, -5, 3]
 
-        kwargs1 = {'shape': 'circle'}
-        kwargs2 = {'shape': 'cross'}
+        kwargs1 = {'shape': 'circle', 'size': '1'}
+        kwargs2 = {'shape': 'cross', 'size': '10'}
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " call"}}
         chart.add_serie(name="series 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
