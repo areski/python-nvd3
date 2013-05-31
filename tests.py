@@ -120,9 +120,9 @@ class ChartTest(unittest.TestCase):
         ydata2 = [x * 2 for x in ydata]
         ydata3 = [x * 5 for x in ydata]
 
-        kwargs1 = {'shape': 'circle'}
-        kwargs2 = {'shape': 'cross'}
-        kwargs3 = {'shape': 'triangle-up'}
+        kwargs1 = {'shape': 'circle', 'size': '1'}
+        kwargs2 = {'shape': 'cross', 'size': '10'}
+        kwargs3 = {'shape': 'triangle-up', 'size': '100'}
         chart.add_serie(y=ydata, x=xdata, **kwargs1)
         chart.add_serie(y=ydata2, x=xdata, **kwargs2)
         chart.add_serie(y=ydata3, x=xdata, **kwargs3)
