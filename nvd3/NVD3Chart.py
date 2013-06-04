@@ -179,7 +179,7 @@ class NVD3Chart:
             serie =[{
                 "x": x[i], 
                 "y": y, 
-                "shape": shape, 
+                "shape": cshape, 
                 "size": csize[i] if isinstance(csize, list) else csize
                 } for i, y in enumerate(y)]
         else:
