@@ -18,6 +18,9 @@ for d3.js without taking away the power that d3.js gives you.
     :target: https://coderwall.com/areski
 
 
+Find the release/changelog summary here : https://github.com/areski/python-nvd3/blob/master/CHANGELOG.rst
+
+
 Installation
 ------------
 
@@ -96,6 +99,14 @@ Documentation
 
 Documentation is available on 'Read the Docs':
 http://python-nvd3.readthedocs.org
+
+
+
+Like Django ?
+-------------
+
+We love Django too and we have available a similar wrapper for nvd3 :
+https://github.com/areski/django-nvd3
 
 
 License
