@@ -124,6 +124,7 @@ class NVD3Chart:
     color_list = []  # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
+    x_axis_format = ''
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -177,9 +178,9 @@ class NVD3Chart:
             else:
                 cshape = "circle"
             serie =[{
-                "x": x[i], 
-                "y": y, 
-                "shape": cshape, 
+                "x": x[i],
+                "y": y,
+                "shape": cshape,
                 "size": csize[i] if isinstance(csize, list) else csize
                 } for i, y in enumerate(y)]
         else:
@@ -409,7 +410,10 @@ class NVD3Chart:
         """
         axis = {}
         if format:
-            axis["tickFormat"] = "d3.format(',%s')" % format
+            if format == 'AM_PM':
+                axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }\n"
+            else:
+                axis["tickFormat"] = "d3.format(',%s')" % format
 
         if label:
             axis["axisLabel"] = label

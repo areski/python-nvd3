@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, stab
 
 
 class lineChart(NVD3Chart):
@@ -79,7 +79,11 @@ class lineChart(NVD3Chart):
             self.create_x_axis('xAxis', format=x_axis_date_format, date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.create_x_axis('xAxis', format="r")
+            if x_axis_date_format and x_axis_date_format == 'AM_PM':
+                self.x_axis_format = format = x_axis_date_format
+            else:
+                format = "r"
+            self.create_x_axis('xAxis', format=format)
         self.create_y_axis('yAxis', format=".02f")
 
         # must have a specified height, otherwise it superimposes both chars
@@ -87,3 +91,20 @@ class lineChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+    def buildjschart(self):
+        NVD3Chart.buildjschart(self)
+        am_pm_js = ''
+        if self.x_axis_format == 'AM_PM':
+            am_pm_js += stab(2) +"function get_am_pm(d){\n";
+            am_pm_js += stab(3) + "if(d > 12){ d = d - 12; return (String(d) + 'PM');}\n"
+            am_pm_js += stab(3) + "else{ return (String(d) + 'AM');}\n"
+            am_pm_js += stab(2) + "};\n"
+
+            start_js = self.jschart.find('nv.addGraph')
+            start_js_len = len('nv.addGraph')
+            replace_index = start_js
+            if start_js > 0:
+                self.jschart = self.jschart[:replace_index] + am_pm_js + self.jschart[replace_index:]
+
+
