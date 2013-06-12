@@ -160,12 +160,12 @@ class NVD3Chart:
         """
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
+
+        TODO: Add doc for supported parameters, ie x_axis_date, shape, size
+
         """
         if not name:
             name = "Serie %d" % (len(self.series) + 1)
-
-        if self.x_axis_date:
-            x = [str(d) for d in x]
 
         # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs or 'size' in kwargs:
@@ -177,12 +177,12 @@ class NVD3Chart:
                 cshape = kwargs["shape"]
             else:
                 cshape = "circle"
-            serie =[{
+            serie = [{
                 "x": x[i],
                 "y": y,
                 "shape": cshape,
                 "size": csize[i] if isinstance(csize, list) else csize
-                } for i, y in enumerate(y)]
+            } for i, y in enumerate(y)]
         else:
             serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 

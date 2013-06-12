@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+
+* Fix #7 from DanMeakin, wrong str conversion of x-axis dates
+
+
 0.6.0 (2013-06-05)
 ------------------
 
