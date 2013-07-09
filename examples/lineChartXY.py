@@ -14,7 +14,10 @@ from numpy import sin, pi, linspace
 
 output_file = open('test_lineChartXY.html', 'w')
 
-chart = lineChart(name="lineChart", date=False, x_format="f", y_format="f", width=500, height=500, show_legend=False)
+chart = lineChart(date=False,
+                  x_axis_format=".1f", y_axis_format=".1f",
+                  width=500, height=500,
+                  show_legend=False)
 
 #lissajous parameters of a/b
 a = [1, 3, 5, 3]

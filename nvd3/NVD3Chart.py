@@ -25,38 +25,6 @@ $jschart
 </body>
 """
 
-#TODO: Use a template to build the JS code, use something like Jinja2
-template_graph_nvd3 = """
-nv.addGraph(function() {
-    var chart = nv.models.linePlusBarChart()
-        .x(function(d,i) { return i });
-
-    chart.xAxis.tickFormat(function(d) {
-      var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
-      return dx ? d3.time.format('%x')(new Date(dx)) : '';
-    });
-
-    chart.y1Axis
-        .tickFormat(d3.format(',f'));
-
-    chart.y2Axis
-        .tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
-
-    chart.bars.forceY([0]);
-
-    d3.select('#chart1 svg')
-        .datum(testdata)
-        .transition()
-        .duration(500)
-        .call(chart);
-
-    nv.utils.windowResize(chart.update);
-
-    return chart;
-});
-"""
-
-
 def stab(tab=1):
     """
     create space tabulation
@@ -126,9 +94,6 @@ class NVD3Chart:
     x_axis_format = ''
     show_legend = True
 
-    header_css = ['http://nvd3.org/src/nv.d3.css']
-    header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
-
     def __init__(self, name=None, color_category=None, **kwargs):
         """
         Constructor
@@ -157,6 +122,15 @@ class NVD3Chart:
             self.resize = True
 
         self.show_legend = kwargs.get("show_legend", True)
+
+        self.header_css = [
+            '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
+                        ('http://nvd3.org/src/nv.d3.css',)
+        ]
+        self.header_js = [
+            '<script src="%s" type="text/javascript"></script>\n' % h for h in
+                        ('http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js')
+        ]
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
@@ -292,9 +266,9 @@ class NVD3Chart:
 
         self.htmlheader = ''
         for css in self.header_css:
-            self.htmlheader += '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % css
+            self.htmlheader += css
         for js in self.header_js:
-            self.htmlheader += '<script src="%s" type="text/javascript"></script>\n' % js
+            self.htmlheader +=  js
 
     def buildcontainer(self):
         """generate HTML div"""
@@ -419,7 +393,7 @@ class NVD3Chart:
         axis = {}
         if format:
             if format == 'AM_PM':
-                axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }\n"
+                axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }"
             else:
                 axis["tickFormat"] = "d3.format(',%s')" % format
 
