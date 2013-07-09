@@ -2,7 +2,10 @@ Changelog
 =========
 
 
+0.7.0 (2013-07-09)
+------------------
 
+* generalise the axis_formatting & add support for hiding the legend by nzjrs (John Stowers)
 * Fix #7 from DanMeakin, wrong str conversion of x-axis dates
 
 
