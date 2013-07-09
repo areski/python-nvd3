@@ -125,6 +125,7 @@ class NVD3Chart:
     tag_script_js = True
     charttooltip_dateformat = None
     x_axis_format = ''
+    show_legend = True
 
     header_css = ['http://nvd3.org/src/nv.d3.css']
     header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
@@ -155,6 +156,8 @@ class NVD3Chart:
 
         if 'resize' in kwargs and kwargs["resize"]:
             self.resize = True
+
+        self.show_legend = kwargs.get("show_legend",True)
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
@@ -386,6 +389,11 @@ class NVD3Chart:
 
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
+
+        if self.show_legend:
+            self.jschart += stab(2) + "chart.showLegend(true)\n"
+        else:
+            self.jschart += stab(2) + "chart.showLegend(false)\n"
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
