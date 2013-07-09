@@ -11,7 +11,6 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
-import random
 import json
 
 template_page_nvd3 = """
@@ -157,7 +156,7 @@ class NVD3Chart:
         if 'resize' in kwargs and kwargs["resize"]:
             self.resize = True
 
-        self.show_legend = kwargs.get("show_legend",True)
+        self.show_legend = kwargs.get("show_legend", True)
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
@@ -390,10 +389,11 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
-        if self.show_legend:
-            self.jschart += stab(2) + "chart.showLegend(true)\n"
-        else:
-            self.jschart += stab(2) + "chart.showLegend(false)\n"
+        if self.model != 'discreteBarChart':
+            if self.show_legend:
+                self.jschart += stab(2) + "chart.showLegend(true)\n"
+            else:
+                self.jschart += stab(2) + "chart.showLegend(false)\n"
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \

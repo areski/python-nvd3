@@ -242,6 +242,30 @@ chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
+
+
+#---------------------------------------
+from numpy import sin, pi, linspace
+
+name = "lineChartXY"
+
+chart = lineChart(name=name, date=False, x_format="f", y_format="f", width=500, height=500, show_legend=False)
+chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
+
+#lissajous parameters of a/b
+a = [1, 3, 5, 3]
+b = [1, 5, 7, 4]
+delta = pi / 2
+t = linspace(-pi, pi, 300)
+
+for i in range(0, 4):
+    x = sin(a[i] * t + delta)
+    y = sin(b[i] * t)
+    chart.add_serie(y=y, x=x, name='lissajous-n%d' % i, color='red' if i == 0 else 'black')
+
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+
 #---------------------------------------
 
 #close Html file

@@ -10,27 +10,23 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from nvd3 import lineChart
-import math
-from numpy import sin,pi,linspace
+from numpy import sin, pi, linspace
 
 output_file = open('test_lineChartXY.html', 'w')
 
-chart = lineChart(name="lineChart", date=False, x_format="f",y_format="f", width=500, height=500, show_legend=False)
+chart = lineChart(name="lineChart", date=False, x_format="f", y_format="f", width=500, height=500, show_legend=False)
 
 #lissajous parameters of a/b
-a = [1,3,5,3]
-b = [1,5,7,4]
-delta = pi/2
-t = linspace(-pi,pi,300)
+a = [1, 3, 5, 3]
+b = [1, 5, 7, 4]
+delta = pi / 2
+t = linspace(-pi, pi, 300)
 
-for i in range(0,4):
+for i in range(0, 4):
     x = sin(a[i] * t + delta)
     y = sin(b[i] * t)
-    
-    chart.add_serie(y=y, x=x, name='lissajous-n%d' % i,  color='red' if i == 0 else 'black')
+    chart.add_serie(y=y, x=x, name='lissajous-n%d' % i, color='red' if i == 0 else 'black')
 
 chart.buildhtml()
-
 output_file.write(chart.htmlcontent)
-
 output_file.close()
