@@ -22,7 +22,7 @@ class lineChart(NVD3Chart):
     Python example::
 
         from nvd3 import lineChart
-        chart = lineChart(name='lineChart', height=400, width=400, date=True, x_axis_date_format="%d %b %Y %H")
+        chart = lineChart(name='lineChart', height=400, width=400, date=True, x_axis_format="%d %b %Y %H")
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
 
@@ -72,19 +72,21 @@ class lineChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, date=False, x_axis_date_format="%d %b %Y", **kwargs):
+    def __init__(self, height=450, width=None, date=False, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         if date:
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format=x_axis_date_format, date=True)
+            self.create_x_axis('xAxis', 
+                               format=kwargs.get('x_axis_format','%d %b %Y'),
+                               date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            if x_axis_date_format and x_axis_date_format == 'AM_PM':
-                self.x_axis_format = format = x_axis_date_format
+            if kwargs.get('x_axis_format') == 'AM_PM':
+                self.x_axis_format = format = 'AM_PM'
             else:
-                format = "r"
+                format = kwargs.get('x_axis_format','r')
             self.create_x_axis('xAxis', format=format)
-        self.create_y_axis('yAxis', format=".02f")
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format','.02f'))
 
         # must have a specified height, otherwise it superimposes both chars
         if height:

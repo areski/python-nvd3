@@ -58,7 +58,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineChart"
-chart = lineChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %H")
+chart = lineChart(name=type, height=350, date=True, x_axis_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = list(range(nb_element))
 xdata = [start_time + x * 1000000000 for x in xdata]
@@ -81,7 +81,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_date_format="%d %b %Y")
+chart = lineWithFocusChart(name=type, color_category='category20b', date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -107,7 +107,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y %I")
+chart = stackedAreaChart(name=type, height=350, date=True, x_axis_format="%d %b %Y %I")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -126,7 +126,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, date=True, x_axis_date_format="%d %b %Y")
+chart = linePlusBarChart(name=type, height=350, date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
