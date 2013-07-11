@@ -38,32 +38,32 @@ class NVD3Chart:
 
     **Attributes**:
 
-        * ``count`` - chart count
-        * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
-        * ``series`` - Series are list of data that will be plotted
         * ``axislist`` - All X, Y axis list
-        * ``style`` - Special style
-        * ``htmlcontent`` - Contain the htmloutput
-        * ``htmlheader`` - Contain the html header
-        * ``height`` - Set graph height
-        * ``width`` - Set graph width
-        * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
-        * ``d3_select_extra`` -
-        * ``x_axis_date`` - False / True
-        * ``resize`` - False / True
-        * ``stacked`` - False / True
-        * ``template_page_nvd3`` - template variable
-        * ``container`` - Place for graph
-        * ``containerheader`` - Header for javascript code
-        * ``jschart`` - Javascript code as string
-        * ``date_flag`` - x-axis contain date format or not
-        * ``custom_tooltip_flag`` - False / True
+        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
         * ``charttooltip`` - Custom tooltip string
-        * ``header_css`` - False / True
-        * ``header_js`` - Custom tooltip string
         * ``color_category`` - Defien color category (eg. category10, category20, category20c)
         * ``color_list`` - used by pieChart (eg. ['red', 'blue', 'orange'])
-        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
+        * ``container`` - Place for graph
+        * ``containerheader`` - Header for javascript code
+        * ``count`` - chart count
+        * ``custom_tooltip_flag`` - False / True
+        * ``d3_select_extra`` -
+        * ``date_flag`` - x-axis contain date format or not
+        * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
+        * ``header_css`` - False / True
+        * ``header_js`` - Custom tooltip string
+        * ``height`` - Set graph height
+        * ``htmlcontent`` - Contain the htmloutput
+        * ``htmlheader`` - Contain the html header
+        * ``jschart`` - Javascript code as string
+        * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
+        * ``resize`` - False / True
+        * ``series`` - Series are list of data that will be plotted
+        * ``stacked`` - False / True
+        * ``style`` - Special style
+        * ``template_page_nvd3`` - template variable
+        * ``width`` - Set graph width
+        * ``x_axis_date`` - False / True
     """
     count = 0
     dateformat = '%x'
@@ -93,6 +93,7 @@ class NVD3Chart:
     charttooltip_dateformat = None
     x_axis_format = ''
     show_legend = True
+    show_labels = True
 
     def __init__(self, name=None, color_category=None, **kwargs):
         """
@@ -122,6 +123,7 @@ class NVD3Chart:
             self.resize = True
 
         self.show_legend = kwargs.get("show_legend", True)
+        self.show_labels = kwargs.get("show_labels", True)
 
         self.header_css = [
             '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
@@ -368,6 +370,10 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showLegend(true)\n"
             else:
                 self.jschart += stab(2) + "chart.showLegend(false)\n"
+            if self.show_labels:
+                self.jschart += stab(2) + "chart.showLabels(true)\n"
+            else:
+                self.jschart += stab(2) + "chart.showLabels(false)\n"
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
