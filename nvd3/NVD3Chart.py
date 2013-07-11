@@ -367,13 +367,16 @@ class NVD3Chart:
 
         if self.model != 'discreteBarChart':
             if self.show_legend:
-                self.jschart += stab(2) + "chart.showLegend(true)\n"
+                self.jschart += stab(2) + "chart.showLegend(true);\n"
             else:
-                self.jschart += stab(2) + "chart.showLegend(false)\n"
+                self.jschart += stab(2) + "chart.showLegend(false);\n"
+
+        #showLabels only supported in pieChart
+        if self.model == 'pieChart':
             if self.show_labels:
-                self.jschart += stab(2) + "chart.showLabels(true)\n"
+                self.jschart += stab(2) + "chart.showLabels(true);\n"
             else:
-                self.jschart += stab(2) + "chart.showLabels(false)\n"
+                self.jschart += stab(2) + "chart.showLabels(false);\n"
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \

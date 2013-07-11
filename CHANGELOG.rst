@@ -2,6 +2,9 @@ Changelog
 =========
 
 
+* Add show_labels parameter for Piechart by RaD (Ruslan Popov)
+
+
 0.7.0 (2013-07-09)
 ------------------
 
