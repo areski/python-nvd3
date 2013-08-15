@@ -34,10 +34,10 @@ html_open = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link media="all" href="http://nvd3.org/src/nv.d3.css" type="text/css" rel="stylesheet" />
-<script src="//nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
-<script src="//nvd3.org/nv.d3.js" type="text/javascript"></script>
+<script src="http://nvd3.org/lib/d3.v2.js" type="text/javascript"></script>
+<script src="http://nvd3.org/nv.d3.js" type="text/javascript"></script>
 </head>
 """
 
