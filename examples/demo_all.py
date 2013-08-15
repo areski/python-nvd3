@@ -263,29 +263,6 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-
-#---------------------------------------
-from numpy import sin, pi, linspace
-
-name = "lineChartXY"
-
-chart = lineChart(name=name, date=False, x_format="f", y_format="f", width=500,
-                  height=500, show_legend=False, jquery_on_ready=True)
-chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
-
-#lissajous parameters of a/b
-a = [1, 3, 5, 3]
-b = [1, 5, 7, 4]
-delta = pi / 2
-t = linspace(-pi, pi, 300)
-
-for i in range(0, 4):
-    x = sin(a[i] * t + delta)
-    y = sin(b[i] * t)
-    chart.add_serie(y=y, x=x, name='lissajous-n%d' % i, color='red' if i == 0 else 'black')
-
-chart.buildcontent()
-output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 html_close = """</body></html>"""
