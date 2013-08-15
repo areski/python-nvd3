@@ -13,6 +13,11 @@ from optparse import OptionParser
 from string import Template
 import json
 
+template_content_nvd3 = """
+$container
+$jschart
+"""
+
 template_page_nvd3 = """
 <!DOCTYPE html>
 <html lang="en">
@@ -20,10 +25,10 @@ template_page_nvd3 = """
 $header
 </head>
 <body>
-$container
-$jschart
+%s
 </body>
-"""
+""" % template_content_nvd3
+
 
 def stab(tab=1):
     """
@@ -95,7 +100,8 @@ class NVD3Chart:
     show_legend = True
     show_labels = True
 
-    def __init__(self, name=None, color_category=None, **kwargs):
+    def __init__(self, name=None, color_category=None, jquery_on_ready=False,
+                 **kwargs):
         """
         Constructor
         """
@@ -106,12 +112,15 @@ class NVD3Chart:
         self.series = []
         self.axislist = {}
         self.template_page_nvd3 = Template(template_page_nvd3)
+        self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
         if not name:
             self.count += 1
             name = "chart%d" % (self.count)
         self.name = name
+
+        self.jquery_on_ready = jquery_on_ready
 
         if color_category:
             self.color_category = color_category
@@ -251,6 +260,16 @@ class NVD3Chart:
         self.buildhtml()
         return self.htmlcontent
 
+    def buildcontent(self):
+        """Build HTML content only, no header or body tags. To be useful this
+        will usually require the attribute `juqery_on_ready` to be set which
+        will wrap the js in $(function(){<regular_js>};)
+        """
+        self.buildcontainer()
+        self.buildjschart()
+        self.htmlcontent = self.template_content_nvd3.substitute(container=self.container,
+                                              jschart=self.jschart)
+
     def buildhtml(self):
         """Build the HTML page
         Create the htmlheader with css / js
@@ -264,8 +283,7 @@ class NVD3Chart:
         self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
 
     def buildhtmlheader(self):
-        """generate HTML header"""
-
+        """generate HTML header content"""
         self.htmlheader = ''
         for css in self.header_css:
             self.htmlheader += css
@@ -326,7 +344,13 @@ class NVD3Chart:
         self.jschart = ''
         if self.tag_script_js:
             self.jschart += '\n<script type="text/javascript">\n'
-        self.jschart += stab() + 'nv.addGraph(function() {\n'
+
+        self.jschart += stab()
+
+        if self.jquery_on_ready:
+            self.jschart += '$(function(){'
+
+        self.jschart += 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
@@ -387,7 +411,10 @@ class NVD3Chart:
 
         if self.resize:
             self.jschart += stab(1) + "nv.utils.windowResize(chart.update);\n"
-        self.jschart += stab(1) + "return chart;\n});\n"
+        self.jschart += stab(1) + "return chart;\n});"
+
+        if self.jquery_on_ready:
+            self.jschart += "\n});"
 
         #Include data
         series_js = json.dumps(self.series)
