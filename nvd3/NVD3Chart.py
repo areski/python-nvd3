@@ -136,11 +136,11 @@ class NVD3Chart:
 
         self.header_css = [
             '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
-                        ('http://nvd3.org/src/nv.d3.css',)
+            ('http://nvd3.org/src/nv.d3.css',)
         ]
         self.header_js = [
             '<script src="%s" type="text/javascript"></script>\n' % h for h in
-                        ('http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js')
+            ('http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js')
         ]
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
@@ -288,7 +288,7 @@ class NVD3Chart:
         for css in self.header_css:
             self.htmlheader += css
         for js in self.header_js:
-            self.htmlheader +=  js
+            self.htmlheader += js
 
     def buildcontainer(self):
         """generate HTML div"""

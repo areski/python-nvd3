@@ -2,6 +2,9 @@ Changelog
 =========
 
 
+0.8.0 (2013-08-15)
+------------------
+* add NVD3Chart.buildcontent() by cmorgan (Chris Morgan)
 * Add show_labels parameter for Piechart by RaD (Ruslan Popov)
 
 
