@@ -128,6 +128,9 @@ class NVD3Chart:
         if 'stacked' in kwargs and kwargs["stacked"]:
             self.stacked = True
 
+        if 'resize' in kwargs and kwargs["resize"]:
+            self.resize = True
+
         self.show_legend = kwargs.get("show_legend", True)
         self.show_labels = kwargs.get("show_labels", True)
 
