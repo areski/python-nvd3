@@ -82,7 +82,7 @@ class NVD3Chart:
     model = ''
     d3_select_extra = ''
     x_axis_date = False
-    resize = False
+    resize = True
     stacked = False
     template_page_nvd3 = None
     container = None
