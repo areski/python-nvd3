@@ -2,10 +2,13 @@
 # coding=utf-8
 
 import os
-import codecs
 from setuptools import setup, find_packages
 from fnmatch import fnmatchcase
 from distutils.util import convert_path
+
+
+def read(*parts):
+    return open(os.path.join(os.path.dirname(__file__), *parts)).read()
 
 
 def get_version():
@@ -101,13 +104,12 @@ def find_package_data(where='.', package='',
                 out.setdefault(package, []).append(prefix + name)
     return out
 
-long_description = codecs.open("README.rst", "r", "utf-8").read()
 
 setup(
     name='python-nvd3',
     version=get_version(),
     description="Python NVD3",
-    long_description=long_description,
+    long_description=read('README.rst'),
     keywords='plot, graph, nvd3, d3',
     author='Belaid Arezqui',
     author_email='areski@gmail.com',

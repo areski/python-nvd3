@@ -11,8 +11,12 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
-import random
 import json
+
+template_content_nvd3 = """
+$container
+$jschart
+"""
 
 template_page_nvd3 = """
 <!DOCTYPE html>
@@ -21,41 +25,9 @@ template_page_nvd3 = """
 $header
 </head>
 <body>
-$container
-$jschart
+%s
 </body>
-"""
-
-#TODO: Use a template to build the JS code, use something like Jinja2
-template_graph_nvd3 = """
-nv.addGraph(function() {
-    var chart = nv.models.linePlusBarChart()
-        .x(function(d,i) { return i });
-
-    chart.xAxis.tickFormat(function(d) {
-      var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
-      return dx ? d3.time.format('%x')(new Date(dx)) : '';
-    });
-
-    chart.y1Axis
-        .tickFormat(d3.format(',f'));
-
-    chart.y2Axis
-        .tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
-
-    chart.bars.forceY([0]);
-
-    d3.select('#chart1 svg')
-        .datum(testdata)
-        .transition()
-        .duration(500)
-        .call(chart);
-
-    nv.utils.windowResize(chart.update);
-
-    return chart;
-});
-"""
+""" % template_content_nvd3
 
 
 def stab(tab=1):
@@ -71,31 +43,32 @@ class NVD3Chart:
 
     **Attributes**:
 
-        * ``count`` - chart count
-        * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
-        * ``series`` - Series are list of data that will be plotted
         * ``axislist`` - All X, Y axis list
-        * ``style`` - Special style
-        * ``htmlcontent`` - Contain the htmloutput
-        * ``htmlheader`` - Contain the html header
-        * ``height`` - Set graph height
-        * ``width`` - Set graph width
-        * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
-        * ``d3_select_extra`` -
-        * ``x_axis_date`` - False / True
-        * ``resize`` - False / True
-        * ``stacked`` - False / True
-        * ``template_page_nvd3`` - template variable
+        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
+        * ``charttooltip`` - Custom tooltip string
+        * ``color_category`` - Defien color category (eg. category10, category20, category20c)
+        * ``color_list`` - used by pieChart (eg. ['red', 'blue', 'orange'])
         * ``container`` - Place for graph
         * ``containerheader`` - Header for javascript code
-        * ``jschart`` - Javascript code as string
-        * ``date_flag`` - x-axis contain date format or not
+        * ``count`` - chart count
         * ``custom_tooltip_flag`` - False / True
-        * ``charttooltip`` - Custom tooltip string
+        * ``d3_select_extra`` -
+        * ``date_flag`` - x-axis contain date format or not
+        * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
-        * ``color_category`` - Defien color category (eg. category10, category20, category20c)
-        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
+        * ``height`` - Set graph height
+        * ``htmlcontent`` - Contain the htmloutput
+        * ``htmlheader`` - Contain the html header
+        * ``jschart`` - Javascript code as string
+        * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
+        * ``resize`` - False / True
+        * ``series`` - Series are list of data that will be plotted
+        * ``stacked`` - False / True
+        * ``style`` - Special style
+        * ``template_page_nvd3`` - template variable
+        * ``width`` - Set graph width
+        * ``x_axis_date`` - False / True
     """
     count = 0
     dateformat = '%x'
@@ -120,13 +93,15 @@ class NVD3Chart:
     charttooltip = ''
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
+    color_list = []  # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
+    x_axis_format = ''
+    show_legend = True
+    show_labels = True
 
-    header_css = ['http://nvd3.org/src/nv.d3.css']
-    header_js = ['http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js']
-
-    def __init__(self, name=None, color_category=None, **kwargs):
+    def __init__(self, name=None, color_category=None, jquery_on_ready=False,
+                 **kwargs):
         """
         Constructor
         """
@@ -137,12 +112,15 @@ class NVD3Chart:
         self.series = []
         self.axislist = {}
         self.template_page_nvd3 = Template(template_page_nvd3)
+        self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
         if not name:
             self.count += 1
             name = "chart%d" % (self.count)
         self.name = name
+
+        self.jquery_on_ready = jquery_on_ready
 
         if color_category:
             self.color_category = color_category
@@ -153,21 +131,45 @@ class NVD3Chart:
         if 'resize' in kwargs and kwargs["resize"]:
             self.resize = True
 
+        self.show_legend = kwargs.get("show_legend", True)
+        self.show_labels = kwargs.get("show_labels", True)
+
+        self.header_css = [
+            '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
+            ('http://nvd3.org/src/nv.d3.css',)
+        ]
+        self.header_js = [
+            '<script src="%s" type="text/javascript"></script>\n' % h for h in
+            ('http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js')
+        ]
+
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
+
+        TODO: Add doc for supported parameters, ie x_axis_date, shape, size
+
         """
         if not name:
             name = "Serie %d" % (len(self.series) + 1)
 
-        if self.x_axis_date:
-            x = [str(d) for d in x]
-
-        x = sorted(x)
         # For scatterChart shape & size fields are added in serie
-        if 'shape' in kwargs:
-            serie = [{"x": x[i], "y": y, "shape": kwargs["shape"], "size": random.randint(1, 3)} for i, y in enumerate(y)]
+        if 'shape' in kwargs or 'size' in kwargs:
+            if 'size' in kwargs and kwargs["size"]:
+                csize = kwargs["size"]
+            else:
+                csize = 1
+            if 'shape' in kwargs and kwargs["shape"]:
+                cshape = kwargs["shape"]
+            else:
+                cshape = "circle"
+            serie = [{
+                "x": x[i],
+                "y": y,
+                "shape": cshape,
+                "size": csize[i] if isinstance(csize, list) else csize
+            } for i, y in enumerate(y)]
         else:
             serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 
@@ -177,6 +179,10 @@ class NVD3Chart:
         #Histogram type="bar" for the series
         if 'type' in kwargs and kwargs["type"]:
             data_keyvalue["type"] = kwargs["type"]
+
+        if self.model == 'pieChart':
+            if 'color_list' in extra and extra["color_list"]:
+                self.color_list = extra["color_list"]
 
         #Define on which Y axis the serie is related
         #a chart can have 2 Y axis, left and right, by default only one Y Axis is used
@@ -254,6 +260,16 @@ class NVD3Chart:
         self.buildhtml()
         return self.htmlcontent
 
+    def buildcontent(self):
+        """Build HTML content only, no header or body tags. To be useful this
+        will usually require the attribute `juqery_on_ready` to be set which
+        will wrap the js in $(function(){<regular_js>};)
+        """
+        self.buildcontainer()
+        self.buildjschart()
+        self.htmlcontent = self.template_content_nvd3.substitute(container=self.container,
+                                              jschart=self.jschart)
+
     def buildhtml(self):
         """Build the HTML page
         Create the htmlheader with css / js
@@ -267,13 +283,12 @@ class NVD3Chart:
         self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
 
     def buildhtmlheader(self):
-        """generate HTML header"""
-
+        """generate HTML header content"""
         self.htmlheader = ''
         for css in self.header_css:
-            self.htmlheader += '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % css
+            self.htmlheader += css
         for js in self.header_js:
-            self.htmlheader += '<script src="%s" type="text/javascript"></script>\n' % js
+            self.htmlheader += js
 
     def buildcontainer(self):
         """generate HTML div"""
@@ -329,12 +344,19 @@ class NVD3Chart:
         self.jschart = ''
         if self.tag_script_js:
             self.jschart += '\n<script type="text/javascript">\n'
-        self.jschart += stab() + 'nv.addGraph(function() {\n'
+
+        self.jschart += stab()
+
+        if self.jquery_on_ready:
+            self.jschart += '$(function(){'
+
+        self.jschart += 'nv.addGraph(function() {\n'
 
         self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
 
-        if self.color_category:
-            self.jschart += stab(2) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
+        if self.model != 'pieChart' and not self.color_list:
+            if self.color_category:
+                self.jschart += stab(2) + 'chart.color(d3.scale.%s().range());\n' % self.color_category
 
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
@@ -367,6 +389,19 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
+        if self.model != 'discreteBarChart':
+            if self.show_legend:
+                self.jschart += stab(2) + "chart.showLegend(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.showLegend(false);\n"
+
+        #showLabels only supported in pieChart
+        if self.model == 'pieChart':
+            if self.show_labels:
+                self.jschart += stab(2) + "chart.showLabels(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.showLabels(false);\n"
+
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
             stab(3) + ".datum(%s)\n" % datum + \
@@ -376,7 +411,10 @@ class NVD3Chart:
 
         if self.resize:
             self.jschart += stab(1) + "nv.utils.windowResize(chart.update);\n"
-        self.jschart += stab(1) + "return chart;\n});\n"
+        self.jschart += stab(1) + "return chart;\n});"
+
+        if self.jquery_on_ready:
+            self.jschart += "\n});"
 
         #Include data
         series_js = json.dumps(self.series)
@@ -390,7 +428,10 @@ class NVD3Chart:
         """
         axis = {}
         if format:
-            axis["tickFormat"] = "d3.format(',%s')" % format
+            if format == 'AM_PM':
+                axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }"
+            else:
+                axis["tickFormat"] = "d3.format(',%s')" % format
 
         if label:
             axis["axisLabel"] = label
@@ -398,7 +439,7 @@ class NVD3Chart:
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
             self.dateformat = format
-            axis["tickFormat"] = "function(d) { return d3.time.format('%s')(new Date(d)) }\n" % self.dateformat
+            axis["tickFormat"] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % self.dateformat
             #flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True
