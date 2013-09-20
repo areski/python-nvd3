@@ -243,6 +243,10 @@ class NVD3Chart:
         """Set Graph width"""
         self.width = str(width)
 
+    def set_resize(self, resize):
+        """Set Graph resize property"""
+        self.resize = resize
+
     def set_containerheader(self, containerheader):
         """Set containerheader"""
         self.containerheader = containerheader
