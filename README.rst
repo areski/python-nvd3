@@ -116,10 +116,10 @@ Changelog
 Changelog summary : https://github.com/areski/python-nvd3/blob/master/CHANGELOG.rst
 
 
-Like Django ?
--------------
+Do you like Django?
+-------------------
 
-We love Django too and we made available a django wrapper for nvd3:
+There is also a django wrapper for nvd3 available:
 https://github.com/areski/django-nvd3
 
 
