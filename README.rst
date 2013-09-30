@@ -42,6 +42,8 @@ Then in your directory where you will use python-nvd3, just type the following::
     $ bower install d3
     $ bower install nvd3
 
+This will create a directory "bower_components" where d3 & nvd3 will be installed.
+
 
 Usage
 -----

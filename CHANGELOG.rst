@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+0.9.0 (2013-09-30)
+------------------
+* Use Bower to install D3 and NVD3
+
+
 0.8.0 (2013-08-15)
 ------------------
 * add NVD3Chart.buildcontent() by cmorgan (Chris Morgan)
