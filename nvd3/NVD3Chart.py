@@ -134,13 +134,20 @@ class NVD3Chart:
         self.show_legend = kwargs.get("show_legend", True)
         self.show_labels = kwargs.get("show_labels", True)
 
+        #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
             '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
-            ('http://nvd3.org/src/nv.d3.css',)
+            (
+                './bower_components/nvd3/src/nv.d3.css',
+            )
         ]
+
         self.header_js = [
             '<script src="%s" type="text/javascript"></script>\n' % h for h in
-            ('http://nvd3.org/lib/d3.v2.js', 'http://nvd3.org/nv.d3.js')
+            (
+                './bower_components/d3/d3.min.js',
+                './bower_components/nvd3/nv.d3.min.js'
+            )
         ]
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):

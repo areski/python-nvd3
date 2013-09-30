@@ -28,6 +28,21 @@ Install, upgrade and uninstall python-nvd3 with these commands::
     $ pip uninstall python-nvd3
 
 
+Dependecies
+-----------
+
+You will "bower" installed in order to install D3 and NvD3, see bower website for futher info : http://bower.io/
+
+Bower depends on Node and npm. It's installed globally using npm::
+
+    npm install -g bower
+
+Then in your directory where you will use python-nvd3, just type the following::
+
+    $ bower install d3
+    $ bower install nvd3
+
+
 Usage
 -----
 
