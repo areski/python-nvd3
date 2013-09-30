@@ -34,8 +34,8 @@ Bower depends on Node and npm. It's installed globally using npm::
 
 Then in your directory where you will use python-nvd3, just type the following::
 
-    $ bower install d3
-    $ bower install nvd3
+    $ bower install d3#3.3.6
+    $ bower install nvd3#1.1.12-beta
 
 This will create a directory "bower_components" where d3 & nvd3 will be installed.
 
