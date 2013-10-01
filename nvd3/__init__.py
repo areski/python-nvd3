@@ -22,7 +22,7 @@ from .cumulativeLineChart import cumulativeLineChart
 from .scatterChart import scatterChart
 from .discreteBarChart import discreteBarChart
 from .multiBarChart import multiBarChart
-from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
+# from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
 
 
 class lineChart(lineChart):
@@ -37,8 +37,8 @@ class lineWithFocusChart(lineWithFocusChart):
     pass
 
 
-class linePlusBarWithFocusChart(linePlusBarWithFocusChart):
-    pass
+# class linePlusBarWithFocusChart(linePlusBarWithFocusChart):
+#     pass
 
 
 class stackedAreaChart(stackedAreaChart):
