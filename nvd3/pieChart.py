@@ -61,7 +61,7 @@ class pieChart(NVD3Chart):
 
             chart.tooltipContent(function(key, y, e, graph) {
                 var x = String(key);
-                var y =  String(e.point.y)  + ' cal';
+                var y =  String(y)  + ' cal';
                 tooltip_str = '<center><b>'+x+'</b></center>' + y;
                 return tooltip_str;
             });
@@ -104,9 +104,8 @@ class pieChart(NVD3Chart):
             if start_js > 0:
                 self.jschart = self.jschart[:replace_index] + color_js + self.jschart[replace_index:]
 
-        pie_jschart = '\n' + stab(2) + 'chart.x(function(d) { return d.x })\n' + \
-            stab(3) + '.y(function(d) { return d.y })\n' + \
-            stab(3) + '.values(function(d) { return d });\n'
+        pie_jschart = '\n' + stab(2) + 'chart.x(function(d) { return d.label })\n' + \
+            stab(3) + '.y(function(d) { return d.value });\n'
         if self.width:
             pie_jschart += stab(2) + 'chart.width(%s);\n' % self.width
         if self.height:
