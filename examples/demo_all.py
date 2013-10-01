@@ -8,16 +8,19 @@ for d3.js without taking away the power that d3.js gives you.
 
 Project location : https://github.com/areski/python-nvd3
 """
-from nvd3 import lineChart
-from nvd3 import lineWithFocusChart
-from nvd3 import stackedAreaChart
-from nvd3 import multiBarHorizontalChart
-from nvd3 import linePlusBarChart
+
 from nvd3 import cumulativeLineChart
 from nvd3 import discreteBarChart
-from nvd3 import pieChart
+from nvd3 import lineChart
+from nvd3 import linePlusBarChart
+from nvd3 import lineWithFocusChart
 from nvd3 import multiBarChart
+from nvd3 import multiBarHorizontalChart
+from nvd3 import stackedAreaChart
 from nvd3 import scatterChart
+from nvd3 import pieChart
+
+
 import random
 import datetime
 import time

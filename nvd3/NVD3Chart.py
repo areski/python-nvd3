@@ -145,10 +145,8 @@ class NVD3Chart:
         self.header_js = [
             '<script src="%s" type="text/javascript"></script>\n' % h for h in
             (
-                #'./bower_components/d3/d3.min.js',
-                './bower_components/nvd3/lib/d3.v2.js',
-                #'./bower_components/nvd3/nv.d3.min.js'
-                'http://nvd3.org/nv.d3.js'
+                './bower_components/d3/d3.min.js',
+                './bower_components/nvd3/nv.d3.min.js'
             )
         ]
 
