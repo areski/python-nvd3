@@ -441,21 +441,22 @@ class NVD3Chart:
         else:
             self.jschart += """data_%s=%s;\n""" % (self.name, series_js)
 
-
-
         if self.tag_script_js:
             self.jschart += "</script>"
 
-    def create_x_axis(self, name, label=None, format=None, date=False):
+    def create_x_axis(self, name, label=None, format=None, date=False, custom_format=False):
         """
         Create X-axis
         """
         axis = {}
-        if format:
-            if format == 'AM_PM':
-                axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }"
-            else:
-                axis["tickFormat"] = "d3.format(',%s')" % format
+        if custom_format and format:
+            axis["tickFormat"] = format
+        else:
+            if format:
+                if format == 'AM_PM':
+                    axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }"
+                else:
+                    axis["tickFormat"] = "d3.format(',%s')" % format
 
         if label:
             axis["axisLabel"] = label

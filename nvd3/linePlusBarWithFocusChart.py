@@ -100,13 +100,30 @@ class linePlusBarWithFocusChart(NVD3Chart):
         NVD3Chart.__init__(self, **kwargs)
         if date:
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format=x_axis_format, date=True)
+
+            with_focus_chart_1 = """function(d) {
+                var dx = data_linePlusBarWithFocusChart[0].values[d] && data_linePlusBarWithFocusChart[0].values[d].x || 0;
+                if (dx > 0) { return d3.time.format('%x')(new Date(dx)) }
+                return null;
+            }"""
+            self.create_x_axis('xAxis', format=with_focus_chart_1, date=False, custom_format=True)
+
+            with_focus_chart_2 = """function(d) {
+                var dx = data_linePlusBarWithFocusChart[0].values[d] && data_linePlusBarWithFocusChart[0].values[d].x || 0;
+                return d3.time.format('%x')(new Date(dx));
+            }"""
+            self.create_x_axis('x2Axis', format=with_focus_chart_2, date=False, custom_format=True)
+
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=".2f")
 
         self.create_y_axis('y1Axis', format="f")
-        self.create_y_axis('y2Axis', format="function(d) { return '$' + d3.format(',f')(d) }", custom_format=True)
+        self.create_y_axis('y3Axis', format="f")
+
+        self.create_y_axis('y2Axis', format="function(d) { return '$' + d3.format(',.2f')(d) }", custom_format=True)
+
+        self.create_y_axis('y4Axis', format="function(d) { return '$' + d3.format(',.2f')(d) }", custom_format=True)
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
@@ -123,7 +140,6 @@ class linePlusBarWithFocusChart(NVD3Chart):
             string_jschart += stab(2) + 'chart.width(%s);\n' % self.width
         if self.height:
             string_jschart += stab(2) + 'chart.height(%s);\n' % self.height
-
 
         start_index = self.jschart.find('.linePlusBarWithFocusChart();')
         string_len = len('.linePlusBarWithFocusChart();')
