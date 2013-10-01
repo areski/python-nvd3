@@ -102,16 +102,17 @@ class linePlusBarWithFocusChart(NVD3Chart):
             self.set_date_flag(True)
 
             with_focus_chart_1 = """function(d) {
-                var dx = data_linePlusBarWithFocusChart[0].values[d] && data_linePlusBarWithFocusChart[0].values[d].x || 0;
+                var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
                 if (dx > 0) { return d3.time.format('%s')(new Date(dx)) }
                 return null;
-            }""" % x_axis_format
+            }""" % (self.name, self.name, x_axis_format)
             self.create_x_axis('xAxis', format=with_focus_chart_1, date=False, custom_format=True)
 
             with_focus_chart_2 = """function(d) {
-                var dx = data_linePlusBarWithFocusChart[0].values[d] && data_linePlusBarWithFocusChart[0].values[d].x || 0;
+                var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
                 return d3.time.format('%s')(new Date(dx));
-            }""" % x_axis_format
+            }""" % (self.name, self.name, x_axis_format)
+
             self.create_x_axis('x2Axis', format=with_focus_chart_2, date=False, custom_format=True)
 
             self.set_custom_tooltip_flag(True)
