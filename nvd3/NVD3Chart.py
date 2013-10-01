@@ -390,7 +390,10 @@ class NVD3Chart:
         if self.height:
             self.d3_select_extra += ".attr('height', %s)\n" % self.height
 
-        datum = "data_%s" % self.name
+        if self.model == 'pieChart':
+            datum = "data_%s[0].values" % self.name
+        else:
+            datum = "data_%s" % self.name
 
         # add custom tooltip string in jschart
         # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
