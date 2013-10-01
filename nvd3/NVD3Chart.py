@@ -225,7 +225,7 @@ class NVD3Chart:
                 _start = ("'" + str(_start) + "' + ") if _start else ''
                 _end = (" + '" + str(_end) + "'") if _end else ''
 
-                if self.model == 'linePlusBarChart':
+                if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
                     self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
                         stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
                         stab(3) + "}\n"
