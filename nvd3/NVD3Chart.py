@@ -180,6 +180,8 @@ class NVD3Chart:
         else:
             if self.model == 'pieChart':
                 serie = [{"label": x[i], "value": y} for i, y in enumerate(y)]
+            elif self.model == 'linePlusBarWithFocusChart':
+                serie = [[x[i], y] for i, y in enumerate(y)]
             else:
                 serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
 
@@ -199,7 +201,7 @@ class NVD3Chart:
         if 'yaxis' in kwargs and kwargs["yaxis"]:
             data_keyvalue["yAxis"] = kwargs["yaxis"]
         else:
-            if self.model != 'pieChart':
+            if self.model != 'pieChart' and self.model != 'linePlusBarWithFocusChart':
                 data_keyvalue["yAxis"] = "1"
 
         if 'bar' in kwargs and kwargs["bar"]:
@@ -427,7 +429,17 @@ class NVD3Chart:
 
         #Include data
         series_js = json.dumps(self.series)
-        self.jschart += """data_%s=%s;\n""" % (self.name, series_js)
+
+        if self.model == 'linePlusBarWithFocusChart':
+            append_to_data = ".map(function(series) {"+\
+                "series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });"+\
+                "return series; })"
+            self.jschart += """data_%s=%s%s;\n""" % (self.name, series_js, append_to_data)
+        else:
+            self.jschart += """data_%s=%s;\n""" % (self.name, series_js)
+
+
+
         if self.tag_script_js:
             self.jschart += "</script>"
 

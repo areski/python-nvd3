@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, stab
 
 
 class linePlusBarWithFocusChart(NVD3Chart):
@@ -42,64 +42,59 @@ class linePlusBarWithFocusChart(NVD3Chart):
 
         data_linePlusBarWithFocusChart = [
             {
-               "key" : "Serie 1",
-               "bar": "true",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : -6
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : -5
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : -1
-                    },
-                  ],
+                "key" : "Quantity" ,
+                "bar": true,
+                "values" : [ [ 1136005200000 , 1271000.0] , [ 1138683600000 , 1271000.0] , ]
             },
             {
-               "key" : "Serie 2",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : 34
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : 56
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : 32
-                    },
-                  ],
+                "key" : "Price" ,
+                "values" : [ [ 1136005200000 , 71.89] , [ 1138683600000 , 75.51]]
             }
-        ]
+        ].map(function(series) {
+            series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
+            return series;
+        });
 
         nv.addGraph(function() {
-            var chart = nv.models.linePlusBarWithFocusChart();
+            var chart = nv.models.linePlusBarWithFocusChart()
+                .margin({top: 30, right: 60, bottom: 50, left: 70})
+                .x(function(d,i) { return i })
+                .color(d3.scale.category10().range());
 
-            chart.xAxis
-                .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(d)) });
-            chart.y1Axis
-                .tickFormat(d3.format(',f'));
-            chart.y2Axis
-                .tickFormat(function(d) { return '$' + d3.format(',f')(d) });
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = d3.time.format('%d %b %Y %H:%S')(new Date(parseInt(graph.point.x)));
-                var y = String(graph.point.y);
-                if(key.indexOf('Serie 1') > -1 ){
-                    var y = '$ ' +  String(graph.point.y) ;
+            chart.xAxis.tickFormat(function(d) {
+
+                var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
+                if (dx > 0) {
+                    return d3.time.format('%x')(new Date(dx))
                 }
-                if(key.indexOf('Serie 2') > -1 ){
-                    var y =  String(graph.point.y)  + ' min';
-                }
-                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                return tooltip_str;
+                return null;
             });
-            d3.select('#linePlusBarChart svg')
-                .datum(data_linePlusBarChart)
-                .transition().duration(500)
-                .attr('height', 350)
+
+            chart.x2Axis.tickFormat(function(d) {
+                var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
+                return d3.time.format('%x')(new Date(dx))
+            });
+
+            chart.y1Axis.tickFormat(d3.format(',f'));
+
+            chart.y3Axis.tickFormat(d3.format(',f'));
+
+            chart.y2Axis.tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
+
+            chart.y4Axis.tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
+
+            chart.bars.forceY([0]);
+            chart.bars2.forceY([0]);
+            //chart.lines.forceY([0]);
+            nv.log(testdata);
+            d3.select('#linePlusBarWithFocusChart svg')
+                .datum(testdata)
                 .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
             return chart;
-        });
+    });
     """
     def __init__(self, height=450, width=None, date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
@@ -118,3 +113,21 @@ class linePlusBarWithFocusChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+    def buildjschart(self):
+        NVD3Chart.buildjschart(self)
+
+        string_jschart = '\n' + stab(2) + 'chart.margin({top: 30, right: 60, bottom: 50, left: 70})\n' + \
+            stab(3) + '.x(function(d,i) { return i });\n'
+        if self.width:
+            string_jschart += stab(2) + 'chart.width(%s);\n' % self.width
+        if self.height:
+            string_jschart += stab(2) + 'chart.height(%s);\n' % self.height
+
+
+        start_index = self.jschart.find('.linePlusBarWithFocusChart();')
+        string_len = len('.linePlusBarWithFocusChart();')
+        replace_index = start_index + string_len
+        if start_index > 0:
+            self.jschart = self.jschart[:replace_index] + string_jschart + self.jschart[replace_index:]
+
