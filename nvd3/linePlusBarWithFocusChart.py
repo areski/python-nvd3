@@ -29,10 +29,11 @@ class linePlusBarWithFocusChart(NVD3Chart):
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
         y2data = [36, 55, 11]
-
+        kwargs = {}
+        kwargs['bar'] = True
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                        "date_format": "%d %b %Y %H:%S" }
-        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs)
 
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
@@ -94,7 +95,7 @@ class linePlusBarWithFocusChart(NVD3Chart):
             nv.utils.windowResize(chart.update);
 
             return chart;
-    });
+            });
     """
     def __init__(self, height=450, width=None, date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
