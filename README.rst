@@ -102,6 +102,8 @@ Charts list:
 
 .. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/scatterChart.png
 
+.. image:: https://raw.github.com/areski/python-nvd3/master/docs/source/_static/screenshot/linePlusBarWithFocusChart.png
+
 
 Documentation
 -------------
