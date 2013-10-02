@@ -2,13 +2,21 @@ Changelog
 =========
 
 
+0.10.0 (2013-10-02)
+------------------
+
+* Support new chart linePlusBarWithFocusChart
+
+
 0.9.0 (2013-09-30)
 ------------------
+
 * Use Bower to install D3 and NVD3
 
 
 0.8.0 (2013-08-15)
 ------------------
+
 * add NVD3Chart.buildcontent() by cmorgan (Chris Morgan)
 * Add show_labels parameter for Piechart by RaD (Ruslan Popov)
 
