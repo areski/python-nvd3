@@ -14,13 +14,12 @@ from nvd3 import discreteBarChart
 from nvd3 import lineChart
 from nvd3 import linePlusBarChart
 from nvd3 import lineWithFocusChart
+from nvd3 import linePlusBarWithFocusChart
 from nvd3 import multiBarChart
 from nvd3 import multiBarHorizontalChart
 from nvd3 import stackedAreaChart
 from nvd3 import scatterChart
 from nvd3 import pieChart
-
-
 import random
 import datetime
 import time
@@ -261,6 +260,28 @@ extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
+
+chart.buildcontent()
+
+output_file.write(chart.htmlcontent)
+
+#--------------------------------------------
+
+type = "linePlusBarWithFocusChart"
+chart = linePlusBarWithFocusChart(name=type, height=350, date=True,
+                         x_axis_format="%d %b %Y", jquery_on_ready=True)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
+ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata2 = [i + random.randint(1, 10) for i in reversed(list(range(nb_element)))]
+kwargs = {}
+kwargs['bar'] = True
+extra_serie = {"tooltip": {"y_start": "$ ", "y_end": ""}}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 
 chart.buildcontent()
 
