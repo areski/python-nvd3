@@ -22,18 +22,18 @@ nb_element = 100
 output_file = open('test_linePlusBarWithFocusChart.html', 'w')
 #---------------------------------------
 type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=type, color_category='category20b', date=True, x_axis_format="%d %b %Y %H")
+chart = linePlusBarWithFocusChart(name=type, color_category='category20b', date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
 xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
 
-ydata2 = [x * 2 for x in ydata]
+ydata2 = [200 - i + random.randint(-10, 10) for i in range(nb_element)]
 
 extra_serie_1 = {
     "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "%d %b %Y %H:%M:%S %p",
+    "date_format": "%d %b %Y",
 }
 kwargs = {"bar": "true"}
 
@@ -41,7 +41,7 @@ chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie_1, **kwargs)
 
 extra_serie_2 = {
     "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "%d %b %Y %H:%M:%S %p",
+    "date_format": "%d %b %Y",
 }
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie_2)
 
