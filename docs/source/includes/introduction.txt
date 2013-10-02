@@ -110,6 +110,10 @@ Supported nvd3 charts
 .. image:: _static/screenshot/scatterChart.png
 
 
+.. image:: _static/screenshot/linePlusBarWithFocusChart.png
+
+
+
 .. _live_demo:
 
 Live demo of NVD3
