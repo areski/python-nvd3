@@ -266,6 +266,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 
 #--------------------------------------------
+nb_element = 200
 
 type = "linePlusBarWithFocusChart"
 chart = linePlusBarWithFocusChart(name=type, height=350, date=True,
@@ -275,7 +276,7 @@ chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = list(range(nb_element))
 xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = [i + random.randint(1, 10) for i in reversed(list(range(nb_element)))]
+ydata2 = [i + random.randint(10, 20) for i in reversed(list(range(nb_element)))]
 kwargs = {}
 kwargs['bar'] = True
 extra_serie = {"tooltip": {"y_start": "$ ", "y_end": ""}}
