@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+0.10.1 (2013-10-03)
+------------------
+
+* Remove $ sign in linePlusBarWithFocusChart
+
+
 0.10.0 (2013-10-02)
 ------------------
 
