@@ -123,9 +123,9 @@ class linePlusBarWithFocusChart(NVD3Chart):
         self.create_y_axis('y1Axis', format="f")
         self.create_y_axis('y3Axis', format="f")
 
-        self.create_y_axis('y2Axis', format="function(d) { return '$' + d3.format(',.2f')(d) }", custom_format=True)
+        self.create_y_axis('y2Axis', format="function(d) { return d3.format(',.2f')(d) }", custom_format=True)
 
-        self.create_y_axis('y4Axis', format="function(d) { return '$' + d3.format(',.2f')(d) }", custom_format=True)
+        self.create_y_axis('y4Axis', format="function(d) { return d3.format(',.2f')(d) }", custom_format=True)
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
