@@ -137,7 +137,7 @@ http://python-nvd3.readthedocs.org
 Contributing
 ============
 
-If you've found a bug, add a feature or improve python-nv3 and
+If you've found a bug, add a feature or improve python-nvd3 and
 think it is useful then please consider contributing.
 Patches, pull requests or just suggestions are always welcome!
 
