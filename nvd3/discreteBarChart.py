@@ -73,9 +73,14 @@ class discreteBarChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, **kwargs):
+    def __init__(self, height=450, width=None, date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.create_x_axis('xAxis', format=None)
+        if date:
+            self.set_date_flag(True)
+            self.create_x_axis('xAxis', format=x_axis_format, date=True)
+        else:
+            self.create_x_axis('xAxis', format=None)
+        self.set_custom_tooltip_flag(True)
         self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
         if height:
