@@ -434,8 +434,8 @@ class NVD3Chart:
         series_js = json.dumps(self.series)
 
         if self.model == 'linePlusBarWithFocusChart':
-            append_to_data = ".map(function(series) {"+\
-                "series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });"+\
+            append_to_data = ".map(function(series) {" + \
+                "series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });" + \
                 "return series; })"
             self.jschart += """data_%s=%s%s;\n""" % (self.name, series_js, append_to_data)
         else:
