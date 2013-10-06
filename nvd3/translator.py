@@ -44,18 +44,34 @@ class Function(object):
         return self
 
     def __call__(self, args=None):
-        if args is not None and not isinstance(args, basestring):
-            self.statements[-1] = self.statements[-1] + '(%s)' % (args)
+        if isinstance(args, (Function, AnonymousFunction, basestring)):
+            self.statements[-1] = self.statements[-1] + '(%s)' % (args,)
+        else:
+            self.statements[-1] = self.statements[-1] + '()'
         return self
+
+
+class Assignment(object):
+
+    def __init__(self, key, value, scoped=True):
+        self.key = key
+        self.value = value
+        self.scoped = scoped
+
+    def __str__(self):
+        return '%s%s = %s;' % (self.scoped and 'var ' or '', self.key, self.value)
 
 
 if __name__ == '__main__':
     nv = Function('nv').addGraph(
-        AnonymousFunction('', Function('nv').models.pieChart(
-            ).x(
-                AnonymousFunction('d', 'return d.label;')
-            ).y(
-                AnonymousFunction('d', 'return d.value;')
-            ).showLabels('true')
+        AnonymousFunction('', Assignment('chart',
+            Function('nv').models.pieChart(
+                ).x(
+                    AnonymousFunction('d', 'return d.label;')
+                ).y(
+                    AnonymousFunction('d', 'return d.value;')
+                ).showLabels('true')
+            )
         )
     )
+    print nv
