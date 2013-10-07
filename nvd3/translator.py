@@ -11,7 +11,10 @@ class Tag(object):
                                for attr, value in self.attrs])
 
     def __str__(self):
-        return '<%s%s>\n    %s\n</%s>' % (self.name, self.attrs and ' ' + self.attrs or '', self.content, self.name)
+        return '<%s%s>\n    %s\n</%s>' % (self.name,
+                                          ' ' + self.attrs if self.attrs else '',
+                                          self.content,
+                                          self.name)
 
 
 class ScriptTag(Tag):
@@ -32,22 +35,23 @@ class Function(object):
 
     def __init__(self, name):
         self.name = name
-        self.statements = []
+        self._calls = []
 
     def __str__(self):
         operations = [self.name]
-        operations.extend(str(statement) for statement in self.statements)
+        operations.extend(str(call) for call in self._calls)
         return '%s' % ('.'.join(operations),)
 
     def __getattr__(self, attr):
-        self.statements.append(attr)
+        self._calls.append(attr)
         return self
 
-    def __call__(self, args=None):
-        if isinstance(args, (Function, AnonymousFunction, basestring)):
-            self.statements[-1] = self.statements[-1] + '(%s)' % (args,)
+    def __call__(self, *args):
+        if not args:
+            self._calls[-1] = self._calls[-1] + '()'
         else:
-            self.statements[-1] = self.statements[-1] + '()'
+            arguments = ','.join([str(arg) for arg in args])
+            self._calls[-1] = self._calls[-1] + '(%s)' % (arguments,)
         return self
 
 
@@ -59,19 +63,9 @@ class Assignment(object):
         self.scoped = scoped
 
     def __str__(self):
-        return '%s%s = %s;' % (self.scoped and 'var ' or '', self.key, self.value)
+        return '%s%s = %s;' % ('var ' if self.scoped else '', self.key, self.value)
 
 
-if __name__ == '__main__':
-    nv = Function('nv').addGraph(
-        AnonymousFunction('', Assignment('chart',
-            Function('nv').models.pieChart(
-                ).x(
-                    AnonymousFunction('d', 'return d.label;')
-                ).y(
-                    AnonymousFunction('d', 'return d.value;')
-                ).showLabels('true')
-            )
-        )
-    )
-    print nv
+def indent(func):
+    # TODO: Add indents to function str
+    return str(func)
