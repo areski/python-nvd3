@@ -19,7 +19,7 @@ output_file = open('test_multiBarChart_date.html', 'w')
 
 type = "multiBarChart"
 
-chart = multiBarChart(name=type, height=350, date=True)
+chart = multiBarChart(name=type, height=350, x_is_date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 100

@@ -73,9 +73,9 @@ class discreteBarChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
+    def __init__(self, height=450, width=None, x_is_date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if date:
+        if x_is_date:
             self.set_date_flag(True)
             self.create_x_axis('xAxis', format=x_axis_format, date=True)
         else:

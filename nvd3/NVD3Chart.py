@@ -100,8 +100,7 @@ class NVD3Chart:
     show_legend = True
     show_labels = True
 
-    def __init__(self, name=None, color_category=None, jquery_on_ready=False,
-                 **kwargs):
+    def __init__(self, name='container', **kwargs):
         """
         Constructor
         """
@@ -115,22 +114,15 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        if not name:
+        self.name = kwargs.get('name', None)
+        if not self.name:
             self.count += 1
-            name = "chart%d" % (self.count)
-        self.name = name
+            self.name = "chart%d" % (self.count)
 
-        self.jquery_on_ready = jquery_on_ready
-
-        if color_category:
-            self.color_category = color_category
-
-        if 'stacked' in kwargs and kwargs["stacked"]:
-            self.stacked = True
-
-        if 'resize' in kwargs and kwargs["resize"]:
-            self.resize = True
-
+        self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
+        self.color_category = kwargs.get('color_category', None)
+        self.stacked = kwargs.get('stacked', False)
+        self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get("show_legend", True)
         self.show_labels = kwargs.get("show_labels", True)
 

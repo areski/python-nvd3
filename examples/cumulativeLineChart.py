@@ -22,7 +22,7 @@ nb_element = 100
 output_file = open('test_cumulativeLineChart.html', 'w')
 
 type = "cumulativeLineChart"
-chart = cumulativeLineChart(name=type, height=350, date=True)
+chart = cumulativeLineChart(name=type, height=350, x_is_date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))

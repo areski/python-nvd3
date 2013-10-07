@@ -74,7 +74,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineChart"
-chart = lineChart(name=type, height=350, date=True, x_axis_format="%d %b %Y %H",
+chart = lineChart(name=type, height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -99,7 +99,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', date=True,
+chart = lineWithFocusChart(name=type, color_category='category20b', x_is_date=True,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -126,7 +126,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(name=type, height=350, date=True,
+chart = stackedAreaChart(name=type, height=350, x_is_date=True,
                          x_axis_format="%d %b %Y %I", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -146,7 +146,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, date=True,
+chart = linePlusBarChart(name=type, height=350, x_is_date=True,
                          x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -167,7 +167,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "cumulativeLineChart"
-chart = cumulativeLineChart(name=type, height=350, date=True,
+chart = cumulativeLineChart(name=type, height=350, x_is_date=True,
                             jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -222,7 +222,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "multiBarChartDate"
-chart = multiBarChart(name=type, height=350, date=True, jquery_on_ready=True)
+chart = multiBarChart(name=type, height=350, x_is_date=True, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
@@ -269,7 +269,7 @@ output_file.write(chart.htmlcontent)
 nb_element = 200
 
 type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=type, height=350, date=True,
+chart = linePlusBarWithFocusChart(name=type, height=350, x_is_date=True,
                          x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 

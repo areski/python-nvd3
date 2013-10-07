@@ -24,7 +24,7 @@ class linePlusBarWithFocusChart(NVD3Chart):
     Python example::
 
         from nvd3 import linePlusBarWithFocusChart
-        chart = linePlusBarWithFocusChart(name='linePlusBarChart', date=True, x_axis_format="%d %b %Y")
+        chart = linePlusBarWithFocusChart(name='linePlusBarChart', x_is_date=True, x_axis_format="%d %b %Y")
 
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
@@ -97,9 +97,9 @@ class linePlusBarWithFocusChart(NVD3Chart):
             return chart;
             });
     """
-    def __init__(self, height=450, width=None, date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
+    def __init__(self, height=450, width=None, x_is_date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if date:
+        if x_is_date:
             self.set_date_flag(True)
 
             with_focus_chart_1 = """function(d) {

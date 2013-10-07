@@ -22,7 +22,7 @@ nb_element = 100
 output_file = open('test_linePlusBarWithFocusChart.html', 'w')
 #---------------------------------------
 type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=type, color_category='category20b', date=True, x_axis_format="%d %b %Y")
+chart = linePlusBarWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))

@@ -21,7 +21,7 @@ nb_element = 100
 
 output_file = open('test_linePlusBarChart.html', 'w')
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, date=True, x_axis_format="%d %b %Y")
+chart = linePlusBarChart(name=type, height=350, x_is_date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))

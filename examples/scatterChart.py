@@ -16,7 +16,7 @@ import random
 output_file = open('test_scatterChart.html', 'w')
 
 type = "scatterChart"
-chart = scatterChart(name=type, height=350, date=False)
+chart = scatterChart(name=type, height=350, x_is_date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]

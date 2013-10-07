@@ -22,7 +22,7 @@ class lineChart(NVD3Chart):
     Python example::
 
         from nvd3 import lineChart
-        chart = lineChart(name='lineChart', height=400, width=400, date=True, x_axis_format="%d %b %Y %H")
+        chart = lineChart(name='lineChart', height=400, width=400, x_is_date=True, x_axis_format="%d %b %Y %H")
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
         ydata = [-6, 5, -1]
 
@@ -72,25 +72,27 @@ class lineChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, date=False, **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if date:
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', 
-                               format=kwargs.get('x_axis_format','%d %b %Y'),
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format', '%d %b %Y'),
                                date=True)
             self.set_custom_tooltip_flag(True)
         else:
             if kwargs.get('x_axis_format') == 'AM_PM':
                 self.x_axis_format = format = 'AM_PM'
             else:
-                format = kwargs.get('x_axis_format','r')
+                format = kwargs.get('x_axis_format', 'r')
             self.create_x_axis('xAxis', format=format)
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format','.02f'))
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.02f'))
 
         # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
 
@@ -98,15 +100,13 @@ class lineChart(NVD3Chart):
         NVD3Chart.buildjschart(self)
         am_pm_js = ''
         if self.x_axis_format == 'AM_PM':
-            am_pm_js += stab(2) +"function get_am_pm(d){\n";
+            am_pm_js += stab(2) + "function get_am_pm(d){\n"
             am_pm_js += stab(3) + "if(d > 12){ d = d - 12; return (String(d) + 'PM');}\n"
             am_pm_js += stab(3) + "else{ return (String(d) + 'AM');}\n"
             am_pm_js += stab(2) + "};\n"
 
             start_js = self.jschart.find('nv.addGraph')
-            start_js_len = len('nv.addGraph')
+            # start_js_len = len('nv.addGraph')
             replace_index = start_js
             if start_js > 0:
                 self.jschart = self.jschart[:replace_index] + am_pm_js + self.jschart[replace_index:]
-
-
