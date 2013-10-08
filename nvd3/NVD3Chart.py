@@ -508,7 +508,7 @@ def _main():
     """
     # Parse arguments
     usage = "usage: nvd3.py [options]"
-    parser = OptionParser(usage=usage, version="python-nvd3 0.2.2 - Python wrapper for nvd3 ")
+    parser = OptionParser(usage=usage, version="python-nvd3 - Charts generator with nvd3.js and d3.js")
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print messages to stdout")

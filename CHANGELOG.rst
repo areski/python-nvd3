@@ -5,6 +5,7 @@ Changelog
 -------------------
 
 * date setting is replaced by x_is_date
+* refactoring
 
 
 0.10.2 (2013-10-04)
