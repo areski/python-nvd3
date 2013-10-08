@@ -46,7 +46,7 @@ html_open = """
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(name=type, height=400, jquery_on_ready=True)
+chart = discreteBarChart(height=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 35, -7, 2]
@@ -59,7 +59,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "pieChart"
-chart = pieChart(name=type, color_category='category20c', height=400,
+chart = pieChart(color_category='category20c', height=400,
                  width=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -74,7 +74,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineChart"
-chart = lineChart(name=type, height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+chart = lineChart(height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -99,7 +99,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', x_is_date=True,
+chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -126,7 +126,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(name=type, height=350, x_is_date=True,
+chart = stackedAreaChart(height=350, x_is_date=True,
                          x_axis_format="%d %b %Y %I", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -146,7 +146,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, x_is_date=True,
+chart = linePlusBarChart(height=350, x_is_date=True,
                          x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -167,7 +167,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "cumulativeLineChart"
-chart = cumulativeLineChart(name=type, height=350, x_is_date=True,
+chart = cumulativeLineChart(height=350, x_is_date=True,
                             jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -187,7 +187,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "multiBarHorizontalChart"
-chart = multiBarHorizontalChart(name=type, height=350, jquery_on_ready=True)
+chart = multiBarHorizontalChart(height=350, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
@@ -205,7 +205,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "multiBarChart"
-chart = multiBarChart(name=type, height=350, jquery_on_ready=True)
+chart = multiBarChart(height=350, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = list(range(nb_element))
@@ -244,7 +244,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "scatterChart"
-chart = scatterChart(name=type, height=350, date=False, jquery_on_ready=True)
+chart = scatterChart(height=350, date=False, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
@@ -269,8 +269,8 @@ output_file.write(chart.htmlcontent)
 nb_element = 200
 
 type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=type, height=350, x_is_date=True,
-                         x_axis_format="%d %b %Y", jquery_on_ready=True)
+chart = linePlusBarWithFocusChart(height=350, x_is_date=True,
+                                  x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
