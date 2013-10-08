@@ -90,10 +90,13 @@ class multiBarHorizontalChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.create_x_axis('xAxis', format=".2f")
-        self.create_y_axis('yAxis', format=".2f")
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)

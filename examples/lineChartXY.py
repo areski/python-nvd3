@@ -14,7 +14,8 @@ from numpy import sin, pi, linspace
 
 output_file = open('test_lineChartXY.html', 'w')
 
-chart = lineChart(x_is_date=False,
+type = "lineChart"
+chart = lineChart(name=type, x_is_date=False,
                   x_axis_format=".1f", y_axis_format=".1f",
                   width=500, height=500,
                   show_legend=False)

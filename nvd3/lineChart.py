@@ -106,7 +106,6 @@ class lineChart(NVD3Chart):
             am_pm_js += stab(2) + "};\n"
 
             start_js = self.jschart.find('nv.addGraph')
-            # start_js_len = len('nv.addGraph')
             replace_index = start_js
             if start_js > 0:
                 self.jschart = self.jschart[:replace_index] + am_pm_js + self.jschart[replace_index:]

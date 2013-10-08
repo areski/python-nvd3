@@ -100,7 +100,7 @@ class NVD3Chart:
     show_legend = True
     show_labels = True
 
-    def __init__(self, name='container', **kwargs):
+    def __init__(self, **kwargs):
         """
         Constructor
         """

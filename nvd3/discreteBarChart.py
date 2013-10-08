@@ -73,16 +73,24 @@ class discreteBarChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, x_is_date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if x_is_date:
+        self.name = kwargs.get('name', 'discreteBarChart')
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format=x_axis_format, date=True)
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format', "%d %b %Y %H %S"),
+                               date=True)
         else:
             self.create_x_axis('xAxis', format=None)
+
         self.set_custom_tooltip_flag(True)
+
         self.create_y_axis('yAxis', format=None)
-        # must have a specified height, otherwise it superimposes both chars
+        # must have a specified height, otherwise it superimposes both charts
         if height:
             self.set_graph_height(height)
         if width:

@@ -101,17 +101,22 @@ class linePlusBarChart(NVD3Chart):
             return chart;
         });
     """
-    def __init__(self, height=450, width=None, x_is_date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if x_is_date:
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
-            self.create_x_axis('xAxis', format=x_axis_format, date=True)
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format', '%d %b %Y %H %S'),
+                               date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.create_x_axis('xAxis', format=".2f")
+            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
 
         self.create_y_axis('y1Axis', format="f")
-        self.create_y_axis('y2Axis', format="function(d) { return '$' + d3.format(',f')(d) }", custom_format=True)
+        self.create_y_axis('y2Axis', format="function(d) { return d3.format(',f')(d) }", custom_format=True)
 
         # must have a specified height, otherwise it superimposes both chars
         if height:

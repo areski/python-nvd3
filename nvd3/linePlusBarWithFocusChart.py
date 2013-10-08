@@ -97,22 +97,25 @@ class linePlusBarWithFocusChart(NVD3Chart):
             return chart;
             });
     """
-    def __init__(self, height=450, width=None, x_is_date=False, x_axis_format="%d %b %Y %H %S", **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        if x_is_date:
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
 
             with_focus_chart_1 = """function(d) {
                 var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
                 if (dx > 0) { return d3.time.format('%s')(new Date(dx)) }
                 return null;
-            }""" % (self.name, self.name, x_axis_format)
+            }""" % (self.name, self.name, kwargs.get('x_axis_format', '%d %b %Y %H %S'))
             self.create_x_axis('xAxis', format=with_focus_chart_1, date=False, custom_format=True)
 
             with_focus_chart_2 = """function(d) {
                 var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
                 return d3.time.format('%s')(new Date(dx));
-            }""" % (self.name, self.name, x_axis_format)
+            }""" % (self.name, self.name, kwargs.get('x_axis_format', '%d %b %Y %H %S'))
 
             self.create_x_axis('x2Axis', format=with_focus_chart_2, date=False, custom_format=True)
 
@@ -148,4 +151,3 @@ class linePlusBarWithFocusChart(NVD3Chart):
         replace_index = start_index + string_len
         if start_index > 0:
             self.jschart = self.jschart[:replace_index] + string_jschart + self.jschart[replace_index:]
-

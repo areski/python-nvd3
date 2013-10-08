@@ -75,8 +75,11 @@ class pieChart(NVD3Chart):
           return chart;
         });
     """
-    def __init__(self, height=None, width=None, **kwargs):
+    def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
         self.create_x_axis('xAxis', format=None)
         self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
@@ -99,7 +102,7 @@ class pieChart(NVD3Chart):
         # add mycolor var in js before nv.addGraph starts
         if self.color_list:
             start_js = self.jschart.find('nv.addGraph')
-            start_js_len = len('nv.addGraph')
+            #start_js_len = len('nv.addGraph')
             replace_index = start_js
             if start_js > 0:
                 self.jschart = self.jschart[:replace_index] + color_js + self.jschart[replace_index:]
