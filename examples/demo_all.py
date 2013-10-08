@@ -46,10 +46,10 @@ html_open = """
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(height=400, jquery_on_ready=True)
+chart = discreteBarChart(name='mygraphname', height=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
-ydata = [3, 12, -10, 5, 35, -7, 2]
+ydata = [3, 12, -10, 5, 25, -7, 2]
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
