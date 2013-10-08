@@ -121,6 +121,7 @@ class NVD3Chart:
         self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get("show_legend", True)
         self.show_labels = kwargs.get("show_labels", True)
+        self.tag_script_js = kwargs.get("tag_script_js", True)
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
