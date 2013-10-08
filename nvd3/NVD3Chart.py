@@ -115,13 +115,6 @@ class NVD3Chart:
         self.charttooltip_dateformat = '%d %b %Y'
 
         self.name = kwargs.get('name', self.model)
-        # TODO : Need to review logic
-        # Every instance of NVD3Chart will reset self.count to 0
-        # So self.name remain "chart1" & we need chart1, chart2, chart3 etc...
-        #if not self.name:
-        #    self.count += 1
-        #    self.name = "chart%d" % (self.count)
-
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.stacked = kwargs.get('stacked', False)
