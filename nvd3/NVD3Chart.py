@@ -150,7 +150,26 @@ class NVD3Chart:
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
 
-        TODO: Add doc for supported parameters, ie x_axis_date, shape, size
+        **Attributes**:
+
+            * ``name`` - set Serie name
+            * ``x`` - x-axis data
+            * ``y`` - y-axis data
+
+            kwargs:
+
+            * ``shape`` - for scatterChart, you can set different shapes (circle, triangle etc...)
+            * ``size`` - for scatterChart, you can set size of different shapes
+            * ``type`` - for multiChart, type should be bar
+            * ``bar`` - to display bars in Chart
+            * ``color_list`` - define list of colors which will be used by pieChart
+            * ``color`` - set axis color
+            * ``disabled`` -
+
+            extra:
+
+            * ``tooltip`` - set tooltip flag
+            * ``date_format`` - set date_format for tooltip if x-axis is in date format
 
         """
         if not name:
