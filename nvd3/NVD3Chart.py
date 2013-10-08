@@ -158,14 +158,9 @@ class NVD3Chart:
 
         # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs or 'size' in kwargs:
-            if 'size' in kwargs and kwargs["size"]:
-                csize = kwargs["size"]
-            else:
-                csize = 1
-            if 'shape' in kwargs and kwargs["shape"]:
-                cshape = kwargs["shape"]
-            else:
-                cshape = "circle"
+            csize = kwargs.get("size", 1)
+            cshape = kwargs.get("shape", "circle")
+
             serie = [{
                 "x": x[i],
                 "y": y,
@@ -276,7 +271,7 @@ class NVD3Chart:
         self.buildcontainer()
         self.buildjschart()
         self.htmlcontent = self.template_content_nvd3.substitute(container=self.container,
-                                              jschart=self.jschart)
+                                                                 jschart=self.jschart)
 
     def buildhtml(self):
         """Build the HTML page
@@ -288,7 +283,9 @@ class NVD3Chart:
         self.buildcontainer()
         self.buildjschart()
 
-        self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader, container=self.container, jschart=self.jschart)
+        self.htmlcontent = self.template_page_nvd3.substitute(header=self.htmlheader,
+                                                              container=self.container,
+                                                              jschart=self.jschart)
 
     def buildhtmlheader(self):
         """generate HTML header content"""
@@ -494,8 +491,8 @@ def _main():
     usage = "usage: nvd3.py [options]"
     parser = OptionParser(usage=usage, version="python-nvd3 0.2.2 - Python wrapper for nvd3 ")
     parser.add_option("-q", "--quiet",
-                  action="store_false", dest="verbose", default=True,
-                  help="don't print messages to stdout")
+                      action="store_false", dest="verbose", default=True,
+                      help="don't print messages to stdout")
 
     (options, args) = parser.parse_args()
 
