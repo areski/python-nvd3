@@ -11,6 +11,7 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
+from nvd3.translator import Function, AnonymousFunction, Assignment
 import random
 import unittest
 import datetime
@@ -146,6 +147,26 @@ class ChartTest(unittest.TestCase):
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
+
+
+class TranslatorTest(unittest.TestCase):
+
+    def test_pieChart(self):
+        func = Function('nv').addGraph(
+            AnonymousFunction('', Assignment('chart',
+                Function('nv').models.pieChart(
+                    ).x(
+                        AnonymousFunction('d', 'return d.label;')
+                    ).y(
+                        AnonymousFunction('d', 'return d.value;')
+                    ).showLabels('true')
+                )
+            )
+        )
+        self.assertEqual(str(func),
+                         'nv.addGraph(function() { var chart = '
+                         'nv.models.pieChart().x(function(d) { return d.label; '
+                         '}).y(function(d) { return d.value; }).showLabels(true); })')
 
 
 if __name__ == '__main__':
