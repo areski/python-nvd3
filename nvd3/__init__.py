@@ -28,3 +28,38 @@ from .scatterChart import scatterChart
 from .discreteBarChart import discreteBarChart
 from .multiBarChart import multiBarChart
 from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
+
+
+
+#TODO: Keep local?
+d3_js_url = 'http://d3js.org/d3.v3.min.js'
+nvd3_js_url = 'http://nvd3.org/nvd3/nv.d3.min.js'
+nvd3_css_url = 'http://nvd3.org/nvd3/src/nv.d3.css'
+
+
+def initialize_notebook(local=False):
+    """Initialize the IPython notebook display elements"""
+    try:
+        from IPython.core.display import display, Javascript, HTML
+    except ImportError:
+        print('IPython Notebook could not be loaded.')
+
+    if local:
+        d3_js_url = './nbextensions/d3/d3.v3.min.js'
+        nvd3_js_url = './nbextensions/nvd3/nv.d3.min.js'
+        nvd3_css_url = './nbextensions/nvd3/src/nv.d3.css'
+
+
+    display(Javascript('''$.getScript("%s", function() {
+        $.getScript("%s", function() {
+            $([IPython.events]).trigger("vega_loaded.vincent");
+        })
+    });''' % (d3_js_url, nvd3_js_url)))
+
+    display(HTML('''<link media="all" href="%s" type="text/css" 
+                rel="stylesheet"/>''' %(nvd3_css_url)))
+
+
+
+
+
