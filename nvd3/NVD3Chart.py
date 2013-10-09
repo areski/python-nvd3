@@ -12,6 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from optparse import OptionParser
 from string import Template
 import json
+import random
 
 template_content_nvd3 = """
 $container
@@ -114,7 +115,7 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.name = kwargs.get('name', self.model)
+        self.name = kwargs.get('name', self.model + str(random.randint(0, 2 ** 16)))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.stacked = kwargs.get('stacked', False)
@@ -494,6 +495,23 @@ class NVD3Chart:
 
         #Add new axis to list of axis
         self.axislist[name] = axis
+
+    def display(self):
+        """Display visualization inline in IPython notebook"""
+        from IPython.core.display import display, HTML, Javascript
+
+        # Copied from vincent.ipynb:
+        # HACK: use a randomly chosen unique div id
+        #id = random.randint(0, 2 ** 16)
+        #self.name = id
+
+        # create div
+        self.style = "" # bug style get longer and longer...
+        self.buildcontainer()
+        # create js
+        self.buildjschart()
+        
+        return HTML(self.container + self.jschart)
 
 
 def _main():
