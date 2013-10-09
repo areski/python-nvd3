@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.11.0 (2013-10-07)
+0.11.0 (2013-10-09)
 -------------------
 
 * date setting is replaced by x_is_date
