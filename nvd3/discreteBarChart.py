@@ -89,7 +89,6 @@ class discreteBarChart(NVD3Chart):
 
         self.set_custom_tooltip_flag(True)
 
-        self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both charts
         if height:
             self.set_graph_height(height)
