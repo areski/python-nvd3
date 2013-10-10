@@ -12,7 +12,6 @@ Project location : https://github.com/areski/python-nvd3
 from optparse import OptionParser
 from string import Template
 import json
-import random
 
 template_content_nvd3 = """
 $container
@@ -501,9 +500,6 @@ class NVD3Chart:
         from IPython.core.display import display, HTML, Javascript
 
         # Copied from vincent.ipynb:
-        # HACK: use a randomly chosen unique div id
-        #id = random.randint(0, 2 ** 16)
-        #self.name = id
 
         # create div
         self.style = "" # bug style get longer and longer...
