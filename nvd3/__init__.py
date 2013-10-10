@@ -30,20 +30,19 @@ from .multiBarChart import multiBarChart
 from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
 
 
-
-#TODO: Keep local?
-d3_js_url = 'http://d3js.org/d3.v3.min.js'
-nvd3_js_url = 'http://nvd3.org/nvd3/nv.d3.min.js'
-nvd3_css_url = 'http://nvd3.org/nvd3/src/nv.d3.css'
-
-
 def initialize_notebook(local=False):
     """Initialize the IPython notebook display elements"""
     try:
         from IPython.core.display import display, Javascript, HTML
     except ImportError:
         print('IPython Notebook could not be loaded.')
-
+    
+    #TODO: Keep local?
+    d3_js_url = 'http://d3js.org/d3.v3.min.js'
+    nvd3_js_url = 'http://nvd3.org/nv.d3.js'
+    nvd3_css_url = 'http://nvd3.org/src/nv.d3.css'
+    # in IPython master a nbextensions folder exists in 
+    # the IPython profile path. So js can be load from there
     if local:
         d3_js_url = './nbextensions/d3/d3.v3.min.js'
         nvd3_js_url = './nbextensions/nvd3/nv.d3.min.js'
