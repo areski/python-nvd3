@@ -1,0 +1,9 @@
+{
+  "name": "python-nvd3",
+  "version": "0.11.0",
+  "author": "Arezqui Belaid <areski@gmail.com>",
+  "description": "Python Wrapper for NVD3 - It's time for beautiful charts",
+  "dependencies": {
+    "bower": "latest"
+  }
+}
