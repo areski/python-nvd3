@@ -119,9 +119,9 @@ class NVD3Chart:
         self.color_category = kwargs.get('color_category', None)
         self.stacked = kwargs.get('stacked', False)
         self.resize = kwargs.get('resize', False)
-        self.show_legend = kwargs.get("show_legend", True)
-        self.show_labels = kwargs.get("show_labels", True)
-        self.tag_script_js = kwargs.get("tag_script_js", True)
+        self.show_legend = kwargs.get('show_legend', True)
+        self.show_labels = kwargs.get('show_labels', True)
+        self.tag_script_js = kwargs.get('tag_script_js', True)
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
@@ -171,50 +171,50 @@ class NVD3Chart:
 
         # For scatterChart shape & size fields are added in serie
         if 'shape' in kwargs or 'size' in kwargs:
-            csize = kwargs.get("size", 1)
-            cshape = kwargs.get("shape", "circle")
+            csize = kwargs.get('size', 1)
+            cshape = kwargs.get('shape', 'circle')
 
             serie = [{
-                "x": x[i],
-                "y": y,
-                "shape": cshape,
-                "size": csize[i] if isinstance(csize, list) else csize
+                'x': x[i],
+                'y': y,
+                'shape': cshape,
+                'size': csize[i] if isinstance(csize, list) else csize
             } for i, y in enumerate(y)]
         else:
             if self.model == 'pieChart':
-                serie = [{"label": x[i], "value": y} for i, y in enumerate(y)]
+                serie = [{'label': x[i], 'value': y} for i, y in enumerate(y)]
             elif self.model == 'linePlusBarWithFocusChart':
                 serie = [[x[i], y] for i, y in enumerate(y)]
             else:
-                serie = [{"x": x[i], "y": y} for i, y in enumerate(y)]
+                serie = [{'x': x[i], 'y': y} for i, y in enumerate(y)]
 
-        data_keyvalue = {"values": serie, "key": name}
+        data_keyvalue = {'values': serie, 'key': name}
 
         #multiChart
-        #Histogram type="bar" for the series
-        if 'type' in kwargs and kwargs["type"]:
-            data_keyvalue["type"] = kwargs["type"]
+        #Histogram type='bar' for the series
+        if 'type' in kwargs and kwargs['type']:
+            data_keyvalue['type'] = kwargs['type']
 
         if self.model == 'pieChart':
-            if 'color_list' in extra and extra["color_list"]:
-                self.color_list = extra["color_list"]
+            if 'color_list' in extra and extra['color_list']:
+                self.color_list = extra['color_list']
 
         #Define on which Y axis the serie is related
         #a chart can have 2 Y axis, left and right, by default only one Y Axis is used
-        if 'yaxis' in kwargs and kwargs["yaxis"]:
-            data_keyvalue["yAxis"] = kwargs["yaxis"]
+        if 'yaxis' in kwargs and kwargs['yaxis']:
+            data_keyvalue['yAxis'] = kwargs['yaxis']
         else:
             if self.model != 'pieChart' and self.model != 'linePlusBarWithFocusChart':
-                data_keyvalue["yAxis"] = "1"
+                data_keyvalue['yAxis'] = '1'
 
-        if 'bar' in kwargs and kwargs["bar"]:
-            data_keyvalue["bar"] = 'true'
+        if 'bar' in kwargs and kwargs['bar']:
+            data_keyvalue['bar'] = 'true'
 
-        if 'disabled' in kwargs and kwargs["disabled"]:
-            data_keyvalue["disabled"] = 'true'
+        if 'disabled' in kwargs and kwargs['disabled']:
+            data_keyvalue['disabled'] = 'true'
 
-        if 'color' in kwargs and kwargs["color"]:
-            data_keyvalue["color"] = kwargs["color"]
+        if 'color' in kwargs and kwargs['color']:
+            data_keyvalue['color'] = kwargs['color']
 
         if extra.get('date_format'):
             self.charttooltip_dateformat = extra['date_format']
@@ -455,21 +455,21 @@ class NVD3Chart:
         """
         axis = {}
         if custom_format and format:
-            axis["tickFormat"] = format
+            axis['tickFormat'] = format
         else:
             if format:
                 if format == 'AM_PM':
-                    axis["tickFormat"] = "function(d) { return get_am_pm(parseInt(d)); }"
+                    axis['tickFormat'] = "function(d) { return get_am_pm(parseInt(d)); }"
                 else:
-                    axis["tickFormat"] = "d3.format(',%s')" % format
+                    axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis["axisLabel"] = label
+            axis['axisLabel'] = label
 
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
             self.dateformat = format
-            axis["tickFormat"] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % self.dateformat
+            axis['tickFormat'] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % self.dateformat
             #flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True
@@ -484,13 +484,13 @@ class NVD3Chart:
         axis = {}
 
         if custom_format and format:
-            axis["tickFormat"] = format
+            axis['tickFormat'] = format
         else:
             if format:
-                axis["tickFormat"] = "d3.format(',%s')" % format
+                axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis["axisLabel"] = label
+            axis['axisLabel'] = label
 
         #Add new axis to list of axis
         self.axislist[name] = axis
