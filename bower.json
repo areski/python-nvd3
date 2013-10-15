@@ -14,7 +14,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "d3": "latest",
+    "d3": "3.3.8",
     "nvd3": "1.1.12-beta"
   }
 }
