@@ -7,7 +7,7 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 
 
 NVD3 is an attempt to build re-usable charts and chart components
-for d3.js without taking away the power that d3.js gives you.
+for d3.js without taking away the power that d3.js offers you.
 
 
 .. image:: https://www.travis-ci.org/areski/python-nvd3.png?branch=master
@@ -26,18 +26,21 @@ Install, upgrade and uninstall python-nvd3 with these commands::
 Dependecies
 -----------
 
-Bower will be used to install D3 and NvD3, see bower website for futher info : http://bower.io/
+D3 and NvD3 can be installed through bower (which itself can be installed through npm). See http://bower.io/ and https://npmjs.org for further information.
+To install bower globally execute :
 
-Bower depends on Node and npm. It's installed globally using npm::
+    $ npm install -g bower
 
-    npm install -g bower
+Note : you might prefer to save your npm dependencies locally in a ``package.json`` file.
 
-Then in your directory where you will use python-nvd3, just type the following::
+Then in the directory where you will use python-nvd3, just execute the following commands :
 
-    $ bower install d3#3.3.6
+    $ bower install d3#3.3.8
     $ bower install nvd3#1.1.12-beta
 
-This will create a directory "bower_components" where d3 & nvd3 will be installed.
+This will create a directory "bower_components" where d3 & nvd3 will be saved.
+
+Note : you might prefer to save your bower dependencies locally in a ``bower.json`` file. You can also configure the directory where your bower dependencies will be saved adding a ``.bowerrc`` file in your project root directory.
 
 
 Usage
