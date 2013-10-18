@@ -69,6 +69,9 @@ class NVD3Chart:
         * ``template_page_nvd3`` - template variable
         * ``width`` - Set graph width
         * ``x_axis_date`` - False / True
+        * ``show_legend`` - False / True
+        * ``show_labels`` - False / True
+        * ``assets_directory`` directory holding the assets (./bower_components/)
     """
     count = 0
     dateformat = '%x'
@@ -99,6 +102,7 @@ class NVD3Chart:
     x_axis_format = ''
     show_legend = True
     show_labels = True
+    assets_directory = './bower_components/'
 
     def __init__(self, **kwargs):
         """
@@ -122,20 +126,21 @@ class NVD3Chart:
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
+        self.assets_directory = kwargs.get('assets_directory', './bower_components/')
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
-            '<link media="all" href="%s" type="text/css" rel="stylesheet" />\n' % h for h in
+            '<link href="%s" rel="stylesheet">\n' % h for h in
             (
-                './bower_components/nvd3/src/nv.d3.css',
+                self.assets_directory + 'nvd3/src/nv.d3.css',
             )
         ]
 
         self.header_js = [
-            '<script src="%s" type="text/javascript"></script>\n' % h for h in
+            '<script src="%s"></script>\n' % h for h in
             (
-                './bower_components/d3/d3.min.js',
-                './bower_components/nvd3/nv.d3.min.js'
+                self.assets_directory + 'd3/d3.min.js',
+                self.assets_directory + 'nvd3/nv.d3.min.js'
             )
         ]
 
@@ -361,7 +366,7 @@ class NVD3Chart:
 
         self.jschart = ''
         if self.tag_script_js:
-            self.jschart += '\n<script type="text/javascript">\n'
+            self.jschart += '\n<script>\n'
 
         self.jschart += stab()
 
