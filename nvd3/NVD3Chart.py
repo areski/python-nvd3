@@ -11,7 +11,6 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
-import os
 import json
 
 template_content_nvd3 = """
