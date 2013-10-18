@@ -29,5 +29,10 @@ nosetests.xml
 # Translations
 *.mo
 
+# Npm
+package.json
+
 # Bower
 bower_components
+.bowerrc
+bower.json

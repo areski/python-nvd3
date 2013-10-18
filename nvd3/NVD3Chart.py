@@ -110,12 +110,6 @@ class NVD3Chart:
         Constructor
         """
 
-        if not os.path.exists('../.bowerrc'):
-            f = open('.bowerrc', 'r')
-            tmp = json.load(f)
-            if "" != tmp['directory']:
-                self.assets_directory = tmp['directory']
-
         #set the model
         self.model = self.__class__.__name__
         #Init Data
@@ -133,6 +127,7 @@ class NVD3Chart:
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
+        self.assets_directory = kwargs.get('assets_directory', './bower_components/')
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [

@@ -26,13 +26,21 @@ Install, upgrade and uninstall python-nvd3 with these commands::
 Dependecies
 -----------
 
-D3 and NvD3 can be installed through bower (which itself can be installed through npm) :
+D3 and NvD3 can be installed through bower (which itself can be installed through npm). See http://bower.io/ and https://npmjs.org for further information.
+To install bower globally execute :
 
-    $ npm install
-    $ bower install
+    $ npm install -g bower
 
-The dependencies are defined in package.json and bower.json.
-You can also define the directory where the assets (d3 and nvd3 libraries) are stored updating the "directory" parameter in ".bowerrc".
+Note : you might prefer to save your npm dependencies locally in a ``package.json`` file.
+
+Then in the directory where you will use python-nvd3, just execute the following commands :
+
+    $ bower install d3#3.3.8
+    $ bower install nvd3#1.1.12-beta
+
+This will create a directory "bower_components" where d3 & nvd3 will be saved.
+
+Note : you might prefer to save your bower dependencies locally in a ``bower.json`` file. You can also configure the directory where your bower dependencies will be saved adding a ``.bowerrc`` file in your project root directory.
 
 
 Usage
