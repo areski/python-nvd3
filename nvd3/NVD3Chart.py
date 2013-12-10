@@ -426,6 +426,8 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showControls(true);\n"
             else:
                 self.jschart += stab(2) + "chart.showControls(false);\n"
+            self.jschart += stab(2) + "chart.xAxis.showMaxMin(false);\n"
+            self.jschart += stab(2) + "chart.reduceXTicks(false);\n"
         #showLabels only supported in pieChart
         if self.model == 'pieChart':
             if self.show_labels:
