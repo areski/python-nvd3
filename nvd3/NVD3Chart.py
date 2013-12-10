@@ -103,7 +103,7 @@ class NVD3Chart:
     x_axis_format = ''
     show_legend = True
     show_labels = True
-    show_controls = True # modded by gitHubUser: cacho
+    show_controls = True 
     assets_directory = './bower_components/'
 
     def __init__(self, **kwargs):
