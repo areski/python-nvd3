@@ -422,7 +422,6 @@ class NVD3Chart:
             else:
                 self.jschart += stab(2) + "chart.showLegend(false);\n"
 
-            #modded by gitHubUser:cacho
             if self.show_controls:
                 self.jschart += stab(2) + "chart.showControls(true);\n"
             else:
