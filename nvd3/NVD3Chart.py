@@ -427,7 +427,7 @@ class NVD3Chart:
             else:
                 self.jschart += stab(2) + "chart.showLabels(false);\n"
 
-        # add custome chart attributes
+        # add custom chart attributes
         for attr, value in self.chart_attr.items():
             self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
 
