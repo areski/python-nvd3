@@ -426,7 +426,11 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showControls(true);\n"
             else:
                 self.jschart += stab(2) + "chart.showControls(false);\n"
-            self.jschart += stab(2) + "chart.xAxis.showMaxMin(false);\n"
+            #check for bug with ordinal scales before deleting next line    
+            # self.jschart += stab(2) + "chart.xAxis.showMaxMin(false);\n"  
+              
+        #reduceXTicks only supported in multiBarChart
+        if self.model == 'multiBarChart':
             self.jschart += stab(2) + "chart.reduceXTicks(false);\n"
         #showLabels only supported in pieChart
         if self.model == 'pieChart':
