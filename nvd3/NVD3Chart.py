@@ -416,7 +416,12 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
-        if self.model != 'discreteBarChart':
+        if self.model == 'lineWithFocusChart' or self.model == 'lineChart':
+            if self.show_legend:
+                self.jschart += stab(2) + "chart.showLegend(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.showLegend(false);\n"
+        elif self.model != 'discreteBarChart':
             if self.show_legend:
                 self.jschart += stab(2) + "chart.showLegend(true);\n"
             else:
@@ -428,7 +433,8 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showControls(false);\n"
             #check for bug with ordinal scales before deleting next line    
             # self.jschart += stab(2) + "chart.xAxis.showMaxMin(false);\n"  
-              
+ 
+
         #reduceXTicks only supported in multiBarChart
         if self.model == 'multiBarChart':
             self.jschart += stab(2) + "chart.reduceXTicks(false);\n"
