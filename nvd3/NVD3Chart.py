@@ -126,7 +126,7 @@ class NVD3Chart:
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
-        self.chart_attr = kwargs.get("chart_attr", None)
+        self.chart_attr = kwargs.get("chart_attr", {})
         self.assets_directory = kwargs.get('assets_directory', './bower_components/')
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
