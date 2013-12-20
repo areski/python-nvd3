@@ -126,6 +126,7 @@ class NVD3Chart:
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
+        self.chart_attr = kwargs.get("chart_attr", {})
         self.assets_directory = kwargs.get('assets_directory', './bower_components/')
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
@@ -425,6 +426,10 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showLabels(true);\n"
             else:
                 self.jschart += stab(2) + "chart.showLabels(false);\n"
+
+        # add custom chart attributes
+        for attr, value in self.chart_attr.items():
+            self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
 
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
