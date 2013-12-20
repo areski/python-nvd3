@@ -121,6 +121,7 @@ class NVD3Chart:
         self.name = kwargs.get('name', self.model)
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
+        self.color_list = kwargs.get('color_list', None)
         self.stacked = kwargs.get('stacked', False)
         self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get('show_legend', True)
