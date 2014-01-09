@@ -115,8 +115,8 @@ class scatterChart(NVD3Chart):
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
 
-        self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.02f'))
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.02f'))
+        self.create_x_axis('xAxis', label=kwargs.get('x_axis_label', None), format=kwargs.get('x_axis_format', '.02f'))
+        self.create_y_axis('yAxis', label=kwargs.get('y_axis_label', None), format=kwargs.get('y_axis_format', '.02f'))
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)

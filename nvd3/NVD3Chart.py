@@ -396,7 +396,8 @@ class NVD3Chart:
             for axis_name, a in list(self.axislist.items()):
                 self.jschart += stab(2) + "chart.%s\n" % axis_name
                 for attr, value in list(a.items()):
-                    self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
+                    self.jschart += stab(3) + ".%s(%s)\n" % (attr, value)
+                self.jschart += stab(2) + ';\n'
 
         if self.width:
             self.d3_select_extra += ".attr('width', %s)\n" % self.width
