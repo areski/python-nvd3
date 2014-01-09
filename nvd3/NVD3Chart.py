@@ -71,6 +71,7 @@ class NVD3Chart:
         * ``x_axis_date`` - False / True
         * ``show_legend`` - False / True
         * ``show_labels`` - False / True
+        * ``show_controls`` - False / True
         * ``assets_directory`` directory holding the assets (./bower_components/)
     """
     count = 0
@@ -102,6 +103,7 @@ class NVD3Chart:
     x_axis_format = ''
     show_legend = True
     show_labels = True
+    show_controls = True 
     assets_directory = './bower_components/'
 
     def __init__(self, **kwargs):
@@ -126,6 +128,7 @@ class NVD3Chart:
         self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
+        self.show_controls = kwargs.get('show_controls', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
         self.chart_attr = kwargs.get("chart_attr", {})
         self.assets_directory = kwargs.get('assets_directory', './bower_components/')
@@ -395,7 +398,8 @@ class NVD3Chart:
             for axis_name, a in list(self.axislist.items()):
                 self.jschart += stab(2) + "chart.%s\n" % axis_name
                 for attr, value in list(a.items()):
-                    self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
+                    self.jschart += stab(3) + ".%s(%s)\n" % (attr, value)
+                self.jschart += stab(2) + ';\n'
 
         if self.width:
             self.d3_select_extra += ".attr('width', %s)\n" % self.width
@@ -415,12 +419,28 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
-        if self.model != 'discreteBarChart':
+        if self.model == 'lineWithFocusChart' or self.model == 'lineChart':
+            if self.show_legend:
+                self.jschart += stab(2) + "chart.showLegend(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.showLegend(false);\n"
+        elif self.model != 'discreteBarChart':
             if self.show_legend:
                 self.jschart += stab(2) + "chart.showLegend(true);\n"
             else:
                 self.jschart += stab(2) + "chart.showLegend(false);\n"
 
+            if self.show_controls:
+                self.jschart += stab(2) + "chart.showControls(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.showControls(false);\n"
+            #check for bug with ordinal scales before deleting next line    
+            # self.jschart += stab(2) + "chart.xAxis.showMaxMin(false);\n"  
+ 
+
+        #reduceXTicks only supported in multiBarChart
+        if self.model == 'multiBarChart':
+            self.jschart += stab(2) + "chart.reduceXTicks(false);\n"
         #showLabels only supported in pieChart
         if self.model == 'pieChart':
             if self.show_labels:
