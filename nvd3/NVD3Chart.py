@@ -415,6 +415,11 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
+        # the shape attribute in kwargs is not applied when 
+        # not allowing other shapes to be rendered 
+        if self.model == 'scatterChart':
+           self.jschart += 'chart.scatter.onlyCircles(false);'
+
         if self.model != 'discreteBarChart':
             if self.show_legend:
                 self.jschart += stab(2) + "chart.showLegend(true);\n"
