@@ -61,6 +61,10 @@ class NVD3Chart:
         * ``htmlcontent`` - Contain the htmloutput
         * ``htmlheader`` - Contain the html header
         * ``jschart`` - Javascript code as string
+        * ``margin_bottom`` - set the bottom margin
+        * ``margin_left`` - set the left margin
+        * ``margin_right`` - set the right margin
+        * ``margin_top`` - set the top margin
         * ``model`` - set the model (ex. pieChart, LineWithFocusChart, MultiBarChart)
         * ``resize`` - False / True
         * ``series`` - Series are list of data that will be plotted
@@ -82,6 +86,10 @@ class NVD3Chart:
     htmlheader = ''
     height = None
     width = None
+    margin_bottom = None
+    margin_left = None
+    margin_right = None
+    margin_top = None
     model = ''
     d3_select_extra = ''
     x_axis_date = False
@@ -122,6 +130,10 @@ class NVD3Chart:
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
+        self.margin_bottom = kwargs.get('margin_bottom', 20)
+        self.margin_left = kwargs.get('margin_left', 60)
+        self.margin_right = kwargs.get('margin_right', 60)
+        self.margin_top = kwargs.get('margin_top', 30)
         self.stacked = kwargs.get('stacked', False)
         self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get('show_legend', True)
@@ -385,6 +397,11 @@ class NVD3Chart:
 
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
+
+        self.jschart += stab(2) + \
+          'chart.margin({top: %s, right: %s, bottom: %s, left: %s})\n' % \
+          (self.margin_top, self.margin_right, \
+           self.margin_bottom, self.margin_left)
 
         """
         We want now to loop through all the defined Axis and add:
