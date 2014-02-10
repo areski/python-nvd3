@@ -86,10 +86,10 @@ class NVD3Chart:
     htmlheader = ''
     height = None
     width = None
-    margin_bottom = 50
-    margin_left = 70
-    margin_right = 70
-    margin_top = 30
+    margin_bottom = None
+    margin_left = None
+    margin_right = None
+    margin_top = None
     model = ''
     d3_select_extra = ''
     x_axis_date = False
