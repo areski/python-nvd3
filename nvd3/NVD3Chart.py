@@ -452,8 +452,11 @@ class NVD3Chart:
 
         # add custom chart attributes
         for attr, value in self.chart_attr.items():
-            self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
-
+            if type(value)==str and value.startswith("."):
+                self.jschart += stab(2) + "chart.%s%s;\n" % (attr, value)
+            else:
+                self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
+                
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
             stab(3) + ".datum(%s)\n" % datum + \
