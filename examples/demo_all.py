@@ -98,6 +98,32 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
+type = "lineChartWithInteractiveGuideline"
+chart = lineChart(name="lineChartWithInteractiveGuideline",
+                    height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+                    jquery_on_ready=True,use_interactive_guideline=True)
+
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = list(range(nb_element))
+xdata = [start_time + x * 1000000000 for x in xdata]
+ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata2 = [x * 2 for x in ydata]
+
+#Configure a color for a specific serie
+kwargs1 = {'color': 'green'}
+kwargs2 = {'color': 'red'}
+
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+               "date_format": "%d %b %Y %I:%M:%S %p"}
+chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
+chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
+
+chart.buildcontent()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
 type = "lineWithFocusChart"
 chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
