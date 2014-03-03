@@ -71,6 +71,7 @@ class NVD3Chart:
         * ``stacked`` - False / True
         * ``style`` - Special style
         * ``template_page_nvd3`` - template variable
+        * ``use_interactive_guideline`` - False / True
         * ``width`` - Set graph width
         * ``x_axis_date`` - False / True
         * ``show_legend`` - False / True
@@ -107,6 +108,7 @@ class NVD3Chart:
     color_list = []  # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
+    use_interactive_guideline = False
     x_axis_format = ''
     show_legend = True
     show_labels = True
@@ -139,6 +141,7 @@ class NVD3Chart:
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
+        self.use_interactive_guideline = kwargs.get("use_interactive_guideline", False)
         self.chart_attr = kwargs.get("chart_attr", {})
         self.assets_directory = kwargs.get('assets_directory', './bower_components/')
 
@@ -389,7 +392,10 @@ class NVD3Chart:
 
         self.jschart += 'nv.addGraph(function() {\n'
 
-        self.jschart += stab(2) + 'var chart = nv.models.%s();\n' % self.model
+        self.jschart += stab(2) + 'var chart = nv.models.%s()' % self.model
+        if self.use_interactive_guideline:
+            self.jschart += '.useInteractiveGuideline(true)'
+        self.jschart += ';\n'
 
         if self.model != 'pieChart' and not self.color_list:
             if self.color_category:
