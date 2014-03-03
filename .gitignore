@@ -39,3 +39,5 @@ bower.json
 bower_components
 
 archive
+
+test_*.html
