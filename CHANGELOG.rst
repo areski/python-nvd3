@@ -1,6 +1,10 @@
 Changelog
 =========
 
+
+* allow chart_attr to be set as follow 'xAxis': '.rotateLabels(-25)'
+  This will turn into calling chart.xAxis.rotateLabels(-25)
+
 0.11.0 (2013-10-09)
 -------------------
 
