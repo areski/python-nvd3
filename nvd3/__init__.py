@@ -28,6 +28,6 @@ from .scatterChart import scatterChart
 from .discreteBarChart import discreteBarChart
 from .multiBarChart import multiBarChart
 from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
-import ipynb
+from . import ipynb
 
 
