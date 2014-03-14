@@ -20,7 +20,7 @@ if _ip and _ip.__module__.startswith('IPython'):
         charts are displayed inline.'''
         global _js_initialized
         if not _js_initialized:
-            print 'js not initialized - pausing to allow time for it to load...'
+            print('js not initialized - pausing to allow time for it to load...')
             initialize_javascript()
             import time
             time.sleep(5)
