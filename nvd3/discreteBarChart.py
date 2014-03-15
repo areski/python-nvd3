@@ -17,61 +17,50 @@ class discreteBarChart(NVD3Chart):
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
 
-    .. image:: ../_static/screenshot/discreteBarChart.png
+    .. image:: ../_static/doc_images/discreteBarChart.png
 
     Python example::
 
         from nvd3 import discreteBarChart
         chart = discreteBarChart(name='discreteBarChart', height=400, width=400)
 
-        xdata = ["A", "B", "C", "D", "E"]
+        xdata = ["A", "B", "C", "D", "E", "F"]
         ydata = [3, 4, 0, -3, 5, 7]
 
-        extra_serie = {"tooltip": {"y_start": "", "y_end": " balls"}}
-        chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+        chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
     Javascript generated::
 
-        data = [{ key: "Cumulative Return",
-                  values: [
-                    {
-                      "label": "A",
-                      "value" : 10
-                    },
-                    {
-                      "label": "B",
-                      "value" : 0
-                    },
-                    {
-                      "label": "C",
-                      "value" : -3
-                    },
-                  ]
-                }]
-
         nv.addGraph(function() {
-            var chart = nv.models.discreteBarChart()
-                .x(function(d) { return d.label })
-                .y(function(d) { return d.value })
-                .showLabels(true);
+            var chart = nv.models.discreteBarChart();
+            chart.yAxis
+            chart.xAxis
             chart.tooltipContent(function(key, y, e, graph) {
                 var x = String(graph.point.x);
                 var y = String(graph.point.y);
-                if(key == 'Serie 1'){
-                    var y =  String(graph.point.y)  + ' balls';
-                }
+                var y = String(graph.point.y);
                 tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
                 return tooltip_str;
             });
-            d3.select("#div_id")
-                .datum(data)
-                .transition()
-                .duration(1200)
+            d3.select('#discreteBarChart svg')
+                .datum(data_discreteBarChart)
+                .transition().duration(500)
+                .attr('width', 400)
+                .attr('height', 400)
                 .call(chart);
 
-            return chart;
-        });
+        return chart;
+        });data_discreteBarChart=[
+            {"key": "Serie 1",
+            "yAxis": "1",
+            "values": [{"x": "A", "y": 3},
+                       {"x": "B", "y": 4},
+                       {"x": "C", "y": 0},
+                       {"x": "D", "y": 3},
+                       {"x": "E", "y": 5},
+                       {"x": "F", "y": 7}
+        ]}];
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
