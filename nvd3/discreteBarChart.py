@@ -17,7 +17,7 @@ class discreteBarChart(NVD3Chart):
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
 
-    .. image:: ../_static/screenshot/discreteBarChart.png
+    .. image:: ../_static/doc_images/discreteBarChart.png
 
     Python example::
 
