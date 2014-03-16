@@ -128,6 +128,15 @@ There is also a django wrapper for nvd3 available:
 https://github.com/areski/django-nvd3
 
 
+IPython & Notebook
+------------------
+
+Python-NVD3 works nicely with Notebook (thanks to @jdavidheiser)
+
+You can check this notebook that demonstrates ipython compatibility in the nvd3-python package:
+http://nbviewer.ipython.org/gist/jdavidheiser/9552624
+
+
 License
 -------
 
