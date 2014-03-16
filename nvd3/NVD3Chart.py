@@ -537,6 +537,20 @@ class NVD3Chart:
         #Add new axis to list of axis
         self.axislist[name] = axis
 
+    def display(self):
+        """Display visualization inline in IPython notebook"""
+        from IPython.core.display import display, HTML, Javascript
+
+        # Copied from vincent.ipynb:
+
+        # create div
+        self.style = "" # bug style get longer and longer...
+        self.buildcontainer()
+        # create js
+        self.buildjschart()
+        
+        return HTML(self.container + self.jschart)
+
 
 def _main():
     """
