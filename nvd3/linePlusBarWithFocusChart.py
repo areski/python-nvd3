@@ -121,7 +121,12 @@ class linePlusBarWithFocusChart(NVD3Chart):
 
             self.set_custom_tooltip_flag(True)
         else:
-            self.create_x_axis('xAxis', format=".2f")
+            if kwargs.get('x_axis_format') == 'AM_PM':
+                self.x_axis_format = format = 'AM_PM'
+            else:
+                format = kwargs.get('x_axis_format', '.2f')
+            self.create_x_axis('xAxis', format=format)
+            #self.create_x_axis('xAxis', format=".2f")
 
         self.create_y_axis('y1Axis', format="f")
         self.create_y_axis('y3Axis', format="f")
@@ -151,3 +156,15 @@ class linePlusBarWithFocusChart(NVD3Chart):
         replace_index = start_index + string_len
         if start_index > 0:
             self.jschart = self.jschart[:replace_index] + string_jschart + self.jschart[replace_index:]
+
+        am_pm_js = ''
+        if self.x_axis_format == 'AM_PM':
+            am_pm_js += stab(2) + "function get_am_pm(d){\n"
+            am_pm_js += stab(3) + "if(d > 12){ d = d - 12; return (String(d) + 'PM');}\n"
+            am_pm_js += stab(3) + "else{ return (String(d) + 'AM');}\n"
+            am_pm_js += stab(2) + "};\n"
+
+            start_js = self.jschart.find('nv.addGraph')
+            replace_index = start_js
+            if start_js > 0:
+                self.jschart = self.jschart[:replace_index] + am_pm_js + self.jschart[replace_index:]
