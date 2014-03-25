@@ -106,6 +106,7 @@ class NVD3Chart:
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
     color_list = []  # for pie chart
+    donut = False # for pie chart
     tag_script_js = True
     charttooltip_dateformat = None
     use_interactive_guideline = False
@@ -132,6 +133,7 @@ class NVD3Chart:
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
+        self.donut = kwargs.get('donut', False)
         self.margin_bottom = kwargs.get('margin_bottom', 20)
         self.margin_left = kwargs.get('margin_left', 60)
         self.margin_right = kwargs.get('margin_right', 60)
@@ -455,6 +457,11 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.showLabels(true);\n"
             else:
                 self.jschart += stab(2) + "chart.showLabels(false);\n"
+
+            if self.donut:
+                self.jschart += stab(2) + "chart.donut(true);\n"
+            else:
+                self.jschart += stab(2) + "chart.donut(false);\n"
 
         # add custom chart attributes
         for attr, value in self.chart_attr.items():
