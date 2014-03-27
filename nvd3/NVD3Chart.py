@@ -21,12 +21,14 @@ $jschart
 template_page_nvd3 = """
 <!DOCTYPE html>
 <html lang="en">
-<head>
-$header
-</head>
-<body>
-%s
-</body>
+    <head>
+        <meta charset="utf-8" />
+        $header
+    </head>
+    <body>
+    %s
+    </body>
+</html>
 """ % template_content_nvd3
 
 
@@ -147,7 +149,7 @@ class NVD3Chart:
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
-            '<link href="%s" rel="stylesheet">\n' % h for h in
+            '<link href="%s" rel="stylesheet" />\n' % h for h in
             (
                 self.assets_directory + 'nvd3/src/nv.d3.css',
             )
@@ -462,7 +464,7 @@ class NVD3Chart:
                 self.jschart += stab(2) + "chart.%s%s;\n" % (attr, value)
             else:
                 self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
-                
+
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
             stab(3) + ".datum(%s)\n" % datum + \
