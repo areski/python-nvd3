@@ -292,7 +292,7 @@ class NVD3Chart:
         self.containerheader = containerheader
 
     def set_date_flag(self, date_flag=False):
-        """Set date falg"""
+        """Set date flag"""
         self.date_flag = date_flag
 
     def set_custom_tooltip_flag(self, custom_tooltip_flag):
