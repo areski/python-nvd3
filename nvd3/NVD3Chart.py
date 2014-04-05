@@ -46,7 +46,7 @@ class NVD3Chart:
     **Attributes**:
 
         * ``axislist`` - All X, Y axis list
-        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
+        * ``charttooltip_dateformat`` - date format for tooltip if x-axis is in date format
         * ``charttooltip`` - Custom tooltip string
         * ``color_category`` - Defien color category (eg. category10, category20, category20c)
         * ``color_list`` - used by pieChart (eg. ['red', 'blue', 'orange'])
