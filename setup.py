@@ -122,6 +122,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
+        'python-slugify'
         # -*- Extra requirements: -*-
     ],
     entry_points={
