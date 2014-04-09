@@ -148,6 +148,14 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
+    def test_donutPieChart(self):
+        """Test Donut Pie Chart"""
+        type = "pieChart"
+        chart = pieChart(name=type, height=400, width=400, donut=True, donutRatio=0.2)
+        xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+        ydata = [3, 4, 0, 1, 5, 7, 3]
+        chart.add_serie(y=ydata, x=xdata)
+        chart.buildhtml()
 
 class TranslatorTest(unittest.TestCase):
 

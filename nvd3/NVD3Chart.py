@@ -21,12 +21,14 @@ $jschart
 template_page_nvd3 = """
 <!DOCTYPE html>
 <html lang="en">
-<head>
-$header
-</head>
-<body>
-%s
-</body>
+    <head>
+        <meta charset="utf-8" />
+        $header
+    </head>
+    <body>
+    %s
+    </body>
+</html>
 """ % template_content_nvd3
 
 
@@ -44,7 +46,7 @@ class NVD3Chart:
     **Attributes**:
 
         * ``axislist`` - All X, Y axis list
-        * ``charttooltip_dateformat`` - date fromat for tooltip if x-axis is in date format
+        * ``charttooltip_dateformat`` - date format for tooltip if x-axis is in date format
         * ``charttooltip`` - Custom tooltip string
         * ``color_category`` - Defien color category (eg. category10, category20, category20c)
         * ``color_list`` - used by pieChart (eg. ['red', 'blue', 'orange'])
@@ -106,6 +108,8 @@ class NVD3Chart:
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
     color_list = []  # for pie chart
+    donut = False # for pie chart
+    donutRatio = 0.35
     tag_script_js = True
     charttooltip_dateformat = None
     use_interactive_guideline = False
@@ -132,6 +136,8 @@ class NVD3Chart:
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
+        self.donut = kwargs.get('donut', False)
+        self.donutRatio = kwargs.get('donutRatio', 0.35)
         self.margin_bottom = kwargs.get('margin_bottom', 20)
         self.margin_left = kwargs.get('margin_left', 60)
         self.margin_right = kwargs.get('margin_right', 60)
@@ -147,7 +153,7 @@ class NVD3Chart:
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
-            '<link href="%s" rel="stylesheet">\n' % h for h in
+            '<link href="%s" rel="stylesheet" />\n' % h for h in
             (
                 self.assets_directory + 'nvd3/src/nv.d3.css',
             )
@@ -286,7 +292,7 @@ class NVD3Chart:
         self.containerheader = containerheader
 
     def set_date_flag(self, date_flag=False):
-        """Set date falg"""
+        """Set date flag"""
         self.date_flag = date_flag
 
     def set_custom_tooltip_flag(self, custom_tooltip_flag):
@@ -456,13 +462,19 @@ class NVD3Chart:
             else:
                 self.jschart += stab(2) + "chart.showLabels(false);\n"
 
+            if self.donut:
+                self.jschart += stab(2) + "chart.donut(true);\n"
+                self.jschart += stab(2) + "chart.donutRatio(%f);\n" % self.donutRatio
+            else:
+                self.jschart += stab(2) + "chart.donut(false);\n"
+
         # add custom chart attributes
         for attr, value in self.chart_attr.items():
             if type(value)==str and value.startswith("."):
                 self.jschart += stab(2) + "chart.%s%s;\n" % (attr, value)
             else:
                 self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
-                
+
         #Inject data to D3
         self.jschart += stab(2) + "d3.select('#%s svg')\n" % self.name + \
             stab(3) + ".datum(%s)\n" % datum + \
