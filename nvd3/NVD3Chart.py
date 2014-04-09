@@ -11,6 +11,7 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
+from slugify import slugify
 import json
 
 template_content_nvd3 = """
@@ -132,7 +133,7 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.name = kwargs.get('name', self.model)
+        self.name = slugify(kwargs.get('name', self.model))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)

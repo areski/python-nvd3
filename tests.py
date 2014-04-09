@@ -20,6 +20,13 @@ import time
 
 class ChartTest(unittest.TestCase):
 
+    def test_chartWithBadName(self):
+        name="Chart with spaces"
+        chart = lineChart(name=name, date=True, height=350)
+        chart.buildhtml()
+        assert(" " not in chart.name)
+        assert("spaces" in chart.name)
+
     def test_lineWithFocusChart(self):
         """Test Line With Focus Chart"""
         type = "lineWithFocusChart"
