@@ -39,7 +39,6 @@ class multiBarChart(NVD3Chart):
             var chart = nv.models.multiBarChart();
             chart.yAxis
                 .tickFormat(d3.format(',.2f'));
-            chart.xAxis
             chart.showLegend(true);
             d3.select('#multiBarChart svg')
                 .datum(data_multiBarChart)

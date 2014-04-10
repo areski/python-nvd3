@@ -11,6 +11,7 @@ Project location : https://github.com/areski/python-nvd3
 
 from optparse import OptionParser
 from string import Template
+from slugify import slugify
 import json
 
 template_content_nvd3 = """
@@ -132,7 +133,7 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.name = kwargs.get('name', self.model)
+        self.name = slugify(kwargs.get('name', self.model))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
@@ -416,12 +417,15 @@ class NVD3Chart:
            self.margin_bottom, self.margin_left)
 
         """
-        We want now to loop through all the defined Axis and add:
+        We want now to loop through all the defined axes and add:
             chart.y2Axis
                 .tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
         """
         if self.model != 'pieChart':
             for axis_name, a in list(self.axislist.items()):
+                # If we don't modify the axis at all, we skip over it.
+                if not a.items():
+                    continue
                 self.jschart += stab(2) + "chart.%s\n" % axis_name
                 for attr, value in list(a.items()):
                     self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
