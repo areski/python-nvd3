@@ -34,8 +34,6 @@ class discreteBarChart(NVD3Chart):
 
         nv.addGraph(function() {
             var chart = nv.models.discreteBarChart();
-            chart.yAxis
-            chart.xAxis
             chart.tooltipContent(function(key, y, e, graph) {
                 var x = String(graph.point.x);
                 var y = String(graph.point.y);
