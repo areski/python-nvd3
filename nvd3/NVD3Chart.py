@@ -109,7 +109,7 @@ class NVD3Chart:
     tooltip_condition_string = ''
     color_category = 'category10'  # category10, category20, category20c
     color_list = []  # for pie chart
-    donut = False # for pie chart
+    donut = False  # for pie chart
     donutRatio = 0.35
     tag_script_js = True
     charttooltip_dateformat = None
@@ -133,7 +133,8 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.name = slugify(kwargs.get('name', self.model))
+        self.slugify_name(kwargs.get('name', self.model))
+        print self.name
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
@@ -167,6 +168,10 @@ class NVD3Chart:
                 self.assets_directory + 'nvd3/nv.d3.min.js'
             )
         ]
+
+    def slugify_name(self, name):
+        """Slufigy name with underscore"""
+        self.name = slugify(name).replace('-', '_')
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
@@ -411,10 +416,8 @@ class NVD3Chart:
         if self.stacked:
             self.jschart += stab(2) + "chart.stacked(true);"
 
-        self.jschart += stab(2) + \
-          'chart.margin({top: %s, right: %s, bottom: %s, left: %s})\n' % \
-          (self.margin_top, self.margin_right, \
-           self.margin_bottom, self.margin_left)
+        self.jschart += stab(2) + 'chart.margin({top: %s, right: %s, bottom: %s, left: %s})\n' % \
+            (self.margin_top, self.margin_right, self.margin_bottom, self.margin_left)
 
         """
         We want now to loop through all the defined axes and add:
@@ -448,10 +451,10 @@ class NVD3Chart:
         self.build_custom_tooltip()
         self.jschart += self.charttooltip
 
-        # the shape attribute in kwargs is not applied when 
-        # not allowing other shapes to be rendered 
+        # the shape attribute in kwargs is not applied when
+        # not allowing other shapes to be rendered
         if self.model == 'scatterChart':
-           self.jschart += 'chart.scatter.onlyCircles(false);'
+            self.jschart += 'chart.scatter.onlyCircles(false);'
 
         if self.model != 'discreteBarChart':
             if self.show_legend:
@@ -474,7 +477,7 @@ class NVD3Chart:
 
         # add custom chart attributes
         for attr, value in self.chart_attr.items():
-            if type(value)==str and value.startswith("."):
+            if type(value) == str and value.startswith("."):
                 self.jschart += stab(2) + "chart.%s%s;\n" % (attr, value)
             else:
                 self.jschart += stab(2) + "chart.%s(%s);\n" % (attr, value)
@@ -527,7 +530,8 @@ class NVD3Chart:
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
             self.dateformat = format
-            axis['tickFormat'] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % self.dateformat
+            axis['tickFormat'] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % \
+                self.dateformat
             #flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True

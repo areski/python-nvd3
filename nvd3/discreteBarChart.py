@@ -62,7 +62,7 @@ class discreteBarChart(NVD3Chart):
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
-        self.name = kwargs.get('name', 'discreteBarChart')
+        # self.slugify_name(kwargs.get('name', 'discreteBarChart'))
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
 

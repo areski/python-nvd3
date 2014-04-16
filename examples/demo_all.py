@@ -46,7 +46,7 @@ html_open = """
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(name='mygraphname', height=400, jquery_on_ready=True)
+chart = discreteBarChart(name='my-graphname', height=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
@@ -99,9 +99,9 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "lineChartWithInteractiveGuideline"
-chart = lineChart(name="lineChartWithInteractiveGuideline",
-                    height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
-                    jquery_on_ready=True,use_interactive_guideline=True)
+chart = lineChart(name="lineChart-With-Interactive-Guideline",
+                  height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+                  jquery_on_ready=True, use_interactive_guideline=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = list(range(nb_element))
