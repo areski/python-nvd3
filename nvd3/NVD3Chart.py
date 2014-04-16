@@ -428,7 +428,8 @@ class NVD3Chart:
                     continue
                 self.jschart += stab(2) + "chart.%s\n" % axis_name
                 for attr, value in list(a.items()):
-                    self.jschart += stab(3) + ".%s(%s);\n" % (attr, value)
+                    self.jschart += stab(3) + ".%s(%s)\n" % (attr, value)
+                self.jschart += stab(3) + ';\n'
 
         if self.width:
             self.d3_select_extra += ".attr('width', %s)\n" % self.width
@@ -522,7 +523,7 @@ class NVD3Chart:
                     axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis['axisLabel'] = label
+            axis['axisLabel'] = "'" + label + "'"
 
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
@@ -548,7 +549,7 @@ class NVD3Chart:
                 axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis['axisLabel'] = label
+            axis['axisLabel'] = "'" + label + "'"
 
         #Add new axis to list of axis
         self.axislist[name] = axis

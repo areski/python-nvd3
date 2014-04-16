@@ -5,7 +5,7 @@ clean:
 
 build:
 	virtualenv nvd3_env && source nvd3_env/bin/activate && \
-		pip install -r requirements.txt
+		pip install -r python_nvd3.egg-info/requires.txt
 
 test: clean build
 		source nvd3_env/bin/activate && \
