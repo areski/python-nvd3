@@ -134,7 +134,6 @@ class NVD3Chart:
         self.charttooltip_dateformat = '%d %b %Y'
 
         self.slugify_name(kwargs.get('name', self.model))
-        print self.name
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
