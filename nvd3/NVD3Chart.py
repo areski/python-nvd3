@@ -343,12 +343,6 @@ class NVD3Chart:
 
         self.jschart = ''
 
-        """
-        We want now to loop through all the defined axes and add:
-            chart.y2Axis
-                .tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
-        """
-
         if self.width:
             self.d3_select_extra += ".attr('width', %s)\n" % self.width
         if self.height:

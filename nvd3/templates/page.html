@@ -41,12 +41,6 @@
                         {% endfor %}
                     {% endif %}
 
-                    {% if chart.model == 'pieChart' %}
-                        datum = "data_{{ chart.name }}[0].values";
-                    {% else %}
-                        datum = "data_{{ chart.name }}";
-                    {% endif %}
-
                     {# generate custom tooltip for the chart #}
                     {% if chart.custom_tooltip_flag %}
                         {% if not chart.date_flag %}
@@ -68,8 +62,7 @@
                             {% endif %}
                         {% else %}
                             chart.tooltipContent(function(key, y, e, graph) {
-                                var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));
-                                {{ chart.charttooltip_dateformat }}
+                                var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
                                 var y = String(graph.point.y);
                                 {{ chart.tooltip_condition_string }}
                                 tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
@@ -119,13 +112,6 @@
                         {% endif %}
                     {% endfor %}
 
-                    {# Inject data to D3 #}
-                    d3.select('#{{ chart.name }} svg')
-                        .datum(datum)
-                        .transition().duration(500)
-                        {{ chart.d3_select_extra }}
-                        .call(chart);
-
                     {% if chart.resize %}
                         nv.utils.windowResize(chart.update);
                         return chart;
@@ -139,6 +125,20 @@
                     {% else %}
                         data_{{ chart.name }}={{ chart.series_js }};
                     {% endif %}
+
+                    {% if chart.model == 'pieChart' %}
+                        datum = data_{{ chart.name }}[0].values;
+                    {% else %}
+                        datum = data_{{ chart.name }};
+                    {% endif %}
+
+                    {# Inject data to D3 #}
+                    d3.select('#{{ chart.name }} svg')
+                        .datum(datum)
+                        .transition().duration(500)
+                        {% if chart.d3_select_extra %}{{ chart.d3_select_extra }}{% endif %}.call(chart);
+
+                    });
 
             {% if chart.jquery_on_ready %}
                 });
