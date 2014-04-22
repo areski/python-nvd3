@@ -47,7 +47,36 @@
                         datum = "data_{{ chart.name }}";
                     {% endif %}
 
-                    {{ chart.charttooltip }}
+                    {# generate custom tooltip for the chart #}
+                    {% if chart.custom_tooltip_flag %}
+                        {% if not chart.date_flag %}
+                            {% if self.model == 'pieChart' %}
+                                chart.tooltipContent(function(key, y, e, graph) {
+                                    var x = String(key);
+                                    {{ chart.tooltip_condition_string }}
+                                    tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                                    return tooltip_str;
+                                });
+                            {% else %}
+                                chart.tooltipContent(function(key, y, e, graph) {
+                                    var x = String(graph.point.x);
+                                    var y = String(graph.point.y);
+                                    {{ chart.tooltip_condition_string }}
+                                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                                    return tooltip_str;
+                                });
+                            {% endif %}
+                        {% else %}
+                            chart.tooltipContent(function(key, y, e, graph) {
+                                var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));
+                                {{ chart.charttooltip_dateformat }}
+                                var y = String(graph.point.y);
+                                {{ chart.tooltip_condition_string }}
+                                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                                return tooltip_str;
+                            });
+                        {% endif %}
+                    {% endif %}
 
                     {# the shape attribute in kwargs is not applied when #}
                     {# not allowing other shapes to be rendered #}
