@@ -306,8 +306,7 @@ class NVD3Chart:
         """
         self.buildcontainer()
         self.buildjschart()
-        self.htmlcontent = self.template_content_nvd3.render(container=self.container,
-                                                                 jschart=self.jschart)
+        self.htmlcontent = self.template_content_nvd3.render(chart=self)
 
     def buildhtml(self):
         """Build the HTML page
@@ -315,8 +314,8 @@ class NVD3Chart:
         Create html page
         Add Js code for nvd3
         """
-        self.buildcontainer()
-        self.buildjschart()
+        self.buildcontent()
+        self.content = self.htmlcontent
         self.htmlcontent = self.template_page_nvd3.render(chart=self)
 
     def buildcontainer(self):
