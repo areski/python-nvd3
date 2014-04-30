@@ -45,7 +45,6 @@ class NVD3Chart:
         * ``containerheader`` - Header for javascript code
         * ``count`` - chart count
         * ``custom_tooltip_flag`` - False / True
-        * ``d3_select_extra`` -
         * ``date_flag`` - x-axis contain date format or not
         * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
         * ``header_css`` - False / True
@@ -85,7 +84,6 @@ class NVD3Chart:
     margin_right = None
     margin_top = None
     model = ''
-    d3_select_extra = ''
     x_axis_date = False
     resize = False
     stacked = False
@@ -341,11 +339,6 @@ class NVD3Chart:
         """generate javascript code for the chart"""
 
         self.jschart = ''
-
-        if self.width:
-            self.d3_select_extra += ".attr('width', %s)\n" % self.width
-        if self.height:
-            self.d3_select_extra += ".attr('height', %s)\n" % self.height
 
         # add custom tooltip string in jschart
         # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)

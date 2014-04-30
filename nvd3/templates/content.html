@@ -130,7 +130,8 @@
                     d3.select('#{{ chart.name }} svg')
                         .datum(datum)
                         .transition().duration(500)
-                        {% if chart.d3_select_extra %}{{ chart.d3_select_extra }}{% endif %}.call(chart);
+                       {% if chart.width %}.attr('width', {{ chart.width}}){% endif %}
+                       {% if chart.height %}.attr('height', {{ chart.height}}){% endif %}.call(chart);
 
                     });
 
