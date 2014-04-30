@@ -11,6 +11,7 @@ Project location : https://github.com/areski/python-nvd3
 
 from .NVD3Chart import NVD3Chart, stab
 
+from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
 
 class scatterChart(NVD3Chart):
     """
@@ -110,6 +111,13 @@ class scatterChart(NVD3Chart):
             return chart;
         });
     """
+
+    CHART_FILENAME = "./nvd3/templates/scatter.html"
+
+    template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
+    template_environment.loader = FileSystemLoader('.')
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         height = kwargs.get('height', 450)
@@ -125,13 +133,4 @@ class scatterChart(NVD3Chart):
 
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
-
-        scatter_jschart = '\n' + stab(3) + '.showDistX(true)\n' + \
-            stab(3) + '.showDistY(true)\n' + \
-            stab(3) + '.color(d3.scale.category10().range())'
-
-        start_index = self.jschart.find('.scatterChart()')
-        string_len = len('.scatterChart()')
-        replace_index = start_index + string_len
-        if start_index > 0:
-            self.jschart = self.jschart[:replace_index] + scatter_jschart + self.jschart[replace_index:]
+        self.jschart = self.template_chart_nvd3.render(chart = self)
