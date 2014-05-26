@@ -10,8 +10,9 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart
-
 from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
+import os
+
 
 class scatterChart(NVD3Chart):
     """
@@ -112,10 +113,10 @@ class scatterChart(NVD3Chart):
         });
     """
 
-    CHART_FILENAME = "./nvd3/templates/scatter.html"
+    CHART_FILENAME = "./scatter.html"
 
     template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
-    template_environment.loader = FileSystemLoader('.')
+    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
     template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
