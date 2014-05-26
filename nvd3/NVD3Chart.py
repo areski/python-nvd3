@@ -13,12 +13,16 @@ from optparse import OptionParser
 from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
 from slugify import slugify
 import json
+import os
 
-CONTENT_FILENAME = "./nvd3/templates/content.html"
-PAGE_FILENAME = "./nvd3/templates/page.html"
+LIB_DIR = os.path.dirname(globals()['__file__'])
+
+CONTENT_FILENAME = "./content.html"
+PAGE_FILENAME = "./page.html"
 
 template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
-template_environment.loader = FileSystemLoader('.')
+template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+
 template_content_nvd3 = template_environment.get_template(CONTENT_FILENAME)
 template_page_nvd3 = template_environment.get_template(PAGE_FILENAME)
 
@@ -106,6 +110,7 @@ class NVD3Chart:
     show_legend = True
     show_labels = True
     assets_directory = './bower_components/'
+    display_container = True
 
     def __init__(self, **kwargs):
         """
@@ -316,6 +321,15 @@ class NVD3Chart:
         self.content = self.htmlcontent
         self.htmlcontent = self.template_page_nvd3.render(chart=self)
 
+    #this is used by django-nvd3
+    def buildhtmlheader(self):
+        """generate HTML header content"""
+        self.htmlheader = ''
+        for css in self.header_css:
+            self.htmlheader += css
+        for js in self.header_js:
+            self.htmlheader += js
+
     def buildcontainer(self):
         """generate HTML div"""
         self.container = self.containerheader
@@ -347,6 +361,7 @@ class NVD3Chart:
 
         #Include data
         self.series_js = json.dumps(self.series)
+
 
     def create_x_axis(self, name, label=None, format=None, date=False, custom_format=False):
         """

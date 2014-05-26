@@ -1,4 +1,8 @@
+
+{% if chart.display_container %}
 {{ chart.container }}
+{% endif %}
+
 {% if chart.tag_script_js %}
 <script>
 {% endif %}
@@ -122,8 +126,10 @@
         {% else %}
             datum = data_{{ chart.name }};
         {% endif %}
+
         {# include specific subchart #}
         {{ chart.jschart }}
+
         {# Inject data to D3 #}
         d3.select('#{{ chart.name }} svg')
             .datum(datum)

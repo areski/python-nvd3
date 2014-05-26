@@ -10,8 +10,9 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart
-
 from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
+import os
+
 
 class pieChart(NVD3Chart):
     """
@@ -77,11 +78,11 @@ class pieChart(NVD3Chart):
         });
     """
 
-    CHART_FILENAME = "./nvd3/templates/pie.html"
+    CHART_FILENAME = "./pie.html"
 
     template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
-    template_environment.loader = FileSystemLoader('.')
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME) 
 
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
