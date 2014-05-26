@@ -363,7 +363,7 @@ class NVD3Chart:
                     axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis['axisLabel'] = label
+            axis['axisLabel'] = "'" + label + "'"
 
         #date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
@@ -390,7 +390,7 @@ class NVD3Chart:
                 axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
-            axis['axisLabel'] = label
+            axis['axisLabel'] = "'" + label + "'"
 
         #Add new axis to list of axis
         self.axislist[name] = axis
