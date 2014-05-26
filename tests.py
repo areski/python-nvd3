@@ -39,6 +39,7 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
+        print chart
 
     def test_lineChart(self):
         """Test Line Chart"""

@@ -123,7 +123,7 @@ class NVD3Chart:
         self.template_content_nvd3 = Template(template_content_nvd3)
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.slugify_name(kwargs.get('name', self.model))
+        self.slugify_name(unicode(kwargs.get('name', self.model)))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
@@ -338,35 +338,6 @@ class NVD3Chart:
 
         self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
-    def build_custom_tooltip(self):
-        """generate custom tooltip for the chart"""
-        if self.custom_tooltip_flag:
-            if not self.date_flag:
-                if self.model == 'pieChart':
-                    self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var x = String(key);\n" +\
-                        stab(3) + self.tooltip_condition_string +\
-                        stab(3) + "tooltip_str = '<center><b>'+x+'</b></center>' + y;\n" +\
-                        stab(3) + "return tooltip_str;\n" + \
-                        stab(2) + "});\n"
-                else:
-                    self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                        stab(3) + "var x = String(graph.point.x);\n" +\
-                        stab(3) + "var y = String(graph.point.y);\n" +\
-                        self.tooltip_condition_string +\
-                        stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;\n" +\
-                        stab(3) + "return tooltip_str;\n" + \
-                        stab(2) + "});\n"
-            else:
-                self.charttooltip = stab(2) + "chart.tooltipContent(function(key, y, e, graph) {\n" + \
-                    stab(3) + "var x = d3.time.format('%s')(new Date(parseInt(graph.point.x)));\n" \
-                    % self.charttooltip_dateformat +\
-                    stab(3) + "var y = String(graph.point.y);\n" +\
-                    self.tooltip_condition_string +\
-                    stab(3) + "tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;\n" +\
-                    stab(3) + "return tooltip_str;\n" + \
-                    stab(2) + "});\n"
-
     def buildjschart(self):
         """generate javascript code for the chart"""
 
@@ -387,8 +358,6 @@ class NVD3Chart:
         # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
         if self.tooltip_condition_string == '':
             self.tooltip_condition_string = 'var y = String(graph.point.y);\n'
-
-        self.build_custom_tooltip()
 
         #Include data
         self.series_js = json.dumps(self.series)
