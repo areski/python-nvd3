@@ -204,8 +204,8 @@ class NVD3Chart:
         else:
             if self.model == 'pieChart':
                 serie = [{'label': x[i], 'value': y} for i, y in enumerate(y)]
-            elif self.model == 'linePlusBarWithFocusChart':
-                serie = [[x[i], y] for i, y in enumerate(y)]
+            # elif self.model == 'linePlusBarWithFocusChart':
+            #     serie = [[x[i], y] for i, y in enumerate(y)]
             else:
                 serie = [{'x': x[i], 'y': y} for i, y in enumerate(y)]
 
