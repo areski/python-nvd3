@@ -117,8 +117,8 @@ class NVD3Chart:
         #Init Data
         self.series = []
         self.axislist = {}
-        self.template_page_nvd3 = Template(template_page_nvd3)
-        self.template_content_nvd3 = Template(template_content_nvd3)
+        self.template_page_nvd3 = template_page_nvd3
+        self.template_content_nvd3 = template_content_nvd3
         self.charttooltip_dateformat = '%d %b %Y'
 
         self.slugify_name(unicode(kwargs.get('name', self.model)))
