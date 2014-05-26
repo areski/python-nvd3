@@ -1,144 +1,146 @@
 {{ chart.container }}
-        {% if chart.tag_script_js %}
-            <script>
+{% if chart.tag_script_js %}
+<script>
+{% endif %}
+
+{% if chart.jquery_on_ready %}
+    $(function(){
+{% endif %}
+
+        nv.addGraph(function() {
+            var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
+
+            chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
+
+        {% if chart.model != 'pieChart' and not chart.color_list and chart.color_category %}
+            chart.color(d3.scale.{{ chart.color_category }}().range());
         {% endif %}
 
-            {% if chart.jquery_on_ready %}
-                $(function(){
-            {% endif %}
+        {% if chart.stacked %}
+            chart.stacked(true);
+        {% endif %}
 
-                nv.addGraph(function() {
-                    var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
-
-                    {% if chart.model != 'pieChart' and not chart.color_list and chart.color_category %}
-                        chart.color(d3.scale.{{ chart.color_category }}().range());
-                    {% endif %}
-                    
-                    {% if chart.stacked %}
-                        chart.stacked(true);
-                    {% endif %}
-                    
-                    chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
-                    
-                    {% if chart.model != 'pieChart' %}
-                        {% for axis, a in chart.axislist.items() %}
-                            {% if a.items() %}
-                                chart.{{ axis }}
-                                    {% for attr, value in a.items() %}
-                                        .{{ attr}}({{ value}}){% if loop.last %};
-                                        {% endif %}
-                                    {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-
-                    {# generate custom tooltip for the chart #}
-                    {% if chart.custom_tooltip_flag %}
-                        {% if not chart.date_flag %}
-                            {% if chart.model == 'pieChart' %}
-                                chart.tooltipContent(function(key, y, e, graph) {
-                                    var x = String(key);
-                                    {{ chart.tooltip_condition_string }}
-                                    tooltip_str = '<center><b>'+x+'</b></center>' + y;
-                                    return tooltip_str;
-                                });
-                            {% else %}
-                                chart.tooltipContent(function(key, y, e, graph) {
-                                    var x = String(graph.point.x);
-                                    var y = String(graph.point.y);
-                                    {{ chart.tooltip_condition_string }}
-                                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
-                                    return tooltip_str;
-                                });
-                            {% endif %}
-                        {% else %}
-                            chart.tooltipContent(function(key, y, e, graph) {
-                                var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
-                                var y = String(graph.point.y);
-                                {{ chart.tooltip_condition_string }}
-                                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                                return tooltip_str;
-                            });
-                        {% endif %}
-                    {% endif %}
-
-                    {# the shape attribute in kwargs is not applied when #}
-                    {# not allowing other shapes to be rendered #}
-                    {% if chart.model == 'scatterChart' %}
-                        chart.scatter.onlyCircles(false);
-                    {% endif %}
-
-                    {% if chart.model != 'discreteBarChart' %}
-                        {% if chart.show_legend %}
-                            chart.showLegend(true);
-                        {% else %}
-                            chart.showLegend(false);
-                        {% endif %}
-                    {% endif %}
-
-
-                    {# showLabels only supported in pieChart #}
-                    {% if chart.model == 'pieChart' %}
-                        {% if chart.show_labels %}
-                            chart.showLabels(true);
-                        {% else %}
-                            chart.showLabels(false);
-                        {% endif %}
-
-                        {% if chart.donut %}
-                            chart.donut(true);
-                            chart.donutRatio({{ chart.donutRatio }});
-                        {% else %}
-                            chart.donut(false);
-                        {% endif %}
-                    {% endif %}
-
-
-                    {# add custom chart attributes #}
-                    {% for attr, value in chart.chart_attr.items() %}
-                        {% if type(value) == str and value.startswith(".") %}:
-                            chart.{{ attr }}{{ value }};
-                        {% else %}
-                            chart.{{ attr }}({{ value }});
+        {% if chart.model != 'pieChart' %}
+            {% for axis, a in chart.axislist.items() %}
+                {% if a.items() %}
+                    chart.{{ axis }}
+                    {% for attr, value in a.items() %}
+                        .{{ attr}}({{ value}}){% if loop.last %};
                         {% endif %}
                     {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
-                    {% if chart.resize %}
-                        nv.utils.windowResize(chart.update);
-                        return chart;
+        {# generate custom tooltip for the chart #}
+        {% if chart.custom_tooltip_flag %}
+            {% if not chart.date_flag %}
+                {% if chart.model == 'pieChart' %}
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = String(key);
+                        {{ chart.tooltip_condition_string }}
+                        tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                        return tooltip_str;
                     });
-                    {% endif %}
-
-                    {% if self.model == 'linePlusBarWithFocusChart' %}
-                        data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
-                            series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
-                            return series; });
-                    {% else %}
-                        data_{{ chart.name }}={{ chart.series_js }};
-                    {% endif %}
-
-                    {% if chart.model == 'pieChart' %}
-                        datum = data_{{ chart.name }}[0].values;
-                    {% else %}
-                        datum = data_{{ chart.name }};
-                    {% endif %}
-
-                    {# include specific subchart #}
-                    {{ chart.jschart }}
-
-                    {# Inject data to D3 #}
-                    d3.select('#{{ chart.name }} svg')
-                        .datum(datum)
-                        .transition().duration(500)
-                       {% if chart.width %}.attr('width', {{ chart.width}}){% endif %}
-                       {% if chart.height %}.attr('height', {{ chart.height}}){% endif %}.call(chart);
-
+                {% else %}
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = String(graph.point.x);
+                        var y = String(graph.point.y);
+                        {{ chart.tooltip_condition_string }}
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                        return tooltip_str;
                     });
-
-            {% if chart.jquery_on_ready %}
+                {% endif %}
+            {% else %}
+                chart.tooltipContent(function(key, y, e, graph) {
+                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
+                    var y = String(graph.point.y);
+                    {{ chart.tooltip_condition_string }}
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                    return tooltip_str;
                 });
             {% endif %}
-
-        {% if chart.tag_script_js %}
-            </script>
         {% endif %}
+
+        {# the shape attribute in kwargs is not applied when #}
+        {# not allowing other shapes to be rendered #}
+        {% if chart.model == 'scatterChart' %}
+            chart.scatter.onlyCircles(false);
+        {% endif %}
+
+        {% if chart.model != 'discreteBarChart' %}
+            {% if chart.show_legend %}
+                chart.showLegend(true);
+            {% else %}
+                chart.showLegend(false);
+            {% endif %}
+        {% endif %}
+
+
+        {# showLabels only supported in pieChart #}
+        {% if chart.model == 'pieChart' %}
+            {% if chart.show_labels %}
+                chart.showLabels(true);
+            {% else %}
+                chart.showLabels(false);
+            {% endif %}
+
+            {% if chart.donut %}
+                chart.donut(true);
+                chart.donutRatio({{ chart.donutRatio }});
+            {% else %}
+                chart.donut(false);
+            {% endif %}
+        {% endif %}
+
+
+        {# add custom chart attributes #}
+        {% for attr, value in chart.chart_attr.items() %}
+            {% if type(value) == str and value.startswith(".") %}:
+                chart.{{ attr }}{{ value }};
+            {% else %}
+                chart.{{ attr }}({{ value }});
+            {% endif %}
+        {% endfor %}
+
+        {% if chart.resize %}
+            nv.utils.windowResize(chart.update);
+            return chart;
+        });
+        {% endif %}
+
+        {% if self.model == 'linePlusBarWithFocusChart' %}
+            data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
+                series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
+                return series; });
+        {% else %}
+            data_{{ chart.name }}={{ chart.series_js }};
+        {% endif %}
+
+        {% if chart.model == 'pieChart' %}
+            datum = data_{{ chart.name }}[0].values;
+        {% else %}
+            datum = data_{{ chart.name }};
+        {% endif %}
+        {# include specific subchart #}
+        {{ chart.jschart }}
+        {# Inject data to D3 #}
+        d3.select('#{{ chart.name }} svg')
+            .datum(datum)
+            .transition().duration(500)
+            {% if chart.width %}
+            .attr('width', {{ chart.width}})
+            {% endif %}
+            {% if chart.height %}
+            .attr('height', {{ chart.height}})
+            {% endif %}
+            .call(chart);
+        });
+
+{% if chart.jquery_on_ready %}
+    });
+{% endif %}
+
+{% if chart.tag_script_js %}
+</script>
+{% endif %}
