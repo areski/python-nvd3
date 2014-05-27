@@ -255,25 +255,26 @@ class NVD3Chart:
                 _end = (" + '" + str(_end) + "'") if _end else ''
 
                 if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
-                    self.tooltip_condition_string += stab(3) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
-                        stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                        stab(3) + "}\n"
+                    if self.tooltip_condition_string:
+                        self.tooltip_condition_string += stab(5)
+                    self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
+                        stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                        stab(5) + "}\n"
                 elif self.model == 'cumulativeLineChart':
-                    self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
-                        stab(4) + "var y = " + _start + " String(e) " + _end + ";\n" +\
-                        stab(3) + "}\n"
+                    self.tooltip_condition_string += stab(0) + "if(key == '" + name + "'){\n" +\
+                        stab(6) + "var y = " + _start + " String(e) " + _end + ";\n" +\
+                        stab(5) + "}\n"
                 else:
-                    self.tooltip_condition_string += stab(3) + "if(key == '" + name + "'){\n" +\
-                        stab(4) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                        stab(3) + "}\n"
+                    self.tooltip_condition_string += stab(5) + "if(key == '" + name + "'){\n" +\
+                        stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                        stab(5) + "}\n"
 
             if self.model == 'pieChart':
                 _start = extra['tooltip']['y_start']
                 _end = extra['tooltip']['y_end']
                 _start = ("'" + str(_start) + "' + ") if _start else ''
                 _end = (" + '" + str(_end) + "'") if _end else ''
-                self.tooltip_condition_string += \
-                    "var y = " + _start + " String(y) " + _end + ";\n"
+                self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
         self.series.append(data_keyvalue)
 
@@ -370,12 +371,11 @@ class NVD3Chart:
         axis = {}
         if custom_format and format:
             axis['tickFormat'] = format
-        else:
-            if format:
-                if format == 'AM_PM':
-                    axis['tickFormat'] = "function(d) { return get_am_pm(parseInt(d)); }"
-                else:
-                    axis['tickFormat'] = "d3.format(',%s')" % format
+        elif format:
+            if format == 'AM_PM':
+                axis['tickFormat'] = "function(d) { return get_am_pm(parseInt(d)); }"
+            else:
+                axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
             axis['axisLabel'] = "'" + label + "'"
@@ -400,9 +400,8 @@ class NVD3Chart:
 
         if custom_format and format:
             axis['tickFormat'] = format
-        else:
-            if format:
-                axis['tickFormat'] = "d3.format(',%s')" % format
+        elif format:
+            axis['tickFormat'] = "d3.format(',%s')" % format
 
         if label:
             axis['axisLabel'] = "'" + label + "'"
