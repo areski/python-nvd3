@@ -1,14 +1,5 @@
-
-        chart.margin({top: 30, right: 60, bottom: 50, left: 70});
-        chart.x(function(d,i) { return i });
-
-    {% if chart.width %}
-        chart.width({{ chart.width }});
-    {% endif %}
-    {% if chart.height %}
-        chart.height({{ chart.height }});
-    {% endif %}
-
+ 
+    
     {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
             if (d > 12) {
@@ -18,4 +9,6 @@
                 return (String(d) + 'AM');
             }
         };
+    {% else %}
+        chart.x(function(d,i) { return i });
     {% endif %}
