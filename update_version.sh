@@ -1,3 +1,8 @@
+#
+# Usage:
+#   ./update_version.sh 0.12.0
+#
+
 git flow release start v$1
 sed -i -e "s/__version__ = '.*'/__version__ = '$1'/g" nvd3/__init__.py
 #rm -rf docs/html
