@@ -21,7 +21,7 @@ import time
 class ChartTest(unittest.TestCase):
 
     def test_chartWithBadName(self):
-        name="Chart with spaces"
+        name = "Chart with spaces"
         chart = lineChart(name=name, date=True, height=350)
         chart.buildhtml()
         assert(" " not in chart.name)
@@ -146,7 +146,7 @@ class ChartTest(unittest.TestCase):
 
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
-        
+
         # We don't modify the xAxis, so make sure that it's not invoked.
         assert("chart.xAxis" not in chart.htmlcontent)
 
@@ -168,16 +168,16 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
 
+
 class TranslatorTest(unittest.TestCase):
 
     def test_pieChart(self):
         func = Function('nv').addGraph(
-            AnonymousFunction('', Assignment('chart',
-                Function('nv').models.pieChart(
-                    ).x(
-                        AnonymousFunction('d', 'return d.label;')
-                    ).y(
-                        AnonymousFunction('d', 'return d.value;')
+            AnonymousFunction('', Assignment(
+                'chart',
+                Function('nv').models.pieChart().x(
+                    AnonymousFunction('d', 'return d.label;')
+                ).y(AnonymousFunction('d', 'return d.value;')
                     ).showLabels('true')
                 )
             )
