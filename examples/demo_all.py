@@ -46,7 +46,7 @@ html_open = """
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(name='my-graphname', height=400, jquery_on_ready=True)
+chart = discreteBarChart(name='my graphname', height=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
@@ -58,8 +58,8 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
-type = "pieChart"
-chart = pieChart(color_category='category20c', height=400,
+type = "pie Chart"
+chart = pieChart(name=type ,color_category='category20c', height=400,
                  width=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
