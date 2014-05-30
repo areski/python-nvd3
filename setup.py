@@ -96,8 +96,7 @@ def find_package_data(where='.', package='',
                     if (fnmatchcase(name, pattern) or fn.lower() == pattern.lower()):
                         bad_name = True
                         if show_ignored:
-                            print ("File %s ignored by pattern %s"
-                                % (fn, pattern))
+                            print ("File %s ignored by pattern %s" % (fn, pattern))
                         break
                 if bad_name:
                     continue
@@ -122,7 +121,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'python-slugify'
+        'awesome-slugify',
+        'Jinja2>=2.7.2'
         # -*- Extra requirements: -*-
     ],
     entry_points={

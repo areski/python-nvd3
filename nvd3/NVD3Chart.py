@@ -9,18 +9,20 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
+from __future__ import unicode_literals
 from optparse import OptionParser
-from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
-from slugify import slugify
+from jinja2 import Environment, FileSystemLoader
+from slugify import slugify_unicode
 import json
 import os
+
 
 LIB_DIR = os.path.dirname(globals()['__file__'])
 
 CONTENT_FILENAME = "./content.html"
 PAGE_FILENAME = "./page.html"
 
-template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
+template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
 template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
 
 template_content_nvd3 = template_environment.get_template(CONTENT_FILENAME)
@@ -126,7 +128,7 @@ class NVD3Chart:
         self.template_content_nvd3 = template_content_nvd3
         self.charttooltip_dateformat = '%d %b %Y'
 
-        self.slugify_name(unicode(kwargs.get('name', self.model)))
+        self.slugify_name(kwargs.get('name', self.model))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
@@ -163,7 +165,7 @@ class NVD3Chart:
 
     def slugify_name(self, name):
         """Slufigy name with underscore"""
-        self.name = slugify(name).replace('-', '_')
+        self.name = slugify_unicode(name, separator='_')
 
     def add_serie(self, y, x, name=None, extra={}, **kwargs):
         """
@@ -363,11 +365,8 @@ class NVD3Chart:
         #Include data
         self.series_js = json.dumps(self.series)
 
-
     def create_x_axis(self, name, label=None, format=None, date=False, custom_format=False):
-        """
-        Create X-axis
-        """
+        """Create X-axis"""
         axis = {}
         if custom_format and format:
             axis['tickFormat'] = format

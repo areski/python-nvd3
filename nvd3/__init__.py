@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-__version__ = '0.12.1'  # edit also docs/source/conf.py
+__version__ = '0.12.2'  # edit also docs/source/conf.py
 __all__ = ['lineChart', 'pieChart', 'lineWithFocusChart',
            'stackedAreaChart', 'multiBarHorizontalChart',
            'linePlusBarChart', 'cumulativeLineChart',
