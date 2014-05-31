@@ -73,6 +73,31 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 #---------------------------------------
 
+name = "lineChart-different-x-axis"
+type = "lineChart"
+chart = lineChart(name=name, height=350, x_is_date=False,
+                  jquery_on_ready=True)
+
+chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
+xdata = [1 + x * 2 for x in list(range(nb_element))]
+xdata10 = [0 + x * 2 for x in list(range(nb_element))]
+ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+ydata2 = [x * 2 for x in ydata]
+
+#Configure a color for a specific serie
+kwargs1 = {'color': 'green'}
+kwargs2 = {'color': 'red'}
+
+extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " odd"}}
+chart.add_serie(name="Odd X-Axis", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+extra_serie = {"tooltip": {"y_start": "", "y_end": " even"}}
+chart.add_serie(name="Even X-Axis", y=ydata2, x=xdata10, extra=extra_serie, **kwargs2)
+
+chart.buildcontent()
+
+output_file.write(chart.htmlcontent)
+#---------------------------------------
+
 type = "lineChart"
 chart = lineChart(height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
