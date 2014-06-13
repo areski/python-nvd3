@@ -114,7 +114,7 @@ $(function(){
 
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
-        {% if type(value) == str and value.startswith(".") %}:
+        {% if value is string and value.startswith(".") %}:
             chart.{{ attr }}{{ value }};
         {% else %}
             chart.{{ attr }}({{ value }});
