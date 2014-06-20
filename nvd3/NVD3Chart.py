@@ -75,6 +75,8 @@ class NVD3Chart:
         * ``show_legend`` - False / True
         * ``show_labels`` - False / True
         * ``assets_directory`` directory holding the assets (./bower_components/)
+        * ``x_custom_format`` - False / True - Used with ``x_axis_format``
+        * ``y_custom_format`` - False / True- Used with ``y_axis_format``
     """
     count = 0
     dateformat = '%x'
