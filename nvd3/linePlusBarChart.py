@@ -32,7 +32,8 @@ class linePlusBarChart(NVD3Chart):
 
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                        "date_format": "%d %b %Y %H:%S" }
-        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
+        chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie,
+                        bar=True)
 
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
