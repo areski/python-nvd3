@@ -128,9 +128,9 @@ class NVD3Chart:
         self.axislist = {}
         self.template_page_nvd3 = template_page_nvd3
         self.template_content_nvd3 = template_content_nvd3
-        self.charttooltip_dateformat = '%d %b %Y'
 
         self.slugify_name(kwargs.get('name', self.model))
+        self.charttooltip_dateformat = kwargs.get('charttooltip_dateformat', '%d %b %Y')
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
