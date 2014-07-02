@@ -10,7 +10,8 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart
-from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
+from jinja2 import Environment, FileSystemLoader
+# from jinja2 import DebugUndefined, Template
 import os
 
 
@@ -102,7 +103,7 @@ class linePlusBarWithFocusChart(NVD3Chart):
 
     CHART_FILENAME = "./lineplusbarwithfocuschart.html"
 
-    template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
     template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
     template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
 
@@ -152,4 +153,4 @@ class linePlusBarWithFocusChart(NVD3Chart):
 
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
-        self.jschart = self.template_chart_nvd3.render(chart = self)
+        self.jschart = self.template_chart_nvd3.render(chart=self)

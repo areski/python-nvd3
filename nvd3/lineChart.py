@@ -77,10 +77,9 @@ class lineChart(NVD3Chart):
 
     CHART_FILENAME = "./line.html"
 
-    template_environment = Environment(lstrip_blocks = True, trim_blocks = True)
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
     template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
     template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
-
 
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
@@ -99,7 +98,10 @@ class lineChart(NVD3Chart):
             else:
                 format = kwargs.get('x_axis_format', 'r')
             self.create_x_axis('xAxis', format=format, custom_format=kwargs.get('x_custom_format', False))
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.02f'), custom_format=kwargs.get('y_custom_format', False))
+        self.create_y_axis(
+            'yAxis',
+            format=kwargs.get('y_axis_format', '.02f'),
+            custom_format=kwargs.get('y_custom_format', False))
 
         # must have a specified height, otherwise it superimposes both chars
         self.set_graph_height(height)
@@ -108,4 +110,4 @@ class lineChart(NVD3Chart):
 
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
-        self.jschart = self.template_chart_nvd3.render(chart = self)
+        self.jschart = self.template_chart_nvd3.render(chart=self)

@@ -22,11 +22,11 @@ LIB_DIR = os.path.dirname(globals()['__file__'])
 CONTENT_FILENAME = "./content.html"
 PAGE_FILENAME = "./page.html"
 
-template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+jinja2_env = Environment(lstrip_blocks=True, trim_blocks=True)
+jinja2_env.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
 
-template_content_nvd3 = template_environment.get_template(CONTENT_FILENAME)
-template_page_nvd3 = template_environment.get_template(PAGE_FILENAME)
+template_content = jinja2_env.get_template(CONTENT_FILENAME)
+template_page = jinja2_env.get_template(PAGE_FILENAME)
 
 
 def stab(tab=1):
@@ -126,8 +126,8 @@ class NVD3Chart:
         #Init Data
         self.series = []
         self.axislist = {}
-        self.template_page_nvd3 = template_page_nvd3
-        self.template_content_nvd3 = template_content_nvd3
+        self.template_page_nvd3 = template_page
+        self.template_content_nvd3 = template_content
         self.charttooltip_dateformat = '%d %b %Y'
 
         self.slugify_name(kwargs.get('name', self.model))
