@@ -53,6 +53,7 @@ class NVD3Chart:
         * ``custom_tooltip_flag`` - False / True
         * ``date_flag`` - x-axis contain date format or not
         * ``dateformat`` - see https://github.com/mbostock/d3/wiki/Time-Formatting
+        * ``extras`` - extra modifiers. Use this to modify different attributes of the chart.
         * ``header_css`` - False / True
         * ``header_js`` - Custom tooltip string
         * ``height`` - Set graph height
@@ -77,6 +78,7 @@ class NVD3Chart:
         * ``assets_directory`` directory holding the assets (./bower_components/)
         * ``x_custom_format`` - False / True - Used with ``x_axis_format``
         * ``y_custom_format`` - False / True- Used with ``y_axis_format``
+
     """
     count = 0
     dateformat = '%x'
@@ -120,10 +122,10 @@ class NVD3Chart:
         """
         Constructor
         """
-        #set the model
+        # set the model
         self.model = self.__class__.__name__
 
-        #Init Data
+        # Init Data
         self.series = []
         self.axislist = {}
         self.template_page_nvd3 = template_page
@@ -148,6 +150,7 @@ class NVD3Chart:
         self.use_interactive_guideline = kwargs.get("use_interactive_guideline", False)
         self.chart_attr = kwargs.get("chart_attr", {})
         self.assets_directory = kwargs.get('assets_directory', './bower_components/')
+        self.extras = kwargs.get('extras', None)
 
         #CDN http://cdnjs.com/libraries/nvd3/ needs to make sure it's up to date
         self.header_css = [
@@ -281,6 +284,35 @@ class NVD3Chart:
                 self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
         self.series.append(data_keyvalue)
+
+    def add_chart_extras(self, extras):
+        """
+        Use this method to add extra d3 properties to your chart.
+        For example, you want to change the text color of the graph::
+
+            chart = pieChart(name='pieChart', color_category='category20c', height=400, width=400)
+
+            xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+            ydata = [3, 4, 0, 1, 5, 7, 3]
+
+            extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+            chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+
+        The above code will create graph with a black text, the following will change it::
+
+            text_white="d3.selectAll('#pieChart text').style('fill', 'white');"
+            chart.add_chart_extras(text_white)
+
+        The above extras will be appended to the java script generated.
+
+        Alternatively, you can use the following initialization::
+
+            chart = pieChart(name='pieChart',
+                             color_category='category20c',
+                             height=400, width=400,
+                             extras=text_white)
+        """
+        self.extras = extras
 
     def set_graph_height(self, height):
         """Set Graph height"""
