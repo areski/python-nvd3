@@ -9,8 +9,7 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js offers you.
 
-
-.. image:: https://api.travis-ci.org/areski/python-nvd3.png?branch=master
+.. image:: https://travis-ci.org/areski/python-nvd3.svg?branch=develop
 
 
 Installation
