@@ -101,11 +101,28 @@ class linePlusBarChart(NVD3Chart):
                 .call(chart);
             return chart;
         });
+
+
+    In case you have two data serie with extreme different numbers, that you would like to format
+    in different ways, you can pass a keyword *yaxis1_format* or *yaxis2_format* when
+    creating the graph::
+
+
+        ydata = [6, 5, 1]
+        y2data = [0.002, 0.003, 0.004]
+        chart = linePlusBarChart(name='linePlusBarChart',
+                                 yaxis2_format="function(d) { return d3.format(',0.3f')(d) }")
+
+    This way the graph create will represent the values of data series with three digits right
+    of the decimal point.
+
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
+        self.yaxis1_format = kwargs.get('yaxis1_format', "function(d) { return d3.format(',f')(d) }")
+        self.yaxis2_format = kwargs.get('yaxis2_format', "function(d) { return d3.format(',f')(d) }")
 
         if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
@@ -116,8 +133,8 @@ class linePlusBarChart(NVD3Chart):
         else:
             self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
 
-        self.create_y_axis('y1Axis', format="f")
-        self.create_y_axis('y2Axis', format="function(d) { return d3.format(',f')(d) }", custom_format=True)
+        self.create_y_axis('y1Axis', format=self.yaxis1_format, custom_format=True)
+        self.create_y_axis('y2Axis', format=self.yaxis2_format, custom_format=True)
 
         # must have a specified height, otherwise it superimposes both chars
         if height:
