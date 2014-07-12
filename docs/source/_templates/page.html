@@ -1,0 +1,12 @@
+{% extends "!page.html" %}
+
+{% block extrahead %}
+    <script src="{{ pathto('_static/d3.min.js', 1) }}"></script>
+    <script src="{{ pathto('_static/nv.d3.js', 1) }}"></script>
+    <link href={{ pathto('_static/nv.d3.css', 1) }} rel="stylesheet" />
+
+{% endblock %}
+
+{%- block body %}
+  {{ super() }}
+{%- endblock %}
