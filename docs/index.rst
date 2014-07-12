@@ -64,9 +64,6 @@ The following python code will create the graph bellow::
 
 .. raw:: html
 
-    <link href="_static/nv.d3.css" rel="stylesheet" />
-    <script src="_static/d3.min.js"></script>
-    <script src="_static/nv.d3.min.js"></script>
     <div id="pieChart"><svg style="width:400px;height:400px;"></svg></div>
     <script>
 
