@@ -21,6 +21,9 @@
 {% block footer %}
 {{ super() }}
 
+  <link href="_static/nv.d3.css" rel="stylesheet">
+  <script src="_static/d3.min.js"></script>
+  <script src="_static/nv.d3.min.js"></script>
 {# Add plone-derived 'edit me' sticky note #}
 {% if github_base_account %}
 <div id="editor-trap">
