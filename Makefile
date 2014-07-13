@@ -14,4 +14,9 @@ test: clean build
 		coverage report
 
 docs:
-	sphinx-build -aE docs docs/html > /dev/null
+	rm -f docs/manutils.rst
+	rm -f docs/modules.rst
+	sphinx-apidoc -o docs/ nvd3
+	$(MAKE) -C docs clean
+	$(MAKE) -C docs html
+	#open docs/_build/html/index.html
