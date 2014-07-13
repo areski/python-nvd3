@@ -19,8 +19,6 @@ class lineWithFocusChart(NVD3Chart):
     The lineWithFocusChart provide a smaller chart that act as a selector,
     this is very useful if you want to zoom on a specific time period.
 
-    .. image:: ../_static/screenshot/lineWithFocusChart.png
-
     Python example::
 
         from nvd3 import lineWithFocusChart

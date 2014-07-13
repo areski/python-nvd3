@@ -19,8 +19,6 @@ class multiBarChart(NVD3Chart):
     about the categories. Reading a multiple bar graph includes looking at extremes
     (tallest/longest vs. shortest) in each grouping.
 
-    .. image:: ../_static/doc_images/multiBarChart.png
-
     Python example::
 
         from nvd3 import multiBarChart

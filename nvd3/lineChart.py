@@ -19,8 +19,6 @@ class lineChart(NVD3Chart):
     A line chart or line graph is a type of chart which displays information
     as a series of data points connected by straight line segments.
 
-    .. image:: ../_static/screenshot/lineChart.png
-
     Python example::
 
         from nvd3 import lineChart

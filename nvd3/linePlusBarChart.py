@@ -19,8 +19,6 @@ class linePlusBarChart(NVD3Chart):
     and with some series with rectangular bars with lengths proportional
     to the values that they represent
 
-    .. image:: ../_static/screenshot/linePlusBarChart.png
-
     Python example::
 
         from nvd3 import linePlusBarChart
