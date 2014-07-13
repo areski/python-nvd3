@@ -18,9 +18,8 @@ Contents:
     :maxdepth: 2
 
     introduction
-    chart-classes
     resources
-    modules
+    chart-classes
 
 The following python code will create the graph bellow::
 
