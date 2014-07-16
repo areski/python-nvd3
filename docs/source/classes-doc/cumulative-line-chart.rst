@@ -1,10 +1,9 @@
-.. automodule:: nvd3.cumulativeLineChart
+.. module:: nvd3.cumulativeLineChart
 
 .. _cumulativeLineChart-model:
 
 :class:`cumulativeLineChart`
 ----------------------------
-
-.. autoclass:: cumulativeLineChart
-
-
+.. autoclass:: nvd3.cumulativeLineChart
+    :members:
+    :noindex:

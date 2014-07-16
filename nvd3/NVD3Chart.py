@@ -120,7 +120,6 @@ class NVD3Chart:
 
     def __init__(self, **kwargs):
         """
-        Constructor
         """
         # set the model
         self.model = self.__class__.__name__

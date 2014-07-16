@@ -1,8 +1,9 @@
-.. automodule:: nvd3.multiBarChart
+.. module:: nvd3.multiBarChart
 
 .. _multiBarChart-model:
 
 :class:`multiBarChart`
 ----------------------
 
-.. autoclass:: multiBarChart
+.. autoclass:: nvd3.multiBarChart
+    :noindex:

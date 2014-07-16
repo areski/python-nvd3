@@ -1,8 +1,9 @@
-.. automodule:: nvd3.lineWithFocusChart
+.. module:: nvd3.lineWithFocusChart
 
 .. _lineWithFocusChart-model:
 
 :class:`lineWithFocusChart`
 ---------------------------
 
-.. autoclass:: lineWithFocusChart
+.. autoclass:: nvd3.lineWithFocusChart
+    :noindex:

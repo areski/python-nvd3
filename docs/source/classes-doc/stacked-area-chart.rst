@@ -1,9 +1,9 @@
-.. automodule:: nvd3.stackedAreaChart
+.. module:: nvd3.stackedAreaChart
 
 .. _stackedAreaChart-model:
 
 :class:`stackedAreaChart`
 -------------------------
 
-.. autoclass:: stackedAreaChart
-
+.. autoclass:: nvd3.stackedAreaChart
+    :noindex:

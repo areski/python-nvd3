@@ -1,8 +1,9 @@
-.. automodule:: nvd3.lineChart
+.. module:: nvd3.lineChart
 
 .. _lineChart-model:
 
 :class:`lineChart`
 ------------------
 
-.. autoclass:: lineChart
+.. autoclass:: nvd3.lineChart
+    :noindex:

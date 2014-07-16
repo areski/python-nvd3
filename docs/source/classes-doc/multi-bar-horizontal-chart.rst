@@ -1,8 +1,9 @@
-.. automodule:: nvd3.multiBarHorizontalChart
+.. module:: nvd3.multiBarHorizontalChart
 
 .. _multiBarHorizontalChart-model:
 
 :class:`multiBarHorizontalChart`
 --------------------------------
 
-.. autoclass:: multiBarHorizontalChart
+.. autoclass:: nvd3.multiBarHorizontalChart
+    :noindex:
