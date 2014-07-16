@@ -8,4 +8,5 @@
 .. autoclass:: nvd3.pieChart
     :noindex:
 
+See the HTML source code of this page, to see the underlying javascript.
 

@@ -22,7 +22,7 @@ class cumulativeLineChart(NVD3Chart):
         from nvd3 import cumulativeLineChart
         chart = cumulativeLineChart(name='cumulativeLineChart', x_is_date=True)
         xdata = [1365026400000000, 1365026500000000, 1365026600000000]
-        ydata = [-6, 5, -1]
+        ydata = [6, 5, 1]
         y2data = [36, 55, 11]
 
         extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " calls"}}
@@ -32,65 +32,43 @@ class cumulativeLineChart(NVD3Chart):
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        data_lineWithFocusChart = [
-            {
-               "key" : "Serie 1",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : -6
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : -5
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : -1
-                    },
-                  ],
-            },
-            {
-               "key" : "Serie 2",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : 34
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : 56
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : 32
-                    },
-                  ],
-            }
-        ]
+    .. raw:: html
 
-        nv.addGraph(function() {
-            var chart = nv.models.cumulativeLineChart();
+        <div id="cumulativeLineChart"><svg style="height:450px;"></svg></div>
+        <script>
+            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000000}, {"y": 5, "x": 1365026500000000}, {"y": 1, "x": 1365026600000000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 36, "x": 1365026400000000}, {"y": 55, "x": 1365026500000000}, {"y": 11, "x": 1365026600000000}], "key": "Serie 2", "yAxis": "1"}];
+            nv.addGraph(function() {
+                var chart = nv.models.cumulativeLineChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_cumulativeLineChart;
 
-            chart.xAxis
-                .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(d)) });
-            chart.y1Axis
-                .tickFormat(d3.format('.1%'));
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
-                var y = String(graph.point.y);
-                if(key == 'Serie 1'){
-                    var y = 'There are ' + String(e)  + ' calls';
-                }
-                if(key == 'Serie 2'){
-                    var y =  String(e)  + ' mins';
-                }
-                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                return tooltip_str;
-            });
-            d3.select('#cumulativeLineChart svg')
-                .datum(data_linePlusBarChart)
-                .transition().duration(500)
-                .attr('height', 350)
-                .call(chart);
-            return chart;
-        });
+                        chart.xAxis
+                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
+                        chart.yAxis
+                            .tickFormat(d3.format(',.1%'));
+
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = d3.time.format("%d %b %Y")(new Date(parseInt(graph.point.x)));
+                        var y = String(graph.point.y);
+                        if(key == 'Serie 1'){
+                                var y = 'There are ' +  String(e)  + ' calls';
+                            }if(key == 'Serie 2'){
+                                var y =  String(e)  + ' mins';
+                            }
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                        return tooltip_str;
+                    });
+                    chart.showLegend(true);
+
+                d3.select('#cumulativeLineChart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('height', 450)
+                    .call(chart); });
+        </script>
+
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
