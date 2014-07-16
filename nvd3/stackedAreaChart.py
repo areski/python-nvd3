@@ -17,8 +17,6 @@ class stackedAreaChart(NVD3Chart):
     The stacked area chart is identical to the area chart, except the areas are stacked
     on top of each other, rather than overlapping. This can make the chart much easier to read.
 
-    .. image:: ../_static/screenshot/stackedAreaChart.png
-
     Python example::
 
         from nvd3 import stackedAreaChart

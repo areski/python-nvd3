@@ -16,8 +16,6 @@ class multiBarHorizontalChart(NVD3Chart):
     """
     A multiple horizontal bar graph contains comparisons of two or more categories or bars.
 
-    .. image:: ../_static/screenshot/multiBarHorizontalChart.png
-
     Python example::
 
         from nvd3 import multiBarHorizontalChart

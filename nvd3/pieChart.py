@@ -21,8 +21,6 @@ class pieChart(NVD3Chart):
     illustrating numerical proportion. In chart, the arc length of each sector
     is proportional to the quantity it represents.
 
-    .. image:: ../_static/screenshot/pieChart.png
-
     Python example::
 
         from nvd3 import pieChart

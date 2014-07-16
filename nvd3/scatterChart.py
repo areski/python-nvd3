@@ -23,8 +23,6 @@ class scatterChart(NVD3Chart):
     determining the position on the horizontal axis and the value of the other variable
     determining the position on the vertical axis.
 
-    .. image:: ../_static/screenshot/scatterChart.png
-
     Python example::
 
         from nvd3 import scatterChart

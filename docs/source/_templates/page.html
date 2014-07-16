@@ -1,0 +1,22 @@
+{% extends "!page.html" %}
+
+{% block footer %}
+{{ super() }}
+
+  <link href="_static/nv.d3.css" rel="stylesheet">
+  <script src="_static/d3.min.js"></script>
+  <script src="_static/nv.d3.min.js"></script>
+{% endblock %}
+
+{% block extrahead %}
+  
+  <link href="_static/nv.d3.css" rel="stylesheet">
+  <script src="_static/d3.min.js"></script>
+  <script src="_static/nv.d3.min.js"></script>
+
+{% endblock %}
+
+{%- block body %}
+  {{ super() }}
+
+{%- endblock %}
