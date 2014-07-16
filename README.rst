@@ -12,7 +12,7 @@ for d3.js without taking away the power that d3.js offers you.
 
 Python-NVD3 makes your life easy! You write Python and the library 
 renders JavaScript for you!
-This graphs can be part of your web application:
+These graphs can be part of your web application:
 
  .. image:: https:://raw.github.com/areski/python-nvd3/master/docs/showcase/multiple-charts.png
 
@@ -68,7 +68,7 @@ Want to try it yourself? Here is a quick demo::
     </script>
 
 
-This will render in your browser to live graphs! To 
+This will render in your browser to live graphs!  
 
 Check out the documentation for some live JS examples.
 

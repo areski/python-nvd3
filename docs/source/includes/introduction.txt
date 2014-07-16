@@ -78,16 +78,6 @@ Supported nvd3 charts
 
     See the section Chart Classes.
 
-
-.. _live_demo:
-
-Live demo of NVD3
------------------
-
-See a live demo on jsfiddle : http://jsfiddle.net/areski/z4zuH/246/
-
-
-
 .. _documentation:
 
 Documentation
