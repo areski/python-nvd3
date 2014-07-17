@@ -32,7 +32,7 @@ class discreteBarChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="discreteBarChart"><svg style="width:400px;height:400px;"></svg></div>
+        <div id="discreteBarChart"><svg style="height:450px;"></svg></div>
         <script>
             data_discreteBarChart=[{"values": [{"y": 3, "x": "A"}, {"y": 4, "x": "B"}, {"y": 0, "x": "C"}, {"y": -3, "x": "D"}, {"y": 5, "x": "E"}, {"y": 7, "x": "F"}], "key": "Serie 1", "yAxis": "1"}];
 

@@ -35,7 +35,7 @@ class multiBarHorizontalChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="multiBarHorizontalChart"><svg style="width:400px;height:400px;"></svg></div>
+        <div id="multiBarHorizontalChart"><svg style="height:450px;"></svg></div>
         <script>
 
             data_multiBarHorizontalChart=[{"values":

@@ -35,7 +35,7 @@ class multiBarChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="multiBarChart"><svg style="width:500px;height:400px;"></svg></div>
+        <div id="multiBarChart"><svg style="height:450px;"></svg></div>
         <script>
 
             data_multiBarChart=[{"values":

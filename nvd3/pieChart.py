@@ -37,7 +37,7 @@ class pieChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="pieChart"><svg style="width:400px;height:400px;"></svg></div>
+        <div id="pieChart"><svg style="height:450px;"></svg></div>
         <script>
 
 

@@ -35,7 +35,7 @@ class stackedAreaChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="stackedAreaChart"><svg style="width:400px;height:400px;"></svg></div>
+        <div id="stackedAreaChart"><svg style="height:450px;"></svg></div>
         <script>
 
 

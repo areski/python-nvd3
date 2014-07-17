@@ -45,7 +45,7 @@ class scatterChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="scatterChart"><svg style="width:400px;height:400px;"></svg></div>
+        <div id="scatterChart"><svg style="height:450px;"></svg></div>
         <script>
 
         data_scatterChart=[{"values": [{"y": -1, "x": 3, "shape": "circle", "size": "1"}, {"y": 2, "x": 4, "shape": "circle", "size": "1"}, {"y": 3, "x": 0, "shape": "circle", "size": "1"}, {"y": 3, "x": -3, "shape": "circle", "size": "1"}, {"y": 15, "x": 5, "shape": "circle", "size": "1"}, {"y": 2, "x": 7, "shape": "circle", "size": "1"}], "key": "series 1", "yAxis": "1"}, {"values": [{"y": 1, "x": 3, "shape": "cross", "size": "10"}, {"y": -2, "x": 4, "shape": "cross", "size": "10"}, {"y": 4, "x": 0, "shape": "cross", "size": "10"}, {"y": 7, "x": -3, "shape": "cross", "size": "10"}, {"y": -5, "x": 5, "shape": "cross", "size": "10"}, {"y": 3, "x": 7, "shape": "cross", "size": "10"}], "key": "series 2", "yAxis": "1"}];
