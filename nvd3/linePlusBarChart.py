@@ -52,7 +52,7 @@ class linePlusBarChart(NVD3Chart):
 
     .. raw:: html
 
-        <div id="linePlusBarChart"><svg style="width:500px;height:400px;"></svg></div>
+        <div id="linePlusBarChart"><svg style="height:450px;"></svg></div>
         <script>
             data_linePlusBarChart=[{"bar": "true", "values": [{"y": 6, "x": 1338501600000}, {"y": 5, "x": 1345501600000}, {"y": 1, "x": 1353501600000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 0.002, "x": 1338501600000}, {"y": 0.003, "x": 1345501600000}, {"y": 0.004, "x": 1353501600000}], "key": "Serie 2", "yAxis": "1"}];
             nv.addGraph(function() {
