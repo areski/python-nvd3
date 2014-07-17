@@ -86,6 +86,7 @@ Excited !? Learn more here:
     introduction
     resources
     chart-classes
+    examples-of-chart-types
 
 Indices and tables
 ==================
