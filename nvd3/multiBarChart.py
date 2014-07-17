@@ -19,8 +19,6 @@ class multiBarChart(NVD3Chart):
     about the categories. Reading a multiple bar graph includes looking at extremes
     (tallest/longest vs. shortest) in each grouping.
 
-    .. image:: ../_static/doc_images/multiBarChart.png
-
     Python example::
 
         from nvd3 import multiBarChart
@@ -33,35 +31,44 @@ class multiBarChart(NVD3Chart):
         chart.add_serie(name="Serie 2", y=ydata2, x=xdata)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        nv.addGraph(function() {
-            var chart = nv.models.multiBarChart();
-            chart.yAxis
-                .tickFormat(d3.format(',.2f'));
-            chart.showLegend(true);
-            d3.select('#multiBarChart svg')
-                .datum(data_multiBarChart)
-                .transition().duration(500)
-                .attr('width', 500)
-                .attr('height', 400)
-                .call(chart);
+    .. raw:: html
 
-        return chart;
-        });
-        data_multiBarChart=[
-            {"yAxis": "1",
-             "values": [{"x": "one", "y": 6},
-                        {"x": "two", "y": 12},
-                        {"x": "three", "y": 9},
-                        {"x": "four", "y": 16}],
-             "key": "Serie 1"},
-            {"yAxis": "1",
-             "values": [{"x": "one", "y": 8},
-                        {"x": "two", "y": 14},
-                        {"x": "three", "y": 7},
-                        {"x": "four", "y": 11}],
-             "key": "Serie 2"}];
+        <div id="multiBarChart"><svg style="width:500px;height:400px;"></svg></div>
+        <script>
+
+            data_multiBarChart=[{"values":
+                                [{"y": 6, "x": "one"},
+                                {"y": 12, "x": "two"},
+                                {"y": 9, "x": "three"},
+                                {"y": 16, "x": "four"}],
+                                "key": "Serie 1", "yAxis": "1"},
+                                {"values":
+                                    [{"y": 8, "x": "one"},
+                                    {"y": 14, "x": "two"},
+                                    {"y": 7, "x": "three"},
+                                    {"y": 11, "x": "four"}],
+                                "key": "Serie 2", "yAxis": "1"}];
+
+            nv.addGraph(function() {
+                var chart = nv.models.multiBarChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_multiBarChart;
+                        chart.yAxis
+                            .tickFormat(d3.format(',.2f'));
+                    chart.showLegend(true);
+                d3.select('#multiBarChart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', 500)
+                    .attr('height', 400)
+                    .call(chart);
+            });
+
+
+        </script>
+
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)

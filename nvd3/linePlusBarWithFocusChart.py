@@ -22,83 +22,79 @@ class linePlusBarWithFocusChart(NVD3Chart):
     and with some series with rectangular bars with lengths proportional
     to the values that they represent
 
-    .. image:: ../_static/screenshot/linePlusBarWithFocusChart.png
-
     Python example::
 
         from nvd3 import linePlusBarWithFocusChart
         chart = linePlusBarWithFocusChart(name='linePlusBarChart', x_is_date=True, x_axis_format="%d %b %Y")
 
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
-        ydata = [-6, 5, -1]
+        xdata = [1338501600000, 1345501600000, 1353501600000]
+        ydata = [6, 5, 1]
         y2data = [36, 55, 11]
         kwargs = {}
         kwargs['bar'] = True
-        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
-                       "date_format": "%d %b %Y %H:%S" }
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs)
 
         extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        data_linePlusBarWithFocusChart = [
-            {
-                "key" : "Quantity" ,
-                "bar": true,
-                "values" : [ [ 1136005200000 , 1271000.0] , [ 1138683600000 , 1271000.0] , ]
-            },
-            {
-                "key" : "Price" ,
-                "values" : [ [ 1136005200000 , 71.89] , [ 1138683600000 , 75.51]]
-            }
-        ].map(function(series) {
-            series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
-            return series;
-        });
+    .. raw:: html
 
-        nv.addGraph(function() {
-            var chart = nv.models.linePlusBarWithFocusChart()
-                .margin({top: 30, right: 60, bottom: 50, left: 70})
-                .x(function(d,i) { return i })
-                .color(d3.scale.category10().range());
+            <div id="linePlusBarChart"><svg style="height:450px;"></svg></div>
+            <script>
+                data_linePlusBarChart=[{"bar": "true", "values": [{"y": 6, "x": 1338501600000}, {"y": 5, "x": 1345501600000}, {"y": 1, "x": 1353501600000}], "key": "Serie 1"}, {"values": [{"y": 36, "x": 1338501600000}, {"y": 55, "x": 1345501600000}, {"y": 11, "x": 1353501600000}], "key": "Serie 2"}];
 
-            chart.xAxis.tickFormat(function(d) {
+                nv.addGraph(function() {
+                    var chart = nv.models.linePlusBarWithFocusChart();
+                    chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                    var datum = data_linePlusBarChart;
+                            chart.y2Axis
+                                .tickFormat(function(d) { return d3.format(',.2f')(d) });
+                            chart.x2Axis
+                                .tickFormat(function(d) {
+                            var dx = data_linePlusBarChart[0].values[d] && data_linePlusBarChart[0].values[d].x || 0;
+                            return d3.time.format('%d %b %Y')(new Date(dx)); });
+                            chart.y4Axis
+                                .tickFormat(function(d) { return d3.format(',.2f')(d) });
+                            chart.y3Axis
+                                .tickFormat(d3.format(',f'));
+                            chart.xAxis
+                                .tickFormat(function(d) {
+                            var dx = data_linePlusBarChart[0].values[d] && data_linePlusBarChart[0].values[d].x || 0;
+                            if (dx > 0) { return d3.time.format('%d %b %Y')(new Date(dx)) }
+                            return null; });
+                            chart.y1Axis
+                                .tickFormat(d3.format(',f'));
 
-                var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
-                if (dx > 0) {
-                    return d3.time.format('%x')(new Date(dx))
-                }
-                return null;
-            });
+                        chart.tooltipContent(function(key, y, e, graph) {
+                            var x = d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(graph.point.x)));
+                            var y = String(graph.point.y);
+                            if(key.indexOf('Serie 1') > -1 ){
+                                    var y = 'There is ' +  String(graph.point.y)  + ' calls';
+                                }
+                                if(key.indexOf('Serie 2') > -1 ){
+                                    var y = 'There is ' +  String(graph.point.y)  + ' min';
+                                }
 
-            chart.x2Axis.tickFormat(function(d) {
-                var dx = testdata[0].values[d] && testdata[0].values[d].x || 0;
-                return d3.time.format('%x')(new Date(dx))
-            });
+                            tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                            return tooltip_str;
+                        });
 
-            chart.y1Axis.tickFormat(d3.format(',f'));
 
-            chart.y3Axis.tickFormat(d3.format(',f'));
+                        chart.showLegend(true);
 
-            chart.y2Axis.tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
+                    chart.x(function(d,i) { return i });
 
-            chart.y4Axis.tickFormat(function(d) { return '$' + d3.format(',.2f')(d) });
+                    d3.select('#linePlusBarChart svg')
+                        .datum(datum)
+                        .transition().duration(500)
+                        .attr('height', 450)
+                        .call(chart);    });
+            </script>
 
-            chart.bars.forceY([0]);
-            chart.bars2.forceY([0]);
-            //chart.lines.forceY([0]);
-            nv.log(testdata);
-            d3.select('#linePlusBarWithFocusChart svg')
-                .datum(testdata)
-                .call(chart);
-
-            nv.utils.windowResize(chart.update);
-
-            return chart;
-            });
     """
 
     CHART_FILENAME = "./lineplusbarwithfocuschart.html"

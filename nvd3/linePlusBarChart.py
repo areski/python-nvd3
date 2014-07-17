@@ -17,104 +17,77 @@ class linePlusBarChart(NVD3Chart):
     A linePlusBarChart Chart is a type of chart which displays information
     as a series of data points connected by straight line segments
     and with some series with rectangular bars with lengths proportional
-    to the values that they represent
-
-    .. image:: ../_static/screenshot/linePlusBarChart.png
+    to the values that they represent.
 
     Python example::
 
         from nvd3 import linePlusBarChart
-        chart = linePlusBarChart(name='linePlusBarChart', x_is_date=True, x_axis_format="%d %b %Y")
+        chart = linePlusBarChart(name="linePlusBarChart",
+                             width=500, height=400, x_axis_format="%d %b %Y",
+                             x_is_date=True,
+                             yaxis2_format="function(d) { return d3.format(',0.3f')(d) }")
 
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
-        ydata = [-6, 5, -1]
-        y2data = [36, 55, 11]
+        xdata = [1338501600000, 1345501600000, 1353501600000]
+        ydata = [6, 5, 1]
+        y2data = [0.002, 0.003, 0.004]
 
-        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
+        extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " calls"},
                        "date_format": "%d %b %Y %H:%S" }
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie,
                         bar=True)
 
-        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " min"}}
+        extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " min"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
-        chart.buildhtml()
+        chart.buildcontent()
 
-    Javascript generated::
+    Note that in case you have two data serie with extreme different numbers,
+    that you would like to format in different ways,
+    you can pass a keyword *yaxis1_format* or *yaxis2_format* when
+    creating the graph.
 
-        data_lineWithFocusChart = [
-            {
-               "key" : "Serie 1",
-               "bar": "true",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : -6
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : -5
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : -1
-                    },
-                  ],
-            },
-            {
-               "key" : "Serie 2",
-               "values" : [
-                    { "x" : "1365026400000000",
-                      "y" : 34
-                    },
-                    { "x" : "1365026500000000",
-                      "y" : 56
-                    },
-                    { "x" : "1365026600000000",
-                      "y" : 32
-                    },
-                  ],
-            }
-        ]
+    In the example above the graph created presents the values of the second
+    data series with three digits right  of the decimal point.
 
-        nv.addGraph(function() {
-            var chart = nv.models.linePlusBarChart();
+    Javascript generated:
 
-            chart.xAxis
-                .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(d)) });
-            chart.y1Axis
-                .tickFormat(d3.format(',f'));
-            chart.y2Axis
-                .tickFormat(function(d) { return '$' + d3.format(',f')(d) });
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = d3.time.format('%d %b %Y %H:%S')(new Date(parseInt(graph.point.x)));
-                var y = String(graph.point.y);
-                if(key.indexOf('Serie 1') > -1 ){
-                    var y = '$ ' +  String(graph.point.y) ;
-                }
-                if(key.indexOf('Serie 2') > -1 ){
-                    var y =  String(graph.point.y)  + ' min';
-                }
-                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                return tooltip_str;
+    .. raw:: html
+
+        <div id="linePlusBarChart"><svg style="width:500px;height:400px;"></svg></div>
+        <script>
+            data_linePlusBarChart=[{"bar": "true", "values": [{"y": 6, "x": 1338501600000}, {"y": 5, "x": 1345501600000}, {"y": 1, "x": 1353501600000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 0.002, "x": 1338501600000}, {"y": 0.003, "x": 1345501600000}, {"y": 0.004, "x": 1353501600000}], "key": "Serie 2", "yAxis": "1"}];
+            nv.addGraph(function() {
+                var chart = nv.models.linePlusBarChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_linePlusBarChart;
+
+                        chart.y2Axis
+                            .tickFormat(function(d) { return d3.format(',0.3f')(d) });
+                        chart.xAxis
+                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
+                        chart.y1Axis
+                            .tickFormat(function(d) { return d3.format(',f')(d) });
+
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(graph.point.x)));
+                        var y = String(graph.point.y);
+                        if(key.indexOf('Serie 1') > -1 ){
+                                var y = 'There are ' +  String(graph.point.y)  + ' calls';
+                            }
+                            if(key.indexOf('Serie 2') > -1 ){
+                                var y = 'There are ' +  String(graph.point.y)  + ' min';
+                            }
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                        return tooltip_str;
+                    });
+                    chart.showLegend(true);
+                d3.select('#linePlusBarChart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', 500)
+                    .attr('height', 400)
+                    .call(chart);
             });
-            d3.select('#linePlusBarChart svg')
-                .datum(data_linePlusBarChart)
-                .transition().duration(500)
-                .attr('height', 350)
-                .call(chart);
-            return chart;
-        });
-
-
-    In case you have two data serie with extreme different numbers, that you would like to format
-    in different ways, you can pass a keyword *yaxis1_format* or *yaxis2_format* when
-    creating the graph::
-
-
-        ydata = [6, 5, 1]
-        y2data = [0.002, 0.003, 0.004]
-        chart = linePlusBarChart(name='linePlusBarChart',
-                                 yaxis2_format="function(d) { return d3.format(',0.3f')(d) }")
-
-    This way the graph create will represent the values of data series with three digits right
-    of the decimal point.
+        </script>
 
     """
     def __init__(self, **kwargs):

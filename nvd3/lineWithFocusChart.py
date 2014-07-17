@@ -19,8 +19,6 @@ class lineWithFocusChart(NVD3Chart):
     The lineWithFocusChart provide a smaller chart that act as a selector,
     this is very useful if you want to zoom on a specific time period.
 
-    .. image:: ../_static/screenshot/lineWithFocusChart.png
-
     Python example::
 
         from nvd3 import lineWithFocusChart
@@ -33,49 +31,45 @@ class lineWithFocusChart(NVD3Chart):
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        data_lineWithFocusChart = [{ "key" : "Serie 1",
-           "values" : [
-                { "x" : "1365026400000000",
-                  "y" : -6
-                },
-                { "x" : "1365026500000000",
-                  "y" : -5
-                },
-                { "x" : "1365026600000000",
-                  "y" : -1
-                },
-              ],
-            "yAxis" : "1"
-        }]
+    .. raw:: html
 
-        nv.addGraph(function() {
+        <div id="lineWithFocusChart"><svg style="height:450px;"></svg></div>
+        <script>
+            data_lineWithFocusChart=[{"values": [{"y": -6, "x": 1365026400000000}, {"y": 5, "x": 1365026500000000}, {"y": -1, "x": 1365026600000000}], "key": "Serie 1", "yAxis": "1"}];
+            nv.addGraph(function() {
                 var chart = nv.models.lineWithFocusChart();
-                chart.yAxis
-                    .tickFormat(d3.format(',.2f'));
-                chart.y2Axis
-                    .tickFormat(d3.format(',.2f'));
-                chart.xAxis
-                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) });
-                chart.x2Axis
-                    .tickFormat(function(d) { return d3.time.format('%d %b %y')(new Date(d)) });
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = d3.time.format('%d %b %Y')(new Date(parseInt(graph.point.x)));
-                    var y = String(graph.point.y);
-                    if(key == 'serie 1'){
-                        var y = 'There is ' +  String(graph.point.y)  + ' calls';
-                    }
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                    return tooltip_str;
-                });
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_lineWithFocusChart;
+                        chart.yAxis
+                            .tickFormat(d3.format(',.2f'));
+                        chart.y2Axis
+                            .tickFormat(d3.format(',.2f'));
+                        chart.xAxis
+                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
+                        chart.x2Axis
+                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
+
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = d3.time.format("%d %b %Y")(new Date(parseInt(graph.point.x)));
+                        var y = String(graph.point.y);
+                                            if(key == 'Serie 1'){
+                                var y =  String(graph.point.y)  + ' ext';
+                            }
+
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                        return tooltip_str; });
+
+                    chart.showLegend(true);
+
                 d3.select('#lineWithFocusChart svg')
-                    .datum(data_lineWithFocusChart)
-                    .transition()
-                    .duration(500)
-                    .call(chart);
-            return chart;
-        });
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('height', 450)
+                    .call(chart); });
+        </script>
+
     """
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)

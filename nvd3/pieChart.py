@@ -21,8 +21,6 @@ class pieChart(NVD3Chart):
     illustrating numerical proportion. In chart, the arc length of each sector
     is proportional to the quantity it represents.
 
-    .. image:: ../_static/screenshot/pieChart.png
-
     Python example::
 
         from nvd3 import pieChart
@@ -35,48 +33,44 @@ class pieChart(NVD3Chart):
         chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        data = [{ key: "Cumulative Return",
-                  values: [
-                    {
-                      "label": "One",
-                      "value" : 29.765957771107
-                    },
-                    {
-                      "label": "Two",
-                      "value" : 0
-                    },
-                    {
-                      "label": "Three",
-                      "value" : 32.807804682612
-                    },
-                  ]
-                }]
+    .. raw:: html
 
-        nv.addGraph(function() {
-            var chart = nv.models.pieChart()
-              .x(function(d) { return d.label })
-              .y(function(d) { return d.value })
-              .showLabels(true);
+        <div id="pieChart"><svg style="width:400px;height:400px;"></svg></div>
+        <script>
 
-            chart.color(d3.scale.category20c().range());
 
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = String(key);
-                var y =  String(y)  + ' cal';
-                tooltip_str = '<center><b>'+x+'</b></center>' + y;
-                return tooltip_str;
-            });
+            data_pieChart=[{"values": [{"value": 3, "label": "Orange"}, {"value": 4, "label": "Banana"}, {"value": 0, "label": "Pear"}, {"value": 1, "label": "Kiwi"}, {"value": 5, "label": "Apple"}, {"value": 7, "label": "Strawberry"}, {"value": 3, "label": "Pineapple"}], "key": "Serie 1"}];
 
-            d3.select("#div_id")
-                .datum(data)
-                .transition()
-                .duration(1200)
-                .call(chart);
+            nv.addGraph(function() {
+                var chart = nv.models.pieChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_pieChart[0].values;
+                        chart.tooltipContent(function(key, y, e, graph) {
+                            var x = String(key);
+                            var y =  String(y)  + ' cal';
 
-          return chart;
-        });
+                            tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                            return tooltip_str;
+                        });
+                    chart.showLegend(true);
+                    chart.showLabels(true);
+                    chart.donut(false);
+                chart
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value });
+                chart.width(400);
+                chart.height(400);
+
+                d3.select('#pieChart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', 400)
+                    .attr('height', 400)
+                    .call(chart);  });
+        </script>
+
     """
 
     CHART_FILENAME = "./pie.html"

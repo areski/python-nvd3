@@ -1,4 +1,4 @@
-.. automodule:: nvd3.NVD3Chart
+.. module:: nvd3.NVD3Chart
 
 .. _NVD3Chart-model:
 
