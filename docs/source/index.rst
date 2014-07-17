@@ -15,11 +15,11 @@ Python-nvd3 Documentation!
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js offers you.
 
-Python-NVD3 makes your life easy! You write Python and the library 
+Python-NVD3 makes your life easy! You write Python and the library
 renders JavaScript for you!
 These graphs can be part of your web application:
 
- .. image:: https:://raw.github.com/areski/python-nvd3/master/docs/showcase/multiple-charts.png
+ .. image:: https://raw.githubusercontent.com/areski/python-nvd3/develop/docs/showcase/multiple-charts.png
 
 Want to try it yourself? Here is a quick demo::
 
@@ -32,17 +32,17 @@ Want to try it yourself? Here is a quick demo::
     >>> chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
     >>> chart.buildcontent()
     >>> print chart.htmlcontent
-    
+
     >>> print chart.htmlcontent
 
     <div id="pieChart"><svg style="width:450px;height:450px;"></svg></div>
     <script>
-    data_pieChart=[{"values": [{"value": 3, "label": "Orange"}, 
-                   {"value": 4, "label": "Banana"}, 
-                   {"value": 0, "label": "Pear"}, 
-                   {"value": 1, "label": "Kiwi"}, 
-                   {"value": 5, "label": "Apple"}, 
-                   {"value": 7, "label": "Strawberry"}, 
+    data_pieChart=[{"values": [{"value": 3, "label": "Orange"},
+                   {"value": 4, "label": "Banana"},
+                   {"value": 0, "label": "Pear"},
+                   {"value": 1, "label": "Kiwi"},
+                   {"value": 5, "label": "Apple"},
+                   {"value": 7, "label": "Strawberry"},
                    {"value": 3, "label": "Pineapple"}], "key": "Serie 1"}];
 
     nv.addGraph(function() {
@@ -73,8 +73,8 @@ Want to try it yourself? Here is a quick demo::
     </script>
 
 
-This will render in your browser to live graphs! To 
-Check out the chart class reference to live JS examples and 
+This will render in your browser to live graphs! To
+Check out the chart class reference to live JS examples and
 the possible graphs types supported!
 
 Excited? Learn more here:

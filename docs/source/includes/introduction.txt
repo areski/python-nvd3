@@ -83,8 +83,15 @@ Supported nvd3 charts
 Documentation
 =============
 
-Documentation is available on 'Read the Docs':
-http://python-nvd3.readthedocs.org
+Documentation is available on 'Read the Docs': http://python-nvd3.readthedocs.org
+
+
+.. _changelog:
+
+Changelog
+---------
+
+Changelog summary : https://github.com/areski/python-nvd3/blob/master/CHANGELOG.rst
 
 
 .. _contributing:
@@ -108,7 +115,5 @@ Bug tracker: http://github.com/areski/python-nvd3/issues
 
 License
 =======
-
-Copyright (c) 2013 Arezqui Belaid <areski@gmail.com>
 
 Python-nvd3 is licensed under MIT, see `MIT-LICENSE.txt`.
