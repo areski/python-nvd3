@@ -21,7 +21,8 @@ These graphs can be part of your web application:
 
  .. image:: https://raw.githubusercontent.com/areski/python-nvd3/develop/docs/showcase/multiple-charts.png
 
-Want to try it yourself? Here is a quick demo::
+
+Want to try it yourself? Install python-nvd3, enter your python shell and try this quick demo::
 
     >>> from nvd3 import pieChart
     >>> type = 'pieChart'
@@ -33,7 +34,8 @@ Want to try it yourself? Here is a quick demo::
     >>> chart.buildcontent()
     >>> print chart.htmlcontent
 
-    >>> print chart.htmlcontent
+
+This will output the following HTML to render a live chart. The HTML could be stored into a HTML file, used in a Web application, or even used via Ipython Notebook::
 
     <div id="pieChart"><svg style="width:450px;height:450px;"></svg></div>
     <script>
@@ -73,11 +75,10 @@ Want to try it yourself? Here is a quick demo::
     </script>
 
 
-This will render in your browser to live graphs! To
-Check out the chart class reference to live JS examples and
-the possible graphs types supported!
+Check out the class references for dynamic examples and a full list of supported charts!
 
-Excited? Learn more here:
+Excited !? Learn more here:
+
 
 .. toctree::
     :maxdepth: 2

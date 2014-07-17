@@ -73,9 +73,7 @@ This will output the following HTML to render a live chart. The HTML could be st
 Documentation
 -------------
 
-Check out the documentation for some live Chart examples!
-
-Documentation is available on 'Read the Docs': http://python-nvd3.readthedocs.org
+Check out the documentation on 'Read the Docs'(http://python-nvd3.readthedocs.org) for some live Chart examples!
 
 
 Installation

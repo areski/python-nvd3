@@ -78,12 +78,13 @@ Supported nvd3 charts
 
     See the section Chart Classes.
 
+
 .. _documentation:
 
 Documentation
 =============
 
-Documentation is available on 'Read the Docs': http://python-nvd3.readthedocs.org
+Check out the documentation on 'Read the Docs'(http://python-nvd3.readthedocs.org) for some live Chart examples!
 
 
 .. _changelog:
