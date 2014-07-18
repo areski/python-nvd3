@@ -1,8 +1,10 @@
-
+{% block container %}
 {% if chart.display_container %}
-{{ chart.container }}
+    {{ chart.container }}
 {% endif %}
+{%  endblock %}
 
+{% block body %}
 {% if chart.tag_script_js %}
 <script>
 {% endif %}
@@ -93,25 +95,6 @@ $(function(){
             chart.showLegend(false);
         {% endif %}
     {% endif %}
-
-
-    {# showLabels only supported in pieChart #}
-    {% if chart.model == 'pieChart' %}
-        {% if chart.show_labels %}
-            chart.showLabels(true);
-        {% else %}
-            chart.showLabels(false);
-        {% endif %}
-
-        {% if chart.donut %}
-            chart.donut(true);
-            chart.donutRatio({{ chart.donutRatio }});
-        {% else %}
-            chart.donut(false);
-        {% endif %}
-    {% endif %}
-
-
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
         {% if value is string and value.startswith(".") %}:
@@ -153,3 +136,4 @@ $(function(){
 {% if chart.tag_script_js %}
 </script>
 {% endif %}
+{% endblock %}
