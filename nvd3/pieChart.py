@@ -83,7 +83,9 @@ class pieChart(NVD3Chart):
         NVD3Chart.__init__(self, **kwargs)
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
-
+        self.donut = kwargs.get('donut', False)
+        self.donutRatio = kwargs.get('donutRatio', 0.35)
+        self.color_list = []
         self.create_x_axis('xAxis', format=None)
         self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
@@ -91,6 +93,8 @@ class pieChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+        self.donut = kwargs.get('donut', False)
+        self.donutRatio = kwargs.get('donutRatio', 0.35)
 
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
