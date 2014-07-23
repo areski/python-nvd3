@@ -24,9 +24,11 @@ class pieChart(NVD3Chart):
     Python example::
 
         from nvd3 import pieChart
-        chart = pieChart(name='pieChart', color_category='category20c', height=400, width=400)
+        chart = pieChart(name='pieChart', color_category='category20c',
+                         height=400, width=400)
 
-        xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+        xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawbery",
+                 "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
@@ -41,7 +43,14 @@ class pieChart(NVD3Chart):
         <script>
 
 
-            data_pieChart=[{"values": [{"value": 3, "label": "Orange"}, {"value": 4, "label": "Banana"}, {"value": 0, "label": "Pear"}, {"value": 1, "label": "Kiwi"}, {"value": 5, "label": "Apple"}, {"value": 7, "label": "Strawberry"}, {"value": 3, "label": "Pineapple"}], "key": "Serie 1"}];
+            data_pieChart=[{"values": [{"value": 3, "label": "Orange"},
+                           {"value": 4, "label": "Banana"},
+                           {"value": 0, "label": "Pear"},
+                           {"value": 1, "label": "Kiwi"},
+                           {"value": 5, "label": "Apple"},
+                           {"value": 7, "label": "Strawberry"},
+                           {"value": 3, "label": "Pineapple"}],
+                           "key": "Serie 1"}];
 
             nv.addGraph(function() {
                 var chart = nv.models.pieChart();
@@ -76,14 +85,17 @@ class pieChart(NVD3Chart):
     CHART_FILENAME = "./pie.html"
 
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
     template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
-
+        self.donut = kwargs.get('donut', False)
+        self.donutRatio = kwargs.get('donutRatio', 0.35)
+        self.color_list = []
         self.create_x_axis('xAxis', format=None)
         self.create_y_axis('yAxis', format=None)
         # must have a specified height, otherwise it superimposes both chars
@@ -91,6 +103,8 @@ class pieChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+        self.donut = kwargs.get('donut', False)
+        self.donutRatio = kwargs.get('donutRatio', 0.35)
 
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
