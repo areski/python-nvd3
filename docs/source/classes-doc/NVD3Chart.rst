@@ -5,6 +5,10 @@
 :class:`NVD3Chart`
 ------------------
 
-.. autoclass:: NVD3Chart
+.. autoclass:: nvd3.NVD3Chart.NVD3Chart
     :members:
+    :undoc-members:
+
+    ..  automethod:: __init__
+
 

@@ -1,4 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+    {{ super() }}
+    
+    
+    {# showLabels only supported in pieChart #}
+        chart.showLabels({{chart.show_labels|lower}});
 
+        {% if chart.donut %}
+            chart.donut(true);
+            chart.donutRatio({{ chart.donutRatio }});
+        {% else %}
+            chart.donut(false);
+        {% endif %}
+
+{% endblock %}
+{% block foot %}
 {% if chart.color_list %}
         var mycolor = new Array();
     {% for color in chart.color_list %}
@@ -19,3 +35,4 @@
 {% if chart.color_list %}
         chart.color(mycolor);
 {% endif %}
+{% endblock %}
