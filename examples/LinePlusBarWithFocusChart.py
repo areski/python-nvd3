@@ -19,7 +19,7 @@ start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
 #Open File for test
-output_file = open('test_linePlusBarWithFocusChart.html', 'w')
+output_file = open('test_LinePlusBarWithFocusChart.html', 'w')
 #---------------------------------------
 type = "linePlusBarWithFocusChart"
 chart = LinePlusBarWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y")
