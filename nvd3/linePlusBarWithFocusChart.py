@@ -161,6 +161,8 @@ class LinePlusBarWithFocusChart(NVD3Chart):
 
     def __init__(self, **kwargs):
         super(LinePlusBarWithFocusChart, self).__init__(**kwargs)
+        self.model = 'linePlusBarWithFocusChart'
+
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
 
