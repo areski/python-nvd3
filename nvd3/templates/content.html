@@ -85,13 +85,9 @@ $(function(){
     {% if chart.model == 'scatterChart' %}
         chart.scatter.onlyCircles(false);
     {% endif %}
-
+    
     {% if chart.model != 'discreteBarChart' %}
-        {% if chart.show_legend %}
-            chart.showLegend(true);
-        {% else %}
-            chart.showLegend(false);
-        {% endif %}
+        chart.showLegend({{chart.show_legend|lower}});
     {% endif %}
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
