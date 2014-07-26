@@ -10,6 +10,8 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart
+from jinja2 import Environment, FileSystemLoader
+import os
 
 
 class multiBarHorizontalChart(NVD3Chart):
@@ -95,3 +97,55 @@ class multiBarHorizontalChart(NVD3Chart):
             self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+
+class MultiBarHorizontalChart(NVD3Chart):
+
+    CHART_FILENAME = "./multibarcharthorizontal.html"
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
+    def __init__(self, **kwargs):
+        super(MultiBarHorizontalChart, self).__init__(**kwargs)
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
+        # must have a specified height, otherwise it superimposes both chars
+
+        self.set_graph_height(height)
+
+        if width:
+            self.set_graph_width(width)
+
+    def buildjschart(self):
+        """
+        This only renders the template discretebarchart.html,
+        the rest of the body is renderd by calling NVD3Chart.buildhtml
+        """
+        NVD3Chart.buildjschart(self)
+
+    def buildcontent(self):
+        """Build HTML content only, no header or body tags. To be useful this
+        will usually require the attribute `juqery_on_ready` to be set which
+        will wrap the js in $(function(){<regular_js>};)
+        """
+        self.buildcontainer()
+        # if the subclass has a method buildjs this method will be
+        # called instead of the method defined here
+        # when this subclass method is entered it does call
+        # the method buildjschart defined here
+        self.buildjschart()
+        self.htmlcontent = self.template_chart_nvd3.render(chart=self)
+
+    def buildhtml(self):
+        """Build the HTML page
+        Create the htmlheader with css / js
+        Create html page
+        Add Js code for nvd3
+        """
+        self.buildcontent()
+        self.content = self.htmlcontent
+        self.htmlcontent = self.template_page_nvd3.render(chart=self)
