@@ -36,7 +36,7 @@ def stab(tab=1):
     return ' ' * 4 * tab
 
 
-class NVD3Chart:
+class NVD3Chart(object):
     """
     NVD3Chart Base class.
     """
