@@ -2,8 +2,16 @@
 {% block container %}
     {# super() #}
 {% endblock %}
+
+{% block start_script %}
+{% endblock start_script %}
+
 {% block body %}
+    {% block inject %}
+    {% endblock inject %}
     {% block foot %}
     {% endblock %}
 {% endblock %}
 
+{% block endscript %}
+{% endblock endscript %}

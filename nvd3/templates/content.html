@@ -1,18 +1,11 @@
+{% extends "infra.html" %}
 {% block container %}
 {% if chart.display_container %}
     {{ chart.container }}
 {% endif %}
-{%  endblock %}
+{%  endblock  container %}
 
 {% block body %}
-{% if chart.tag_script_js %}
-<script>
-{% endif %}
-
-{% if chart.jquery_on_ready %}
-$(function(){
-{% endif %}
-
 {% if self.model == 'linePlusBarWithFocusChart' %}
     data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
         series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
@@ -101,6 +94,7 @@ $(function(){
         {# include specific subchart #}
         {{ chart.jschart }}
 
+        {% block inject %}
         {# Inject data to D3 #}
         d3.select('#{{ chart.name }} svg')
             .datum(datum)
@@ -112,17 +106,11 @@ $(function(){
             .attr('height', {{ chart.height}})
             {% endif %}
             .call(chart);
+        {% endblock inject %}
 		{# extra chart attributes #}
 		{% if chart.extras %}
 			{{ chart.extras }}
 		{% endif %}
     {# closing nv.addGraph #}
     });
-
-{% if chart.jquery_on_ready %}
-});
-{% endif %}
-{% if chart.tag_script_js %}
-</script>
-{% endif %}
 {% endblock body %}
