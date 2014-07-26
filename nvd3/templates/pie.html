@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block body %}
-    {{ super() }}
     
             {% block pietooltip %}
                 chart.tooltipContent(function(key, y, e, graph) {
@@ -43,4 +42,5 @@
         chart.color(mycolor);
 {% endif %}
 {% endblock foot %}
+
 {% endblock body %}
