@@ -1,4 +1,13 @@
-chart
-    .showDistX(true)
-    .showDistY(true)
-    .color(d3.scale.category10().range());
+{% extends "base.html" %}
+{% block body %}
+{{ super() }}
+
+    chart.scatter.onlyCircles(false);
+    
+    chart
+        .showDistX(true)
+        .showDistY(true)
+        .color(d3.scale.category10().range());
+
+
+{% endblock body %}

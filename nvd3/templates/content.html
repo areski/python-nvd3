@@ -71,9 +71,6 @@
 
     {# the shape attribute in kwargs is not applied when #}
     {# not allowing other shapes to be rendered #}
-    {% if chart.model == 'scatterChart' %}
-        chart.scatter.onlyCircles(false);
-    {% endif %}
     
     {% if chart.model != 'discreteBarChart' %}
         chart.showLegend({{chart.show_legend|lower}});
