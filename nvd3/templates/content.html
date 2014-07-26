@@ -40,17 +40,15 @@ $(function(){
         chart.stacked(true);
     {% endif %}
 
-    {% if chart.model != 'pieChart' %}
-        {% for axis, a in chart.axislist.items() %}
-            {% if a.items() %}
-                chart.{{ axis }}
-                {% for attr, value in a.items() %}
-                    .{{ attr}}({{ value}}){% if loop.last %};
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+    {% for axis, a in chart.axislist.items() %}
+        {% if a.items() %}
+            chart.{{ axis }}
+            {% for attr, value in a.items() %}
+                .{{ attr}}({{ value}}){% if loop.last %};
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
 
     {# generate custom tooltip for the chart #}
     {% if chart.custom_tooltip_flag %}
