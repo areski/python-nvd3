@@ -10,7 +10,7 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart
-from jinja2 import DebugUndefined, Environment, FileSystemLoader, Template
+from jinja2 import Environment, FileSystemLoader
 import os
 
 
