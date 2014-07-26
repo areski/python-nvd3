@@ -6,14 +6,16 @@
 {%  endblock  container %}
 
 {% block body %}
-{% if self.model == 'linePlusBarWithFocusChart' %}
-    data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
+    {% block data %}
+    {% if self.model == 'linePlusBarWithFocusChart' %}
+        data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
         series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
         return series; });
-{% else %}
-    data_{{ chart.name }}={{ chart.series_js }};
-{% endif %}
-
+    {% else %}
+        data_{{ chart.name }}={{ chart.series_js }};
+    {% endif %}
+    {% endblock data %}
+    
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
 
