@@ -7,15 +7,10 @@
 
 {% block body %}
     {% block data %}
-    {% if self.model == 'linePlusBarWithFocusChart' %}
-        data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
-        series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
-        return series; });
-    {% else %}
         data_{{ chart.name }}={{ chart.series_js }};
-    {% endif %}
     {% endblock data %}
     
+    {% block init %}
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
 
@@ -26,11 +21,13 @@
     {% if not chart.color_list and chart.color_category %}
         chart.color(d3.scale.{{ chart.color_category }}().range());
     {% endif %}
+    {% endblock init %}
 
     {% if chart.stacked %}
         chart.stacked(true);
     {% endif %}
-
+    
+    {% block axes %}
     {% for axis, a in chart.axislist.items() %}
         {% if a.items() %}
             chart.{{ axis }}
@@ -40,8 +37,10 @@
             {% endfor %}
         {% endif %}
     {% endfor %}
+    {% endblock axes %}
 
     {# generate custom tooltip for the chart #}
+    {% block tooltip %}
     {% if chart.custom_tooltip_flag %}
         {% if not chart.date_flag %}
             {% if chart.model == 'pieChart' %}
@@ -66,6 +65,7 @@
             });
         {% endif %}
     {% endif %}
+    {% endblock tooltip %}
 
     {# the shape attribute in kwargs is not applied when #}
     {# not allowing other shapes to be rendered #}
@@ -107,5 +107,7 @@
 			{{ chart.extras }}
 		{% endif %}
     {# closing nv.addGraph #}
+    {% block close %}
     });
+    {% endblock close %}
 {% endblock body %}
