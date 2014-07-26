@@ -21,13 +21,9 @@
 
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
 
-    {% if chart.model == 'pieChart' %}
-        var datum = data_{{ chart.name }}[0].values;
-    {% else %}
         var datum = data_{{ chart.name }};
-    {% endif %}
 
-    {% if chart.model != 'pieChart' and not chart.color_list and chart.color_category %}
+    {% if not chart.color_list and chart.color_category %}
         chart.color(d3.scale.{{ chart.color_category }}().range());
     {% endif %}
 
