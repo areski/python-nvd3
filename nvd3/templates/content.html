@@ -54,12 +54,8 @@ $(function(){
     {% if chart.custom_tooltip_flag %}
         {% if not chart.date_flag %}
             {% if chart.model == 'pieChart' %}
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = String(key);
-                    {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+x+'</b></center>' + y;
-                    return tooltip_str;
-                });
+                {% block pietooltip %}
+                {% endblock pietooltip %}
             {% else %}
                 chart.tooltipContent(function(key, y, e, graph) {
                     var x = String(graph.point.x);
@@ -130,4 +126,4 @@ $(function(){
 {% if chart.tag_script_js %}
 </script>
 {% endif %}
-{% endblock %}
+{% endblock body %}
