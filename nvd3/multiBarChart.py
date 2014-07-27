@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
 from jinja2 import Environment, FileSystemLoader
 import os
 
@@ -93,7 +93,7 @@ class multiBarChart(NVD3Chart):
             self.set_graph_width(width)
 
 
-class MultiBarChart(NVD3Chart):
+class MultiBarChart(TemplateMixin, NVD3Chart):
 
     CHART_FILENAME = "./multibarchart.html"
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
@@ -119,33 +119,3 @@ class MultiBarChart(NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-    def buildjschart(self):
-        """
-        This only renders the template discretebarchart.html,
-        the rest of the body is renderd by calling NVD3Chart.buildhtml
-        """
-        NVD3Chart.buildjschart(self)
-
-    def buildcontent(self):
-        """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
-        will wrap the js in $(function(){<regular_js>};)
-        """
-        self.buildcontainer()
-        # if the subclass has a method buildjs this method will be
-        # called instead of the method defined here
-        # when this subclass method is entered it does call
-        # the method buildjschart defined here
-        self.buildjschart()
-        self.htmlcontent = self.template_chart_nvd3.render(chart=self)
-
-    def buildhtml(self):
-        """Build the HTML page
-        Create the htmlheader with css / js
-        Create html page
-        Add Js code for nvd3
-        """
-        self.buildcontent()
-        self.content = self.htmlcontent
-        self.htmlcontent = self.template_page_nvd3.render(chart=self)
