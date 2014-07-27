@@ -442,6 +442,26 @@ class NVD3Chart(object):
         self.axislist[name] = axis
 
 
+class TemplateMixin(object):
+    """
+    A mixin that override buildcontent. Instead of building the complex
+    content template we exploit Jinja2 inheritance. Thus each chart class
+    renders it's own chart template which inherits from content.html
+    """
+    def buildcontent(self):
+        """Build HTML content only, no header or body tags. To be useful this
+        will usually require the attribute `juqery_on_ready` to be set which
+        will wrap the js in $(function(){<regular_js>};)
+        """
+        self.buildcontainer()
+        # if the subclass has a method buildjs this method will be
+        # called instead of the method defined here
+        # when this subclass method is entered it does call
+        # the method buildjschart defined here
+        self.buildjschart()
+        self.htmlcontent = self.template_chart_nvd3.render(chart=self)
+
+
 def _main():
     """
     Parse options and process commands
