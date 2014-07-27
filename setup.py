@@ -116,6 +116,7 @@ setup(
     license='MIT license',
     py_modules=['nvd3'],
     namespace_packages=[],
+    test_suite='tests',
     packages=find_packages(),
     package_data=find_package_data(),
     zip_safe=False,
