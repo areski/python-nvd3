@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
 from jinja2 import Environment, FileSystemLoader
 # from jinja2 import DebugUndefined, Template
 import os
@@ -111,7 +111,7 @@ class pieChart(NVD3Chart):
         self.jschart = self.template_chart_nvd3.render(chart=self)
 
 
-class PieChart(NVD3Chart):
+class PieChart(TemplateMixin, NVD3Chart):
 
     CHART_FILENAME = "./piechart.html"
 
@@ -138,32 +138,3 @@ class PieChart(NVD3Chart):
         self.donut = kwargs.get('donut', False)
         self.donutRatio = kwargs.get('donutRatio', 0.35)
 
-    def buildjschart(self):
-        """
-        This only renders the template discretebarchart.html,
-        the rest of the body is renderd by calling NVD3Chart.buildhtml
-        """
-        super(PieChart, self).buildjschart()
-
-    def buildcontent(self):
-        """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
-        will wrap the js in $(function(){<regular_js>};)
-        """
-        self.buildcontainer()
-        # if the subclass has a method buildjs this method will be
-        # called instead of the method defined here
-        # when this subclass method is entered it does call
-        # the method buildjschart defined here
-        self.buildjschart()
-        self.htmlcontent = self.template_chart_nvd3.render(chart=self)
-
-    def buildhtml(self):
-        """Build the HTML page
-        Create the htmlheader with css / js
-        Create html page
-        Add Js code for nvd3
-        """
-        self.buildcontent()
-        self.content = self.htmlcontent
-        self.htmlcontent = self.template_page_nvd3.render(chart=self)
