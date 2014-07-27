@@ -41,3 +41,5 @@ bower_components
 archive
 
 test_*.html
+#[vim]
+*.swp
