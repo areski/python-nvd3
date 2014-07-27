@@ -30,11 +30,11 @@
     {% block axes %}
     {% for axis, a in chart.axislist.items() %}
         {% if a.items() %}
-            chart.{{ axis }}
-            {% for attr, value in a.items() %}
-                .{{ attr}}({{ value}}){% if loop.last %};
-                {% endif %}
-            {% endfor %}
+        chart.{{ axis }}
+        {% for attr, value in a.items() %}
+            .{{ attr}}({{ value}}){% if loop.last %};
+            {% endif %}
+        {% endfor %}
         {% endif %}
     {% endfor %}
     {% endblock axes %}
@@ -69,10 +69,10 @@
 
     {# the shape attribute in kwargs is not applied when #}
     {# not allowing other shapes to be rendered #}
-    
-    {% if chart.model != 'discreteBarChart' %}
-        chart.showLegend({{chart.show_legend|lower}});
-    {% endif %}
+    {% block legend %}
+      chart.showLegend({{chart.show_legend|lower}});
+    {% endblock legend %}
+    {% block custoattr %}
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
         {% if value is string and value.startswith(".") %}:
@@ -88,6 +88,8 @@
 
         {# include specific subchart #}
         {{ chart.jschart }}
+
+    {% endblock custoattr %}
 
         {% block inject %}
         {# Inject data to D3 #}

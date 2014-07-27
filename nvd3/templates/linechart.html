@@ -4,11 +4,19 @@
 {% extends "content.html" %}
 {% block body %}
 
-{# calling super guarantees everying in content is also found here ...#}
-{{super()}}
+    {% block data %}
+    {{super()}}
+    {% endblock data %}
 
-{# add AM_PM time axis ... #}
-{% if chart.x_axis_format == 'AM_PM' %}
+    {% block init %}
+    {{super()}}
+    {% endblock init %}
+
+    {% block axes %}
+    {{super()}}
+    {% endblock axes %}
+    
+    {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
             if (d > 12) {
                 d = d - 12; return (String(d) + 'PM');
@@ -17,6 +25,22 @@
                 return (String(d) + 'AM');
             }
         };
+    
+    {% block legend %}
+    {{super()}}
+    {% endblock legend %}
+    
+    {% block custoattr %}
+    {{super()}}
+    {% endblock custoattr %}
+
+    {% block inject %}
+    {{ super() }}
+    {% endblock inject %}
+    
+    {% block close %}
+    {{ super() }}
+    {% endblock close %}
 {% endif %}
 
 {% endblock body %}
