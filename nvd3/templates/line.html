@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block body %}
 {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
             if (d > 12) {
@@ -8,3 +10,4 @@
             }
         };
 {% endif %}
+{% endblock body %}

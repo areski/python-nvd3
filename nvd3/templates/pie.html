@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
-    {{ super() }}
     
-    
+            {% block pietooltip %}
+                chart.tooltipContent(function(key, y, e, graph) {
+                    var x = String(key);
+                    {{ chart.tooltip_condition_string }}
+                    tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                    return tooltip_str;
+                });
+            {% endblock pietooltip %}
+
     {# showLabels only supported in pieChart #}
         chart.showLabels({{chart.show_labels|lower}});
 
@@ -13,7 +20,6 @@
             chart.donut(false);
         {% endif %}
 
-{% endblock %}
 {% block foot %}
 {% if chart.color_list %}
         var mycolor = new Array();
@@ -35,4 +41,5 @@
 {% if chart.color_list %}
         chart.color(mycolor);
 {% endif %}
-{% endblock %}
+{% endblock foot %}
+{% endblock body %}

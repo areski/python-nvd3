@@ -9,7 +9,9 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
+from jinja2 import Environment, FileSystemLoader
+import os
 
 
 class discreteBarChart(NVD3Chart):
@@ -64,6 +66,12 @@ class discreteBarChart(NVD3Chart):
 
 
     """
+    CHART_FILENAME = "./discretebarchart.html"
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
     def __init__(self, **kwargs):
         NVD3Chart.__init__(self, **kwargs)
         # self.slugify_name(kwargs.get('name', 'discreteBarChart'))
@@ -73,7 +81,8 @@ class discreteBarChart(NVD3Chart):
         if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
             self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format', "%d %b %Y %H %S"),
+                               format=kwargs.get('x_axis_format',
+                                                 "%d %b %Y %H %S"),
                                date=True)
         else:
             self.create_x_axis('xAxis', format=None)
@@ -85,5 +94,40 @@ class discreteBarChart(NVD3Chart):
         # must have a specified height, otherwise it superimposes both charts
         if height:
             self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+    def buildjschart(self):
+        NVD3Chart.buildjschart(self)
+        self.jschart = self.template_chart_nvd3.render(chart=self)
+
+
+class DiscreteBarChart(TemplateMixin, NVD3Chart):
+    CHART_FILENAME = "./discretebarchart.html"
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
+    def __init__(self, **kwargs):
+        super(DiscreteBarChart, self).__init__(**kwargs)
+        self.model = 'discreteBarChart'
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
+            self.set_date_flag(True)
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format',
+                                                 "%d %b %Y %H %S"),
+                               date=True)
+        else:
+            self.create_x_axis('xAxis', format=None)
+
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', ".0f"))
+
+        self.set_custom_tooltip_flag(True)
+
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
