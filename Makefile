@@ -20,5 +20,18 @@ coverage: install
 	coverage report
 	coverage html 
 
+# assume that the developer already works with virtualenv
+# or virtualenv-wrapper
+install:
+	python setup.py install
+
+test: install
+	python setup.py test
+
+coverage: install
+	coverage run --source=nvd3 setup.py test
+	coverage report
+	coverage html
+
 docs:
 	sphinx-build -aE docs docs/html > /dev/null
