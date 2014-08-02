@@ -9,7 +9,9 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
+from jinja2 import Environment, FileSystemLoader
+import os
 
 
 class cumulativeLineChart(NVD3Chart):
@@ -84,6 +86,40 @@ class cumulativeLineChart(NVD3Chart):
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
+
+        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.1%'))
+
+        # must have a specified height, otherwise it superimposes both chars
+        if height:
+            self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+
+class CumulativeLineChart(TemplateMixin, NVD3Chart):
+
+    CHART_FILENAME = "./cumulativelinechart.html"
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
+    def __init__(self, **kwargs):
+        super(CumulativeLineChart, self).__init__(**kwargs)
+        self.model = 'cumulativeLineChart'
+
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
+            self.set_date_flag(True)
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format', '%d %b %Y'),
+                               date=True)
+            self.set_custom_tooltip_flag(True)
+        else:
+            self.create_x_axis('xAxis', format=kwargs.get(
+                'x_axis_format', '.2f'))
 
         self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.1%'))
 

@@ -9,7 +9,9 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
+from jinja2 import Environment, FileSystemLoader
+import os
 
 
 class linePlusBarChart(NVD3Chart):
@@ -112,5 +114,46 @@ class linePlusBarChart(NVD3Chart):
         # must have a specified height, otherwise it superimposes both chars
         if height:
             self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)
+
+
+class LinePlusBarChart(TemplateMixin, NVD3Chart):
+
+    CHART_FILENAME = "./lineplusbarchart.html"
+
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
+    def __init__(self, **kwargs):
+        super(LinePlusBarChart, self).__init__(**kwargs)
+        self.model = 'linePlusBarChart'
+
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+        self.yaxis1_format = kwargs.get('yaxis1_format',
+                                        "function(d) { return d3.format(',f')(d) }")
+        self.yaxis2_format = kwargs.get('yaxis2_format',
+                                        "function(d) { return d3.format(',f')(d) }")
+
+        if kwargs.get('x_is_date', False):
+            self.set_date_flag(True)
+            self.create_x_axis('xAxis',
+                               format=kwargs.get('x_axis_format',
+                                                 '%d %b %Y %H %S'),
+                               date=True)
+            self.set_custom_tooltip_flag(True)
+        else:
+            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format',
+                                                          '.2f'))
+
+        self.create_y_axis('y1Axis', format=self.yaxis1_format,
+                           custom_format=True)
+        self.create_y_axis('y2Axis', format=self.yaxis2_format,
+                           custom_format=True)
+
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)

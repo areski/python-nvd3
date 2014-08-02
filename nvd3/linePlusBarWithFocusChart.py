@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
 from jinja2 import Environment, FileSystemLoader
 # from jinja2 import DebugUndefined, Template
 import os
@@ -132,7 +132,7 @@ class linePlusBarWithFocusChart(NVD3Chart):
             else:
                 format = kwargs.get('x_axis_format', '.2f')
             self.create_x_axis('xAxis', format=format)
-            #self.create_x_axis('xAxis', format=".2f")
+            # self.create_x_axis('xAxis', format=".2f")
 
         self.create_y_axis('y1Axis', format="f")
         self.create_y_axis('y3Axis', format="f")
@@ -150,3 +150,67 @@ class linePlusBarWithFocusChart(NVD3Chart):
     def buildjschart(self):
         NVD3Chart.buildjschart(self)
         self.jschart = self.template_chart_nvd3.render(chart=self)
+
+
+class LinePlusBarWithFocusChart(TemplateMixin, NVD3Chart):
+
+    CHART_FILENAME = "./linebarwfocuschart.html"
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+
+    def __init__(self, **kwargs):
+        super(LinePlusBarWithFocusChart, self).__init__(**kwargs)
+        self.model = 'linePlusBarWithFocusChart'
+
+        height = kwargs.get('height', 450)
+        width = kwargs.get('width', None)
+
+        if kwargs.get('x_is_date', False):
+            self.set_date_flag(True)
+
+            with_focus_chart_1 = """function(d) {
+                var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
+                if (dx > 0) { return d3.time.format('%s')(new Date(dx)) }
+                return null;
+            }""" % (self.name, self.name, kwargs.get('x_axis_format',
+                                                     '%d %b %Y %H %S'))
+            self.create_x_axis('xAxis', format=with_focus_chart_1, date=False,
+                               custom_format=True)
+
+            with_focus_chart_2 = """function(d) {
+                var dx = data_%s[0].values[d] && data_%s[0].values[d].x || 0;
+                return d3.time.format('%s')(new Date(dx));
+            }""" % (self.name, self.name, kwargs.get('x_axis_format',
+                                                     '%d %b %Y %H %S'))
+
+            self.create_x_axis('x2Axis', format=with_focus_chart_2,
+                               date=False, custom_format=True)
+
+            self.set_custom_tooltip_flag(True)
+        else:
+            if kwargs.get('x_axis_format') == 'AM_PM':
+                # why overwrite format here?
+                self.x_axis_format = format = 'AM_PM'
+            else:
+                format = kwargs.get('x_axis_format', '.2f')
+            self.create_x_axis('xAxis', format=format)
+            # self.create_x_axis('xAxis', format=".2f")
+
+        self.create_y_axis('y1Axis', format="f")
+        self.create_y_axis('y3Axis', format="f")
+
+        self.create_y_axis('y2Axis',
+                           format="function(d) { return d3.format(',.2f')(d) }",
+                           custom_format=True)
+
+        self.create_y_axis('y4Axis',
+                           format="function(d) { return d3.format(',.2f')(d) }",
+                           custom_format=True)
+
+        # must have a specified height, otherwise it superimposes both chars
+        if height:
+            self.set_graph_height(height)
+        if width:
+            self.set_graph_width(width)

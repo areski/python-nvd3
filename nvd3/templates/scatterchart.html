@@ -1,6 +1,11 @@
-{% extends "base.html" %}
+{# This template adds attributes unique
+   to  scatterChart #}
+
+{% extends "content.html" %}
 {% block body %}
-{{ super() }}
+
+{# calling super guarantees everying in content is also found here ...#}
+{{super()}}
 
     chart.scatter.onlyCircles(false);
     
@@ -9,5 +14,5 @@
         .showDistY(true)
         .color(d3.scale.category10().range());
 
-
 {% endblock body %}
+

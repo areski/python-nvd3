@@ -2,14 +2,16 @@
 {% block container %}
     {# super() #}
 {% endblock %}
-{% if chart.tag_script_js %}
-<script>
-{% endif %}
+
+{% block start_script %}
+{% endblock start_script %}
+
 {% block body %}
+    {% block inject %}
+    {% endblock inject %}
     {% block foot %}
     {% endblock %}
 {% endblock %}
-{% if chart.tag_script_js %}
-</script>
-{% endif %}
 
+{% block endscript %}
+{% endblock endscript %}
