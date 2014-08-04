@@ -1,4 +1,4 @@
-.PHONY: docs release clean build
+.PHONY: docs release clean build install test
 
 clean:
 	rm -rf nvd3_env htmlcov
@@ -7,26 +7,13 @@ build:
 	virtualenv nvd3_env && source nvd3_env/bin/activate && \
 		pip install -r requirements.txt
 
-# assume that the developer already works with virtualenv 
-# or virtualenv-wrapper 
-install: 
-	python setup.py install 
-
 test: install 
 	python setup.py test
-
-coverage: install 
-	coverage run --source=nvd3 setup.py test 
-	coverage report
-	coverage html 
 
 # assume that the developer already works with virtualenv
 # or virtualenv-wrapper
 install:
 	python setup.py install
-
-test: install
-	python setup.py test
 
 coverage: install
 	coverage run --source=nvd3 setup.py test
