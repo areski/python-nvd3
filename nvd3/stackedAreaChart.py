@@ -14,7 +14,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 
 
-class stackedAreaChart(NVD3Chart):
+class StackedAreaChart(TemplateMixin, NVD3Chart):
     """
     The stacked area chart is identical to the area chart, except the areas are stacked
     on top of each other, rather than overlapping. This can make the chart much easier to read.
@@ -75,28 +75,6 @@ class stackedAreaChart(NVD3Chart):
         </script>
 
     """
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-
-        if kwargs.get('x_is_date', False):
-            self.set_date_flag(True)
-            self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format', '%d %b %Y'),
-                               date=True)
-            self.set_custom_tooltip_flag(True)
-        else:
-            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-
-class StackedAreaChart(TemplateMixin, NVD3Chart):
 
     CHART_FILENAME = "./stackedareachart.html"
 
@@ -125,3 +103,5 @@ class StackedAreaChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+stackedAreaChart = StackedAreaChart
