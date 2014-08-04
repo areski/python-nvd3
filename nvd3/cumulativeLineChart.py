@@ -14,7 +14,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 
 
-class cumulativeLineChart(NVD3Chart):
+class CumulativeLineChart(TemplateMixin, NVD3Chart):
     """
     A cumulative line chart is used when you have one important grouping representing
     an ordered set of data and one value to show, summed over time.
@@ -40,7 +40,13 @@ class cumulativeLineChart(NVD3Chart):
 
         <div id="cumulativeLineChart"><svg style="height:450px;"></svg></div>
         <script>
-            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000000}, {"y": 5, "x": 1365026500000000}, {"y": 1, "x": 1365026600000000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 36, "x": 1365026400000000}, {"y": 55, "x": 1365026500000000}, {"y": 11, "x": 1365026600000000}], "key": "Serie 2", "yAxis": "1"}];
+            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000000},
+            {"y": 5, "x": 1365026500000000},
+            {"y": 1, "x": 1365026600000000}],
+            "key": "Serie 1", "yAxis": "1"},
+            {"values": [{"y": 36, "x": 1365026400000000},
+            {"y": 55, "x": 1365026500000000},
+            {"y": 11, "x": 1365026600000000}], "key": "Serie 2", "yAxis": "1"}];
             nv.addGraph(function() {
                 var chart = nv.models.cumulativeLineChart();
                 chart.margin({top: 30, right: 60, bottom: 20, left: 60});
@@ -72,31 +78,6 @@ class cumulativeLineChart(NVD3Chart):
         </script>
 
     """
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-
-        if kwargs.get('x_is_date', False):
-            self.set_date_flag(True)
-            self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format', '%d %b %Y'),
-                               date=True)
-            self.set_custom_tooltip_flag(True)
-        else:
-            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
-
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.1%'))
-
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-
-class CumulativeLineChart(TemplateMixin, NVD3Chart):
 
     CHART_FILENAME = "./cumulativelinechart.html"
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
@@ -123,8 +104,8 @@ class CumulativeLineChart(TemplateMixin, NVD3Chart):
 
         self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.1%'))
 
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+cumulativeLineChart = CumulativeLineChart
