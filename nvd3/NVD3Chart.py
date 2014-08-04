@@ -45,6 +45,12 @@ class NVD3Chart(object):
     #:  directory holding the assets (bower_components)
     assets_directory = './bower_components/'
 
+    CHART_FILENAME = None  # this attribute is overriden by children of this
+                           # class
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
+    template_environment.loader = FileSystemLoader(os.path.join(
+        os.path.dirname(__file__), 'templates'))
+
     def __init__(self, **kwargs):
         """
         This is the base class for all the charts. The following keywords are

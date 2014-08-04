@@ -10,8 +10,6 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart, TemplateMixin
-from jinja2 import Environment, FileSystemLoader
-import os
 
 
 class MultiBarHorizontalChart(TemplateMixin, NVD3Chart):
@@ -87,9 +85,7 @@ class MultiBarHorizontalChart(TemplateMixin, NVD3Chart):
     """
 
     CHART_FILENAME = "./multibarcharthorizontal.html"
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+    template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
         super(MultiBarHorizontalChart, self).__init__(**kwargs)
