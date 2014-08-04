@@ -10,16 +10,10 @@ from distutils.util import convert_path
 def read(*parts):
     return open(os.path.join(os.path.dirname(__file__), *parts)).read()
 
+import nvd3
 
 def get_version():
-    f = open('nvd3/__init__.py')
-    try:
-        for line in f:
-            if line.startswith('__version__'):
-                return eval(line.split('=')[-1])
-    finally:
-        f.close()
-
+    return nvd3.__version__
 
 # Provided as an attribute, so you can append to these instead
 # of replicating them:

@@ -6,8 +6,8 @@ python:
 
 install:
     - python setup.py install
-    - pip install coveralls
-
+    - pip install coveralls 
+    
 script:
     #- python tests.py
     - coverage run --source=nvd3 setup.py test

@@ -10,11 +10,9 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart, TemplateMixin
-from jinja2 import Environment, FileSystemLoader
-import os
 
 
-class discreteBarChart(NVD3Chart):
+class DiscreteBarChart(TemplateMixin, NVD3Chart):
     """
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
@@ -67,47 +65,7 @@ class discreteBarChart(NVD3Chart):
 
     """
     CHART_FILENAME = "./discretebarchart.html"
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(
-        os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
-
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-        # self.slugify_name(kwargs.get('name', 'discreteBarChart'))
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-
-        if kwargs.get('x_is_date', False):
-            self.set_date_flag(True)
-            self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format',
-                                                 "%d %b %Y %H %S"),
-                               date=True)
-        else:
-            self.create_x_axis('xAxis', format=None)
-
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', ".0f"))
-
-        self.set_custom_tooltip_flag(True)
-
-        # must have a specified height, otherwise it superimposes both charts
-        if height:
-            self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-    def buildjschart(self):
-        NVD3Chart.buildjschart(self)
-        self.jschart = self.template_chart_nvd3.render(chart=self)
-
-
-class DiscreteBarChart(TemplateMixin, NVD3Chart):
-    CHART_FILENAME = "./discretebarchart.html"
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(
-        os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+    template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
         super(DiscreteBarChart, self).__init__(**kwargs)
@@ -131,3 +89,5 @@ class DiscreteBarChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+discreteBarChart = DiscreteBarChart
