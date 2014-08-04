@@ -11,11 +11,11 @@ Project location : https://github.com/areski/python-nvd3
 
 from .NVD3Chart import NVD3Chart, TemplateMixin
 from jinja2 import Environment, FileSystemLoader
-# from jinja2 import DebugUndefined, Template
 import os
 
 
-class scatterChart(NVD3Chart):
+class ScatterChart(TemplateMixin, NVD3Chart):
+
     """
     A scatter plot or scattergraph is a type of mathematical diagram using Cartesian
     coordinates to display values for two variables for a set of data.
@@ -48,7 +48,20 @@ class scatterChart(NVD3Chart):
         <div id="scatterChart"><svg style="height:450px;"></svg></div>
         <script>
 
-        data_scatterChart=[{"values": [{"y": -1, "x": 3, "shape": "circle", "size": "1"}, {"y": 2, "x": 4, "shape": "circle", "size": "1"}, {"y": 3, "x": 0, "shape": "circle", "size": "1"}, {"y": 3, "x": -3, "shape": "circle", "size": "1"}, {"y": 15, "x": 5, "shape": "circle", "size": "1"}, {"y": 2, "x": 7, "shape": "circle", "size": "1"}], "key": "series 1", "yAxis": "1"}, {"values": [{"y": 1, "x": 3, "shape": "cross", "size": "10"}, {"y": -2, "x": 4, "shape": "cross", "size": "10"}, {"y": 4, "x": 0, "shape": "cross", "size": "10"}, {"y": 7, "x": -3, "shape": "cross", "size": "10"}, {"y": -5, "x": 5, "shape": "cross", "size": "10"}, {"y": 3, "x": 7, "shape": "cross", "size": "10"}], "key": "series 2", "yAxis": "1"}];
+        data_scatterChart=[{"values": [{"y": -1, "x": 3, "shape": "circle",
+            "size": "1"}, {"y": 2, "x": 4, "shape": "circle", "size": "1"},
+            {"y": 3, "x": 0, "shape": "circle", "size": "1"},
+            {"y": 3, "x": -3, "shape": "circle", "size": "1"},
+            {"y": 15, "x": 5, "shape": "circle", "size": "1"},
+            {"y": 2, "x": 7, "shape": "circle", "size": "1"}],
+            "key": "series 1", "yAxis": "1"},
+            {"values": [{"y": 1, "x": 3, "shape": "cross", "size": "10"},
+            {"y": -2, "x": 4, "shape": "cross", "size": "10"},
+            {"y": 4, "x": 0, "shape": "cross", "size": "10"},
+            {"y": 7, "x": -3, "shape": "cross", "size": "10"},
+            {"y": -5, "x": 5, "shape": "cross", "size": "10"},
+            {"y": 3, "x": 7, "shape": "cross", "size": "10"}],
+            "key": "series 2", "yAxis": "1"}];
         nv.addGraph(function() {
         var chart = nv.models.scatterChart();
 
@@ -95,30 +108,6 @@ class scatterChart(NVD3Chart):
 
     """
 
-    CHART_FILENAME = "./scatter.html"
-
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
-
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-        self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.02f'), label=kwargs.get('x_axis_label', None))
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.02f'), label=kwargs.get('y_axis_label', None))
-        # must have a specified height, otherwise it superimposes both chars
-        self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-    def buildjschart(self):
-        NVD3Chart.buildjschart(self)
-        self.jschart = self.template_chart_nvd3.render(chart=self)
-
-
-class ScatterChart(TemplateMixin, NVD3Chart):
-
     CHART_FILENAME = "./scatterchart.html"
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
     template_environment.loader = FileSystemLoader(
@@ -134,8 +123,8 @@ class ScatterChart(TemplateMixin, NVD3Chart):
                            label=kwargs.get('x_axis_label', None))
         self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.02f'),
                            label=kwargs.get('y_axis_label', None))
-        # must have a specified height, otherwise it superimposes both chars
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
 
+scatterChart = ScatterChart
