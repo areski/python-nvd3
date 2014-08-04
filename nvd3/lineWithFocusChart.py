@@ -14,7 +14,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 
 
-class lineWithFocusChart(NVD3Chart):
+class LineWithFocusChart(TemplateMixin, NVD3Chart):
     """
     A lineWithFocusChart or line graph is a type of chart which displays information
     as a series of data points connected by straight line segments.
@@ -73,31 +73,6 @@ class lineWithFocusChart(NVD3Chart):
         </script>
 
     """
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-
-        if kwargs.get('x_is_date', False):
-            self.set_date_flag(True)
-            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '%d %b %Y %H %S'), date=True)
-            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format', '%d %b %Y %H %S'), date=True)
-            self.set_custom_tooltip_flag(True)
-        else:
-            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
-            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format', '.2f'))
-
-        self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
-        self.create_y_axis('y2Axis', format=kwargs.get('y_axis_format', '.2f'))
-
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-
-class LineWithFocusChart(TemplateMixin, NVD3Chart):
 
     CHART_FILENAME = "./linewfocuschart.html"
 
@@ -131,8 +106,8 @@ class LineWithFocusChart(TemplateMixin, NVD3Chart):
         self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
         self.create_y_axis('y2Axis', format=kwargs.get('y_axis_format', '.2f'))
 
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+lineWithFocusChart = LineWithFocusChart
