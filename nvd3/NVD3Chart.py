@@ -170,7 +170,7 @@ class NVD3Chart(object):
         """Slufigy name with underscore"""
         self.name = slugify_unicode(name, separator='_')
 
-    def add_serie(self, y, x, name=None, extra={}, **kwargs):
+    def add_serie(self, y, x, name=None, extra=None, **kwargs):
         """
         add serie - Series are list of data that will be plotted
         y {1, 2, 3, 4, 5} / x {1, 2, 3, 4, 5}
@@ -244,45 +244,46 @@ class NVD3Chart(object):
         if 'disabled' in kwargs and kwargs['disabled']:
             data_keyvalue['disabled'] = 'true'
 
-        if 'color' in extra and extra['color']:
-            data_keyvalue['color'] = extra['color']
+        if 'color' in kwargs and kwargs['color']:
+            data_keyvalue['color'] = kwargs['color']
 
-        if extra.get('date_format'):
-            self.charttooltip_dateformat = extra['date_format']
+        if extra:
+            if extra.get('date_format'):
+                self.charttooltip_dateformat = extra['date_format']
 
-        if extra.get('tooltip'):
-            self.custom_tooltip_flag = True
+            if extra.get('tooltip'):
+                self.custom_tooltip_flag = True
 
-            if self.model != 'pieChart':
-                _start = extra['tooltip']['y_start']
-                _end = extra['tooltip']['y_end']
-                _start = ("'" + str(_start) + "' + ") if _start else ''
-                _end = (" + '" + str(_end) + "'") if _end else ''
+                if self.model != 'pieChart':
+                    _start = extra['tooltip']['y_start']
+                    _end = extra['tooltip']['y_end']
+                    _start = ("'" + str(_start) + "' + ") if _start else ''
+                    _end = (" + '" + str(_end) + "'") if _end else ''
 
-                if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
-                    if self.tooltip_condition_string:
-                        self.tooltip_condition_string += stab(5)
-                    self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
-                        stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                        stab(5) + "}\n"
-                elif self.model == 'cumulativeLineChart':
-                    self.tooltip_condition_string += stab(0) + "if(key == '" + name + "'){\n" +\
-                        stab(6) + "var y = " + _start + " String(e) " + _end + ";\n" +\
-                        stab(5) + "}\n"
-                else:
-                    self.tooltip_condition_string += stab(5) + "if(key == '" + name + "'){\n" +\
-                        stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                        stab(5) + "}\n"
+                    if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
+                        if self.tooltip_condition_string:
+                            self.tooltip_condition_string += stab(5)
+                        self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
+                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                            stab(5) + "}\n"
+                    elif self.model == 'cumulativeLineChart':
+                        self.tooltip_condition_string += stab(0) + "if(key == '" + name + "'){\n" +\
+                            stab(6) + "var y = " + _start + " String(e) " + _end + ";\n" +\
+                            stab(5) + "}\n"
+                    else:
+                        self.tooltip_condition_string += stab(5) + "if(key == '" + name + "'){\n" +\
+                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
+                            stab(5) + "}\n"
 
-            if self.model == 'pieChart':
-                _start = extra['tooltip']['y_start']
-                _end = extra['tooltip']['y_end']
-                _start = ("'" + str(_start) + "' + ") if _start else ''
-                _end = (" + '" + str(_end) + "'") if _end else ''
-                self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
+                if self.model == 'pieChart':
+                    _start = extra['tooltip']['y_start']
+                    _end = extra['tooltip']['y_end']
+                    _start = ("'" + str(_start) + "' + ") if _start else ''
+                    _end = (" + '" + str(_end) + "'") if _end else ''
+                    self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
-        self.serie_no += 1
-        self.series.append(data_keyvalue)
+            self.serie_no += 1
+            self.series.append(data_keyvalue)
 
     def add_chart_extras(self, extras):
         """
