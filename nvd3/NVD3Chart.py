@@ -11,19 +11,17 @@ Project location : https://github.com/areski/python-nvd3
 
 from __future__ import unicode_literals
 from optparse import OptionParser
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, PackageLoader
 from slugify import slugify_unicode
 import json
-import os
 
-
-LIB_DIR = os.path.dirname(globals()['__file__'])
 
 CONTENT_FILENAME = "./content.html"
 PAGE_FILENAME = "./page.html"
 
-jinja2_env = Environment(lstrip_blocks=True, trim_blocks=True)
-jinja2_env.loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+
+pl = PackageLoader('nvd3', 'templates')
+jinja2_env = Environment(lstrip_blocks=True, trim_blocks=True, loader=pl)
 
 template_content = jinja2_env.get_template(CONTENT_FILENAME)
 template_page = jinja2_env.get_template(PAGE_FILENAME)
@@ -44,6 +42,12 @@ class NVD3Chart(object):
     count = 0
     #:  directory holding the assets (bower_components)
     assets_directory = './bower_components/'
+
+    # this attribute is overriden by children of this
+    # class
+    CHART_FILENAME = None
+    template_environment = Environment(lstrip_blocks=True, trim_blocks=True,
+                                       loader=pl)
 
     def __init__(self, **kwargs):
         """

@@ -10,11 +10,10 @@ Project location : https://github.com/areski/python-nvd3
 """
 
 from .NVD3Chart import NVD3Chart, TemplateMixin
-from jinja2 import Environment, FileSystemLoader
-import os
 
 
-class lineChart(NVD3Chart):
+class LineChart(TemplateMixin, NVD3Chart):
+
     """
     A line chart or line graph is a type of chart which displays information
     as a series of data points connected by straight line segments.
@@ -86,58 +85,8 @@ class lineChart(NVD3Chart):
 
     See the source code of this page, to see the underlying javascript.
     """
-
-    CHART_FILENAME = "./line.html"
-
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(
-        os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
-
-    def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
-        height = kwargs.get('height', 450)
-        width = kwargs.get('width', None)
-
-        if kwargs.get('x_is_date', False):
-            self.set_date_flag(True)
-            self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format', '%d %b %Y'),
-                               date=True)
-            self.set_custom_tooltip_flag(True)
-        else:
-            if kwargs.get('x_axis_format') == 'AM_PM':
-                self.x_axis_format = format = 'AM_PM'
-            else:
-                format = kwargs.get('x_axis_format', 'r')
-            self.create_x_axis('xAxis', format=format,
-                               custom_format=kwargs.get('x_custom_format', False))
-        self.create_y_axis(
-            'yAxis',
-            format=kwargs.get('y_axis_format', '.02f'),
-            custom_format=kwargs.get('y_custom_format', False))
-
-        # must have a specified height, otherwise it superimposes both chars
-        self.set_graph_height(height)
-        if width:
-            self.set_graph_width(width)
-
-    def buildjschart(self):
-        NVD3Chart.buildjschart(self)
-        self.jschart = self.template_chart_nvd3.render(chart=self)
-
-
-class LineChart(TemplateMixin, NVD3Chart):
-
-    """
-    The new LineChart class uses a new template, has a TemplateMixin
-    inheritance, and it *does not* have a ```buildjschart``` method.
-    """
     CHART_FILENAME = "./linechart.html"
-    template_environment = Environment(lstrip_blocks=True, trim_blocks=True)
-    template_environment.loader = FileSystemLoader(os.path.join(
-        os.path.dirname(__file__), 'templates'))
-    template_chart_nvd3 = template_environment.get_template(CHART_FILENAME)
+    template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
         super(LineChart, self).__init__(**kwargs)
@@ -169,3 +118,5 @@ class LineChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+lineChart = LineChart
