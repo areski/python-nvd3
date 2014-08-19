@@ -373,7 +373,9 @@ class NVD3Chart(object):
 
     def buildcontainer(self):
         """generate HTML div"""
-        self.container = self.containerheader
+        if self.container:
+            return
+
         # Create SVG div with style
         if self.width:
             if self.width[-1] != '%':
@@ -388,11 +390,11 @@ class NVD3Chart(object):
         if self.style:
             self.style = 'style="%s"' % self.style
 
-        self.container += '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
+        self.container = self.containerheader + \
+            '<div id="%s"><svg %s></svg></div>\n' % (self.name, self.style)
 
     def buildjschart(self):
         """generate javascript code for the chart"""
-
         self.jschart = ''
 
         # add custom tooltip string in jschart
