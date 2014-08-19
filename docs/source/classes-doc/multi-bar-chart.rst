@@ -5,7 +5,7 @@
 :class:`multiBarChart`
 ----------------------
 
-.. autoclass:: nvd3.multiBarChart
+.. autoclass:: MultiBarChart
     :noindex:
 
 See the HTML source code of this page, to see the underlying javascript.

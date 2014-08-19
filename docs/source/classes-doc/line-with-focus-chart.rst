@@ -5,7 +5,7 @@
 :class:`lineWithFocusChart`
 ---------------------------
 
-.. autoclass:: nvd3.lineWithFocusChart
+.. autoclass:: LineWithFocusChart
     :noindex:
 
 See the HTML source code of this page, to see the underlying javascript.

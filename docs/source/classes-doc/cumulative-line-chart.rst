@@ -4,7 +4,7 @@
 
 :class:`cumulativeLineChart`
 ----------------------------
-.. autoclass:: nvd3.cumulativeLineChart
+.. autoclass:: CumulativeLineChart
     :members:
     :noindex:
 
