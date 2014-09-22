@@ -116,7 +116,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'awesome-slugify',
+        'python-slugify==0.0.9',
         'Jinja2>=2.7.2'
         # -*- Extra requirements: -*-
     ],

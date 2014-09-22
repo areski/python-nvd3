@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from __future__ import unicode_literals
 from optparse import OptionParser
 from jinja2 import Environment, PackageLoader
-from slugify import slugify_unicode
+from slugify import slugify
 import json
 
 
@@ -105,7 +105,7 @@ class NVD3Chart(object):
         self.display_container = kwargs.get('display_container', True)
         self.charttooltip_dateformat = kwargs.get('charttooltip_dateformat',
                                                   '%d %b %Y')
-        self.slugify_name(kwargs.get('name', self.model))
+        self._slugify_name(kwargs.get('name', self.model))
         self.jquery_on_ready = kwargs.get('jquery_on_ready', False)
         self.color_category = kwargs.get('color_category', None)
         self.color_list = kwargs.get('color_list', None)
@@ -166,9 +166,9 @@ class NVD3Chart(object):
         self.charttooltip = ''
         self.serie_no = 1
 
-    def slugify_name(self, name):
+    def _slugify_name(self, name):
         """Slufigy name with underscore"""
-        self.name = slugify_unicode(name, separator='_')
+        self.name = slugify(name, separator='_')
 
     def add_serie(self, y, x, name=None, extra=None, **kwargs):
         """
