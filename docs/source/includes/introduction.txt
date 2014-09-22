@@ -76,51 +76,7 @@ See our examples directory for more usage.
 Supported nvd3 charts
 ---------------------
 
-
-.. image:: _static/screenshot/lineChart.png
-
-
-.. image:: _static/screenshot/linePlusBarChart.png
-
-
-.. image:: _static/screenshot/lineWithFocusChart.png
-
-
-.. image:: _static/screenshot/linePlusBarWithFocusChart.png
-
-
-.. image:: _static/screenshot/multiBarChart.png
-
-
-.. image:: _static/screenshot/multiBarHorizontalChart.png
-
-
-.. image:: _static/screenshot/cumulativeLineChart.png
-
-
-.. image:: _static/screenshot/discreteBarChart.png
-
-
-.. image:: _static/screenshot/pieChart.png
-
-
-.. image:: _static/screenshot/stackedAreaChart.png
-
-
-.. image:: _static/screenshot/scatterChart.png
-
-
-.. image:: _static/screenshot/linePlusBarWithFocusChart.png
-
-
-
-.. _live_demo:
-
-Live demo of NVD3
------------------
-
-See a live demo on jsfiddle : http://jsfiddle.net/areski/z4zuH/246/
-
+    See the section Chart Classes.
 
 
 .. _documentation:
@@ -128,8 +84,15 @@ See a live demo on jsfiddle : http://jsfiddle.net/areski/z4zuH/246/
 Documentation
 =============
 
-Documentation is available on 'Read the Docs':
-http://python-nvd3.readthedocs.org
+Check out the documentation on 'Read the Docs'(http://python-nvd3.readthedocs.org) for some live Chart examples!
+
+
+.. _changelog:
+
+Changelog
+---------
+
+Changelog summary : https://github.com/areski/python-nvd3/blob/master/CHANGELOG.rst
 
 
 .. _contributing:
@@ -153,7 +116,5 @@ Bug tracker: http://github.com/areski/python-nvd3/issues
 
 License
 =======
-
-Copyright (c) 2013 Arezqui Belaid <areski@gmail.com>
 
 Python-nvd3 is licensed under MIT, see `MIT-LICENSE.txt`.

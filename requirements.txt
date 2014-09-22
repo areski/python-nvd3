@@ -1,0 +1,2 @@
+awesome-slugify
+Jinja2>=2.7.2

@@ -1,65 +1,51 @@
-
+{% extends "base.html" %}
+{% block container %}
 {% if chart.display_container %}
-{{ chart.container }}
+    {{ chart.container }}
 {% endif %}
+{%  endblock  container %}
 
-{% if chart.tag_script_js %}
-<script>
-{% endif %}
-
-{% if chart.jquery_on_ready %}
-$(function(){
-{% endif %}
-
-{% if self.model == 'linePlusBarWithFocusChart' %}
-    data_{{ chart.name }}={{ chart.series_js }}.map(function(series) {
-        series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
-        return series; });
-{% else %}
-    data_{{ chart.name }}={{ chart.series_js }};
-{% endif %}
-
+{% block body %}
+    {% block data %}
+        data_{{ chart.name }}={{ chart.series_js }};
+    {% endblock data %}
+    
+    {% block init %}
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
 
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
 
-    {% if chart.model == 'pieChart' %}
-        var datum = data_{{ chart.name }}[0].values;
-    {% else %}
         var datum = data_{{ chart.name }};
-    {% endif %}
 
-    {% if chart.model != 'pieChart' and not chart.color_list and chart.color_category %}
+    {% if not chart.color_list and chart.color_category %}
         chart.color(d3.scale.{{ chart.color_category }}().range());
     {% endif %}
+    {% endblock init %}
 
     {% if chart.stacked %}
         chart.stacked(true);
     {% endif %}
-
-    {% if chart.model != 'pieChart' %}
-        {% for axis, a in chart.axislist.items() %}
-            {% if a.items() %}
-                chart.{{ axis }}
-                {% for attr, value in a.items() %}
-                    .{{ attr}}({{ value}}){% if loop.last %};
-                    {% endif %}
-                {% endfor %}
+    
+    {% block axes %}
+    {% for axis, a in chart.axislist.items() %}
+        {% if a.items() %}
+        chart.{{ axis }}
+        {% for attr, value in a.items() %}
+            .{{ attr}}({{ value}}){% if loop.last %};
             {% endif %}
         {% endfor %}
-    {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% endblock axes %}
 
     {# generate custom tooltip for the chart #}
+    {% block tooltip %}
     {% if chart.custom_tooltip_flag %}
         {% if not chart.date_flag %}
             {% if chart.model == 'pieChart' %}
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = String(key);
-                    {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+x+'</b></center>' + y;
-                    return tooltip_str;
-                });
+                {% block pietooltip %}
+                {% endblock pietooltip %}
             {% else %}
                 chart.tooltipContent(function(key, y, e, graph) {
                     var x = String(graph.point.x);
@@ -79,42 +65,17 @@ $(function(){
             });
         {% endif %}
     {% endif %}
+    {% endblock tooltip %}
 
     {# the shape attribute in kwargs is not applied when #}
     {# not allowing other shapes to be rendered #}
-    {% if chart.model == 'scatterChart' %}
-        chart.scatter.onlyCircles(false);
-    {% endif %}
-
-    {% if chart.model != 'discreteBarChart' %}
-        {% if chart.show_legend %}
-            chart.showLegend(true);
-        {% else %}
-            chart.showLegend(false);
-        {% endif %}
-    {% endif %}
-
-
-    {# showLabels only supported in pieChart #}
-    {% if chart.model == 'pieChart' %}
-        {% if chart.show_labels %}
-            chart.showLabels(true);
-        {% else %}
-            chart.showLabels(false);
-        {% endif %}
-
-        {% if chart.donut %}
-            chart.donut(true);
-            chart.donutRatio({{ chart.donutRatio }});
-        {% else %}
-            chart.donut(false);
-        {% endif %}
-    {% endif %}
-
-
+    {% block legend %}
+      chart.showLegend({{chart.show_legend|lower}});
+    {% endblock legend %}
+    {% block custoattr %}
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
-        {% if type(value) == str and value.startswith(".") %}:
+        {% if value is string and value.startswith(".") %}:
             chart.{{ attr }}{{ value }};
         {% else %}
             chart.{{ attr }}({{ value }});
@@ -128,6 +89,9 @@ $(function(){
         {# include specific subchart #}
         {{ chart.jschart }}
 
+    {% endblock custoattr %}
+
+        {% block inject %}
         {# Inject data to D3 #}
         d3.select('#{{ chart.name }} svg')
             .datum(datum)
@@ -139,14 +103,13 @@ $(function(){
             .attr('height', {{ chart.height}})
             {% endif %}
             .call(chart);
-
+        {% endblock inject %}
+		{# extra chart attributes #}
+		{% if chart.extras %}
+			{{ chart.extras }}
+		{% endif %}
     {# closing nv.addGraph #}
+    {% block close %}
     });
-
-{% if chart.jquery_on_ready %}
-});
-{% endif %}
-
-{% if chart.tag_script_js %}
-</script>
-{% endif %}
+    {% endblock close %}
+{% endblock body %}

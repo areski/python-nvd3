@@ -9,15 +9,13 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from .NVD3Chart import NVD3Chart
+from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class stackedAreaChart(NVD3Chart):
+class StackedAreaChart(TemplateMixin, NVD3Chart):
     """
     The stacked area chart is identical to the area chart, except the areas are stacked
     on top of each other, rather than overlapping. This can make the chart much easier to read.
-
-    .. image:: ../_static/screenshot/stackedAreaChart.png
 
     Python example::
 
@@ -33,68 +31,57 @@ class stackedAreaChart(NVD3Chart):
         chart.add_serie(name="Serie 2", y=ydata2, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
-    Javascript generated::
+    Javascript generated:
 
-        data_stackedAreaChart = [{
-                  "values":[
-                     {
-                        "y":9,
-                        "x":100
-                     },
-                     {
-                        "y":5,
-                        "x":101
-                     },
-                  ],
-                  "key":"Serie 1",
-                  "yAxis":"1"
-               },
-               {
-                  "values":[
-                     {
-                        "y":18,
-                        "x":100
-                     },
-                     {
-                        "y":10,
-                        "x":101
-                     },
-                  ],
-                  "key":"Serie 2",
-                  "yAxis":"1"
-               }
-            ]
+    .. raw:: html
 
-        nv.addGraph(function() {
-            var chart = nv.models.stackedAreaChart();
-            chart.xAxis
-                .tickFormat(d3.format(',.2f'));
-            chart.yAxis
-                .tickFormat(d3.format(',.2f'));
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = String(graph.point.x);
-                var y = String(graph.point.y);
-                if(key == 'serie 1'){
-                    var y = 'There is ' +  String(graph.point.y)  + ' min';
-                }
-                if(key == 'serie 2'){
-                    var y = 'There is ' +  String(graph.point.y)  + ' min';
-                }
-                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
-                return tooltip_str;
+        <div id="stackedAreaChart"><svg style="height:450px;"></svg></div>
+        <script>
+
+
+            data_stackedAreaChart=[{"values": [{"y": 6, "x": 100}, {"y": 11, "x": 101}, {"y": 12, "x": 102}, {"y": 7, "x": 103}, {"y": 11, "x": 104}, {"y": 10, "x": 105}, {"y": 11, "x": 106}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 8, "x": 100}, {"y": 20, "x": 101}, {"y": 16, "x": 102}, {"y": 12, "x": 103}, {"y": 20, "x": 104}, {"y": 28, "x": 105}, {"y": 28, "x": 106}], "key": "Serie 2", "yAxis": "1"}];
+            nv.addGraph(function() {
+                var chart = nv.models.stackedAreaChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_stackedAreaChart;
+                        chart.xAxis
+                            .tickFormat(d3.format(',.2f'));
+                        chart.yAxis
+                            .tickFormat(d3.format(',.2f'));
+
+                        chart.tooltipContent(function(key, y, e, graph) {
+                            var x = String(graph.point.x);
+                            var y = String(graph.point.y);
+                                                if(key == 'Serie 1'){
+                                var y = 'There is ' +  String(graph.point.y)  + ' min';
+                            }
+                            if(key == 'Serie 2'){
+                                var y = 'There is ' +  String(graph.point.y)  + ' min';
+                            }
+
+                            tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                            return tooltip_str;
+                        });
+                    chart.showLegend(true);
+                d3.select('#stackedAreaChart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', 400)
+                    .attr('height', 400)
+                    .call(chart);
             });
-            d3.select('#stackedAreaChart svg')
-                .datum(data_stackedAreaChart)
-                .transition()
-                .duration(500)
-                .call(chart);
-            return chart;
-        });
+        </script>
+
     """
+
+    CHART_FILENAME = "./stackedareachart.html"
+    template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
+
     def __init__(self, **kwargs):
-        NVD3Chart.__init__(self, **kwargs)
+        super(StackedAreaChart, self).__init__(**kwargs)
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
+        self.model = 'stackedAreaChart'
 
         if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
@@ -103,10 +90,12 @@ class stackedAreaChart(NVD3Chart):
                                date=True)
             self.set_custom_tooltip_flag(True)
         else:
-            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format', '.2f'))
+            self.create_x_axis('xAxis', format=kwargs.get('x_axis_format',
+                                                          '.2f'))
         self.create_y_axis('yAxis', format=kwargs.get('y_axis_format', '.2f'))
-        # must have a specified height, otherwise it superimposes both chars
-        if height:
-            self.set_graph_height(height)
+
+        self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+stackedAreaChart = StackedAreaChart
