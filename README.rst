@@ -131,6 +131,8 @@ Python-NVD3 works nicely with Notebook (thanks to @jdavidheiser)
 You can check this notebook that demonstrates ipython compatibility in the nvd3-python package:
 http://nbviewer.ipython.org/gist/jdavidheiser/9552624
 
+!!! Notebook seems to be broken for the moment !!!
+
 
 License
 -------
