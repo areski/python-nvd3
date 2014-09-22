@@ -1,2 +1,2 @@
-awesome-slugify
+python-slugify==0.0.9
 Jinja2>=2.7.2
