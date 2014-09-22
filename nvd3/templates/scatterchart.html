@@ -4,15 +4,51 @@
 {% extends "content.html" %}
 {% block body %}
 
-{# calling super guarantees everying in content is also found here ...#}
-{{super()}}
+    {% block data %}
+    {{super()}}
+    {% endblock data %}
+
+    {% block init %}
+    {{super()}}
+    {% endblock init %}
+
+    {% block axes %}
+    {{super()}}
+    {% endblock axes %}
+
+    {% if chart.x_axis_format == 'AM_PM' %}
+        function get_am_pm(d){
+            if (d > 12) {
+                d = d - 12; return (String(d) + 'PM');
+            }
+            else {
+                return (String(d) + 'AM');
+            }
+        };
+    {% endif %}
+
+    {% block legend %}
+    {{super()}}
+    {% endblock legend %}
+
+    {% block custoattr %}
+    {{super()}}
+    {% endblock custoattr %}
+
+    {% block inject %}
 
     chart.scatter.onlyCircles(false);
-    
+
     chart
         .showDistX(true)
         .showDistY(true)
         .color(d3.scale.category10().range());
 
-{% endblock body %}
+    {{ super() }}
+    {% endblock inject %}
 
+    {% block close %}
+    {{ super() }}
+    {% endblock close %}
+
+{% endblock body %}

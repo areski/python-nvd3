@@ -59,7 +59,7 @@ output_file.write(chart.htmlcontent)
 #---------------------------------------
 
 type = "pie Chart"
-chart = pieChart(name=type ,color_category='category20c', height=400,
+chart = pieChart(name=type, color_category='category20c', height=400,
                  width=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 

@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class DiscreteBarChart(TemplateMixin, NVD3Chart):
+class discreteBarChart(TemplateMixin, NVD3Chart):
     """
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
@@ -68,7 +68,7 @@ class DiscreteBarChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(DiscreteBarChart, self).__init__(**kwargs)
+        super(discreteBarChart, self).__init__(**kwargs)
         self.model = 'discreteBarChart'
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
@@ -89,5 +89,3 @@ class DiscreteBarChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-discreteBarChart = DiscreteBarChart

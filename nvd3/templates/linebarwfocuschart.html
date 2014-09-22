@@ -6,8 +6,8 @@
     {% block data %}
         data_{{ chart.name }}={{ chart.series_js }};
     {% endblock data %}
- 
-    
+
+
     {% block init %}
         {{super()}}
     {% endblock init %}
@@ -17,8 +17,9 @@
     {% block tooltip %}
         {{super()}}
     {% endblock tooltip %}
+
     chart.showLegend({{chart.show_legend|lower}});
-    
+
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
         {% if value is string and value.startswith(".") %}:
@@ -27,8 +28,6 @@
             chart.{{ attr }}({{ value }});
         {% endif %}
     {% endfor %}
-
-
 
     {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
@@ -41,7 +40,7 @@
         };
     {% else %}
         chart.x(function(d,i) { return i });
-
+    {% endif %}
 
     {% if chart.resize %}
         nv.utils.windowResize(chart.update);
@@ -53,9 +52,9 @@
 		{% if chart.extras %}
 			{{ chart.extras }}
 		{% endif %}
-    
-    {% endif %}
+
     {% block close %}
     });
     {% endblock close %}
+
 {% endblock body %}

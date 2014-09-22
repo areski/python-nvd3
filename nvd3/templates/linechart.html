@@ -15,7 +15,7 @@
     {% block axes %}
     {{super()}}
     {% endblock axes %}
-    
+
     {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
             if (d > 12) {
@@ -25,11 +25,12 @@
                 return (String(d) + 'AM');
             }
         };
-    
+    {% endif %}
+
     {% block legend %}
     {{super()}}
     {% endblock legend %}
-    
+
     {% block custoattr %}
     {{super()}}
     {% endblock custoattr %}
@@ -37,11 +38,10 @@
     {% block inject %}
     {{ super() }}
     {% endblock inject %}
-    
+
     {% block close %}
     {{ super() }}
     {% endblock close %}
-{% endif %}
 
 {% endblock body %}
 

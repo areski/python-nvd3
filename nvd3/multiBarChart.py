@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class MultiBarChart(TemplateMixin, NVD3Chart):
+class multiBarChart(TemplateMixin, NVD3Chart):
     """
     A multiple bar graph contains comparisons of two or more categories or bars.
     One axis represents a quantity and the other axis identifies a specific feature
@@ -75,7 +75,7 @@ class MultiBarChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(MultiBarChart, self).__init__(**kwargs)
+        super(multiBarChart, self).__init__(**kwargs)
 
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
@@ -93,5 +93,3 @@ class MultiBarChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-multiBarChart = MultiBarChart

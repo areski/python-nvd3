@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class LinePlusBarWithFocusChart(TemplateMixin, NVD3Chart):
+class linePlusBarWithFocusChart(TemplateMixin, NVD3Chart):
     """
     A linePlusBarWithFocusChart Chart is a type of chart which displays information
     as a series of data points connected by straight line segments
@@ -98,7 +98,7 @@ class LinePlusBarWithFocusChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(LinePlusBarWithFocusChart, self).__init__(**kwargs)
+        super(linePlusBarWithFocusChart, self).__init__(**kwargs)
         self.model = 'linePlusBarWithFocusChart'
 
         height = kwargs.get('height', 450)
@@ -149,5 +149,3 @@ class LinePlusBarWithFocusChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-linePlusBarWithFocusChart = LinePlusBarWithFocusChart
