@@ -68,5 +68,9 @@
     {% block inject %}
     {{super()}}
     {% endblock inject %}
-    });
+
+    {% block close %}
+    {{ super() }}
+    {% endblock close %}
+
 {% endblock body %}

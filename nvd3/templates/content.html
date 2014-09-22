@@ -28,43 +28,43 @@
     {% endif %}
 
     {% block axes %}
-    {% for axis, a in chart.axislist.items() %}
-        {% if a.items() %}
-        chart.{{ axis }}
-        {% for attr, value in a.items() %}
-            .{{ attr}}({{ value}}){% if loop.last %};
+        {% for axis, a in chart.axislist.items() %}
+            {% if a.items() %}
+            chart.{{ axis }}
+            {% for attr, value in a.items() %}
+                .{{ attr}}({{ value}}){% if loop.last %};
+                {% endif %}
+            {% endfor %}
             {% endif %}
         {% endfor %}
-        {% endif %}
-    {% endfor %}
     {% endblock axes %}
 
     {# generate custom tooltip for the chart #}
     {% block tooltip %}
-    {% if chart.custom_tooltip_flag %}
-        {% if not chart.date_flag %}
-            {% if chart.model == 'pieChart' %}
-                {% block pietooltip %}
-                {% endblock pietooltip %}
+        {% if chart.custom_tooltip_flag %}
+            {% if not chart.date_flag %}
+                {% if chart.model == 'pieChart' %}
+                    {% block pietooltip %}
+                    {% endblock pietooltip %}
+                {% else %}
+                    chart.tooltipContent(function(key, y, e, graph) {
+                        var x = String(graph.point.x);
+                        var y = String(graph.point.y);
+                        {{ chart.tooltip_condition_string }}
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                        return tooltip_str;
+                    });
+                {% endif %}
             {% else %}
                 chart.tooltipContent(function(key, y, e, graph) {
-                    var x = String(graph.point.x);
+                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
                     var y = String(graph.point.y);
                     {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
                     return tooltip_str;
                 });
             {% endif %}
-        {% else %}
-            chart.tooltipContent(function(key, y, e, graph) {
-                var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
-                var y = String(graph.point.y);
-                {{ chart.tooltip_condition_string }}
-                tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                return tooltip_str;
-            });
         {% endif %}
-    {% endif %}
     {% endblock tooltip %}
 
     {# the shape attribute in kwargs is not applied when #}
@@ -72,19 +72,20 @@
     {% block legend %}
       chart.showLegend({{chart.show_legend|lower}});
     {% endblock legend %}
-    {% block custoattr %}
-    {# add custom chart attributes #}
-    {% for attr, value in chart.chart_attr.items() %}
-        {% if value is string and value.startswith(".") %}:
-            chart.{{ attr }}{{ value }};
-        {% else %}
-            chart.{{ attr }}({{ value }});
-        {% endif %}
-    {% endfor %}
 
-    {% if chart.resize %}
-        nv.utils.windowResize(chart.update);
-    {% endif %}
+    {% block custoattr %}
+        {# add custom chart attributes #}
+        {% for attr, value in chart.chart_attr.items() %}
+            {% if value is string and value.startswith(".") %}:
+                chart.{{ attr }}{{ value }};
+            {% else %}
+                chart.{{ attr }}({{ value }});
+            {% endif %}
+        {% endfor %}
+
+        {% if chart.resize %}
+            nv.utils.windowResize(chart.update);
+        {% endif %}
 
         {# include specific subchart #}
         {{ chart.jschart }}
@@ -104,6 +105,7 @@
             {% endif %}
             .call(chart);
     {% endblock inject %}
+
     {# extra chart attributes #}
     {% if chart.extras %}
         {{ chart.extras }}
@@ -113,4 +115,5 @@
     {% block close %}
     });
     {% endblock close %}
+
 {% endblock body %}
