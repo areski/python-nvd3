@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class LineChart(TemplateMixin, NVD3Chart):
+class lineChart(TemplateMixin, NVD3Chart):
 
     """
     A line chart or line graph is a type of chart which displays information
@@ -89,7 +89,7 @@ class LineChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(LineChart, self).__init__(**kwargs)
+        super(lineChart, self).__init__(**kwargs)
         self.model = 'lineChart'
 
         height = kwargs.get('height', 450)
@@ -118,5 +118,3 @@ class LineChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-lineChart = LineChart

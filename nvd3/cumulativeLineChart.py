@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class CumulativeLineChart(TemplateMixin, NVD3Chart):
+class cumulativeLineChart(TemplateMixin, NVD3Chart):
     """
     A cumulative line chart is used when you have one important grouping representing
     an ordered set of data and one value to show, summed over time.
@@ -81,7 +81,7 @@ class CumulativeLineChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(CumulativeLineChart, self).__init__(**kwargs)
+        super(cumulativeLineChart, self).__init__(**kwargs)
         self.model = 'cumulativeLineChart'
 
         height = kwargs.get('height', 450)
@@ -102,5 +102,3 @@ class CumulativeLineChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-cumulativeLineChart = CumulativeLineChart
