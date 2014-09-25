@@ -5,6 +5,7 @@
 
 git flow release start v$1
 sed -i -e "s/__version__ = '.*'/__version__ = '$1'/g" nvd3/__init__.py
+sed -i -e "s/version='.*'/version='$1'/g" setup.py
 #rm -rf docs/html
 #python setup.py develop
 #make docs
