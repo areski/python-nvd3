@@ -11,6 +11,7 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 .. _Oz: https://github.com/oz123/
 
 .. image:: https://api.travis-ci.org/areski/python-nvd3.png?branch=develop
+  :target: https://travis-ci.org/areski/python-nvd3
 
 .. image:: https://coveralls.io/repos/areski/python-nvd3/badge.png?branch=develop
   :target: https://coveralls.io/r/areski/python-nvd3?branch=develop
