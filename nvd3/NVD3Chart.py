@@ -226,10 +226,6 @@ class NVD3Chart(object):
         if 'type' in kwargs and kwargs['type']:
             data_keyvalue['type'] = kwargs['type']
 
-        if self.model == 'pieChart':
-            if 'color_list' in extra and extra['color_list']:
-                self.color_list = extra['color_list']
-
         # Define on which Y axis the serie is related
         # a chart can have 2 Y axis, left and right, by default only one Y Axis is used
         if 'yaxis' in kwargs and kwargs['yaxis']:
@@ -248,6 +244,10 @@ class NVD3Chart(object):
             data_keyvalue['color'] = kwargs['color']
 
         if extra:
+            if self.model == 'pieChart':
+                if 'color_list' in extra and extra['color_list']:
+                    self.color_list = extra['color_list']
+
             if extra.get('date_format'):
                 self.charttooltip_dateformat = extra['date_format']
 
