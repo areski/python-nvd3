@@ -96,7 +96,7 @@ def find_package_data(where='.', package='',
 
 setup(
     name='python-nvd3',
-    version='0.13.3',
+    version='0.13.4',
     description="Python NVD3 - Chart Library for d3.js",
     long_description=read('README.rst'),
     keywords='plot, graph, nvd3, d3',
