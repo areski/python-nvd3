@@ -152,10 +152,11 @@ class ChartTest(unittest.TestCase):
     def test_pieChart(self):
         """Test Pie Chart"""
         type = "pieChart"
-        chart = pieChart(name=type, height=400, width=400)
+        chart = pieChart(name=type, color_category='category20c', height=400, width=400)
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
         ydata = [3, 4, 0, 1, 5, 7, 3]
-        chart.add_serie(y=ydata, x=xdata)
+        chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
     def test_donutPieChart(self):
