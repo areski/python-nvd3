@@ -282,8 +282,9 @@ class NVD3Chart(object):
                     _end = (" + '" + str(_end) + "'") if _end else ''
                     self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
-            self.serie_no += 1
-            self.series.append(data_keyvalue)
+        #Increment series counter & append
+        self.serie_no += 1
+        self.series.append(data_keyvalue)
 
     def add_chart_extras(self, extras):
         """

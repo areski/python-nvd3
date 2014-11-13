@@ -13,3 +13,5 @@ sed -i -e "s/version='.*'/version='$1'/g" setup.py
 git commit -a -m "Update to version v$1"
 git flow release finish v$1
 python setup.py sdist upload -r pypi
+
+git push origin develop; git push origin master; git push --tags
