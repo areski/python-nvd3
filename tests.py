@@ -11,6 +11,8 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
+from nvd3 import linePlusBarWithFocusChart
+from nvd3.NVD3Chart import stab
 from nvd3.translator import Function, AnonymousFunction, Assignment
 import random
 import unittest
@@ -52,6 +54,29 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
+        #extra tests
+        chart.buildcontent()
+        chart.buildhtmlheader()
+
+    def test_lineChart_tooltip(self):
+        """Test Line Chart"""
+        type = "lineChart"
+        chart = lineChart(name=type, date=True, height=350)
+        nb_element = 100
+        xdata = list(range(nb_element))
+        xdata = [1365026400000 + x * 100000 for x in xdata]
+        ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+        ydata2 = [x * 2 for x in ydata]
+
+        kwargs1 = {'color': 'green'}
+        kwargs2 = {'color': 'red'}
+
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " random values"}}
+        chart.add_serie(name="Random X-Axis", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " double values"}}
+        chart.add_serie(name="Double X-Axis", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
+
+        chart.buildhtml()
 
     def test_linePlusBarChart(self):
         """Test line Plus Bar Chart"""
@@ -89,7 +114,8 @@ class ChartTest(unittest.TestCase):
         nb_element = 10
         xdata = list(range(nb_element))
         ydata = [random.randint(1, 10) for i in range(nb_element)]
-        chart.add_serie(y=ydata, x=xdata)
+        extra = {"type": "bar", "yaxis": 1}
+        chart.add_serie(y=ydata, x=xdata, extra=extra)
         chart.buildhtml()
 
     def test_multiBarHorizontalChart(self):
@@ -154,7 +180,8 @@ class ChartTest(unittest.TestCase):
         type = "pieChart"
         chart = pieChart(name=type, color_category='category20c', height=400, width=400)
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
-        extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+        color_list = ['orange', 'yellow', '#C5E946', '#95b43f', 'red', '#FF2259', '#F6A641']
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}, "color_list": color_list}
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
@@ -167,6 +194,38 @@ class ChartTest(unittest.TestCase):
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
+
+    def test_lineplusbarwithfocuschart(self):
+        "Test LinePlusBar With FocusChart"
+        type = "linePlusBarWithFocusChart"
+        chart = linePlusBarWithFocusChart(name=type, color_category='category20b',
+                                          x_is_date=True, x_axis_format="%d %b %Y")
+        chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+        nb_element = 100
+        xdata = list(range(nb_element))
+        start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
+        #prepare series
+        xdata = [start_time + x * 1000000000 for x in xdata]
+        ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
+        ydata2 = [200 - i + random.randint(-10, 10) for i in range(nb_element)]
+        extra_serie_1 = {
+            "tooltip": {"y_start": "$ ", "y_end": ""},
+            "date_format": "%d %b %Y",
+        }
+        kwargs = {"bar": "true"}
+        chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie_1, **kwargs)
+        extra_serie_2 = {
+            "tooltip": {"y_start": "$ ", "y_end": ""},
+            "date_format": "%d %b %Y",
+        }
+        chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie_2)
+        chart.buildhtml()
+
+
+class FuncTest(unittest.TestCase):
+
+    def test_stab(self):
+        self.assertEqual("    ", stab(1))
 
 
 class TranslatorTest(unittest.TestCase):

@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.linePlusBarWithFocusChart import LinePlusBarWithFocusChart
+from nvd3.linePlusBarWithFocusChart import linePlusBarWithFocusChart
 import random
 import datetime
 import time
@@ -19,10 +19,10 @@ start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
 #Open File for test
-output_file = open('test_LinePlusBarWithFocusChart.html', 'w')
+output_file = open('test_linePlusBarWithFocusChart.html', 'w')
 #---------------------------------------
 type = "linePlusBarWithFocusChart"
-chart = LinePlusBarWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y")
+chart = linePlusBarWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
