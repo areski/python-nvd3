@@ -257,8 +257,8 @@ class NVD3Chart(object):
                 if self.model != 'pieChart':
                     _start = extra['tooltip']['y_start']
                     _end = extra['tooltip']['y_end']
-                    _start = ("'" + str(_start) + "' + ") if _start else ''
-                    _end = (" + '" + str(_end) + "'") if _end else ''
+                    _start = ("'" + unicode(_start) + "' + ") if _start else ''
+                    _end = (" + '" + unicode(_end) + "'") if _end else ''
 
                     if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
                         if self.tooltip_condition_string:
@@ -278,8 +278,8 @@ class NVD3Chart(object):
                 if self.model == 'pieChart':
                     _start = extra['tooltip']['y_start']
                     _end = extra['tooltip']['y_end']
-                    _start = ("'" + str(_start) + "' + ") if _start else ''
-                    _end = (" + '" + str(_end) + "'") if _end else ''
+                    _start = ("'" + unicode(_start) + "' + ") if _start else ''
+                    _end = (" + '" + unicode(_end) + "'") if _end else ''
                     self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
         #Increment series counter & append
