@@ -26,9 +26,8 @@ if _ip and _ip.__module__.startswith('IPython'):
             initialize_javascript()
             import time
             time.sleep(5)
-        chart.buildcontainer()
-        chart.buildjschart()
-        return chart.container + chart.jschart
+        chart.buildhtml()
+        return chart.htmlcontent
 
     def _setup_ipython_formatter(ip):
         ''' Set up the ipython formatter to display HTML formatted output inline'''
