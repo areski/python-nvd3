@@ -40,7 +40,7 @@ if _ip and _ip.__module__.startswith('IPython'):
                 html_formatter.for_type_by_name('nvd3.' + chart_type, chart_type, _print_html)
 
     def initialize_javascript(d3_js_url='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js',
-                              nvd3_js_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css',
+                              nvd3_js_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js',
                               nvd3_css_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css',
                               use_remote=False):
         '''Initialize the ipython notebook to be able to display nvd3 results.
