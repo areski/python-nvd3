@@ -52,9 +52,9 @@ if _ip and _ip.__module__.startswith('IPython'):
 
         use_remote: use remote hosts for d3.js, nvd3.js, and nv.d3.css (default False)
         * Note:  the following options are ignored if use_remote is False:
-        nvd3_css_url: location of nvd3 css file (default http://nvd3.org/assets/css/nv.d3.css)
-        nvd3_js_url: location of nvd3 javascript file (default  http://nvd3.org/assets/js/nv.d3.js)
-        nvds_url: location of d3 javascript file (default http://nvd3.org/assets/lib/d3.v3.js)
+        nvd3_css_url: location of nvd3 css file (default https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css)
+        nvd3_js_url: location of nvd3 javascript file (default  https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css)
+        d3_js_url: location of d3 javascript file (default https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js)
         '''
         from IPython.display import display, Javascript, HTML
 
