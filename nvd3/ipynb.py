@@ -39,9 +39,9 @@ if _ip and _ip.__module__.startswith('IPython'):
             for chart_type in nvd3_all:
                 html_formatter.for_type_by_name('nvd3.' + chart_type, chart_type, _print_html)
 
-    def initialize_javascript(d3_js_url='http://nvd3.org/assets/lib/d3.v3.js',
-                              nvd3_js_url='http://nvd3.org/assets/js/nv.d3.js',
-                              nvd3_css_url='http://nvd3.org/assets/css/nv.d3.css',
+    def initialize_javascript(d3_js_url='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js',
+                              nvd3_js_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css',
+                              nvd3_css_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css',
                               use_remote=False):
         '''Initialize the ipython notebook to be able to display nvd3 results.
         by instructing IPython to load the nvd3 JS and css files, and the d3 JS file.
