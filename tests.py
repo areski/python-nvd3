@@ -11,7 +11,6 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
-from nvd3 import linePlusBarWithFocusChart
 from nvd3.NVD3Chart import stab
 from nvd3.translator import Function, AnonymousFunction, Assignment
 import random
@@ -193,32 +192,6 @@ class ChartTest(unittest.TestCase):
         xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)
-        chart.buildhtml()
-
-    def test_lineplusbarwithfocuschart(self):
-        "Test LinePlusBar With FocusChart"
-        type = "linePlusBarWithFocusChart"
-        chart = linePlusBarWithFocusChart(name=type, color_category='category20b',
-                                          x_is_date=True, x_axis_format="%d %b %Y")
-        chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-        nb_element = 100
-        xdata = list(range(nb_element))
-        start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
-        #prepare series
-        xdata = [start_time + x * 1000000000 for x in xdata]
-        ydata = [i + random.randint(-10, 10) for i in range(nb_element)]
-        ydata2 = [200 - i + random.randint(-10, 10) for i in range(nb_element)]
-        extra_serie_1 = {
-            "tooltip": {"y_start": "$ ", "y_end": ""},
-            "date_format": "%d %b %Y",
-        }
-        kwargs = {"bar": "true"}
-        chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie_1, **kwargs)
-        extra_serie_2 = {
-            "tooltip": {"y_start": "$ ", "y_end": ""},
-            "date_format": "%d %b %Y",
-        }
-        chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie_2)
         chart.buildhtml()
 
 

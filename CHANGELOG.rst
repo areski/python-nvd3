@@ -1,6 +1,8 @@
 Changelog
 =========
 
+* remove linePlusBarWithFocusChart as this is replaced by linePlusBarChart with option FocusEnable():
+  http://nvd3-community.github.io/nvd3/examples/documentation.html#linePlusBarChart
 
 * allow chart_attr to be set as follow 'xAxis': '.rotateLabels(-25)'
   This will turn into calling chart.xAxis.rotateLabels(-25)

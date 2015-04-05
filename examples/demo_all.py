@@ -14,7 +14,6 @@ from nvd3 import discreteBarChart
 from nvd3 import lineChart
 from nvd3 import linePlusBarChart
 from nvd3 import lineWithFocusChart
-from nvd3 import linePlusBarWithFocusChart
 from nvd3 import multiBarChart
 from nvd3 import multiBarHorizontalChart
 from nvd3 import stackedAreaChart
@@ -316,72 +315,10 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-#--------------------------------------------
-nb_element = 200
-
-type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(height=350, x_is_date=True,
-                                  x_axis_format="%d %b %Y", jquery_on_ready=True)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-
-xdata = list(range(nb_element))
-xdata = [start_time + x * 1000000000 for x in xdata]
-ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = [i + random.randint(10, 20) for i in reversed(list(range(nb_element)))]
-kwargs = {}
-kwargs['bar'] = True
-extra_serie = {"tooltip": {"y_start": "$ ", "y_end": ""}}
-chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs)
-extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
-chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-
-chart.buildcontent()
-
-output_file.write(chart.htmlcontent)
-
-
-#--------------------------------------------
-
-# linePlusBarWithFocusChart_AMPM
-
-name = "linePlusBarWithFocusChartAMPM"
-type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=name, x_is_date=False, x_axis_format="AM_PM")
-chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
-
-xdata = [i for i in range(0, 24)]
-ydata = [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 4, 3, 3, 5, 7, 5, 3, 16, 6, 9, 15, 4, 12]
-ydata2 = [9, 8, 11, 8, 3, 7, 10, 8, 6, 6, 9, 6, 5, 4, 3, 10, 0, 6, 3, 1, 0, 0, 0, 1]
-ydata3 = [9, 8, 15, 8, 4, 7, 20, 8, 4, 6, 0, 4, 5, 7, 3, 15, 30, 6, 3, 1, 0, 0, 0, 1]
-
-
-extra_serie_1 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-kwargs = {"bar": "true"}
-chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie_1, **kwargs)
-
-extra_serie_2 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie_2)
-
-extra_serie_3 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie_3)
-
-chart.buildhtml()
-
-output_file.write(chart.htmlcontent)
-
 #---------------------------------------
 
 html_close = """</body></html>"""
 output_file.write(html_close)
 
-#close Html file
+# close Html file
 output_file.close()

@@ -216,8 +216,6 @@ class NVD3Chart(object):
         else:
             if self.model == 'pieChart':
                 serie = [{'label': x[i], 'value': y} for i, y in enumerate(y)]
-            # elif self.model == 'linePlusBarWithFocusChart':
-            #     serie = [[x[i], y] for i, y in enumerate(y)]
             else:
                 serie = [{'x': x[i], 'y': y} for i, y in enumerate(y)]
 
@@ -233,7 +231,7 @@ class NVD3Chart(object):
         if 'yaxis' in kwargs and kwargs['yaxis']:
             data_keyvalue['yAxis'] = kwargs['yaxis']
         else:
-            if self.model != 'pieChart' and self.model != 'linePlusBarWithFocusChart':
+            if self.model != 'pieChart':
                 data_keyvalue['yAxis'] = '1'
 
         if 'bar' in kwargs and kwargs['bar']:
@@ -262,7 +260,7 @@ class NVD3Chart(object):
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
 
-                    if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
+                    if self.model == 'linePlusBarChart':
                         if self.tooltip_condition_string:
                             self.tooltip_condition_string += stab(5)
                         self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
@@ -284,7 +282,7 @@ class NVD3Chart(object):
                     _end = (" + '" + str(_end) + "'") if _end else ''
                     self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
-        #Increment series counter & append
+        # Increment series counter & append
         self.serie_no += 1
         self.series.append(data_keyvalue)
 
