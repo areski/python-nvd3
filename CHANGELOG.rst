@@ -1,8 +1,10 @@
 Changelog
 =========
 
-0.14.0 - work in progress
--------------------
+0.13.6 - (2015-04-06)
+---------------------
+
+* add support for focusEnable
 
 * remove linePlusBarWithFocusChart as this is replaced by linePlusBarChart with option FocusEnable():
   http://nvd3-community.github.io/nvd3/examples/documentation.html#linePlusBarChart

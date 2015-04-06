@@ -49,7 +49,7 @@ After installation use python-nvd3 as follows ::
 
     from nvd3 import pieChart
 
-    #Open File to write the D3 Graph
+    # Open File to write the D3 Graph
     output_file = open('test-nvd3.html', 'w')
 
     type = 'pieChart'
@@ -64,7 +64,7 @@ After installation use python-nvd3 as follows ::
     chart.buildhtml()
     output_file.write(chart.htmlcontent)
 
-    #close Html file
+    # close Html file
     output_file.close()
 
 

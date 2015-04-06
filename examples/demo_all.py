@@ -27,9 +27,9 @@ import time
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
-#Open File for test
+# Open File for test
 output_file = open('test_demo_all.html', 'w')
-#---------------------------------------
+# ---------------------------------------
 
 html_open = """
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 
 chart.buildcontent()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "pie Chart"
 chart = pieChart(name=type, color_category='category20c', height=400,
@@ -70,7 +70,7 @@ ydata = [3, 4, 2, 1, 5, 7, 3]
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 chart.buildcontent()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 name = "lineChart-different-x-axis"
 type = "lineChart"
@@ -95,7 +95,7 @@ chart.add_serie(name="Even X-Axis", y=ydata2, x=xdata10, extra=extra_serie, **kw
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineChart"
 chart = lineChart(height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
@@ -107,7 +107,7 @@ xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]
 
-#Configure a color for a specific serie
+# Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
@@ -120,7 +120,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineChartWithInteractiveGuideline"
 chart = lineChart(name="lineChart-With-Interactive-Guideline",
@@ -133,7 +133,7 @@ xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]
 
-#Configure a color for a specific serie
+# Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
@@ -146,7 +146,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineWithFocusChart"
 chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
@@ -173,7 +173,7 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-#---------------------------------------
+# ---------------------------------------
 
 type = "stackedAreaChart"
 chart = stackedAreaChart(height=350, x_is_date=True,
@@ -193,11 +193,12 @@ chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "linePlusBarChart"
 chart = linePlusBarChart(height=350, x_is_date=True,
-                         x_axis_format="%d %b %Y", jquery_on_ready=True)
+                         x_axis_format="%d %b %Y", jquery_on_ready=True,
+                         focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -214,7 +215,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "cumulativeLineChart"
 chart = cumulativeLineChart(height=350, x_is_date=True,
@@ -234,7 +235,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(height=350, jquery_on_ready=True)
@@ -252,7 +253,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarChart"
 chart = multiBarChart(height=350, jquery_on_ready=True)
@@ -269,7 +270,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarChartDate"
 chart = multiBarChart(name=type, height=350, x_is_date=True, jquery_on_ready=True)
@@ -291,7 +292,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "scatterChart"
 chart = scatterChart(height=350, date=False, jquery_on_ready=True)
@@ -315,7 +316,7 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-#---------------------------------------
+# ---------------------------------------
 
 html_close = """</body></html>"""
 output_file.write(html_close)

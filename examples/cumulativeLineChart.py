@@ -18,7 +18,7 @@ import time
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
-#Open File for test
+# Open File for test
 output_file = open('test_cumulativeLineChart.html', 'w')
 
 type = "cumulativeLineChart"
@@ -38,7 +38,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()
