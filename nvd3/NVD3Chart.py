@@ -70,6 +70,7 @@ class NVD3Chart(object):
         :keyword: **height** - default - ``''``
         :keyword: **width** - default - ``''``
         :keyword: **stacked** - default - ``False``
+        :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
         :keyword: **show_legend** - default - ``True``
         :keyword: **show_labels** - default - ``True``
@@ -116,6 +117,7 @@ class NVD3Chart(object):
         self.height = kwargs.get('height', '')
         self.width = kwargs.get('width', '')
         self.stacked = kwargs.get('stacked', False)
+        self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
@@ -131,6 +133,8 @@ class NVD3Chart(object):
         # possible duplicate of x_axis_date
         self.date_flag = kwargs.get('date_flag', False)
         self.x_axis_format = kwargs.get('x_axis_format', '')
+        # Load remote JS assets or use the local bower assets?
+        self.remote_js_assets = kwargs.get('remote_js_assets', True)
 
         # None keywords attribute that should be modified by methods
         # We should change all these to _attr
@@ -147,15 +151,15 @@ class NVD3Chart(object):
         self.header_css = [
             '<link href="%s" rel="stylesheet" />' % h for h in
             (
-                self.assets_directory + 'nvd3/src/nv.d3.css',
+                '//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css' if self.remote_js_assets else self.assets_directory + 'nvd3/src/nv.d3.css',
             )
         ]
 
         self.header_js = [
             '<script src="%s"></script>' % h for h in
             (
-                self.assets_directory + 'd3/d3.min.js',
-                self.assets_directory + 'nvd3/nv.d3.min.js'
+                '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js' if self.remote_js_assets else self.assets_directory + 'd3/d3.min.js',
+                '//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js' if self.remote_js_assets else self.assets_directory + 'nvd3/nv.d3.min.js'
             )
         ]
 
@@ -214,8 +218,6 @@ class NVD3Chart(object):
         else:
             if self.model == 'pieChart':
                 serie = [{'label': x[i], 'value': y} for i, y in enumerate(y)]
-            # elif self.model == 'linePlusBarWithFocusChart':
-            #     serie = [[x[i], y] for i, y in enumerate(y)]
             else:
                 serie = [{'x': x[i], 'y': y} for i, y in enumerate(y)]
 
@@ -231,7 +233,7 @@ class NVD3Chart(object):
         if 'yaxis' in kwargs and kwargs['yaxis']:
             data_keyvalue['yAxis'] = kwargs['yaxis']
         else:
-            if self.model != 'pieChart' and self.model != 'linePlusBarWithFocusChart':
+            if self.model != 'pieChart':
                 data_keyvalue['yAxis'] = '1'
 
         if 'bar' in kwargs and kwargs['bar']:
@@ -260,7 +262,7 @@ class NVD3Chart(object):
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
 
-                    if self.model == 'linePlusBarChart' or self.model == 'linePlusBarWithFocusChart':
+                    if self.model == 'linePlusBarChart':
                         if self.tooltip_condition_string:
                             self.tooltip_condition_string += stab(5)
                         self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
@@ -282,7 +284,7 @@ class NVD3Chart(object):
                     _end = (" + '" + str(_end) + "'") if _end else ''
                     self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
-        #Increment series counter & append
+        # Increment series counter & append
         self.serie_no += 1
         self.series.append(data_keyvalue)
 
@@ -367,10 +369,13 @@ class NVD3Chart(object):
     def buildhtmlheader(self):
         """generate HTML header content"""
         self.htmlheader = ''
-        for css in self.header_css:
-            self.htmlheader += css
-        for js in self.header_js:
-            self.htmlheader += js
+        # If the JavaScript assets have already been injected, don't bother re-sourcing them.
+        global _js_initialized
+        if '_js_initialized' not in globals() or not _js_initialized:
+            for css in self.header_css:
+                self.htmlheader += css
+            for js in self.header_js:
+                self.htmlheader += js
 
     def buildcontainer(self):
         """generate HTML div"""

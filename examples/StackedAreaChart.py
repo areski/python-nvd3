@@ -11,7 +11,7 @@ Project location : https://github.com/areski/python-nvd3
 
 from nvd3.stackedAreaChart import StackedAreaChart
 
-#Open File for test
+# Open File for test
 output_file = open('test_StackedAreaChart.html', 'w')
 
 chart = StackedAreaChart(name='stackedAreaChart', height=400, width=400)

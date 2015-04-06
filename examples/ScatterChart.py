@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from nvd3.scatterChart import ScatterChart
 import random
 
-#Open File for test
+# Open File for test
 output_file = open('test_ScatterChart.html', 'w')
 
 type = "scatterChart"
@@ -36,7 +36,7 @@ chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()

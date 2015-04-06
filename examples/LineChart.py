@@ -11,9 +11,9 @@ Project location : https://github.com/areski/python-nvd3
 
 from nvd3.lineChart import LineChart
 
-#Open File for test
+# Open File for test
 output_file = open('test_lineChart.html', 'w')
-#---------------------------------------
+# ---------------------------------------
 chart = LineChart(name="lineChart", x_is_date=False, x_axis_format="AM_PM")
 
 xdata = []
@@ -37,5 +37,5 @@ chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
 
-#close Html file
+# close Html file
 output_file.close()

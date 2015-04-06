@@ -1,9 +1,35 @@
 Changelog
 =========
 
+0.13.6 - (2015-04-06)
+---------------------
+
+* add support for focusEnable
+
+* remove linePlusBarWithFocusChart as this is replaced by linePlusBarChart with option FocusEnable():
+  http://nvd3-community.github.io/nvd3/examples/documentation.html#linePlusBarChart
+
+* Sourcing JS assets over https when appropriate
+
+
+0.13.5 (2014-11-13)
+-------------------
+
+* Fix: color_list extra arguments is not mandatory on piechart
+
+
+0.13.0 (2014-08-04)
+-------------------
+
+* User Jinja2 to create the JS charts
+
+
+0.11.0 (2013-10-09)
+-------------------
 
 * allow chart_attr to be set as follow 'xAxis': '.rotateLabels(-25)'
   This will turn into calling chart.xAxis.rotateLabels(-25)
+
 
 0.11.0 (2013-10-09)
 -------------------

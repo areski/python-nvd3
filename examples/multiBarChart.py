@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from nvd3 import multiBarChart
 import random
 
-#Open File for test
+# Open File for test
 output_file = open('test_multiBarChart.html', 'w')
 
 type = "multiBarChart"
@@ -30,7 +30,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildhtml()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()

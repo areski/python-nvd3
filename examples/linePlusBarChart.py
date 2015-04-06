@@ -21,7 +21,9 @@ nb_element = 100
 
 output_file = open('test_linePlusBarChart.html', 'w')
 type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, x_is_date=True, x_axis_format="%d %b %Y")
+chart = linePlusBarChart(name=type, height=350, width=750,
+                         x_is_date=True, x_axis_format="%d %b %Y",
+                         focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -37,7 +39,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()
