@@ -437,6 +437,10 @@ class NVD3Chart(object):
         # Add new axis to list of axis
         self.axislist[name] = axis
 
+        # Create x2Axis if focus_enable
+        if name == "xAxis" and self.focus_enable:
+            self.axislist['x2Axis'] = axis
+
     def create_y_axis(self, name, label=None, format=None, custom_format=False):
         """
         Create Y-axis
