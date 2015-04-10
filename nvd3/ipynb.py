@@ -85,7 +85,7 @@ if _ip and _ip.__module__.startswith('IPython'):
         _js_initialized = True
 
     print('loaded nvd3 IPython extension\n'
-          'run nvd3.IPython_wrapper.initialize_javascript() to set up the notebook\n'
-          'help(nvd3.IPython_wrapper.initialize_javascript) for options')
+          'run nvd3.ipynb.initialize_javascript() to set up the notebook\n'
+          'help(nvd3.ipynb.initialize_javascript) for options')
 
     _setup_ipython_formatter(_ip)
