@@ -36,11 +36,12 @@ html_open = """
 <html lang="en">
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link media="all" href="./bower_components/nvd3/src/nv.d3.css" type="text/css" rel="stylesheet" />
-<script src="./bower_components/d3/d3.min.js" type="text/javascript"></script>
-<script src="./bower_components/nvd3/nv.d3.min.js" type="text/javascript"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.js"></script>
 </head>
 """
+
 
 output_file.write(html_open)
 
