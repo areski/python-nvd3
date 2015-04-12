@@ -86,9 +86,7 @@ class scatterChart(TemplateMixin, NVD3Chart):
                     return tooltip_str;
                 });
 
-        chart.scatter.onlyCircles(false);
-
-            chart.showLegend(true);
+        chart.showLegend(true);
 
         chart
         .showDistX(true)

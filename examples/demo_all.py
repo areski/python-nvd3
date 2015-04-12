@@ -35,10 +35,10 @@ html_open = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
 </head>
 """
 
@@ -46,7 +46,7 @@ html_open = """
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(name='my graphname', height=400, jquery_on_ready=True)
+chart = discreteBarChart(name='my graphname', height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
@@ -75,7 +75,7 @@ output_file.write(chart.htmlcontent)
 
 name = "lineChart-different-x-axis"
 type = "lineChart"
-chart = lineChart(name=name, height=350, x_is_date=False,
+chart = lineChart(name=name, height=400, width=800, x_is_date=False,
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
@@ -99,7 +99,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "lineChart"
-chart = lineChart(height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+chart = lineChart(height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -125,7 +125,7 @@ output_file.write(chart.htmlcontent)
 
 type = "lineChartWithInteractiveGuideline"
 chart = lineChart(name="lineChart-With-Interactive-Guideline",
-                  height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+                  height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True, use_interactive_guideline=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -151,6 +151,7 @@ output_file.write(chart.htmlcontent)
 
 type = "lineWithFocusChart"
 chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
+                           height=400, width=800,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -164,7 +165,7 @@ ydata4 = [x * 4 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %I:%M:%S"}
-#extra_serie = None
+# extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie)
@@ -177,7 +178,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(height=350, x_is_date=True,
+chart = stackedAreaChart(height=400, width=800, x_is_date=True,
                          x_axis_format="%d %b %Y %I", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -197,7 +198,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(height=350, x_is_date=True,
+chart = linePlusBarChart(height=400, width=800, x_is_date=True,
                          x_axis_format="%d %b %Y", jquery_on_ready=True,
                          focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -219,7 +220,8 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "cumulativeLineChart"
-chart = cumulativeLineChart(height=350, x_is_date=True,
+chart = cumulativeLineChart(height=400, width=800,
+                            x_is_date=True, x_axis_format="%d %b %Y",
                             jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -239,7 +241,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "multiBarHorizontalChart"
-chart = multiBarHorizontalChart(height=350, jquery_on_ready=True)
+chart = multiBarHorizontalChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
@@ -257,7 +259,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "multiBarChart"
-chart = multiBarChart(height=350, jquery_on_ready=True)
+chart = multiBarChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = list(range(nb_element))
@@ -274,7 +276,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "multiBarChartDate"
-chart = multiBarChart(name=type, height=350, x_is_date=True, jquery_on_ready=True)
+chart = multiBarChart(name=type, height=400, width=800, x_is_date=True, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
@@ -296,7 +298,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "scatterChart"
-chart = scatterChart(height=350, date=False, jquery_on_ready=True)
+chart = scatterChart(height=400, width=800, date=False, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
