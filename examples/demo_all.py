@@ -35,10 +35,10 @@ html_open = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css" rel="stylesheet" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
 </head>
 """
 
@@ -298,7 +298,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 type = "scatterChart"
-chart = scatterChart(height=400, width=800, date=False, jquery_on_ready=True)
+chart = scatterChart(name=type, height=350, width=800, x_is_date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
