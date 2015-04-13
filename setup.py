@@ -118,7 +118,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'nvd3 = nvd3:_main',
+            'nvd3 = nvd3.NVD3Chart:_main',
         ],
     },
     classifiers=[
