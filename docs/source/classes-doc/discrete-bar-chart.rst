@@ -5,7 +5,7 @@
 :class:`discreteBarChart`
 -------------------------
 
-.. autoclass:: DiscreteBarChart
+.. autoclass:: discreteBarChart
     :noindex:
 
 See the HTML source code of this page, to see the underlying javascript.
