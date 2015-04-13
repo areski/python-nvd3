@@ -187,18 +187,21 @@ class NVD3Chart(object):
 
             kwargs:
 
-            * ``shape`` - for scatterChart, you can set different shapes (circle, triangle etc...)
+            * ``shape`` - for scatterChart, you can set different shapes
+                          (circle, triangle etc...)
             * ``size`` - for scatterChart, you can set size of different shapes
             * ``type`` - for multiChart, type should be bar
             * ``bar`` - to display bars in Chart
-            * ``color_list`` - define list of colors which will be used by pieChart
+            * ``color_list`` - define list of colors which will be
+                               used by pieChart
             * ``color`` - set axis color
             * ``disabled`` -
 
             extra:
 
             * ``tooltip`` - set tooltip flag
-            * ``date_format`` - set date_format for tooltip if x-axis is in date format
+            * ``date_format`` - set date_format for tooltip if x-axis is in
+              date format
 
         """
         if not name:
@@ -428,8 +431,9 @@ class NVD3Chart(object):
         # date format : see https://github.com/mbostock/d3/wiki/Time-Formatting
         if date:
             self.dateformat = format
-            axis['tickFormat'] = "function(d) { return d3.time.format('%s')(new Date(parseInt(d))) }\n" % \
-                self.dateformat
+            axis['tickFormat'] = ("function(d) { return d3.time.format('%s')"
+                                  "(new Date(parseInt(d))) }\n"
+                                  "" % self.dateformat)
             # flag is the x Axis is a date
             if name[0] == 'x':
                 self.x_axis_date = True
@@ -485,7 +489,9 @@ def _main():
     """
     # Parse arguments
     usage = "usage: nvd3.py [options]"
-    parser = OptionParser(usage=usage, version="python-nvd3 - Charts generator with nvd3.js and d3.js")
+    parser = OptionParser(usage=usage,
+                          version=("python-nvd3 - Charts generator with "
+                                   "nvd3.js and d3.js"))
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print messages to stdout")
