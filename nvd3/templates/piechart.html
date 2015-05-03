@@ -3,14 +3,14 @@
 
 {% extends "content.html" %}
 {% block body %}
-    
+
     data_{{ chart.name }}={{ chart.series_js }};
-    
+
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
         var datum = data_{{ chart.name }}[0].values;
-    
+
     chart.tooltipContent(function(key, y, e, graph) {
           var x = String(key);
               {{ chart.tooltip_condition_string }}
@@ -28,7 +28,7 @@
         {% endif %}
 
     chart.showLegend({{chart.show_legend|lower}});
-    
+
     {# add custom chart attributes #}
     {% for attr, value in chart.chart_attr.items() %}
         {% if value is string and value.startswith(".") %}:
@@ -41,19 +41,22 @@
     {% if chart.resize %}
         nv.utils.windowResize(chart.update);
     {% endif %}
+
     {% if chart.color_list %}
         var mycolor = new Array();
-    {% for color in chart.color_list %}
+        {% for color in chart.color_list %}
             mycolor[{{ loop.index - 1}}] = "{{ color }}";
-    {% endfor %}
+        {% endfor %}
     {% endif %}
 
         chart
             .x(function(d) { return d.label })
             .y(function(d) { return d.value });
+
     {% if chart.width %}
         chart.width({{ chart.width }});
     {% endif %}
+
     {% if chart.height %}
         chart.height({{ chart.height }});
     {% endif %}
@@ -61,10 +64,13 @@
     {% if chart.color_list %}
         chart.color(mycolor);
     {% endif %}
-    
+
     {% block inject %}
     {{super()}}
     {% endblock inject %}
-    });
-{% endblock body %}
 
+    {% block close %}
+    {{ super() }}
+    {% endblock close %}
+
+{% endblock body %}

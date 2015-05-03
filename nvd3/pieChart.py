@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class PieChart(TemplateMixin, NVD3Chart):
+class pieChart(TemplateMixin, NVD3Chart):
 
     """
     A pie chart (or a circle graph) is a circular chart divided into sectors,
@@ -83,7 +83,7 @@ class PieChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(PieChart, self).__init__(**kwargs)
+        super(pieChart, self).__init__(**kwargs)
 
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
@@ -99,5 +99,3 @@ class PieChart(TemplateMixin, NVD3Chart):
             self.set_graph_width(width)
         self.donut = kwargs.get('donut', False)
         self.donutRatio = kwargs.get('donutRatio', 0.35)
-
-pieChart = PieChart

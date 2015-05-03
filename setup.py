@@ -10,10 +10,6 @@ from distutils.util import convert_path
 def read(*parts):
     return open(os.path.join(os.path.dirname(__file__), *parts)).read()
 
-import nvd3
-
-def get_version():
-    return nvd3.__version__
 
 # Provided as an attribute, so you can append to these instead
 # of replicating them:
@@ -100,7 +96,7 @@ def find_package_data(where='.', package='',
 
 setup(
     name='python-nvd3',
-    version=get_version(),
+    version='0.13.8',
     description="Python NVD3 - Chart Library for d3.js",
     long_description=read('README.rst'),
     keywords='plot, graph, nvd3, d3',
@@ -116,13 +112,13 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'awesome-slugify',
+        'python-slugify==0.1.0',
         'Jinja2>=2.7.2'
         # -*- Extra requirements: -*-
     ],
     entry_points={
         'console_scripts': [
-            'nvd3 = nvd3:_main',
+            'nvd3 = nvd3.NVD3Chart:_main',
         ],
     },
     classifiers=[

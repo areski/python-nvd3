@@ -14,7 +14,6 @@ from nvd3 import discreteBarChart
 from nvd3 import lineChart
 from nvd3 import linePlusBarChart
 from nvd3 import lineWithFocusChart
-from nvd3 import linePlusBarWithFocusChart
 from nvd3 import multiBarChart
 from nvd3 import multiBarHorizontalChart
 from nvd3 import stackedAreaChart
@@ -28,25 +27,26 @@ import time
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 nb_element = 100
 
-#Open File for test
+# Open File for test
 output_file = open('test_demo_all.html', 'w')
-#---------------------------------------
+# ---------------------------------------
 
 html_open = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link media="all" href="./bower_components/nvd3/src/nv.d3.css" type="text/css" rel="stylesheet" />
-<script src="./bower_components/d3/d3.min.js" type="text/javascript"></script>
-<script src="./bower_components/nvd3/nv.d3.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
 </head>
 """
+
 
 output_file.write(html_open)
 
 type = "discreteBarChart"
-chart = discreteBarChart(name='my graphname', height=400, jquery_on_ready=True)
+chart = discreteBarChart(name='my graphname', height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
@@ -56,10 +56,10 @@ chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 
 chart.buildcontent()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "pie Chart"
-chart = pieChart(name=type ,color_category='category20c', height=400,
+chart = pieChart(name=type, color_category='category20c', height=400,
                  width=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -71,11 +71,11 @@ ydata = [3, 4, 2, 1, 5, 7, 3]
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 chart.buildcontent()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 name = "lineChart-different-x-axis"
 type = "lineChart"
-chart = lineChart(name=name, height=350, x_is_date=False,
+chart = lineChart(name=name, height=400, width=800, x_is_date=False,
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
@@ -96,10 +96,10 @@ chart.add_serie(name="Even X-Axis", y=ydata2, x=xdata10, extra=extra_serie, **kw
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineChart"
-chart = lineChart(height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+chart = lineChart(height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -108,7 +108,7 @@ xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]
 
-#Configure a color for a specific serie
+# Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
@@ -121,11 +121,11 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineChartWithInteractiveGuideline"
 chart = lineChart(name="lineChart-With-Interactive-Guideline",
-                  height=350, x_is_date=True, x_axis_format="%d %b %Y %H",
+                  height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True, use_interactive_guideline=True)
 
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -134,7 +134,7 @@ xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]
 
-#Configure a color for a specific serie
+# Configure a color for a specific serie
 kwargs1 = {'color': 'green'}
 kwargs2 = {'color': 'red'}
 
@@ -147,10 +147,11 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie, **kwargs2
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "lineWithFocusChart"
 chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
+                           height=400, width=800,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -164,7 +165,7 @@ ydata4 = [x * 4 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %I:%M:%S"}
-#extra_serie = None
+# extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie)
@@ -174,10 +175,10 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-#---------------------------------------
+# ---------------------------------------
 
 type = "stackedAreaChart"
-chart = stackedAreaChart(height=350, x_is_date=True,
+chart = stackedAreaChart(height=400, width=800, x_is_date=True,
                          x_axis_format="%d %b %Y %I", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -194,11 +195,12 @@ chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "linePlusBarChart"
-chart = linePlusBarChart(height=350, x_is_date=True,
-                         x_axis_format="%d %b %Y", jquery_on_ready=True)
+chart = linePlusBarChart(height=400, width=800, x_is_date=True,
+                         x_axis_format="%d %b %Y", jquery_on_ready=True,
+                         focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -215,10 +217,11 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "cumulativeLineChart"
-chart = cumulativeLineChart(height=350, x_is_date=True,
+chart = cumulativeLineChart(height=400, width=800,
+                            x_is_date=True, x_axis_format="%d %b %Y",
                             jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -235,10 +238,10 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarHorizontalChart"
-chart = multiBarHorizontalChart(height=350, jquery_on_ready=True)
+chart = multiBarHorizontalChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
@@ -253,10 +256,10 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarChart"
-chart = multiBarChart(height=350, jquery_on_ready=True)
+chart = multiBarChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = list(range(nb_element))
@@ -270,10 +273,10 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "multiBarChartDate"
-chart = multiBarChart(name=type, height=350, x_is_date=True, jquery_on_ready=True)
+chart = multiBarChart(name=type, height=400, width=800, x_is_date=True, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
@@ -292,10 +295,10 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
 type = "scatterChart"
-chart = scatterChart(height=350, date=False, jquery_on_ready=True)
+chart = scatterChart(name=type, height=350, width=800, x_is_date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]
@@ -316,72 +319,10 @@ chart.buildcontent()
 
 output_file.write(chart.htmlcontent)
 
-#--------------------------------------------
-nb_element = 200
-
-type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(height=350, x_is_date=True,
-                                  x_axis_format="%d %b %Y", jquery_on_ready=True)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-
-xdata = list(range(nb_element))
-xdata = [start_time + x * 1000000000 for x in xdata]
-ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = [i + random.randint(10, 20) for i in reversed(list(range(nb_element)))]
-kwargs = {}
-kwargs['bar'] = True
-extra_serie = {"tooltip": {"y_start": "$ ", "y_end": ""}}
-chart.add_serie(name="Count", y=ydata, x=xdata, extra=extra_serie, **kwargs)
-extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
-chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
-
-chart.buildcontent()
-
-output_file.write(chart.htmlcontent)
-
-
-#--------------------------------------------
-
-# linePlusBarWithFocusChart_AMPM
-
-name = "linePlusBarWithFocusChartAMPM"
-type = "linePlusBarWithFocusChart"
-chart = linePlusBarWithFocusChart(name=name, x_is_date=False, x_axis_format="AM_PM")
-chart.set_containerheader("\n\n<h2>" + name + "</h2>\n\n")
-
-xdata = [i for i in range(0, 24)]
-ydata = [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 4, 3, 3, 5, 7, 5, 3, 16, 6, 9, 15, 4, 12]
-ydata2 = [9, 8, 11, 8, 3, 7, 10, 8, 6, 6, 9, 6, 5, 4, 3, 10, 0, 6, 3, 1, 0, 0, 0, 1]
-ydata3 = [9, 8, 15, 8, 4, 7, 20, 8, 4, 6, 0, 4, 5, 7, 3, 15, 30, 6, 3, 1, 0, 0, 0, 1]
-
-
-extra_serie_1 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-kwargs = {"bar": "true"}
-chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie_1, **kwargs)
-
-extra_serie_2 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie_2)
-
-extra_serie_3 = {
-    "tooltip": {"y_start": "$ ", "y_end": ""},
-    "date_format": "",
-}
-chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie_3)
-
-chart.buildhtml()
-
-output_file.write(chart.htmlcontent)
-
-#---------------------------------------
+# ---------------------------------------
 
 html_close = """</body></html>"""
 output_file.write(html_close)
 
-#close Html file
+# close Html file
 output_file.close()

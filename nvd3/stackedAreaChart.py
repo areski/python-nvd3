@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class StackedAreaChart(TemplateMixin, NVD3Chart):
+class stackedAreaChart(TemplateMixin, NVD3Chart):
     """
     The stacked area chart is identical to the area chart, except the areas are stacked
     on top of each other, rather than overlapping. This can make the chart much easier to read.
@@ -78,7 +78,7 @@ class StackedAreaChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(StackedAreaChart, self).__init__(**kwargs)
+        super(stackedAreaChart, self).__init__(**kwargs)
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
         self.model = 'stackedAreaChart'
@@ -97,5 +97,3 @@ class StackedAreaChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-stackedAreaChart = StackedAreaChart

@@ -5,7 +5,7 @@
 :class:`scatterChart`
 ---------------------
 
-.. autoclass:: nvd3.scatterChart
+.. autoclass:: scatterChart
     :noindex:
 
 See the HTML source code of this page, to see the underlying javascript.

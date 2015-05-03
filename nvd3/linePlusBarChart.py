@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class LinePlusBarChart(TemplateMixin, NVD3Chart):
+class linePlusBarChart(TemplateMixin, NVD3Chart):
 
     """
     A linePlusBarChart Chart is a type of chart which displays information
@@ -95,7 +95,7 @@ class LinePlusBarChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(LinePlusBarChart, self).__init__(**kwargs)
+        super(linePlusBarChart, self).__init__(**kwargs)
         self.model = 'linePlusBarChart'
 
         height = kwargs.get('height', 450)
@@ -124,5 +124,3 @@ class LinePlusBarChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-linePlusBarChart = LinePlusBarChart

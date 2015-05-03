@@ -9,12 +9,11 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-__version__ = '0.12.2'
+__version__ = '0.13.8'
 __all__ = ['lineChart', 'pieChart', 'lineWithFocusChart',
            'stackedAreaChart', 'multiBarHorizontalChart',
            'linePlusBarChart', 'cumulativeLineChart',
-           'scatterChart', 'discreteBarChart', 'multiBarChart',
-           'linePlusBarWithFocusChart']
+           'scatterChart', 'discreteBarChart', 'multiBarChart']
 
 
 from .lineChart import lineChart
@@ -27,5 +26,4 @@ from .cumulativeLineChart import cumulativeLineChart
 from .scatterChart import scatterChart
 from .discreteBarChart import discreteBarChart
 from .multiBarChart import multiBarChart
-from .linePlusBarWithFocusChart import linePlusBarWithFocusChart
 from . import ipynb

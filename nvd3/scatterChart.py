@@ -12,7 +12,7 @@ Project location : https://github.com/areski/python-nvd3
 from .NVD3Chart import NVD3Chart, TemplateMixin
 
 
-class ScatterChart(TemplateMixin, NVD3Chart):
+class scatterChart(TemplateMixin, NVD3Chart):
 
     """
     A scatter plot or scattergraph is a type of mathematical diagram using Cartesian
@@ -86,9 +86,7 @@ class ScatterChart(TemplateMixin, NVD3Chart):
                     return tooltip_str;
                 });
 
-        chart.scatter.onlyCircles(false);
-
-            chart.showLegend(true);
+        chart.showLegend(true);
 
         chart
         .showDistX(true)
@@ -110,7 +108,7 @@ class ScatterChart(TemplateMixin, NVD3Chart):
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
 
     def __init__(self, **kwargs):
-        super(ScatterChart, self).__init__(**kwargs)
+        super(scatterChart, self).__init__(**kwargs)
         self.model = 'scatterChart'
         height = kwargs.get('height', 450)
         width = kwargs.get('width', None)
@@ -121,5 +119,3 @@ class ScatterChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
-
-scatterChart = ScatterChart

@@ -15,7 +15,7 @@ import datetime
 import time
 
 
-#Open File for test
+# Open File for test
 output_file = open('test_discreteBarChart_with_date.html', 'w')
 
 type = "discreteBarChart"
@@ -35,7 +35,7 @@ chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()

@@ -5,7 +5,7 @@
 :class:`stackedAreaChart`
 -------------------------
 
-.. autoclass:: nvd3.stackedAreaChart
+.. autoclass:: stackedAreaChart
     :noindex:
 
 See the HTML source code of this page, to see the underlying javascript.

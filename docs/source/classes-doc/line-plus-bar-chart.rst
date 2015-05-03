@@ -1,4 +1,4 @@
-.. module:: nvd3
+.. module:: nvd3.linePlusBarChart
 
 .. _linePlusBarChart-model:
 
