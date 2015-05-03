@@ -13,10 +13,10 @@ from __future__ import unicode_literals
 from optparse import OptionParser
 from jinja2 import Environment, PackageLoader
 from slugify import slugify
-
-try: import simplejson as json
-except ImportError: import json
-
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 CONTENT_FILENAME = "./content.html"
 PAGE_FILENAME = "./page.html"
