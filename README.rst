@@ -17,24 +17,24 @@ Python Wrapper for NVD3 - It's time for beautiful charts
   :target: https://coveralls.io/r/areski/python-nvd3?branch=develop
 
 .. image:: https://pypip.in/version/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Latest Version
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Latest Version
 
 .. image:: https://pypip.in/download/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Downloads
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Downloads
 
 .. image:: https://pypip.in/py_versions/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Supported Python versions
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Supported Python versions
 
 .. image:: https://pypip.in/license/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: License
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: License
 
 .. image:: https://requires.io/github/areski/python-nvd3/requirements.svg?branch=develop
-     :target: https://requires.io/github/areski/python-nvd3/requirements/?branch=develop
-     :alt: Requirements Status
+  :target: https://requires.io/github/areski/python-nvd3/requirements/?branch=develop
+  :alt: Requirements Status
 
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js offers you.
