@@ -9,14 +9,14 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.scatterChart import ScatterChart
+from nvd3 import scatterChart
 import random
 
 # Open File for test
 output_file = open('test_ScatterChart.html', 'w')
 
 type = "scatterChart"
-chart = ScatterChart(name=type, height=350, x_is_date=False)
+chart = scatterChart(name=type, height=350, x_is_date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]

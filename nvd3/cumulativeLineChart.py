@@ -36,7 +36,7 @@ class cumulativeLineChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="cumulativeLineChart"><svg style="height:450px;"></svg></div>
+        <div id="cumulativeLineChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
             data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000000},
             {"y": 5, "x": 1365026500000000},

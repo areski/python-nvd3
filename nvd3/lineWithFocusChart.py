@@ -23,8 +23,8 @@ class lineWithFocusChart(TemplateMixin, NVD3Chart):
 
         from nvd3 import lineWithFocusChart
         chart = lineWithFocusChart(name='lineWithFocusChart', x_is_date=True, x_axis_format="%d %b %Y")
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
-        ydata = [-6, 5, -1]
+        xdata = [1365026400000000, 1365026500000000, 1365026600000000, 1365026700000000, 1365026800000000, 1365026900000000, 1365027000000000]
+        ydata = [-6, 5, -1, 2, 4, 8, 10]
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " ext"},
                        "date_format": "%d %b %Y"}

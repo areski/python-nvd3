@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.cumulativeLineChart import CumulativeLineChart
+from nvd3 import cumulativeLineChart
 import random
 import datetime
 import time
@@ -22,7 +22,7 @@ nb_element = 100
 output_file = open('test_cumulativeLineChart.html', 'w')
 
 type = "cumulativeLineChart"
-chart = CumulativeLineChart(name=type, height=350, x_is_date=True)
+chart = cumulativeLineChart(name=type, height=350, x_is_date=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))

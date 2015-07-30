@@ -9,14 +9,14 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.discreteBarChart import DiscreteBarChart
+from nvd3 import discreteBarChart
 
 
 # Open File for test
 output_file = open('test_discreteBarChart.html', 'w')
 
 type = "discreteBarChart"
-chart = DiscreteBarChart(name='mygraphname', height=400, width=600)
+chart = discreteBarChart(name='mygraphname', height=400, width=600)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]

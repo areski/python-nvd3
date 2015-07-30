@@ -9,12 +9,12 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.stackedAreaChart import StackedAreaChart
+from nvd3 import stackedAreaChart
 
 # Open File for test
 output_file = open('test_StackedAreaChart.html', 'w')
 
-chart = StackedAreaChart(name='stackedAreaChart', height=400, width=400)
+chart = stackedAreaChart(name='stackedAreaChart', height=400, width=400)
 
 xdata = [100, 101, 102, 103, 104, 105, 106]
 ydata = [6, 11, 12, 7, 11, 10, 11]

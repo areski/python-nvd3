@@ -9,7 +9,7 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.lineWithFocusChart import LineWithFocusChart
+from nvd3 import lineWithFocusChart
 import random
 import datetime
 import time
@@ -22,7 +22,7 @@ nb_element = 100
 output_file = open('test_lineWithFocusChart.html', 'w')
 # ---------------------------------------
 type = "lineWithFocusChart"
-chart = LineWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y %H")
+chart = lineWithFocusChart(name=type, color_category='category20b', x_is_date=True, x_axis_format="%d %b %Y %H")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 xdata = list(range(nb_element))
@@ -35,7 +35,7 @@ ydata4 = [x * 4 for x in ydata]
 
 extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"},
                "date_format": "%d %b %Y %H:%M:%S %p"}
-#extra_serie = None
+# extra_serie = None
 chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie)

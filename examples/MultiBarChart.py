@@ -9,14 +9,14 @@ for d3.js without taking away the power that d3.js gives you.
 Project location : https://github.com/areski/python-nvd3
 """
 
-from nvd3.multiBarChart import MultiBarChart
+from nvd3 import multiBarChart
 import random
 
 # Open File for test
 output_file = open('test_multiBarChart.html', 'w')
 
 type = "multiBarChart"
-chart = MultiBarChart(name=type, height=350)
+chart = multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
 xdata = list(range(nb_element))
