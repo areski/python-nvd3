@@ -142,8 +142,8 @@ You can also configure the directory where your bower dependencies will be
 saved adding a ``.bowerrc`` file in your project root directory.
 
 
-Do you like Django?
--------------------
+Django Wrapper
+--------------
 
 There is also a django wrapper for nvd3 available:
 https://github.com/areski/django-nvd3
