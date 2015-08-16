@@ -111,10 +111,15 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
                                format=kwargs.get('x_axis_format',
                                                  '%d %b %Y %H %S'),
                                date=True)
+            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format',
+                                                           '%d %b %Y %H %S'),
+                               date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=kwargs.get('x_axis_format',
                                                           '.2f'))
+            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format',
+                                                           '.2f'))
 
         self.create_y_axis('y1Axis', format=self.yaxis1_format,
                            custom_format=True)

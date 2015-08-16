@@ -22,7 +22,8 @@ nb_element = 100
 output_file = open('test_lineWithFocusChart.html', 'w')
 # ---------------------------------------
 type = "lineWithFocusChart"
-chart = lineWithFocusChart(name=type, color_category='category20b', x_is_date=True,
+chart = lineWithFocusChart(name=type, height=550, width=850,
+                           color_category='category20b', x_is_date=True,
                            x_axis_format="%d %b %Y %H", focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
