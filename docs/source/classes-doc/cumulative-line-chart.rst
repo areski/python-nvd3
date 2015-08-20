@@ -4,7 +4,7 @@
 
 :class:`cumulativeLineChart`
 ----------------------------
-.. autoclass:: CumulativeLineChart
+.. autoclass:: cumulativeLineChart
     :members:
     :noindex:
 

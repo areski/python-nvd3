@@ -37,7 +37,7 @@ chart.add_serie(name="Duration", y=ydata2, x=xdata, extra=extra_serie)
 
 chart.buildhtml()
 output_file.write(chart.htmlcontent)
-#---------------------------------------
+# ---------------------------------------
 
-#close Html file
+# close Html file
 output_file.close()
