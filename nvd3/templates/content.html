@@ -28,9 +28,9 @@
         chart.stacked(true);
     {% endif %}
 
-    {% if chart.focus_enable %}
-        chart.focusEnable(true);
-    {% endif %}
+    {% block focus %}
+    {% endblock focus %}
+
 
     {% block axes %}
         {% for axis, a in chart.axislist.items() %}

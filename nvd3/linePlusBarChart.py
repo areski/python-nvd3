@@ -25,7 +25,7 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
         from nvd3 import linePlusBarChart
         chart = linePlusBarChart(name="linePlusBarChart",
                              width=500, height=400, x_axis_format="%d %b %Y",
-                             x_is_date=True,
+                             x_is_date=True, focus_enable=True,
                              yaxis2_format="function(d) { return d3.format(',0.3f')(d) }")
 
         xdata = [1338501600000, 1345501600000, 1353501600000]
@@ -53,7 +53,7 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="linePlusBarChart"><svg style="height:450px;"></svg></div>
+        <div id="linePlusBarChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
             data_linePlusBarChart=[{"bar": "true", "values": [{"y": 6, "x": 1338501600000}, {"y": 5, "x": 1345501600000}, {"y": 1, "x": 1353501600000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 0.002, "x": 1338501600000}, {"y": 0.003, "x": 1345501600000}, {"y": 0.004, "x": 1353501600000}], "key": "Serie 2", "yAxis": "1"}];
             nv.addGraph(function() {
@@ -61,12 +61,12 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
                 chart.margin({top: 30, right: 60, bottom: 20, left: 60});
                 var datum = data_linePlusBarChart;
 
-                        chart.y2Axis
-                            .tickFormat(function(d) { return d3.format(',0.3f')(d) });
-                        chart.xAxis
-                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
-                        chart.y1Axis
-                            .tickFormat(function(d) { return d3.format(',f')(d) });
+                    chart.y2Axis
+                        .tickFormat(function(d) { return d3.format(',0.3f')(d) });
+                    chart.xAxis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
+                    chart.y1Axis
+                        .tickFormat(function(d) { return d3.format(',f')(d) });
 
                     chart.tooltipContent(function(key, y, e, graph) {
                         var x = d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(graph.point.x)));
@@ -111,10 +111,15 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
                                format=kwargs.get('x_axis_format',
                                                  '%d %b %Y %H %S'),
                                date=True)
+            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format',
+                                                           '%d %b %Y %H %S'),
+                               date=True)
             self.set_custom_tooltip_flag(True)
         else:
             self.create_x_axis('xAxis', format=kwargs.get('x_axis_format',
                                                           '.2f'))
+            self.create_x_axis('x2Axis', format=kwargs.get('x_axis_format',
+                                                           '.2f'))
 
         self.create_y_axis('y1Axis', format=self.yaxis1_format,
                            custom_format=True)
