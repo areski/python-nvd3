@@ -12,7 +12,7 @@ try:
     _ip = get_ipython()
 except:
     _ip = None
-if _ip and _ip.__module__.startswith('IPython'):
+if _ip and _ip.__module__.lower().startswith('ipy'):
     global _js_initialized
     _js_initialized = False
 
