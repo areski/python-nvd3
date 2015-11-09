@@ -115,6 +115,11 @@
         {{ chart.extras }}
     {% endif %}
 
+    {# callback for clicking on charts #}
+    {% if chart.callback %}
+       },{{ chart.callback }});
+    {% endif %}
+
     {# closing nv.addGraph #}
     {% block close %}
     });
