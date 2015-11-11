@@ -4,9 +4,8 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 :Description: Python-nvd3 is a wrapper for NVD3 graph library
 :NVD3: NVD3 http://nvd3.org/
 :D3: Data-Driven Documents http://d3js.org/
-:Naintainers: Areski_ & Oz_
+:Maintainers: Areski_ & Oz_
 :Contributors: `list of contributors <https://github.com/areski/python-nvd3/graphs/contributors>`_
-:License: MIT
 
 .. _Areski: https://github.com/areski/
 .. _Oz: https://github.com/oz123/
