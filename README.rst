@@ -17,19 +17,19 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 .. image:: https://coveralls.io/repos/areski/python-nvd3/badge.png?branch=develop
   :target: https://coveralls.io/r/areski/python-nvd3?branch=develop
 
-.. image:: https://pypip.in/version/python-nvd3/badge.svg
+.. image:: https://img.shields.io/pypi/v/python-nvd3.svg
   :target: https://pypi.python.org/pypi/python-nvd3/
   :alt: Latest Version
 
-.. image:: https://pypip.in/download/python-nvd3/badge.svg
+.. image:: https://img.shields.io/pypi/dm/python-nvd3.svg
   :target: https://pypi.python.org/pypi/python-nvd3/
   :alt: Downloads
 
-.. image:: https://pypip.in/py_versions/python-nvd3/badge.svg
+.. image:: https://img.shields.io/pypi/pyversions/python-nvd3.svg
   :target: https://pypi.python.org/pypi/python-nvd3/
   :alt: Supported Python versions
 
-.. image:: https://pypip.in/license/python-nvd3/badge.svg
+.. image:: https://img.shields.io/pypi/l/python-nvd3.svg
   :target: https://pypi.python.org/pypi/python-nvd3/
   :alt: License
 
