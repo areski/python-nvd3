@@ -4,6 +4,13 @@ History
 -------
 
 
+0.14.0 - (2015-12-09)
+---------------------
+
+* update project structure
+* remove setuptools from requirements
+
+
 0.13.8 - (2015-04-12)
 ---------------------
 
