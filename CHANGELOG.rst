@@ -1,5 +1,7 @@
-Changelog
-=========
+.. :changelog:
+
+History
+-------
 
 
 0.13.8 - (2015-04-12)
