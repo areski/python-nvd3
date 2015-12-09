@@ -50,7 +50,7 @@ History
 -------------------
 
 * allow chart_attr to be set as follow 'xAxis': '.rotateLabels(-25)'
-  This will turn into calling chart.xAxis.rotateLabels(-25)
+  this will turn into calling chart.xAxis.rotateLabels(-25)
 
 
 0.11.0 (2013-10-09)
@@ -61,13 +61,13 @@ History
 
 
 0.10.2 (2013-10-04)
-------------------
+-------------------
 
 * discreteBarChart support date on xAxis
 
 
 0.10.1 (2013-10-03)
-------------------
+-------------------
 
 * Remove $ sign in linePlusBarWithFocusChart
 
