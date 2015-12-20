@@ -132,8 +132,8 @@ Note : you might prefer to save your npm dependencies locally in a ``package.jso
 
 Then in the directory where you will use python-nvd3, just execute the following commands::
 
-    $ bower install d3#3.3.8
-    $ bower install nvd3#1.1.12-beta
+    $ bower install d3#3.5.5
+    $ bower install nvd3#1.7.1
 
 This will create a directory "bower_components" where d3 & nvd3 will be saved.
 
