@@ -73,6 +73,10 @@
     {{super()}}
     {% endblock inject %}
 
+    {% if chart.callback %}
+       },{{ chart.callback }});
+    {% endif %}
+
     {% block close %}
     {{ super() }}
     {% endblock close %}

@@ -137,6 +137,7 @@ class NVD3Chart(object):
         self.x_axis_format = kwargs.get('x_axis_format', '')
         # Load remote JS assets or use the local bower assets?
         self.remote_js_assets = kwargs.get('remote_js_assets', True)
+        self.callback = kwargs.get('callback', None)
 
         # None keywords attribute that should be modified by methods
         # We should change all these to _attr
