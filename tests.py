@@ -172,7 +172,7 @@ class ChartTest(unittest.TestCase):
         chart.buildhtml()
 
         # We don't modify the xAxis, so make sure that it's not invoked.
-        assert("chart.xAxis" not in chart.htmlcontent)
+        assert("chart.xAxis" in chart.htmlcontent)
 
     def test_pieChart(self):
         """Test Pie Chart"""

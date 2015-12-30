@@ -4,6 +4,13 @@ History
 -------
 
 
+0.15.0 - current
+---------------------
+
+* new settings show_controls & xAxis_rotateLabel
+* add setting to add callback
+
+
 0.14.0 - (2015-12-09)
 ---------------------
 
