@@ -109,7 +109,7 @@
             .datum(datum)
             .transition().duration(500)
             {% if chart.width %}
-            .attr('width', {{ chart.width}})
+            .attr('width', '{{ chart.width}}')
             {% endif %}
             {% if chart.height %}
             .attr('height', {{ chart.height}})
