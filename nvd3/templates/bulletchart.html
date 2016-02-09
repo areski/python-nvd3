@@ -1,0 +1,30 @@
+{# This template adds attributes unique
+    to bulletChart #}
+
+{% extends 'content.html' %}
+{% block body %}
+
+    {% block data %}
+    {{ super () }}
+    {% endblock data %}
+
+    function transformedData(){
+        return data_bulletchart[0]['values'][0]
+    }
+
+
+
+    nv.addGraph(function() {
+    var chart = nv.models.bulletChart();
+
+    d3.select('svg')
+        .datum(transformedData())
+        .transition().duration(1000)
+        .call(chart)
+        ;
+
+    return chart;
+    });
+{% endblock body %}
+
+

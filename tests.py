@@ -11,6 +11,7 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
+from nvd3 import bulletChart
 from nvd3.NVD3Chart import stab
 from nvd3.translator import Function, AnonymousFunction, Assignment
 import random
@@ -193,6 +194,59 @@ class ChartTest(unittest.TestCase):
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
+
+    def test_can_create_bulletChart(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'US$, in thousands'
+        ranges = [150, 225, 300]
+        measures = [220, 270]
+        markers = [250]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures,
+            markers=markers)
+        chart.buildhtml()
+
+    def test_bulletChart_htmlcontent_correct(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'USD, in mill'
+        ranges = [100, 250, 300]
+        measures = [220, 280]
+        markers = [260]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures,
+            markers=markers)
+        chart.buildhtml()
+        assert 'data_bulletchart' in chart.htmlcontent
+        assert '"title": ["Revenue"]'  in chart.htmlcontent
+        assert '"ranges": [100, 250, 300]' in chart.htmlcontent
+        assert 'nv.models.bulletChart();' in chart.htmlcontent
+
+    def test_bulletChart_marker_optional(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'USD, in mill'
+        ranges = [100, 250, 300]
+        measures = [220, 280]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures
+            )
+        chart.buildhtml()
+        assert 'data_bulletchart' in chart.htmlcontent
+        assert 'marker' not in chart.htmlcontent
 
 
 class FuncTest(unittest.TestCase):
