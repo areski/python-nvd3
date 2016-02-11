@@ -69,12 +69,12 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
 
     Python example::
 
-        chart = discreteBarChart(name='discreteBarChart', height=400, width=400,
+        chart = discreteBarChart(name='discreteBarChart-notooltip', height=400, width=400,
                                  tooltips=False)
 
     .. raw:: html
 
-        <div id="discreteBarChart"><svg style="height:450px; width:100%"></svg></div>
+        <div id="discreteBarChart-notooltip"><svg style="height:450px; width:100%"></svg></div>
         <script>
             data_discreteBarChart=[{"values": [{"y": 3, "x": "A"}, {"y": 4, "x": "B"}, {"y": 0, "x": "C"}, {"y": -3, "x": "D"}, {"y": 5, "x": "E"}, {"y": 7, "x": "F"}], "key": "Serie 1", "yAxis": "1"}];
 
