@@ -95,7 +95,7 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
                             return tooltip_str;
                         });
 
-                d3.select('#discreteBarChart svg')
+                d3.select('#discreteBarChart-notooltip svg')
                     .datum(datum)
                     .transition().duration(500)
                     .attr('width', 400)
