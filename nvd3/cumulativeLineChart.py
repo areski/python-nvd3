@@ -21,7 +21,7 @@ class cumulativeLineChart(TemplateMixin, NVD3Chart):
 
         from nvd3 import cumulativeLineChart
         chart = cumulativeLineChart(name='cumulativeLineChart', x_is_date=True)
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
+        xdata = [1365026400000, 1365026500000, 1365026600000]
         ydata = [6, 5, 1]
         y2data = [36, 55, 11]
 
@@ -38,13 +38,13 @@ class cumulativeLineChart(TemplateMixin, NVD3Chart):
 
         <div id="cumulativeLineChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
-            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000000},
-            {"y": 5, "x": 1365026500000000},
-            {"y": 1, "x": 1365026600000000}],
+            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000},
+            {"y": 5, "x": 1365026500000},
+            {"y": 1, "x": 1365026600000}],
             "key": "Serie 1", "yAxis": "1"},
-            {"values": [{"y": 36, "x": 1365026400000000},
-            {"y": 55, "x": 1365026500000000},
-            {"y": 11, "x": 1365026600000000}], "key": "Serie 2", "yAxis": "1"}];
+            {"values": [{"y": 36, "x": 1365026400000},
+            {"y": 55, "x": 1365026500000},
+            {"y": 11, "x": 1365026600000}], "key": "Serie 2", "yAxis": "1"}];
             nv.addGraph(function() {
                 var chart = nv.models.cumulativeLineChart();
                 chart.margin({top: 30, right: 60, bottom: 20, left: 60});
