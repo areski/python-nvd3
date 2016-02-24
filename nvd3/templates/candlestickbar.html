@@ -1,0 +1,38 @@
+{# This template adds attributes unique
+    to candlestickChart #}
+
+{% extends 'content.html' %}
+
+{% block body %}
+
+    {% block data %}
+    {{ super () }}
+    {% endblock data %}
+
+
+        var parseDate = d3.time.format('%Y-%m-%d').parse;
+
+
+        nv.addGraph(function() {
+        var chart = nv.models.candlestickBarChart()
+            .x(function(d) { return parseDate(d['date']); })
+            .y(function(d) { return d['close'] })
+            .duration(250)
+            .margin({left: 75, bottom: 50});
+
+        chart.xAxis
+                .axisLabel("Dates")
+                .tickFormat(function(d) {
+                    return d3.time.format('%Y-%m-%d')(new Date(d));
+                });
+        chart.yAxis
+                .axisLabel('Stock Price')
+                .tickFormat(function(d,i){ return '$' + d3.format(',.1f')(d); });
+        d3.select("#{{ chart.name }} svg")
+                .datum(data_{{ chart.name }})
+                .transition().duration(500)
+                .call(chart);
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+{% endblock body %}
