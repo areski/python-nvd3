@@ -55,18 +55,11 @@ class candlestickBarChart(TemplateMixin, NVD3Chart):
 
         <script>
 
-
-
-                data_candlestickbarchart=[{"values": [{"adjusted": 164.35, "close": 165.22, "open": 165.42, "high": 165.8, "date": "2015-01-01", "low": 164.34, "volume": 160363400}, {"adjusted": 164.96, "close": 165.83, "open": 165.35, "high": 166.59, "date": "2015-01-02", "low": 165.22, "volume": 107793800}, {"adjusted": 162.59, "close": 163.45, "open": 165.37, "high": 166.31, "date": "2015-01-03", "low": 163.13, "volume": 176850100}, {"adjusted": 163.48, "close": 164.35, "open": 163.83, "high": 164.46, "date": "2015-01-04", "low": 162.66, "volume": 168390700}, {"adjusted": 162.7, "close": 163.56, "open": 164.44, "high": 165.1, "date": "2015-01-05", "low": 162.73, "volume": 157631500}, {"adjusted": 160.42, "close": 161.27, "open": 163.09, "high": 163.42, "date": "2015-01-06", "low": 161.13, "volume": 211737800}], "key": "Serie 1"}];
-
-
-
-            var parseDate = d3.time.format('%Y-%m-%d').parse;
-
+            data_candlestickbarchart=[{"values": [{"adjusted": 164.35, "close": 165.22, "open": 165.42, "high": 165.8, "date": "2015-01-01", "low": 164.34, "volume": 160363400}, {"adjusted": 164.96, "close": 165.83, "open": 165.35, "high": 166.59, "date": "2015-01-02", "low": 165.22, "volume": 107793800}, {"adjusted": 162.59, "close": 163.45, "open": 165.37, "high": 166.31, "date": "2015-01-03", "low": 163.13, "volume": 176850100}, {"adjusted": 163.48, "close": 164.35, "open": 163.83, "high": 164.46, "date": "2015-01-04", "low": 162.66, "volume": 168390700}, {"adjusted": 162.7, "close": 163.56, "open": 164.44, "high": 165.1, "date": "2015-01-05", "low": 162.73, "volume": 157631500}, {"adjusted": 160.42, "close": 161.27, "open": 163.09, "high": 163.42, "date": "2015-01-06", "low": 161.13, "volume": 211737800}], "key": "Serie 1"}];
 
             nv.addGraph(function() {
             var chart = nv.models.candlestickBarChart()
-                .x(function(d) { return parseDate(d['date']); })
+                .x(function(d) { return d['date'] })
                 .y(function(d) { return d['close'] })
                 .duration(250)
                 .margin({left: 75, bottom: 50});

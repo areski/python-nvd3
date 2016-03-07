@@ -19,6 +19,7 @@ from nvd3 import multiBarHorizontalChart
 from nvd3 import stackedAreaChart
 from nvd3 import scatterChart
 from nvd3 import pieChart
+from nvd3 import candlestickBarChart
 import random
 import datetime
 import time
@@ -36,9 +37,9 @@ html_open = """
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.1/nv.d3.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.2/nv.d3.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.1/nv.d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.2/nv.d3.min.js"></script>
 </head>
 """
 
@@ -315,6 +316,25 @@ chart.add_serie(name="serie 1", y=ydata, x=xdata, extra=extra_serie, **kwargs1)
 chart.add_serie(name="serie 2", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
 chart.add_serie(name="serie 3", y=ydata3, x=xdata, extra=extra_serie, **kwargs3)
 
+chart.buildcontent()
+
+output_file.write(chart.htmlcontent)
+
+
+# ---------------------------------------
+
+type = "candlestickBarChart"
+values = [
+    {"date": 15854, "open": 165.42, "high": 165.8, "low": 164.34, "close": 165.22, "volume": 160363400, "adjusted": 164.35},
+    {"date": 15855, "open": 165.35, "high": 166.59, "low": 165.22, "close": 165.83, "volume": 107793800, "adjusted": 164.96},
+    {"date": 15856, "open": 165.37, "high": 166.31, "low": 163.13, "close": 163.45, "volume": 176850100, "adjusted": 162.59},
+    {"date": 15859, "open": 163.83, "high": 164.46, "low": 162.66, "close": 164.35, "volume": 168390700, "adjusted": 163.48},
+    {"date": 15860, "open": 164.44, "high": 165.1, "low": 162.73, "close": 163.56, "volume": 157631500, "adjusted": 162.7},
+    {"date": 15861, "open": 163.09, "high": 163.42, "low": 161.13, "close": 161.27, "volume": 211737800, "adjusted": 160.42},
+    ]
+
+chart = candlestickBarChart(name=type, height=600, width=1400)
+chart.add_serie(values=values)
 chart.buildcontent()
 
 output_file.write(chart.htmlcontent)

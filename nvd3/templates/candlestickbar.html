@@ -8,14 +8,9 @@
     {% block data %}
     {{ super () }}
     {% endblock data %}
-
-
-        var parseDate = d3.time.format('%Y-%m-%d').parse;
-
-
         nv.addGraph(function() {
         var chart = nv.models.candlestickBarChart()
-            .x(function(d) { return parseDate(d['date']); })
+            .x(function(d) { return d['date'] })
             .y(function(d) { return d['close'] })
             .duration(250)
             .margin({left: 75, bottom: 50});
