@@ -1,28 +1,29 @@
 #! /usr/bin/env python
-# coding=utf-8
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
+def get_version(filename="nvd3/__init__.py", varname="__version__"):
+    glb = {}
+    with open(filename) as fp:
+        for line in fp:
+            if varname in line:
+                exec(line, glb)
+                break
+    return glb[varname]
 
-with open('CHANGELOG.rst') as history_file:
-    history = history_file.read().replace('.. :changelog:', '')
 
-requirements = [
-]
+def readfile(filename):
+    with open(filename) as fp:
+        return fp.read()
 
-test_requirements = [
-    # TODO: put package test requirements here
-]
+
+readme = readfile('README.rst')
+history = readfile('CHANGELOG.rst').replace('.. :changelog:', '')
 
 setup(
     name='python-nvd3',
-    version='0.14.2',
+    version=get_version(),
     description="Python NVD3 - Chart Library for d3.js",
     long_description=readme + '\n\n' + history,
     keywords='plot, graph, nvd3, d3',
@@ -30,12 +31,8 @@ setup(
     author_email='areski@gmail.com',
     url='http://github.com/areski/python-nvd3',
     license="MIT",
-    py_modules=['nvd3'],
-    namespace_packages=[],
     test_suite='tests',
-    packages=[
-        'nvd3',
-    ],
+    packages=['nvd3'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
