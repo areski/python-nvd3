@@ -12,10 +12,9 @@
 
     {% block init %}
     nv.addGraph(function() {
-        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %}{% if not chart.show_controls %}.showControls(false){% endif %};
+        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
 
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
-        chart.xAxis.rotateLabels({{chart.xAxis_rotateLabel}})
 
         var datum = data_{{ chart.name }};
 
@@ -52,20 +51,21 @@
                     {% block pietooltip %}
                     {% endblock pietooltip %}
                 {% else %}
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = String(graph.point.x);
-                        var y = String(graph.point.y);
+                    chart.tooltip.contentGenerator(function(obj) {
+			console.log(obj)
+                        var x = String(obj.data.x);
+                        var y = String(obj.data.y);
                         {{ chart.tooltip_condition_string }}
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                        tooltip_str = '<div class="chart_tooltip"><center><b>'+obj.data.key+'</b></center>' + y + ' at ' + x +'</div>';
                         return tooltip_str;
                     });
                 {% endif %}
             {% else %}
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
-                    var y = String(graph.point.y);
+                chart.tooltip.contentGenerator(function(obj) {
+                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(obj.data.x)));
+                    var y = String(obj.data.y);
                     {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                    tooltip_str = '<div class="chart_tooltip"><center><b>'+key+'</b></center>' + y + ' on ' + x +'</div>';
                     return tooltip_str;
                 });
             {% endif %}
@@ -81,7 +81,7 @@
     {% block custoattr %}
         {# add custom chart attributes #}
         {% for attr, value in chart.chart_attr.items() %}
-            {% if value is string and value.startswith(".") %}
+            {% if value is string and value.startswith(".") %}:
                 chart.{{ attr }}{{ value }};
             {% else %}
                 chart.{{ attr }}({{ value }});
@@ -97,19 +97,13 @@
 
     {% endblock custoattr %}
 
-    {% block y_axis_scale %}
-    {% if chart.y_axis_scale_min or chart.y_axis_scale_max %}
-        chart.forceY([{{ chart.y_axis_scale_min }},{{ chart.y_axis_scale_max }}]);
-    {% endif %}
-    {% endblock y_axis_scale %}
-
     {% block inject %}
         {# Inject data to D3 #}
         d3.select('#{{ chart.name }} svg')
             .datum(datum)
             .transition().duration(500)
             {% if chart.width %}
-            .attr('width', '{{ chart.width}}')
+            .attr('width', {{ chart.width}})
             {% endif %}
             {% if chart.height %}
             .attr('height', {{ chart.height}})
@@ -120,11 +114,6 @@
     {# extra chart attributes #}
     {% if chart.extras %}
         {{ chart.extras }}
-    {% endif %}
-
-    {# callback for clicking on charts #}
-    {% if chart.callback %}
-       },{{ chart.callback }});
     {% endif %}
 
     {# closing nv.addGraph #}
