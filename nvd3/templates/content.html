@@ -55,8 +55,8 @@
                     chart.tooltip.contentGenerator(function(obj) {
                         var x = String(obj.data.x);
                         var y = String(obj.data.y);
-                        {{ chart.tooltip_condition_string }}
-                        tooltip_str = '<div class="chart_tooltip"><center><b>'+obj.data.key+'</b></center>' + y + ' at ' + x +'</div>';
+                        
+                        tooltip_str = '<div class="chart_tooltip"><center><b>'+obj.data.key+'</b><span>' + y + '</span> > ' + x +'</center></div>';
                         return tooltip_str;
                     });
                 {% endif %}
@@ -64,8 +64,8 @@
                 chart.tooltip.contentGenerator(function(obj) {
                     var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(obj.data.x)));
                     var y = String(obj.data.y);
-                    {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<div class="chart_tooltip"><center><b>'+key+'</b></center>' + y + ' on ' + x +'</div>';
+                    
+                    tooltip_str = '<div class="chart_tooltip"><center><b>'+key+'</b><span>' + y + '</span> > ' + x +'</center></div>';
                     return tooltip_str;
                 });
             {% endif %}
