@@ -78,6 +78,8 @@ class ChartTest(unittest.TestCase):
 
         chart.buildhtml()
 
+        assert("tooltip_str =" in chart.htmlcontent)
+
     def test_linePlusBarChart(self):
         """Test line Plus Bar Chart"""
         type = "linePlusBarChart"
@@ -174,6 +176,7 @@ class ChartTest(unittest.TestCase):
 
         # We don't modify the xAxis, so make sure that it's not invoked.
         assert("chart.xAxis" in chart.htmlcontent)
+        assert("tooltip_str =" in chart.htmlcontent)
 
     def test_pieChart(self):
         """Test Pie Chart"""
@@ -185,6 +188,8 @@ class ChartTest(unittest.TestCase):
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
+
+        assert("tooltip_str =" in chart.htmlcontent)
 
     def test_donutPieChart(self):
         """Test Donut Pie Chart"""
