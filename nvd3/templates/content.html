@@ -7,7 +7,7 @@
 
 {% block body %}
     {% block data %}
-        data_{{ chart.name }}={{ chart.series_js }};
+        data_{{ chart.name }}={{ chart.series_js|striptags }};
     {% endblock data %}
 
     {% block init %}

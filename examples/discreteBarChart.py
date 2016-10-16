@@ -18,7 +18,7 @@ output_file = open('test_discreteBarChart.html', 'w')
 type = "discreteBarChart"
 chart = discreteBarChart(name='mygraphname', height=400, width=600)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
-xdata = ["A", "B", "C", "D", "E", "F", "G"]
+xdata = ["A", "B", "C", "D", "E", "F", "</script>G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}

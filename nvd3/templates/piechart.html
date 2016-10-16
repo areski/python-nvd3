@@ -4,7 +4,7 @@
 {% extends "content.html" %}
 {% block body %}
 
-    data_{{ chart.name }}={{ chart.series_js }};
+    data_{{ chart.name }}={{ chart.series_js|striptags }};
 
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
