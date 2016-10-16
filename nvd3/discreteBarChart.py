@@ -17,6 +17,7 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
     A discrete bar chart or bar graph is a chart with rectangular bars with
     lengths proportional to the values that they represent.
 
+
     Python example::
 
         from nvd3 import discreteBarChart
@@ -32,7 +33,7 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="discreteBarChart"><svg style="height:450px;"></svg></div>
+        <div id="discreteBarChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
             data_discreteBarChart=[{"values": [{"y": 3, "x": "A"}, {"y": 4, "x": "B"}, {"y": 0, "x": "C"}, {"y": -3, "x": "D"}, {"y": 5, "x": "E"}, {"y": 7, "x": "F"}], "key": "Serie 1", "yAxis": "1"}];
 
@@ -63,6 +64,46 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
         </script>
 
 
+    You can also disable the tooltips by passing ``tooltips=False`` when
+    creating the bar chart.
+
+    Python example::
+
+        chart = discreteBarChart(name='discreteBarChart-notooltip', height=400, width=400,
+                                 tooltips=False)
+
+    .. raw:: html
+
+        <div id="discreteBarChart-notooltip"><svg style="height:450px; width:100%"></svg></div>
+        <script>
+            data_discreteBarChart=[{"values": [{"y": 3, "x": "A"}, {"y": 4, "x": "B"}, {"y": 0, "x": "C"}, {"y": -3, "x": "D"}, {"y": 5, "x": "E"}, {"y": 7, "x": "F"}], "key": "Serie 1", "yAxis": "1"}];
+
+            nv.addGraph(function() {
+                var chart = nv.models.discreteBarChart();
+
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.tooltips(false);
+                var datum = data_discreteBarChart;
+                        chart.yAxis
+                            .tickFormat(d3.format(',.0f'));
+                        chart.tooltipContent(function(key, y, e, graph) {
+                            var x = String(graph.point.x);
+                            var y = String(graph.point.y);
+                            var y = String(graph.point.y);
+
+                            tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                            return tooltip_str;
+                        });
+
+                d3.select('#discreteBarChart-notooltip svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', 400)
+                    .attr('height', 400)
+                    .call(chart);
+            });
+        </script>
+
     """
     CHART_FILENAME = "./discretebarchart.html"
     template_chart_nvd3 = NVD3Chart.template_environment.get_template(CHART_FILENAME)
@@ -89,3 +130,9 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
         self.set_graph_height(height)
         if width:
             self.set_graph_width(width)
+
+        tooltips = kwargs.get('tooltips', True)
+
+        if not tooltips:
+            self.chart_attr = {'tooltips': 'false'}
+

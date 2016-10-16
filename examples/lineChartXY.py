@@ -20,7 +20,7 @@ chart = lineChart(name=type, x_is_date=False,
                   width=500, height=500,
                   show_legend=False)
 
-#lissajous parameters of a/b
+# lissajous parameters of a/b
 a = [1, 3, 5, 3]
 b = [1, 5, 7, 4]
 delta = pi / 2

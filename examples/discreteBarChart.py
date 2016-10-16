@@ -30,3 +30,22 @@ output_file.write(chart.htmlcontent)
 
 # close Html file
 output_file.close()
+
+output_file = open('test_discreteBarChart2.html', 'w')
+
+type = "discreteBarChart"
+chart = discreteBarChart(name='mygraphname', height=400, width=600,
+                         tooltips=False)
+chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+xdata = ["A", "B", "C", "D", "E", "F", "G"]
+ydata = [3, 12, -10, 5, 25, -7, 2]
+
+extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
+
+chart.buildhtml()
+output_file.write(chart.htmlcontent)
+# ---------------------------------------
+
+# close Html file
+output_file.close()

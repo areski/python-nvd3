@@ -18,7 +18,18 @@ output_file = open('test_multiBarChart.html', 'w')
 type = "multiBarChart"
 chart = multiBarChart(name=type, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.callback = '''
+                    function(){
+                    d3.selectAll(".nv-bar").on('click',
+                        function(d){
+                        console.log("barchart_callback_test: clicked on bar " + JSON.stringify(d));
+                        console.log('/app/call?x='.concat(d['x']));
+                    }
+                '''
 nb_element = 10
+
+# On multiBarChart the xdata needs to be numeric,
+# if you want to use 'string' you should use discreteBarChart
 xdata = list(range(nb_element))
 ydata = [random.randint(1, 10) for i in range(nb_element)]
 ydata2 = [x * 2 for x in ydata]

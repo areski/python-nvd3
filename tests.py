@@ -11,6 +11,7 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
+from nvd3 import bulletChart
 from nvd3.NVD3Chart import stab
 from nvd3.translator import Function, AnonymousFunction, Assignment
 import random
@@ -53,7 +54,7 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata)
         chart.add_serie(y=ydata2, x=xdata)
         chart.buildhtml()
-        #extra tests
+        # extra tests
         chart.buildcontent()
         chart.buildhtmlheader()
 
@@ -76,6 +77,8 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(name="Double X-Axis", y=ydata2, x=xdata, extra=extra_serie, **kwargs2)
 
         chart.buildhtml()
+
+        assert("tooltip_str =" in chart.htmlcontent)
 
     def test_linePlusBarChart(self):
         """Test line Plus Bar Chart"""
@@ -172,7 +175,8 @@ class ChartTest(unittest.TestCase):
         chart.buildhtml()
 
         # We don't modify the xAxis, so make sure that it's not invoked.
-        assert("chart.xAxis" not in chart.htmlcontent)
+        assert("chart.xAxis" in chart.htmlcontent)
+        assert("tooltip_str =" in chart.htmlcontent)
 
     def test_pieChart(self):
         """Test Pie Chart"""
@@ -185,6 +189,8 @@ class ChartTest(unittest.TestCase):
         chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
 
+        assert("tooltip_str =" in chart.htmlcontent)
+
     def test_donutPieChart(self):
         """Test Donut Pie Chart"""
         type = "pieChart"
@@ -193,6 +199,59 @@ class ChartTest(unittest.TestCase):
         ydata = [3, 4, 0, 1, 5, 7, 3]
         chart.add_serie(y=ydata, x=xdata)
         chart.buildhtml()
+
+    def test_can_create_bulletChart(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'US$, in thousands'
+        ranges = [150, 225, 300]
+        measures = [220, 270]
+        markers = [250]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures,
+            markers=markers)
+        chart.buildhtml()
+
+    def test_bulletChart_htmlcontent_correct(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'USD, in mill'
+        ranges = [100, 250, 300]
+        measures = [220, 280]
+        markers = [260]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures,
+            markers=markers)
+        chart.buildhtml()
+        assert 'data_bulletchart' in chart.htmlcontent
+        assert '"title": ["Revenue"]'  in chart.htmlcontent
+        assert '"ranges": [100, 250, 300]' in chart.htmlcontent
+        assert 'nv.models.bulletChart();' in chart.htmlcontent
+
+    def test_bulletChart_marker_optional(self):
+        type = 'bulletChart'
+        chart = bulletChart(name=type, height=100, width=500)
+        title = 'Revenue',
+        subtitle = 'USD, in mill'
+        ranges = [100, 250, 300]
+        measures = [220, 280]
+        chart.add_serie(
+            title=title,
+            subtitle=subtitle,
+            ranges=ranges,
+            measures=measures
+            )
+        chart.buildhtml()
+        assert 'data_bulletchart' in chart.htmlcontent
+        assert 'marker' not in chart.htmlcontent
 
 
 class FuncTest(unittest.TestCase):

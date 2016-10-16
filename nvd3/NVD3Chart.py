@@ -74,6 +74,8 @@ class NVD3Chart(object):
         :keyword: **stacked** - default - ``False``
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
+        :keyword: **xAxis_rotateLabel** - default - ``0``
+        :keyword: **show_controls** - default - ``True``
         :keyword: **show_legend** - default - ``True``
         :keyword: **show_labels** - default - ``True``
         :keyword: **tag_script_js** - default - ``True``
@@ -87,6 +89,8 @@ class NVD3Chart(object):
             Signal that x axis is a date axis
         :keyword: **date_format** - default - ``%x``
                   see https://github.com/mbostock/d3/wiki/Time-Formatting
+        :keyword: **y_axis_scale_min** - default - ``''``.
+        :keyword: **y_axis_scale_max** - default - ``''``.
         :keyword: **x_axis_format** - default - ``''``.
         :keyword: **y_axis_format** - default - ``''``.
         :keyword: **style** - default - ``''``
@@ -121,6 +125,8 @@ class NVD3Chart(object):
         self.stacked = kwargs.get('stacked', False)
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
+        self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
+        self.show_controls = kwargs.get('show_controls', True)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
         self.tag_script_js = kwargs.get('tag_script_js', True)
@@ -131,12 +137,15 @@ class NVD3Chart(object):
         self.style = kwargs.get('style', '')
         self.date_format = kwargs.get('date_format', '%x')
         self.x_axis_date = kwargs.get('x_axis_date', False)
+        self.y_axis_scale_min = kwargs.get('y_axis_scale_min', '')
+        self.y_axis_scale_max = kwargs.get('y_axis_scale_max', '')
         #: x-axis contain date format or not
         # possible duplicate of x_axis_date
         self.date_flag = kwargs.get('date_flag', False)
         self.x_axis_format = kwargs.get('x_axis_format', '')
         # Load remote JS assets or use the local bower assets?
         self.remote_js_assets = kwargs.get('remote_js_assets', True)
+        self.callback = kwargs.get('callback', None)
 
         # None keywords attribute that should be modified by methods
         # We should change all these to _attr
@@ -153,7 +162,7 @@ class NVD3Chart(object):
         self.header_css = [
             '<link href="%s" rel="stylesheet" />' % h for h in
             (
-                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css' if self.remote_js_assets else self.assets_directory + 'nvd3/src/nv.d3.css',
+                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.1/nv.d3.min.css' if self.remote_js_assets else self.assets_directory + 'nvd3/src/nv.d3.css',
             )
         ]
 
@@ -161,7 +170,7 @@ class NVD3Chart(object):
             '<script src="%s"></script>' % h for h in
             (
                 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js' if self.remote_js_assets else self.assets_directory + 'd3/d3.min.js',
-                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js' if self.remote_js_assets else self.assets_directory + 'nvd3/nv.d3.min.js'
+                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.1/nv.d3.min.js' if self.remote_js_assets else self.assets_directory + 'nvd3/nv.d3.min.js'
             )
         ]
 

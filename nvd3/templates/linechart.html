@@ -16,6 +16,10 @@
     {{super()}}
     {% endblock axes %}
 
+    {% block tooltip %}
+        {{super()}}
+    {% endblock tooltip %}
+
     {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
             if (d > 12) {

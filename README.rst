@@ -2,10 +2,10 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 ========================================================
 
 :Description: Python-nvd3 is a wrapper for NVD3 graph library
-:nvd3: NVD3 http://nvd3.org/
-:d3: Data-Driven Documents http://d3js.org/
-:maintainers: Areski_ & Oz_
-:contributors: `list of contributors <https://github.com/areski/python-nvd3/graphs/contributors>`_
+:NVD3: NVD3 http://nvd3.org/
+:D3: Data-Driven Documents http://d3js.org/
+:Maintainers: Areski_ & Oz_
+:Contributors: `list of contributors <https://github.com/areski/python-nvd3/graphs/contributors>`_
 
 .. _Areski: https://github.com/areski/
 .. _Oz: https://github.com/oz123/
@@ -16,21 +16,25 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 .. image:: https://coveralls.io/repos/areski/python-nvd3/badge.png?branch=develop
   :target: https://coveralls.io/r/areski/python-nvd3?branch=develop
 
-.. image:: https://pypip.in/version/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Latest Version
+.. image:: https://img.shields.io/pypi/v/python-nvd3.svg
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Latest Version
 
-.. image:: https://pypip.in/download/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Downloads
+.. image:: https://img.shields.io/pypi/dm/python-nvd3.svg
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Downloads
 
-.. image:: https://pypip.in/py_versions/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: Supported Python versions
+.. image:: https://img.shields.io/pypi/pyversions/python-nvd3.svg
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: Supported Python versions
 
-.. image:: https://pypip.in/license/python-nvd3/badge.svg
-    :target: https://pypi.python.org/pypi/python-nvd3/
-    :alt: License
+.. image:: https://img.shields.io/pypi/l/python-nvd3.svg
+  :target: https://pypi.python.org/pypi/python-nvd3/
+  :alt: License
+
+.. image:: https://requires.io/github/areski/python-nvd3/requirements.svg?branch=develop
+  :target: https://requires.io/github/areski/python-nvd3/requirements/?branch=develop
+  :alt: Requirements Status
 
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js offers you.
@@ -57,7 +61,7 @@ Want to try it yourself? Install python-nvd3, enter your python shell and try th
     >>> print chart.htmlcontent
 
 
-This will output the following HTML to render a live chart. The HTML could be 
+This will output the following HTML to render a live chart. The HTML could be
 stored into a HTML file, used in a Web application, or even used via Ipython Notebook::
 
     <div id="pieChart"><svg style="width:450px;height:450px;"></svg></div>
@@ -118,7 +122,7 @@ Install, upgrade and uninstall python-nvd3 with these commands::
 Dependecies
 -----------
 
-D3 and NvD3 can be installed through bower (which itself can be installed through npm). 
+D3 and NvD3 can be installed through bower (which itself can be installed through npm).
 See http://bower.io/ and https://npmjs.org for further information.
 To install bower globally execute::
 
@@ -128,18 +132,18 @@ Note : you might prefer to save your npm dependencies locally in a ``package.jso
 
 Then in the directory where you will use python-nvd3, just execute the following commands::
 
-    $ bower install d3#3.3.8
-    $ bower install nvd3#1.1.12-beta
+    $ bower install d3#3.5.5
+    $ bower install nvd3#1.7.1
 
 This will create a directory "bower_components" where d3 & nvd3 will be saved.
 
-Note : you might prefer to save your bower dependencies locally in a ``bower.json`` file. 
-You can also configure the directory where your bower dependencies will be 
+Note : you might prefer to save your bower dependencies locally in a ``bower.json`` file.
+You can also configure the directory where your bower dependencies will be
 saved adding a ``.bowerrc`` file in your project root directory.
 
 
-Do you like Django?
--------------------
+Django Wrapper
+--------------
 
 There is also a django wrapper for nvd3 available:
 https://github.com/areski/django-nvd3

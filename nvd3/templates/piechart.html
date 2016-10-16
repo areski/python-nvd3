@@ -11,6 +11,10 @@
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
         var datum = data_{{ chart.name }}[0].values;
 
+    {% if not chart.color_list and chart.color_category %}
+        chart.color(d3.scale.{{ chart.color_category }}().range());
+    {% endif %}
+
     chart.tooltipContent(function(key, y, e, graph) {
           var x = String(key);
               {{ chart.tooltip_condition_string }}
@@ -68,6 +72,10 @@
     {% block inject %}
     {{super()}}
     {% endblock inject %}
+
+    {% if chart.callback %}
+       },{{ chart.callback }});
+    {% endif %}
 
     {% block close %}
     {{ super() }}

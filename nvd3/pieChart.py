@@ -37,7 +37,7 @@ class pieChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="pieChart"><svg style="height:450px;"></svg></div>
+        <div id="pieChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
 
 
@@ -99,3 +99,4 @@ class pieChart(TemplateMixin, NVD3Chart):
             self.set_graph_width(width)
         self.donut = kwargs.get('donut', False)
         self.donutRatio = kwargs.get('donutRatio', 0.35)
+        self.callback = kwargs.get('callback', None)

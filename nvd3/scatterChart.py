@@ -43,7 +43,7 @@ class scatterChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="scatterChart"><svg style="height:450px;"></svg></div>
+        <div id="scatterChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
 
         data_scatterChart=[{"values": [{"y": -1, "x": 3, "shape": "circle",
