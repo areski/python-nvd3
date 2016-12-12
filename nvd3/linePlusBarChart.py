@@ -68,7 +68,7 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
                     chart.y1Axis
                         .tickFormat(function(d) { return d3.format(',f')(d) });
 
-                    chart.tooltipContent(function(key, y, e, graph) {
+                    chart.tooltip.contentGenerator(function(key, y, e, graph) {
                         var x = d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(graph.point.x)));
                         var y = String(graph.point.y);
                         if(key.indexOf('Serie 1') > -1 ){

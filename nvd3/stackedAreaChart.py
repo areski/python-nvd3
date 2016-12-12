@@ -49,7 +49,7 @@ class stackedAreaChart(TemplateMixin, NVD3Chart):
                         chart.yAxis
                             .tickFormat(d3.format(',.2f'));
 
-                        chart.tooltipContent(function(key, y, e, graph) {
+                        chart.tooltip.contentGenerator(function(key, y, e, graph) {
                             var x = String(graph.point.x);
                             var y = String(graph.point.y);
                                                 if(key == 'Serie 1'){

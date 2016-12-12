@@ -45,7 +45,7 @@ class discreteBarChart(TemplateMixin, NVD3Chart):
                 var datum = data_discreteBarChart;
                         chart.yAxis
                             .tickFormat(d3.format(',.0f'));
-                        chart.tooltipContent(function(key, y, e, graph) {
+                        chart.tooltip.contentGenerator(function(key, y, e, graph) {
                             var x = String(graph.point.x);
                             var y = String(graph.point.y);
                             var y = String(graph.point.y);

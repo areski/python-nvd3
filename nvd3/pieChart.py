@@ -54,7 +54,7 @@ class pieChart(TemplateMixin, NVD3Chart):
                 var chart = nv.models.pieChart();
                 chart.margin({top: 30, right: 60, bottom: 20, left: 60});
                 var datum = data_pieChart[0].values;
-                        chart.tooltipContent(function(key, y, e, graph) {
+                        chart.tooltip.contentGenerator(function(key, y, e, graph) {
                             var x = String(key);
                             var y =  String(y)  + ' cal';
 
