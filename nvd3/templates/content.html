@@ -56,7 +56,7 @@
                         var x = String(graph.point.x);
                         var y = String(graph.point.y);
                         {{ chart.tooltip_condition_string }}
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
+                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' {{ chart.tooltip_separator|default('at', True) }} ' + x;
                         return tooltip_str;
                     });
                 {% endif %}
@@ -65,7 +65,7 @@
                     var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
                     var y = String(graph.point.y);
                     {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' {{ chart.tooltip_separator|default('on', True) }} ' + x;
                     return tooltip_str;
                 });
             {% endif %}
