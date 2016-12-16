@@ -129,6 +129,7 @@ class NVD3Chart(object):
         self.show_controls = kwargs.get('show_controls', True)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
+        self.tooltip_separator = kwargs.get('tooltip_separator')
         self.tag_script_js = kwargs.get('tag_script_js', True)
         self.use_interactive_guideline = kwargs.get("use_interactive_guideline",
                                                     False)
