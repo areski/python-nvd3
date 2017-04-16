@@ -98,7 +98,7 @@ class lineChart(TemplateMixin, NVD3Chart):
         if kwargs.get('x_is_date', False):
             self.set_date_flag(True)
             self.create_x_axis('xAxis',
-                               format=kwargs.get('x_axis_format', '%d %b %Y'),
+                               format=kwargs.get('date_format', '%d %b %Y'),
                                date=True)
             self.set_custom_tooltip_flag(True)
         else:
