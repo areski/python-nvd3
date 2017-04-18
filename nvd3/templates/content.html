@@ -52,7 +52,7 @@
                     {% block pietooltip %}
                     {% endblock pietooltip %}
                 {% else %}
-                    chart.tooltipContent(function(key, y, e, graph) {
+                    chart.tooltip.contentGenerator(function(key, y, e, graph) {
                         var x = String(graph.point.x);
                         var y = String(graph.point.y);
                         {{ chart.tooltip_condition_string }}
@@ -61,7 +61,7 @@
                     });
                 {% endif %}
             {% else %}
-                chart.tooltipContent(function(key, y, e, graph) {
+                chart.tooltip.contentGenerator(function(key, y, e, graph) {
                     var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
                     var y = String(graph.point.y);
                     {{ chart.tooltip_condition_string }}
