@@ -28,6 +28,10 @@
         chart.stacked(true);
     {% endif %}
 
+    {% if chart.show_controls == False %}
+        chart.showControls(false);
+    {% endif %}
+
     {% block focus %}
     {% endblock focus %}
 
