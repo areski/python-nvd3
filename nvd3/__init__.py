@@ -13,7 +13,8 @@ __version__ = '0.14.2'
 __all__ = ['lineChart', 'pieChart', 'lineWithFocusChart',
            'stackedAreaChart', 'multiBarHorizontalChart',
            'linePlusBarChart', 'cumulativeLineChart',
-           'scatterChart', 'discreteBarChart', 'multiBarChart']
+           'scatterChart', 'discreteBarChart', 'multiBarChart',
+           'multiChart']
 
 
 from .lineChart import lineChart
@@ -26,5 +27,5 @@ from .cumulativeLineChart import cumulativeLineChart
 from .scatterChart import scatterChart
 from .discreteBarChart import discreteBarChart
 from .multiBarChart import multiBarChart
-from .bulletChart import bulletChart
+from .multiChart import multiChart
 from . import ipynb
