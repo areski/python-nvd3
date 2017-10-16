@@ -33,7 +33,7 @@ class lineChart(TemplateMixin, NVD3Chart):
         chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie, **kwargs2)
         chart.buildhtml()
 
-    Javascript renderd to:
+    Javascript rendered to:
 
     .. raw:: html
 
