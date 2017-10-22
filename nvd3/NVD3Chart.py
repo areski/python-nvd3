@@ -361,7 +361,7 @@ class NVD3Chart(object):
 
     def buildcontent(self):
         """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
+        will usually require the attribute `jquery_on_ready` to be set which
         will wrap the js in $(function(){<regular_js>};)
         """
         self.buildcontainer()
@@ -485,7 +485,7 @@ class TemplateMixin(object):
     """
     def buildcontent(self):
         """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
+        will usually require the attribute `jquery_on_ready` to be set which
         will wrap the js in $(function(){<regular_js>};)
         """
         self.buildcontainer()
