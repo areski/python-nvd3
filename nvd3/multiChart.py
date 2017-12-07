@@ -15,73 +15,71 @@ from .NVD3Chart import NVD3Chart, TemplateMixin
 class multiChart(TemplateMixin, NVD3Chart):
 
     """
-    A line chart or line graph is a type of chart which displays information
-    as a series of data points connected by straight line segments.
+    A multiChart is a type of chart which combines several plots of the same or different types.
 
     Python example::
 
-        from nvd3 import lineChart
-        chart = lineChart(name="lineChart", x_is_date=False, x_axis_format="AM_PM")
+        from nvd3 import multiChart
+        type = "multiChart"
+        chart = multiChart(name=type, x_is_date=False, x_axis_format="AM_PM")
 
-        xdata = range(24)
-        ydata = [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 4, 3, 3, 5, 7, 5, 3, 16, 6, 9, 15, 4, 12]
-        ydata2 = [9, 8, 11, 8, 3, 7, 10, 8, 6, 6, 9, 6, 5, 4, 3, 10, 0, 6, 3, 1, 0, 0, 0, 1]
+        xdata = [1,2,3,4,5,6]
+        ydata = [115.5,160.5,108,145.5,84,70.5]
+        ydata2 = [48624,42944,43439,24194,38440,31651]
 
-        extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " calls"}}
-        chart.add_serie(y=ydata, x=xdata, name='sine', extra=extra_serie, **kwargs1)
+        kwargs1 = {'color': 'black'}
+        kwargs2 = {'color': 'red'}
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+        chart.add_serie(y=ydata, x=xdata, type='line', yaxis=1, name='visits', extra=extra_serie, **kwargs1)
         extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
-        chart.add_serie(y=ydata2, x=xdata, name='cose', extra=extra_serie, **kwargs2)
+        chart.add_serie(y=ydata2, x=xdata, type='bar', yaxis=2,name='spend', extra=extra_serie, **kwargs2)
         chart.buildhtml()
+
 
     Javascript renderd to:
 
     .. raw:: html
 
-        <div id="lineChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
+    <div id="multichart"><svg style="height:450px;"></svg></div>
+    <script>
 
-            data_lineChart=[{"values": [{"y": 0, "x": 0}, {"y": 0, "x": 1}, {"y": 1, "x": 2}, {"y": 1, "x": 3}, {"y": 0, "x": 4}, {"y": 0, "x": 5}, {"y": 0, "x": 6}, {"y": 0, "x": 7}, {"y": 1, "x": 8}, {"y": 0, "x": 9}, {"y": 0, "x": 10}, {"y": 4, "x": 11}, {"y": 3, "x": 12}, {"y": 3, "x": 13}, {"y": 5, "x": 14}, {"y": 7, "x": 15}, {"y": 5, "x": 16}, {"y": 3, "x": 17}, {"y": 16, "x": 18}, {"y": 6, "x": 19}, {"y": 9, "x": 20}, {"y": 15, "x": 21}, {"y": 4, "x": 22}, {"y": 12, "x": 23}], "key": "sine", "yAxis": "1"}, {"values": [{"y": 9, "x": 0}, {"y": 8, "x": 1}, {"y": 11, "x": 2}, {"y": 8, "x": 3}, {"y": 3, "x": 4}, {"y": 7, "x": 5}, {"y": 10, "x": 6}, {"y": 8, "x": 7}, {"y": 6, "x": 8}, {"y": 6, "x": 9}, {"y": 9, "x": 10}, {"y": 6, "x": 11}, {"y": 5, "x": 12}, {"y": 4, "x": 13}, {"y": 3, "x": 14}, {"y": 10, "x": 15}, {"y": 0, "x": 16}, {"y": 6, "x": 17}, {"y": 3, "x": 18}, {"y": 1, "x": 19}, {"y": 0, "x": 20}, {"y": 0, "x": 21}, {"y": 0, "x": 22}, {"y": 1, "x": 23}], "key": "cose", "yAxis": "1"}];
+            data_multichart=[{"color": "black", "type": "line", "values": [{"y": 115.5, "x": 1}, {"y": 160.5, "x": 2}, {"y": 108, "x": 3}, {"y
+": 145.5, "x": 4}, {"y": 84, "x": 5}, {"y": 70.5, "x": 6}], "key": "visits", "yAxis": 1}, {"color": "red", "type": "bar", "values": [{"y": 486
+24, "x": 1}, {"y": 42944, "x": 2}, {"y": 43439, "x": 3}, {"y": 24194, "x": 4}, {"y": 38440, "x": 5}, {"y": 31651, "x": 6}], "key": "spend", "y
+Axis": 2}];
 
-            nv.addGraph(function() {
-                var chart = nv.models.lineChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_lineChart;
-                        chart.xAxis
-                            .tickFormat(function(d) { return get_am_pm(parseInt(d)); });
-                        chart.yAxis
-                            .tickFormat(d3.format(',.02f'));
+        nv.addGraph(function() {
+        var chart = nv.models.multiChart();
 
-                        chart.tooltipContent(function(key, y, e, graph) {
-                            var x = String(graph.point.x);
-                            var y = String(graph.point.y);
-                                                if(key == 'sine'){
-                                var y = 'There is ' +  String(graph.point.y)  + ' calls';
-                            }
-                            if(key == 'cose'){
-                                var y =  String(graph.point.y)  + ' min';
-                            }
+        chart.margin({top: 30, right: 60, bottom: 20, left: 60});
 
-                            tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
-                            return tooltip_str;
-                        });
-                    chart.showLegend(true);
-                        function get_am_pm(d){
-                    if (d > 12) {
-                        d = d - 12; return (String(d) + 'PM');
-                    }
-                    else {
-                        return (String(d) + 'AM');
-                    }
-                };
+        var datum = data_multichart;
+        
+                chart.yAxis1
+                .tickFormat(d3.format(',.02f'));
+            chart.yAxis2
+                .tickFormat(d3.format(',.02f'));
+            chart.xAxis
+                .tickFormat(function(d) { return get_am_pm(parseInt(d)); });
 
-                d3.select('#lineChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('height', 200)
-                    .call(chart);
-            return chart;
+        function get_am_pm(d){
+            if (d > 12) {
+                d = d - 12; return (String(d) + 'PM');
+            }
+            else {
+                return (String(d) + 'AM');
+            }
+        };
+
+          chart.showLegend(true);
+          
+            d3.select('#multichart svg')
+            .datum(datum)
+            .transition().duration(500)
+            .attr('height', 450)
+            .call(chart);
         });
-        </script>
+    </script>
 
     See the source code of this page, to see the underlying javascript.
     """
