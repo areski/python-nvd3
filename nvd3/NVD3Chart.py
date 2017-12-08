@@ -76,6 +76,7 @@ class NVD3Chart(object):
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
         :keyword: **xAxis_rotateLabel** - default - ``0``
+        :keyword: **xAxis_staggerLabel** - default - ``False``
         :keyword: **show_controls** - default - ``True``
         :keyword: **show_legend** - default - ``True``
         :keyword: **show_labels** - default - ``True``
@@ -128,6 +129,7 @@ class NVD3Chart(object):
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
         self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
+        self.xAxis_staggerLabel = kwargs.get('xAxis_staggerLabel', False)
         self.show_controls = kwargs.get('show_controls', True)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
