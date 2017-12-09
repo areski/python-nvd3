@@ -72,7 +72,6 @@ class NVD3Chart(object):
         :keyword: **height** - default - ``''``
         :keyword: **width** - default - ``''``
         :keyword: **stacked** - default - ``False``
-        :keyword: **show_controls** - default - ``None``
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
         :keyword: **xAxis_rotateLabel** - default - ``0``
@@ -125,7 +124,6 @@ class NVD3Chart(object):
         self.height = kwargs.get('height', '')
         self.width = kwargs.get('width', '')
         self.stacked = kwargs.get('stacked', False)
-        self.show_controls = kwargs.get('show_controls', None)
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
         self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
