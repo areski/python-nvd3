@@ -17,6 +17,7 @@
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
         chart.xAxis.rotateLabels({{chart.xAxis_rotateLabel}})
         chart.xAxis.staggerLabels({{chart.xAxis_staggerLabel|lower}})
+        chart.xAxis.showMaxMin({{chart.xAxis_showMaxMin|lower}})
         var datum = data_{{ chart.name }};
 
     {% if not chart.color_list and chart.color_category %}
