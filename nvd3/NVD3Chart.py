@@ -74,6 +74,7 @@ class NVD3Chart(object):
         :keyword: **stacked** - default - ``False``
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
+        :keyword: **no_data_message** - default - ``None`` or nvd3 default
         :keyword: **xAxis_rotateLabel** - default - ``0``
         :keyword: **xAxis_staggerLabel** - default - ``False``
         :keyword: **xAxis_showMaxMin** - default - ``True``
@@ -127,6 +128,7 @@ class NVD3Chart(object):
         self.stacked = kwargs.get('stacked', False)
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
+        self.no_data_message = kwargs.get('no_data_message', None)
         self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
         self.xAxis_staggerLabel = kwargs.get('xAxis_staggerLabel', False)
         self.xAxis_showMaxMin = kwargs.get('xAxis_showMaxMin', True)

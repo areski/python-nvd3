@@ -29,6 +29,11 @@
         chart.stacked(true);
     {% endif %}
 
+    {% if chart.no_data_message %}
+        chart.noData('{{chart.no_data_message}}')
+    {% endif %}
+
+
     {% if chart.show_controls == False %}
         chart.showControls(false);
     {% endif %}
