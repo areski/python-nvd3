@@ -12,7 +12,7 @@
 
     {% block init %}
     nv.addGraph(function() {
-        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %}{% if not chart.show_controls %}.showControls(false){% endif %};
+        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %}{% if not chart.show_controls %}.showControls(false){% endif %}{% if chart.right_align_y_axis %}.rightAlignYAxis(true){% endif %};
 
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
         chart.xAxis.rotateLabels({{chart.xAxis_rotateLabel}})

@@ -78,6 +78,7 @@ class NVD3Chart(object):
         :keyword: **xAxis_rotateLabel** - default - ``0``
         :keyword: **xAxis_staggerLabel** - default - ``False``
         :keyword: **xAxis_showMaxMin** - default - ``True``
+        :keyword: **right_align_y_axis** - default - ``False``
         :keyword: **show_controls** - default - ``True``
         :keyword: **show_legend** - default - ``True``
         :keyword: **show_labels** - default - ``True``
@@ -132,6 +133,7 @@ class NVD3Chart(object):
         self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
         self.xAxis_staggerLabel = kwargs.get('xAxis_staggerLabel', False)
         self.xAxis_showMaxMin = kwargs.get('xAxis_showMaxMin', True)
+        self.right_align_y_axis = kwargs.get('right_align_y_axis', False)
         self.show_controls = kwargs.get('show_controls', True)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
