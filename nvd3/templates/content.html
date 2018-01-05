@@ -25,6 +25,7 @@
     {% endif %}
     {% endblock init %}
 
+    {% block rendering_opts %}
     {% if chart.stacked %}
         chart.stacked(true);
     {% endif %}
@@ -32,11 +33,10 @@
     {% if chart.no_data_message %}
         chart.noData('{{chart.no_data_message}}')
     {% endif %}
-
-
     {% if chart.show_controls == False %}
         chart.showControls(false);
     {% endif %}
+    {% endblock rendering_opts %}
 
     {% block focus %}
     {% endblock focus %}

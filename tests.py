@@ -11,6 +11,7 @@ from nvd3 import scatterChart
 from nvd3 import discreteBarChart
 from nvd3 import pieChart
 from nvd3 import multiBarChart
+from nvd3 import multiChart
 from nvd3 import bulletChart
 from nvd3.NVD3Chart import stab
 from nvd3.translator import Function, AnonymousFunction, Assignment
@@ -119,6 +120,30 @@ class ChartTest(unittest.TestCase):
         extra = {"type": "bar", "yaxis": 1}
         chart.add_serie(y=ydata, x=xdata, extra=extra)
         chart.buildhtml()
+
+    def test_multiChart(self):
+        """Test Multi (line plus bar) Chart"""
+        type = "multiChart"
+        chart = multiChart(
+            name=type, x_is_date=False, x_axis_format="AM_PM",
+            no_data_message='custom message shows when there is no data',
+            xAxis_staggerLabel=True
+        )
+
+        xdata = [1,2,3,4,5,6]
+        ydata = [115.5,160.5,108,145.5,84,70.5]
+        ydata2 = [48624,42944,43439,24194,38440,31651]
+        kwargs1 = {'color': 'brown'}
+        kwargs2 = {'color': '#bada55'}
+        extra_serie = {"tooltip": {"y_start": "There is ", "y_end": " calls"}}
+        chart.add_serie(y=ydata, x=xdata, type='line', yaxis=1, name='visits', extra=extra_serie, **kwargs1)
+        extra_serie = {"tooltip": {"y_start": "", "y_end": " at this point"}}
+        chart.add_serie(y=ydata2, x=xdata, type='bar', yaxis=2,name='spend', extra=extra_serie, **kwargs2)
+        chart.buildhtml()
+
+        assert("chart.noData('custom message shows when there is no data')" in chart.htmlcontent)
+        assert("function get_am_pm" in chart.htmlcontent)
+
 
     def test_multiBarHorizontalChart(self):
         """Test multi Bar Horizontal Chart"""
