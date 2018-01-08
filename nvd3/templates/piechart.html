@@ -69,6 +69,15 @@
         chart.color(mycolor);
     {% endif %}
 
+    {% block rendering_opts %}
+        {% if chart.no_data_message %}
+            chart.noData('{{chart.no_data_message}}')
+        {% endif %}
+        {% if chart.show_controls == False %}
+            chart.showControls(false);
+        {% endif %}
+    {% endblock rendering_opts %}
+
     {% block inject %}
     {{super()}}
     {% endblock inject %}
