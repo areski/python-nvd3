@@ -71,6 +71,7 @@ class NVD3Chart(object):
         :keyword: **margin_top** - default - ``30``
         :keyword: **height** - default - ``''``
         :keyword: **width** - default - ``''``
+        :keyword: **show_values** - default - ``False``
         :keyword: **stacked** - default - ``False``
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
@@ -126,6 +127,7 @@ class NVD3Chart(object):
         self.margin_top = kwargs.get('margin_top', 30)
         self.height = kwargs.get('height', '')
         self.width = kwargs.get('width', '')
+        self.show_values = kwargs.get('show_values', False)
         self.stacked = kwargs.get('stacked', False)
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)

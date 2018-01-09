@@ -36,6 +36,9 @@
     {% if chart.show_controls == False %}
         chart.showControls(false);
     {% endif %}
+    {% if chart.show_values %}
+        chart.showValues(true);
+    {% endif %}
     {% endblock rendering_opts %}
 
     {% block focus %}
