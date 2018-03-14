@@ -76,6 +76,10 @@
         {% if chart.show_controls == False %}
             chart.showControls(false);
         {% endif %}
+        {# extra chart attributes #}
+        {% if chart.extras %}
+            {{ chart.extras }}
+        {% endif %}
     {% endblock rendering_opts %}
 
     {% block inject %}
