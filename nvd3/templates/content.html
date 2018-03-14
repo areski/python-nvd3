@@ -39,6 +39,11 @@
     {% if chart.show_values %}
         chart.showValues(true);
     {% endif %}
+
+    {# extra chart attributes #}
+    {% if chart.extras %}
+        {{ chart.extras }}
+    {% endif %}
     {% endblock rendering_opts %}
 
     {% block focus %}
@@ -129,11 +134,6 @@
             {% endif %}
             .call(chart);
     {% endblock inject %}
-
-    {# extra chart attributes #}
-    {% if chart.extras %}
-        {{ chart.extras }}
-    {% endif %}
 
     {# callback for clicking on charts #}
     {% if chart.callback %}
