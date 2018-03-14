@@ -76,15 +76,18 @@
         {% if chart.show_controls == False %}
             chart.showControls(false);
         {% endif %}
-        {# extra chart attributes #}
-        {% if chart.extras %}
-            {{ chart.extras }}
-        {% endif %}
     {% endblock rendering_opts %}
 
     {% block inject %}
     {{super()}}
     {% endblock inject %}
+
+    {% block extras %}
+        {# extra chart attributes #}
+        {% if chart.extras %}
+            {{ chart.extras }}
+        {% endif %}
+    {% endblock extras %}
 
     {% if chart.callback %}
        },{{ chart.callback }});
