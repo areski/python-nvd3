@@ -52,9 +52,9 @@
     {{super()}}
     {% endblock inject %}
 
-		{% if chart.extras %}
-			{{ chart.extras }}
-		{% endif %}
+    {% block extras %}
+    {{ super () }}
+    {% endblock extras %}
 
     {% block close %}
     });

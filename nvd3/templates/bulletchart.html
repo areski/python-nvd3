@@ -25,6 +25,10 @@
 
     return chart;
     });
+
+    {% block extras %}
+    {{ super () }}
+    {% endblock extras %}
 {% endblock body %}
 
 
