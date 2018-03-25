@@ -111,9 +111,8 @@ setup(
     package_data=find_package_data(),
     zip_safe=False,
     install_requires=[
-        'setuptools',
-        'python-slugify==0.1.0',
-        'Jinja2>=2.7.2'
+        'python-slugify>=1.2.5',
+        'Jinja2>=2.8'
         # -*- Extra requirements: -*-
     ],
     entry_points={
