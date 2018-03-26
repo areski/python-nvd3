@@ -39,7 +39,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'python-slugify==1.1.4',
+        'python-slugify>=1.2.5',
         'Jinja2>=2.8'
         # -*- Extra requirements: -*-
     ],
