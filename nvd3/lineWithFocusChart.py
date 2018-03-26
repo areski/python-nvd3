@@ -23,8 +23,8 @@ class lineWithFocusChart(TemplateMixin, NVD3Chart):
 
         from nvd3 import lineWithFocusChart
         chart = lineWithFocusChart(name='lineWithFocusChart', x_is_date=True, x_axis_format="%d %b %Y")
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000]
-        ydata = [-6, 5, -1]
+        xdata = [1365026400000000, 1365026500000000, 1365026600000000, 1365026700000000, 1365026800000000, 1365026900000000, 1365027000000000]
+        ydata = [-6, 5, -1, 2, 4, 8, 10]
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " ext"},
                        "date_format": "%d %b %Y"}
@@ -35,7 +35,7 @@ class lineWithFocusChart(TemplateMixin, NVD3Chart):
 
     .. raw:: html
 
-        <div id="lineWithFocusChart"><svg style="height:450px;"></svg></div>
+        <div id="lineWithFocusChart"><svg style="height:450px; width:100%"></svg></div>
         <script>
             data_lineWithFocusChart=[{"values": [{"y": -6, "x": 1365026400000000}, {"y": 5, "x": 1365026500000000}, {"y": -1, "x": 1365026600000000}], "key": "Serie 1", "yAxis": "1"}];
             nv.addGraph(function() {

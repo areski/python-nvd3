@@ -1,5 +1,14 @@
-Changelog
-=========
+.. :changelog:
+
+History
+-------
+
+
+0.14.0 - (2015-12-09)
+---------------------
+
+* update project structure
+* remove setuptools from requirements
 
 
 0.13.8 - (2015-04-12)
@@ -41,7 +50,7 @@ Changelog
 -------------------
 
 * allow chart_attr to be set as follow 'xAxis': '.rotateLabels(-25)'
-  This will turn into calling chart.xAxis.rotateLabels(-25)
+  this will turn into calling chart.xAxis.rotateLabels(-25)
 
 
 0.11.0 (2013-10-09)
@@ -52,13 +61,13 @@ Changelog
 
 
 0.10.2 (2013-10-04)
-------------------
+-------------------
 
 * discreteBarChart support date on xAxis
 
 
 0.10.1 (2013-10-03)
-------------------
+-------------------
 
 * Remove $ sign in linePlusBarWithFocusChart
 
