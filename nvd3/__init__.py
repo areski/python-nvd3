@@ -14,7 +14,7 @@ __all__ = ['lineChart', 'pieChart', 'lineWithFocusChart',
            'stackedAreaChart', 'multiBarHorizontalChart',
            'linePlusBarChart', 'cumulativeLineChart',
            'scatterChart', 'discreteBarChart', 'multiBarChart',
-           'multiChart']
+           'bulletChart', 'multiChart']
 
 
 from .lineChart import lineChart
