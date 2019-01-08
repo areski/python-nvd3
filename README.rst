@@ -119,8 +119,8 @@ Install, upgrade and uninstall python-nvd3 with these commands::
     $ pip uninstall python-nvd3
 
 
-Dependecies
------------
+Dependencies
+------------
 
 D3 and NvD3 can be installed through bower (which itself can be installed through npm).
 See http://bower.io/ and https://npmjs.org for further information.
