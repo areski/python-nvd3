@@ -65,23 +65,23 @@
                 {% if chart.model == 'pieChart' %}
                     {% block pietooltip %}
                     {% endblock pietooltip %}
-                {% else %}
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = String(graph.point.x);
-                        var y = String(graph.point.y);
-                        {{ chart.tooltip_condition_string }}
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' {{ chart.tooltip_separator|default('at', True) }} ' + x;
-                        return tooltip_str;
-                    });
                 {% endif %}
             {% else %}
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
-                    var y = String(graph.point.y);
-                    {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' {{ chart.tooltip_separator|default('on', True) }} ' + x;
-                    return tooltip_str;
-                });
+                {% if chart.model in ('discreteBarChart', ) %}
+                   chart.tooltip.keyFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
+                {% if chart.model in ('linePlusBarChart', 'lineChart', 'multiBarChart', 'cumulativeLineChart', 'lineWithFocusChart') %}
+                   chart.tooltip.headerFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
+                {% if chart.model in ('stackedAreaChart', ) %}
+                   chart.interactiveLayer.tooltip.headerFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
             {% endif %}
         {% endif %}
     {% endblock tooltip %}
