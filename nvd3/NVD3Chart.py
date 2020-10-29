@@ -188,7 +188,6 @@ class NVD3Chart(object):
         #: Javascript code as string
         self.jschart = None
         self.custom_tooltip_flag = False
-        self.tooltip_condition_string = ''
         self.charttooltip = ''
         self.serie_no = 1
 
@@ -287,27 +286,11 @@ class NVD3Chart(object):
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
 
-                    if self.model == 'linePlusBarChart':
-                        if self.tooltip_condition_string:
-                            self.tooltip_condition_string += stab(5)
-                        self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
-                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-                    elif self.model == 'cumulativeLineChart':
-                        self.tooltip_condition_string += stab(0) + "if(key == '" + name + "'){\n" +\
-                            stab(6) + "var y = " + _start + " String(e) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-                    else:
-                        self.tooltip_condition_string += stab(5) + "if(key == '" + name + "'){\n" +\
-                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-
                 if self.model == 'pieChart':
                     _start = extra['tooltip']['y_start']
                     _end = extra['tooltip']['y_end']
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
-                    self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
         # Increment series counter & append
         self.serie_no += 1
@@ -427,11 +410,6 @@ class NVD3Chart(object):
     def buildjschart(self):
         """generate javascript code for the chart"""
         self.jschart = ''
-
-        # add custom tooltip string in jschart
-        # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
-        if self.tooltip_condition_string == '':
-            self.tooltip_condition_string = 'var y = String(graph.point.y);\n'
 
         # Include data
         self.series_js = json.dumps(self.series)

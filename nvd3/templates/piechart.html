@@ -18,7 +18,6 @@
     chart.tooltip.contentGenerator(function(d, elem) {
           var x = String(d.data.label);
           var y = String(d.data.value);
-              {{ chart.tooltip_condition_string }}
               tooltip_str = '<center><b>'+x+'</b></center>' + y;
               return tooltip_str;
               });
