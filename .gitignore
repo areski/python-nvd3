@@ -39,6 +39,7 @@ bower.json
 bower_components
 
 archive
+env
 
 htmlcov
 test_*.html
