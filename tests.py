@@ -79,7 +79,7 @@ class ChartTest(unittest.TestCase):
 
         chart.buildhtml()
 
-        assert("tooltip_str =" in chart.htmlcontent)
+        assert(".tickFormat(d3.format(',.02f'));" in chart.htmlcontent)
 
     def test_linePlusBarChart(self):
         """Test line Plus Bar Chart"""
@@ -201,7 +201,7 @@ class ChartTest(unittest.TestCase):
 
         # We don't modify the xAxis, so make sure that it's not invoked.
         assert("chart.xAxis" in chart.htmlcontent)
-        assert("tooltip_str =" in chart.htmlcontent)
+        assert("var chart = nv.models.discreteBarChart();" in chart.htmlcontent)
 
     def test_pieChart(self):
         """Test Pie Chart"""
