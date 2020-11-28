@@ -31,49 +31,14 @@ class cumulativeLineChart(TemplateMixin, NVD3Chart):
         extra_serie = {"tooltip": {"y_start": "", "y_end": " mins"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
         chart.buildhtml()
+        print(chart.content)
+
 
     Javascript generated:
 
-    .. raw:: html
 
-        <div id="cumulativeLineChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-            data_cumulativeLineChart=[{"values": [{"y": 6, "x": 1365026400000},
-            {"y": 5, "x": 1365026500000},
-            {"y": 1, "x": 1365026600000}],
-            "key": "Serie 1", "yAxis": "1"},
-            {"values": [{"y": 36, "x": 1365026400000},
-            {"y": 55, "x": 1365026500000},
-            {"y": 11, "x": 1365026600000}], "key": "Serie 2", "yAxis": "1"}];
-            nv.addGraph(function() {
-                var chart = nv.models.cumulativeLineChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_cumulativeLineChart;
+    .. include:: ./examples/cumulativeLineChart.html
 
-                        chart.xAxis
-                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
-                        chart.yAxis
-                            .tickFormat(d3.format(',.1%'));
-
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = d3.time.format("%d %b %Y")(new Date(parseInt(graph.point.x)));
-                        var y = String(graph.point.y);
-                        if(key == 'Serie 1'){
-                                var y = 'There are ' +  String(e)  + ' calls';
-                            }if(key == 'Serie 2'){
-                                var y =  String(e)  + ' mins';
-                            }
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                        return tooltip_str;
-                    });
-                    chart.showLegend(true);
-
-                d3.select('#cumulativeLineChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('height', 450)
-                    .call(chart); });
-        </script>
 
     """
 

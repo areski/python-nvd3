@@ -29,58 +29,12 @@ class multiBarHorizontalChart(TemplateMixin, NVD3Chart):
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " calls"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
-        chart.buildcontent()
+        chart.buildhtml()
+        print(chart.content)
 
     Javascript generated:
 
-    .. raw:: html
-
-        <div id="multiBarHorizontalChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-
-            data_multiBarHorizontalChart=[{"values":
-                [{"y": -6, "x": -14}, {"y": 5, "x": -7}, {"y": -1, "x": 7}, {"y": 9, "x": 14}],
-                "key": "Serie 1", "yAxis": "1"},
-                {"values":
-                    [{"y": -23, "x": -14}, {"y": -6, "x": -7}, {"y": -32, "x": 7}, {"y": 9, "x": 14}],
-                "key": "Serie 2", "yAxis": "1"}];
-
-            nv.addGraph(function() {
-                var chart = nv.models.multiBarHorizontalChart();
-
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-
-                var datum = data_multiBarHorizontalChart;
-
-                        chart.xAxis
-                            .tickFormat(d3.format(',.2f'));
-                        chart.yAxis
-                            .tickFormat(d3.format(',.2f'));
-
-                        chart.tooltipContent(function(key, y, e, graph) {
-                            var x = String(graph.point.x);
-                            var y = String(graph.point.y);
-                                                if(key == 'Serie 1'){
-                                var y =  String(graph.point.y)  + ' balls';
-                            }
-                            if(key == 'Serie 2'){
-                                var y =  String(graph.point.y)  + ' calls';
-                            }
-
-                            tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
-                            return tooltip_str;
-                        });
-
-                    chart.showLegend(true);
-
-                d3.select('#multiBarHorizontalChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('width', 400)
-                    .attr('height', 400)
-                    .call(chart);
-            });
-        </script>
+    .. include:: ./examples/multiBarHorizontalChart.html
 
     """
 
