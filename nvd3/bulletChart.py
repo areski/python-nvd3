@@ -17,7 +17,7 @@ class bulletChart(TemplateMixin, NVD3Chart):
     A bullet chart is a variation of a bar graph
     used to indicate the value of a single variable
     in relation to a set of qualitative ranges. It is
-    inspired by a dashboard guage or thermometer chart.
+    inspired by a dashboard gauge or thermometer chart.
 
     Python example:
 

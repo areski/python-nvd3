@@ -71,7 +71,7 @@ if _ip and _ip.__module__.lower().startswith('ipy'):
                         rel="stylesheet"/>''' % (nvd3_css_url)))
         # The following two methods for loading the script file are redundant.
         # This is intentional.
-        # Ipython's loading of javscript in version 1.x is a bit squirrely, especially
+        # Ipython's loading of javascript in version 1.x is a bit squirrely, especially
         # when creating demos to view in nbviewer.
         # by trying twice, in two different ways (one using jquery and one using plain old
         # HTML), we maximize our chances of successfully loading the script.
