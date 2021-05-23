@@ -45,7 +45,7 @@ class NVD3Chart(object):
     #:  directory holding the assets (bower_components)
     assets_directory = './bower_components/'
 
-    # this attribute is overriden by children of this
+    # this attribute is overridden by children of this
     # class
     CHART_FILENAME = None
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True,

@@ -36,7 +36,7 @@ class multiChart(TemplateMixin, NVD3Chart):
         chart.buildhtml()
 
 
-    Javascript renderd to:
+    Javascript rendered to:
 
     .. raw:: html
 
