@@ -34,52 +34,12 @@ class multiChart(TemplateMixin, NVD3Chart):
         extra_serie = {"tooltip": {"y_start": "", "y_end": " min"}}
         chart.add_serie(y=ydata2, x=xdata, type='bar', yaxis=2,name='spend', extra=extra_serie, **kwargs2)
         chart.buildhtml()
+        print(chart.content)
 
 
     Javascript rendered to:
 
-    .. raw:: html
-
-    <div id="multichart"><svg style="height:450px;"></svg></div>
-    <script>
-
-            data_multichart=[{"color": "black", "type": "line", "values": [{"y": 115.5, "x": 1}, {"y": 160.5, "x": 2}, {"y": 108, "x": 3}, {"y
-": 145.5, "x": 4}, {"y": 84, "x": 5}, {"y": 70.5, "x": 6}], "key": "visits", "yAxis": 1}, {"color": "red", "type": "bar", "values": [{"y": 486
-24, "x": 1}, {"y": 42944, "x": 2}, {"y": 43439, "x": 3}, {"y": 24194, "x": 4}, {"y": 38440, "x": 5}, {"y": 31651, "x": 6}], "key": "spend", "y
-Axis": 2}];
-
-        nv.addGraph(function() {
-        var chart = nv.models.multiChart();
-
-        chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-
-        var datum = data_multichart;
-        
-                chart.yAxis1
-                .tickFormat(d3.format(',.02f'));
-            chart.yAxis2
-                .tickFormat(d3.format(',.02f'));
-            chart.xAxis
-                .tickFormat(function(d) { return get_am_pm(parseInt(d)); });
-
-        function get_am_pm(d){
-            if (d > 12) {
-                d = d - 12; return (String(d) + 'PM');
-            }
-            else {
-                return (String(d) + 'AM');
-            }
-        };
-
-          chart.showLegend(true);
-          
-            d3.select('#multichart svg')
-            .datum(datum)
-            .transition().duration(500)
-            .attr('height', 450)
-            .call(chart);
-        });
-    </script>
+    .. include:: ./examples/multiChart.html
 
     See the source code of this page, to see the underlying javascript.
     """

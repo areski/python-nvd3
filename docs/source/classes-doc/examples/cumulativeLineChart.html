@@ -1,0 +1,62 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="cumulativelinechart"><svg style="height:450px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                data_cumulativelinechart=[{"values": [{"x": 1365026400000, "y": 6}, {"x": 1365026500000, "y": 5}, {"x": 1365026600000, "y": 1}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"x": 1365026400000, "y": 36}, {"x": 1365026500000, "y": 55}, {"x": 1365026600000, "y": 11}], "key": "Serie 2", "yAxis": "1"}];
+        
+            nv.addGraph(function() {
+                var chart = nv.models.cumulativeLineChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_cumulativelinechart;
+        
+        
+        
+        
+        
+        
+        
+                    chart.xAxis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+        );
+                    chart.yAxis
+                        .tickFormat(d3.format(',.1%'));
+        
+                           chart.tooltip.headerFormatter(function(d, i) {
+                               return d3.time.format("%d %b %Y")(new Date(parseInt(d)));
+                           });
+        
+              chart.showLegend(true);
+        
+        
+        
+                
+        
+        
+        
+                d3.select('#cumulativelinechart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('height', 450)
+                    .call(chart);
+        
+        
+        
+            });
+        
+        
+        
+        
+            </script>
+        

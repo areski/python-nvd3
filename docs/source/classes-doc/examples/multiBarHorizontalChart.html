@@ -1,0 +1,59 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="multibarhorizontalchart"><svg style="width:400px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                data_multibarhorizontalchart=[{"values": [{"x": -14, "y": -6}, {"x": -7, "y": 5}, {"x": 7, "y": -1}, {"x": 14, "y": 9}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"x": -14, "y": -23}, {"x": -7, "y": -6}, {"x": 7, "y": -32}, {"x": 14, "y": 9}], "key": "Serie 2", "yAxis": "1"}];
+        
+            nv.addGraph(function() {
+                var chart = nv.models.multiBarHorizontalChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_multibarhorizontalchart;
+        
+        
+        
+        
+        
+        
+        
+                    chart.xAxis
+                        .tickFormat(d3.format(',.2f'));
+                    chart.yAxis
+                        .tickFormat(d3.format(',.2f'));
+        
+        
+              chart.showLegend(true);
+        
+        
+        
+                
+        
+        
+        
+                d3.select('#multibarhorizontalchart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '400')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+        
+            });
+        
+        
+        
+        
+            </script>
+        

@@ -1,0 +1,58 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="discretebarchart"><svg style="width:400px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                        data_discretebarchart=[{"values": [{"x": "A", "y": 3}, {"x": "B", "y": 4}, {"x": "C", "y": 0}, {"x": "D", "y": -3}, {"x": "E", "y": 5}, {"x": "F", "y": 7}], "key": "Serie 1", "yAxis": "1"}];
+        
+        
+                    nv.addGraph(function() {
+                var chart = nv.models.discreteBarChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_discretebarchart;
+        
+        
+        
+                
+        
+        
+        
+                            chart.yAxis
+                        .tickFormat(d3.format(',.0f'));
+        
+        
+                
+        
+            
+        
+                
+        
+        
+        
+                    d3.select('#discretebarchart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '400')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+            
+        
+                });
+        
+        
+        
+            </script>
+        

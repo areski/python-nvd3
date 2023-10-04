@@ -1,0 +1,70 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="lineplusbarchart"><svg style="width:500px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                    data_lineplusbarchart=[{"values": [{"x": 1338501600000, "y": 6}, {"x": 1345501600000, "y": 5}, {"x": 1353501600000, "y": 1}], "key": "Serie 1", "yAxis": "1", "bar": "true"}, {"values": [{"x": 1338501600000, "y": 0.002}, {"x": 1345501600000, "y": 0.003}, {"x": 1353501600000, "y": 0.004}], "key": "Serie 2", "yAxis": "1"}];
+        
+        
+                nv.addGraph(function() {
+                var chart = nv.models.linePlusBarChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_lineplusbarchart;
+        
+        
+        
+                chart.focusEnable(true);
+        
+                        chart.xAxis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+        );
+                    chart.x2Axis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+        );
+                    chart.y1Axis
+                        .tickFormat(function(d) { return d3.format(',f')(d) });
+                    chart.y2Axis
+                        .tickFormat(function(d) { return d3.format(',0.3f')(d) });
+        
+        
+                               chart.tooltip.headerFormatter(function(d, i) {
+                               return d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(d)));
+                           });
+        
+        
+                  chart.showLegend(true);
+        
+        
+            
+        
+                
+        
+        
+        
+                    d3.select('#lineplusbarchart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '500')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+            
+        
+                });
+        
+        
+        
+            </script>
+        

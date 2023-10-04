@@ -1,0 +1,67 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="linewithfocuschart"><svg style="height:450px;"></svg></div>
+        
+        
+            <script>
+        
+        
+            
+                data_linewithfocuschart=[{"values": [{"x": 1365026400000, "y": -6}, {"x": 1365026500000, "y": 5}, {"x": 1365026600000, "y": -1}, {"x": 1365026700000, "y": 2}, {"x": 1365026800000, "y": 4}, {"x": 1365026900000, "y": 8}, {"x": 1365027000000, "y": 10}], "key": "Serie 1", "yAxis": "1"}];
+        
+            nv.addGraph(function() {
+                var chart = nv.models.lineWithFocusChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_linewithfocuschart;
+        
+        
+        
+        
+        
+        
+        
+                    chart.xAxis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+        );
+                    chart.x2Axis
+                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+        );
+                    chart.yAxis
+                        .tickFormat(d3.format(',.2f'));
+                    chart.y2Axis
+                        .tickFormat(d3.format(',.2f'));
+        
+                           chart.tooltip.headerFormatter(function(d, i) {
+                               return d3.time.format("%d %b %Y")(new Date(parseInt(d)));
+                           });
+        
+              chart.showLegend(true);
+        
+        
+        
+                
+        
+        
+        
+                d3.select('#linewithfocuschart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('height', 450)
+                    .call(chart);
+        
+        
+        
+            });
+        
+        
+        
+        
+            </script>
+        

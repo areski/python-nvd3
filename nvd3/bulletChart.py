@@ -35,53 +35,11 @@ class bulletChart(TemplateMixin, NVD3Chart):
             measures=measures,
             markers=markers)
         chart.buildhtml()
+        print(chart.content)
 
     JavaScript generated:
 
-    .. raw:: html
-
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>
-                <meta charset="utf-8" />
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css" rel="stylesheet" />
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.js"></script>
-            </head>
-            <body>
-
-            <div id="bulletchart"><svg style="width:500px;height:100px;"></svg></div>
-
-
-            <script>
-
-
-
-                    data_bulletchart=[{"key": "Serie 1", "values": [{"title": ["Revenue"], "subtitle": "USD, in mill", "ranges": [100, 250, 300], "measures": [220, 280]}]}];
-
-
-            function transformedData(){
-                return data_bulletchart[0]['values'][0]
-            }
-
-
-
-            nv.addGraph(function() {
-            var chart = nv.models.bulletChart();
-
-            d3.select('svg')
-                .datum(transformedData())
-                .transition().duration(1000)
-                .call(chart)
-                ;
-
-            return chart;
-            });
-
-            </script>
-
-            </body>
-        </html>
+    .. include:: ./examples/bulletChart.html
 
     '''
     CHART_FILENAME = './bulletchart.html'
