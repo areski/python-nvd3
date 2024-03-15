@@ -166,4 +166,4 @@ Python-nvd3 is licensed under MIT, see `MIT-LICENSE.txt`.
 Maintainers
 -----------
 
-If you want to help maintain this project, please get it touch.
+If you want to help maintain this project, please get in touch.
