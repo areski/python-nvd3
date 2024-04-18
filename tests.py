@@ -281,19 +281,19 @@ class ChartTest(unittest.TestCase):
 
     def test_charts_with_extras(self):
         #  extras="d3.selectAll('#mygraphname text').style('opacity', 0.5)"
-        type_bullet = 'bulletChart'
-        bullet_chart = bulletChart(name=chart_name_bullet, height=100, width=500, extras="d3.selectAll('#mygraphname text').style('opacity', 0.5)")
+        chart_name = 'bulletChart'
+        bullet_chart = bulletChart(name=chart_name, height=100, width=500, extras="d3.selectAll('#mygraphname text').style('opacity', 0.5)")
         bullet_chart.buildhtml()
         assert 'data_bulletchart' in bullet_chart.htmlcontent
         assert "d3.selectAll('#mygraphname text').style('opacity', 0.5)" in bullet_chart.htmlcontent
 
-        type_pie = "pieChart"
-        pie_chart = pieChart(name=chart_name_pie, height=400, width=400, donut=True, donutRatio=0.2, extras="alert('Example of extra not even related to d3!')")
+        chart_name = "pieChart"
+        pie_chart = pieChart(name=chart_name, height=400, width=400, donut=True, donutRatio=0.2, extras="alert('Example of extra not even related to d3!')")
         pie_chart.buildhtml()
         assert "alert('Example of extra not even related to d3!')" in pie_chart.htmlcontent
 
-        type_line_plus_bar = "linePlusBarChart"
-        line_plus_bar_chart = linePlusBarChart(name=chart_name_line_plus_bar, date=True, height=350, extras="d3.selectAll('#mygraphname text').style('fill', 'red')")
+        chart_name = "linePlusBarChart"
+        line_plus_bar_chart = linePlusBarChart(name=chart_name, date=True, height=350, extras="d3.selectAll('#mygraphname text').style('fill', 'red')")
         line_plus_bar_chart.buildhtml()
         assert "d3.selectAll('#mygraphname text').style('fill', 'red')" in line_plus_bar_chart.htmlcontent
 
