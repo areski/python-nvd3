@@ -17,7 +17,7 @@ output_file = open('test_multiBarHorizontalChart.html', 'w')
 
 chart_name = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(name=chart_name, height=350)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
 nb_element = 10
 xdata = list(range(nb_element))

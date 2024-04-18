@@ -54,7 +54,7 @@ After installation use python-nvd3 as follows ::
 
     chart_name = 'pieChart'
     chart = pieChart(name=chart_name, color_category='category20c', height=450, width=450)
-    chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+    chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
     xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
     ydata = [3, 4, 0, 1, 5, 7, 3]

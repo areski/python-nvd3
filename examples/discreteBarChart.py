@@ -17,7 +17,7 @@ output_file = open('test_discreteBarChart.html', 'w')
 
 chart_name = "discreteBarChart"
 chart = discreteBarChart(name='mygraphname', height=400, width=600, show_values=True, extras="d3.selectAll('#mygraphname text').style('fill', 'red')")
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
 
@@ -36,7 +36,7 @@ output_file = open('test_discreteBarChart2.html', 'w')
 chart_name = "discreteBarChart"
 chart = discreteBarChart(name='mygraphname', height=400, width=600,
                          tooltips=False)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
 ydata = [3, 12, -10, 5, 25, -7, 2]
 

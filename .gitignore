@@ -41,6 +41,7 @@ bower_components
 archive
 env
 myenv
+nvd3_env
 
 htmlcov
 test_*.html

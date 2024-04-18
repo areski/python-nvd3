@@ -28,7 +28,7 @@ xdata = [start_time + x * 1000000000 for x in xdata]
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
 
 chart = discreteBarChart(name=chart_name, height=400, width=600, x_is_date=True, x_axis_format="%d-%b")
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 chart.add_serie(y=ydata, x=xdata, extra=extra_serie)

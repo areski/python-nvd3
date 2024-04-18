@@ -17,7 +17,7 @@ output_file = open('test_multiBarChart.html', 'w')
 
 chart_name = "multiBarChart"
 chart = multiBarChart(name=chart_name, height=350)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 chart.callback = '''
                     function(){
                     d3.selectAll(".nv-bar").on('click',

@@ -20,7 +20,7 @@ output_file = open('test_multiBarChart_date.html', 'w')
 chart_name = "multiBarChart"
 
 chart = multiBarChart(name=chart_name, height=350, x_is_date=True)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
 nb_element = 100
 start_time = int(time.mktime(datetime.datetime(2013, 6, 1).timetuple()) * 1000)

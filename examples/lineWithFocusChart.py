@@ -25,7 +25,7 @@ chart_name = "lineWithFocusChart"
 chart = lineWithFocusChart(name=chart_name, height=550, width=850,
                            color_category='category20b', x_is_date=True,
                            x_axis_format="%d %b %Y %H", focus_enable=True)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
 xdata = list(range(nb_element))
 xdata = [start_time + x * 1000000000 for x in xdata]
