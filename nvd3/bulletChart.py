@@ -22,7 +22,7 @@ class bulletChart(TemplateMixin, NVD3Chart):
     Python example:
 
         from nvd3.bulletChart import bulletChart
-        chart = bulletChart.bulletChart(name=type, height=100, width=500)
+        chart = bulletChart.bulletChart(name=chart_name, height=100, width=500)
         title = 'Revenue',
         subtitle = 'US$, in thousands'
         ranges = [150, 225, 300]

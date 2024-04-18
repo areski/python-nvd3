@@ -45,7 +45,7 @@ html_open = """
 
 output_file.write(html_open)
 
-type = "discreteBarChart"
+chart_name = "discreteBarChart"
 chart = discreteBarChart(name='my graphname', height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
@@ -58,8 +58,8 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "pie Chart"
-chart = pieChart(name=type, color_category='category20c', height=400,
+chart_name = "pie Chart"
+chart = pieChart(name=chart_name, color_category='category20c', height=400,
                  width=400, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -74,7 +74,7 @@ output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
 name = "lineChart-different-x-axis"
-type = "lineChart"
+chart_name = "lineChart"
 chart = lineChart(name=name, height=400, width=800, x_is_date=False,
                   jquery_on_ready=True)
 
@@ -98,7 +98,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "lineChart"
+chart_name = "lineChart"
 chart = lineChart(height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True)
 
@@ -123,7 +123,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "lineChartWithInteractiveGuideline"
+chart_name = "lineChartWithInteractiveGuideline"
 chart = lineChart(name="lineChart-With-Interactive-Guideline",
                   height=400, width=800, x_is_date=True, x_axis_format="%d %b %Y %H",
                   jquery_on_ready=True, use_interactive_guideline=True)
@@ -149,7 +149,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "lineWithFocusChart"
+chart_name = "lineWithFocusChart"
 chart = lineWithFocusChart(color_category='category20b', x_is_date=True,
                            height=400, width=800,
                            x_axis_format="%d %b %Y", jquery_on_ready=True)
@@ -177,7 +177,7 @@ output_file.write(chart.htmlcontent)
 
 # ---------------------------------------
 
-type = "stackedAreaChart"
+chart_name = "stackedAreaChart"
 chart = stackedAreaChart(height=400, width=800, x_is_date=True,
                          x_axis_format="%d %b %Y %I", jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
@@ -197,7 +197,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "linePlusBarChart"
+chart_name = "linePlusBarChart"
 chart = linePlusBarChart(height=400, width=800, x_is_date=True,
                          x_axis_format="%d %b %Y", jquery_on_ready=True,
                          focus_enable=True)
@@ -219,7 +219,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "cumulativeLineChart"
+chart_name = "cumulativeLineChart"
 chart = cumulativeLineChart(height=400, width=800,
                             x_is_date=True, x_axis_format="%d %b %Y",
                             jquery_on_ready=True)
@@ -240,7 +240,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "multiBarHorizontalChart"
+chart_name = "multiBarHorizontalChart"
 chart = multiBarHorizontalChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
@@ -258,7 +258,7 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "multiBarChart"
+chart_name = "multiBarChart"
 chart = multiBarChart(height=400, width=800, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 10
@@ -275,8 +275,8 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "multiBarChartDate"
-chart = multiBarChart(name=type, height=400, width=800, x_is_date=True, jquery_on_ready=True)
+chart_name = "multiBarChartDate"
+chart = multiBarChart(name=chart_name, height=400, width=800, x_is_date=True, jquery_on_ready=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 100
 start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
@@ -297,8 +297,8 @@ chart.buildcontent()
 output_file.write(chart.htmlcontent)
 # ---------------------------------------
 
-type = "scatterChart"
-chart = scatterChart(name=type, height=350, width=800, x_is_date=False)
+chart_name = "scatterChart"
+chart = scatterChart(name=chart_name, height=350, width=800, x_is_date=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 nb_element = 50
 xdata = [i + random.randint(1, 10) for i in range(nb_element)]

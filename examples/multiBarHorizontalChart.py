@@ -15,8 +15,8 @@ import random
 # Open File for test
 output_file = open('test_multiBarHorizontalChart.html', 'w')
 
-type = "multiBarHorizontalChart"
-chart = multiBarHorizontalChart(name=type, height=350)
+chart_name = "multiBarHorizontalChart"
+chart = multiBarHorizontalChart(name=chart_name, height=350)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 
 nb_element = 10
