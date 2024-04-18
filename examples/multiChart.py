@@ -14,8 +14,8 @@ from nvd3 import multiChart
 # Open File for test
 output_file = open('test_multiChart.html', 'w')
 # ---------------------------------------
-type = "multiChart"
-chart = multiChart(name=type, x_is_date=False, x_axis_format="AM_PM")
+chart_name = "multiChart"
+chart = multiChart(name=chart_name, x_is_date=False, x_axis_format="AM_PM")
 
 xdata = [1,2,3,4,5,6]
 ydata = [115.5,160.5,108,145.5,84,70.5]

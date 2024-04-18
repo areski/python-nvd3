@@ -20,8 +20,8 @@ class multiChart(TemplateMixin, NVD3Chart):
     Python example::
 
         from nvd3 import multiChart
-        type = "multiChart"
-        chart = multiChart(name=type, x_is_date=False, x_axis_format="AM_PM")
+        chart_name = "multiChart"
+        chart = multiChart(name=chart_name, x_is_date=False, x_axis_format="AM_PM")
 
         xdata = [1,2,3,4,5,6]
         ydata = [115.5,160.5,108,145.5,84,70.5]

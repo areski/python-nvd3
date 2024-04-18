@@ -20,8 +20,8 @@ nb_element = 100
 
 
 output_file = open('test_linePlusBarChart.html', 'w')
-type = "linePlusBarChart"
-chart = linePlusBarChart(name=type, height=350, width=750,
+chart_name = "linePlusBarChart"
+chart = linePlusBarChart(name=chart_name, height=350, width=750,
                          x_is_date=True, x_axis_format="%d %b %Y",
                          focus_enable=True)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")

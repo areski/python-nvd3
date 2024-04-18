@@ -15,7 +15,7 @@ from nvd3 import discreteBarChart
 # Open File for test
 output_file = open('test_discreteBarChart.html', 'w')
 
-type = "discreteBarChart"
+chart_name = "discreteBarChart"
 chart = discreteBarChart(name='mygraphname', height=400, width=600, show_values=True, extras="d3.selectAll('#mygraphname text').style('fill', 'red')")
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
 xdata = ["A", "B", "C", "D", "E", "F", "G"]
@@ -33,7 +33,7 @@ output_file.close()
 
 output_file = open('test_discreteBarChart2.html', 'w')
 
-type = "discreteBarChart"
+chart_name = "discreteBarChart"
 chart = discreteBarChart(name='mygraphname', height=400, width=600,
                          tooltips=False)
 chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")

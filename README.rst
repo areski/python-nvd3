@@ -42,8 +42,8 @@ These graphs can be part of your web application:
 Want to try it yourself? Install python-nvd3, enter your python shell and try this quick demo::
 
     >>> from nvd3 import pieChart
-    >>> type = 'pieChart'
-    >>> chart = pieChart(name=type, color_category='category20c', height=450, width=450)
+    >>> chart_name = 'pieChart'
+    >>> chart = pieChart(name=chart_name, color_category='category20c', height=450, width=450)
     >>> xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]
     >>> ydata = [3, 4, 0, 1, 5, 7, 3]
     >>> extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
