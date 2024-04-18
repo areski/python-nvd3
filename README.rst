@@ -10,9 +10,6 @@ Python Wrapper for NVD3 - It's time for beautiful charts
 .. _Areski: https://github.com/areski/
 .. _Oz: https://github.com/oz123/
 
-.. image:: https://api.travis-ci.org/areski/python-nvd3.png?branch=develop
-  :target: https://travis-ci.org/areski/python-nvd3
-
 .. image:: https://coveralls.io/repos/areski/python-nvd3/badge.png?branch=develop
   :target: https://coveralls.io/r/areski/python-nvd3?branch=develop
 
@@ -32,10 +29,6 @@ Python Wrapper for NVD3 - It's time for beautiful charts
   :target: https://pypi.python.org/pypi/python-nvd3/
   :alt: License
 
-.. image:: https://requires.io/github/areski/python-nvd3/requirements.svg?branch=develop
-  :target: https://requires.io/github/areski/python-nvd3/requirements/?branch=develop
-  :alt: Requirements Status
-
 NVD3 is an attempt to build re-usable charts and chart components
 for d3.js without taking away the power that d3.js offers you.
 
@@ -44,8 +37,6 @@ renders JavaScript for you!
 These graphs can be part of your web application:
 
  .. image:: https://raw.githubusercontent.com/areski/python-nvd3/develop/docs/showcase/multiple-charts.png
-
-
 
 
 Want to try it yourself? Install python-nvd3, enter your python shell and try this quick demo::
@@ -108,6 +99,7 @@ Documentation
 Check out the documentation on `Read the Docs`_ for some live Chart examples!
 
 .. _Read the Docs: http://python-nvd3.readthedocs.org
+
 
 Installation
 ------------
