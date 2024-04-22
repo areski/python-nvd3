@@ -1,0 +1,55 @@
+{# This template adds attributes unique
+   to multiChart #}
+
+{% extends "content.html" %}
+{% block body %}
+
+    {% block data %}
+    {{super()}}
+    {% endblock data %}
+
+    {% block init %}
+    {{super()}}
+    {% endblock init %}
+
+    {% block rendering_opts %}
+    {{super()}}
+    {% endblock rendering_opts %}
+
+    {% block axes %}
+    {{super()}}
+    {% endblock axes %}
+
+    {% if chart.x_axis_format == 'AM_PM' %}
+        function get_am_pm(d){
+            if (d > 12) {
+                d = d - 12; return (String(d) + 'PM');
+            }
+            else {
+                return (String(d) + 'AM');
+            }
+        };
+    {% endif %}
+
+    {% block legend %}
+    {{super()}}
+    {% endblock legend %}
+
+    {% block custoattr %}
+    {{super()}}
+    {% endblock custoattr %}
+
+    {% block inject %}
+    {{ super() }}
+    {% endblock inject %}
+
+    {% block extras %}
+    {{ super () }}
+    {% endblock extras %}
+
+    {% block close %}
+    {{ super() }}
+    {% endblock close %}
+
+{% endblock body %}
+

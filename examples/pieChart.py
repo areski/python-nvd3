@@ -15,9 +15,17 @@ from nvd3 import pieChart
 # Open File for test
 output_file = open('test_pieChart.html', 'w')
 
-type = "pieChart"
-chart = pieChart(name=type, color_category='category20c', height=400, width=400)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart_name = "pieChart"
+chart = pieChart(name=chart_name, color_category='category20c', height=400, width=400, extras="d3.selectAll('#piechart .nv-slice').style('opacity', 0.5);")
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
+chart.callback = '''
+                    function(){
+                    d3.selectAll(".nv-pie .nv-pie .nv-slice").on('click',
+                        function(d){
+                        console.log("piechart_callback_test: clicked on slice " + JSON.stringify(d['data']));
+                        console.log('/app/fruit?type='.concat(d['data']['label']));
+                    }
+                '''
 
 extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
 xdata = ["Orange", "Banana", "Pear", "Kiwi", "Apple", "Strawberry", "Pineapple"]

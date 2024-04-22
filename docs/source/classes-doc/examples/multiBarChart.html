@@ -1,0 +1,57 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="multibarchart"><svg style="width:500px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                data_multibarchart=[{"values": [{"x": "one", "y": 6}, {"x": "two", "y": 12}, {"x": "three", "y": 9}, {"x": "four", "y": 16}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"x": "one", "y": 8}, {"x": "two", "y": 14}, {"x": "three", "y": 7}, {"x": "four", "y": 11}], "key": "Serie 2", "yAxis": "1"}];
+        
+            nv.addGraph(function() {
+                var chart = nv.models.multiBarChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_multibarchart;
+        
+        
+        
+        
+        
+        
+        
+                    chart.yAxis
+                        .tickFormat(d3.format(',.2f'));
+        
+        
+              chart.showLegend(true);
+        
+        
+        
+                
+        
+        
+        
+                d3.select('#multibarchart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '500')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+        
+            });
+        
+        
+        
+        
+            </script>
+        

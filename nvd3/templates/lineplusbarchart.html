@@ -24,6 +24,10 @@
     {{super()}}
     {% endblock axes %}
 
+    {% block tooltip %}
+    {{super()}}
+    {% endblock tooltip %}
+
     {% block legend %}
     {{super()}}
     {% endblock legend %}
@@ -35,6 +39,10 @@
     {% block inject %}
     {{ super() }}
     {% endblock inject %}
+
+    {% block extras %}
+    {{ super () }}
+    {% endblock extras %}
 
     {% block close %}
     {{ super() }}

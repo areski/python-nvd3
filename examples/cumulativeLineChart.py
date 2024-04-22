@@ -21,9 +21,9 @@ nb_element = 100
 # Open File for test
 output_file = open('test_cumulativeLineChart.html', 'w')
 
-type = "cumulativeLineChart"
-chart = cumulativeLineChart(name=type, height=350, x_is_date=True)
-chart.set_containerheader("\n\n<h2>" + type + "</h2>\n\n")
+chart_name = "cumulativeLineChart"
+chart = cumulativeLineChart(name=chart_name, height=350, x_is_date=True)
+chart.set_containerheader("\n\n<h2>" + chart_name + "</h2>\n\n")
 
 xdata = list(range(nb_element))
 xdata = [start_time + x * 1000000000 for x in xdata]

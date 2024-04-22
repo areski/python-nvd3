@@ -7,15 +7,17 @@
 
 {% block body %}
     {% block data %}
-        data_{{ chart.name }}={{ chart.series_js }};
+        data_{{ chart.name }}={{ chart.series_js|striptags }};
     {% endblock data %}
 
     {% block init %}
     nv.addGraph(function() {
-        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
+        var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %}{% if not chart.show_controls %}.showControls(false){% endif %}{% if chart.right_align_y_axis %}.rightAlignYAxis(true){% endif %};
 
         chart.margin({top: {{ chart.margin_top }}, right: {{ chart.margin_right }}, bottom: {{ chart.margin_bottom }}, left: {{ chart.margin_left }}});
-
+        chart.xAxis.rotateLabels({{chart.xAxis_rotateLabel}})
+        chart.xAxis.staggerLabels({{chart.xAxis_staggerLabel|lower}})
+        chart.xAxis.showMaxMin({{chart.xAxis_showMaxMin|lower}})
         var datum = data_{{ chart.name }};
 
     {% if not chart.color_list and chart.color_category %}
@@ -23,9 +25,22 @@
     {% endif %}
     {% endblock init %}
 
+    {% block rendering_opts %}
     {% if chart.stacked %}
         chart.stacked(true);
     {% endif %}
+
+    {% if chart.no_data_message %}
+        chart.noData('{{chart.no_data_message}}')
+    {% endif %}
+    {% if chart.show_controls == False %}
+        chart.showControls(false);
+    {% endif %}
+    {% if chart.show_values %}
+        chart.showValues(true);
+    {% endif %}
+
+    {% endblock rendering_opts %}
 
     {% block focus %}
     {% endblock focus %}
@@ -50,23 +65,23 @@
                 {% if chart.model == 'pieChart' %}
                     {% block pietooltip %}
                     {% endblock pietooltip %}
-                {% else %}
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = String(graph.point.x);
-                        var y = String(graph.point.y);
-                        {{ chart.tooltip_condition_string }}
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' at ' + x;
-                        return tooltip_str;
-                    });
                 {% endif %}
             {% else %}
-                chart.tooltipContent(function(key, y, e, graph) {
-                    var x = d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(graph.point.x)));
-                    var y = String(graph.point.y);
-                    {{ chart.tooltip_condition_string }}
-                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                    return tooltip_str;
-                });
+                {% if chart.model in ('discreteBarChart', ) %}
+                   chart.tooltip.keyFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
+                {% if chart.model in ('linePlusBarChart', 'lineChart', 'multiBarChart', 'cumulativeLineChart', 'lineWithFocusChart') %}
+                   chart.tooltip.headerFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
+                {% if chart.model in ('stackedAreaChart', ) %}
+                   chart.interactiveLayer.tooltip.headerFormatter(function(d, i) {
+                       return d3.time.format("{{ chart.charttooltip_dateformat }}")(new Date(parseInt(d)));
+                   });
+                {% endif %}
             {% endif %}
         {% endif %}
     {% endblock tooltip %}
@@ -80,7 +95,7 @@
     {% block custoattr %}
         {# add custom chart attributes #}
         {% for attr, value in chart.chart_attr.items() %}
-            {% if value is string and value.startswith(".") %}:
+            {% if value is string and value.startswith(".") %}
                 chart.{{ attr }}{{ value }};
             {% else %}
                 chart.{{ attr }}({{ value }});
@@ -96,13 +111,19 @@
 
     {% endblock custoattr %}
 
+    {% block y_axis_scale %}
+    {% if chart.y_axis_scale_min or chart.y_axis_scale_max %}
+        chart.forceY([{{ chart.y_axis_scale_min }},{{ chart.y_axis_scale_max }}]);
+    {% endif %}
+    {% endblock y_axis_scale %}
+
     {% block inject %}
         {# Inject data to D3 #}
         d3.select('#{{ chart.name }} svg')
             .datum(datum)
             .transition().duration(500)
             {% if chart.width %}
-            .attr('width', {{ chart.width}})
+            .attr('width', '{{ chart.width}}')
             {% endif %}
             {% if chart.height %}
             .attr('height', {{ chart.height}})
@@ -110,9 +131,16 @@
             .call(chart);
     {% endblock inject %}
 
-    {# extra chart attributes #}
-    {% if chart.extras %}
-        {{ chart.extras }}
+    {% block extras %}
+        {# extra chart attributes #}
+        {% if chart.extras %}
+            {{ chart.extras }}
+        {% endif %}
+    {% endblock extras %}
+
+    {# callback for clicking on charts #}
+    {% if chart.callback %}
+       },{{ chart.callback }});
     {% endif %}
 
     {# closing nv.addGraph #}

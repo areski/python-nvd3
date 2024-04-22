@@ -39,7 +39,8 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
 
         extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " min"}}
         chart.add_serie(name="Serie 2", y=y2data, x=xdata, extra=extra_serie)
-        chart.buildcontent()
+        chart.buildhtml()
+        print(chart.content)
 
     Note that in case you have two data serie with extreme different numbers,
     that you would like to format in different ways,
@@ -51,44 +52,7 @@ class linePlusBarChart(TemplateMixin, NVD3Chart):
 
     Javascript generated:
 
-    .. raw:: html
-
-        <div id="linePlusBarChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-            data_linePlusBarChart=[{"bar": "true", "values": [{"y": 6, "x": 1338501600000}, {"y": 5, "x": 1345501600000}, {"y": 1, "x": 1353501600000}], "key": "Serie 1", "yAxis": "1"}, {"values": [{"y": 0.002, "x": 1338501600000}, {"y": 0.003, "x": 1345501600000}, {"y": 0.004, "x": 1353501600000}], "key": "Serie 2", "yAxis": "1"}];
-            nv.addGraph(function() {
-                var chart = nv.models.linePlusBarChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_linePlusBarChart;
-
-                    chart.y2Axis
-                        .tickFormat(function(d) { return d3.format(',0.3f')(d) });
-                    chart.xAxis
-                        .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
-                    chart.y1Axis
-                        .tickFormat(function(d) { return d3.format(',f')(d) });
-
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = d3.time.format("%d %b %Y %H:%S")(new Date(parseInt(graph.point.x)));
-                        var y = String(graph.point.y);
-                        if(key.indexOf('Serie 1') > -1 ){
-                                var y = 'There are ' +  String(graph.point.y)  + ' calls';
-                            }
-                            if(key.indexOf('Serie 2') > -1 ){
-                                var y = 'There are ' +  String(graph.point.y)  + ' min';
-                            }
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                        return tooltip_str;
-                    });
-                    chart.showLegend(true);
-                d3.select('#linePlusBarChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('width', 500)
-                    .attr('height', 400)
-                    .call(chart);
-            });
-        </script>
+    .. include:: ./examples/linePlusBarChart.html
 
     """
     CHART_FILENAME = "./lineplusbarchart.html"

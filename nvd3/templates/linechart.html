@@ -12,9 +12,17 @@
     {{super()}}
     {% endblock init %}
 
+    {% block rendering_opts %}
+    {{super()}}
+    {% endblock rendering_opts %}
+
     {% block axes %}
     {{super()}}
     {% endblock axes %}
+
+    {% block tooltip %}
+        {{super()}}
+    {% endblock tooltip %}
 
     {% if chart.x_axis_format == 'AM_PM' %}
         function get_am_pm(d){
@@ -38,6 +46,10 @@
     {% block inject %}
     {{ super() }}
     {% endblock inject %}
+
+    {% block extras %}
+    {{ super () }}
+    {% endblock extras %}
 
     {% block close %}
     {{ super() }}

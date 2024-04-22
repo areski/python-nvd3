@@ -32,51 +32,11 @@ class pieChart(TemplateMixin, NVD3Chart):
         extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
         chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
+        print(chart.content)
 
     Javascript generated:
 
-    .. raw:: html
-
-        <div id="pieChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-
-
-            data_pieChart=[{"values": [{"value": 3, "label": "Orange"},
-                           {"value": 4, "label": "Banana"},
-                           {"value": 0, "label": "Pear"},
-                           {"value": 1, "label": "Kiwi"},
-                           {"value": 5, "label": "Apple"},
-                           {"value": 7, "label": "Strawberry"},
-                           {"value": 3, "label": "Pineapple"}],
-                           "key": "Serie 1"}];
-
-            nv.addGraph(function() {
-                var chart = nv.models.pieChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_pieChart[0].values;
-                        chart.tooltipContent(function(key, y, e, graph) {
-                            var x = String(key);
-                            var y =  String(y)  + ' cal';
-
-                            tooltip_str = '<center><b>'+x+'</b></center>' + y;
-                            return tooltip_str;
-                        });
-                    chart.showLegend(true);
-                    chart.showLabels(true);
-                    chart.donut(false);
-                chart
-                    .x(function(d) { return d.label })
-                    .y(function(d) { return d.value });
-                chart.width(400);
-                chart.height(400);
-
-                d3.select('#pieChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('width', 400)
-                    .attr('height', 400)
-                    .call(chart);  });
-        </script>
+    .. include:: ./examples/pieChart.html
 
     """
     CHART_FILENAME = "./piechart.html"
@@ -99,3 +59,4 @@ class pieChart(TemplateMixin, NVD3Chart):
             self.set_graph_width(width)
         self.donut = kwargs.get('donut', False)
         self.donutRatio = kwargs.get('donutRatio', 0.35)
+        self.callback = kwargs.get('callback', None)

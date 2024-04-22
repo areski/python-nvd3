@@ -1,0 +1,68 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="scatterchart"><svg style="width:400px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+                    data_scatterchart=[{"values": [{"x": 3, "y": -1, "shape": "circle", "size": "1"}, {"x": 4, "y": 2, "shape": "circle", "size": "1"}, {"x": 0, "y": 3, "shape": "circle", "size": "1"}, {"x": -3, "y": 3, "shape": "circle", "size": "1"}, {"x": 5, "y": 15, "shape": "circle", "size": "1"}, {"x": 7, "y": 2, "shape": "circle", "size": "1"}], "key": "series 1", "yAxis": "1"}, {"values": [{"x": 3, "y": 1, "shape": "cross", "size": "10"}, {"x": 4, "y": -2, "shape": "cross", "size": "10"}, {"x": 0, "y": 4, "shape": "cross", "size": "10"}, {"x": -3, "y": 7, "shape": "cross", "size": "10"}, {"x": 5, "y": -5, "shape": "cross", "size": "10"}, {"x": 7, "y": 3, "shape": "cross", "size": "10"}], "key": "series 2", "yAxis": "1"}];
+        
+        
+                nv.addGraph(function() {
+                var chart = nv.models.scatterChart();
+        
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                chart.xAxis.rotateLabels(0)
+                chart.xAxis.staggerLabels(false)
+                chart.xAxis.showMaxMin(true)
+                var datum = data_scatterchart;
+        
+        
+        
+            
+        
+        
+        
+                        chart.xAxis
+                        .tickFormat(d3.format(',.02f'));
+                    chart.yAxis
+                        .tickFormat(d3.format(',.02f'));
+        
+        
+        
+                  chart.showLegend(true);
+        
+        
+            
+        
+                
+        
+        
+        
+        
+            chart
+                .showDistX(true)
+                .showDistY(true)
+                .color(d3.scale.category10().range());
+        
+                    d3.select('#scatterchart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '400')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+            
+        
+                });
+        
+        
+        
+            </script>
+        

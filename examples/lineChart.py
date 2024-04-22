@@ -14,8 +14,8 @@ from nvd3 import lineChart
 # Open File for test
 output_file = open('test_lineChart.html', 'w')
 # ---------------------------------------
-type = "lineChart"
-chart = lineChart(name=type, x_is_date=False, x_axis_format="AM_PM")
+chart_name = "lineChart"
+chart = lineChart(name=chart_name, x_is_date=False, x_axis_format="AM_PM")
 
 xdata = list(range(0, 24))
 ydata = [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 4, 3, 3, 5, 7, 5, 3, 16, 6, 9, 15, 4, 12]

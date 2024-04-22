@@ -4,7 +4,7 @@
 {% extends "content.html" %}
 {% block body %}
 
-    data_{{ chart.name }}={{ chart.series_js }};
+    data_{{ chart.name }}={{ chart.series_js|striptags }};
 
     nv.addGraph(function() {
         var chart = nv.models.{{ chart.model }}(){% if chart.use_interactive_guideline %}.useInteractiveGuideline(true){% endif %};
@@ -15,9 +15,9 @@
         chart.color(d3.scale.{{ chart.color_category }}().range());
     {% endif %}
 
-    chart.tooltipContent(function(key, y, e, graph) {
-          var x = String(key);
-              {{ chart.tooltip_condition_string }}
+    chart.tooltip.contentGenerator(function(d, elem) {
+          var x = String(d.data.label);
+          var y = String(d.data.value);
               tooltip_str = '<center><b>'+x+'</b></center>' + y;
               return tooltip_str;
               });
@@ -69,9 +69,29 @@
         chart.color(mycolor);
     {% endif %}
 
+    {% block rendering_opts %}
+        {% if chart.no_data_message %}
+            chart.noData('{{chart.no_data_message}}')
+        {% endif %}
+        {% if chart.show_controls == False %}
+            chart.showControls(false);
+        {% endif %}
+    {% endblock rendering_opts %}
+
     {% block inject %}
     {{super()}}
     {% endblock inject %}
+
+    {% block extras %}
+        {# extra chart attributes #}
+        {% if chart.extras %}
+            {{ chart.extras }}
+        {% endif %}
+    {% endblock extras %}
+
+    {% if chart.callback %}
+       },{{ chart.callback }});
+    {% endif %}
 
     {% block close %}
     {{ super() }}

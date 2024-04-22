@@ -45,7 +45,7 @@ class NVD3Chart(object):
     #:  directory holding the assets (bower_components)
     assets_directory = './bower_components/'
 
-    # this attribute is overriden by children of this
+    # this attribute is overridden by children of this
     # class
     CHART_FILENAME = None
     template_environment = Environment(lstrip_blocks=True, trim_blocks=True,
@@ -71,9 +71,16 @@ class NVD3Chart(object):
         :keyword: **margin_top** - default - ``30``
         :keyword: **height** - default - ``''``
         :keyword: **width** - default - ``''``
+        :keyword: **show_values** - default - ``False``
         :keyword: **stacked** - default - ``False``
         :keyword: **focus_enable** - default - ``False``
         :keyword: **resize** - define - ``False``
+        :keyword: **no_data_message** - default - ``None`` or nvd3 default
+        :keyword: **xAxis_rotateLabel** - default - ``0``
+        :keyword: **xAxis_staggerLabel** - default - ``False``
+        :keyword: **xAxis_showMaxMin** - default - ``True``
+        :keyword: **right_align_y_axis** - default - ``False``
+        :keyword: **show_controls** - default - ``True``
         :keyword: **show_legend** - default - ``True``
         :keyword: **show_labels** - default - ``True``
         :keyword: **tag_script_js** - default - ``True``
@@ -87,6 +94,8 @@ class NVD3Chart(object):
             Signal that x axis is a date axis
         :keyword: **date_format** - default - ``%x``
                   see https://github.com/mbostock/d3/wiki/Time-Formatting
+        :keyword: **y_axis_scale_min** - default - ``''``.
+        :keyword: **y_axis_scale_max** - default - ``''``.
         :keyword: **x_axis_format** - default - ``''``.
         :keyword: **y_axis_format** - default - ``''``.
         :keyword: **style** - default - ``''``
@@ -118,11 +127,19 @@ class NVD3Chart(object):
         self.margin_top = kwargs.get('margin_top', 30)
         self.height = kwargs.get('height', '')
         self.width = kwargs.get('width', '')
+        self.show_values = kwargs.get('show_values', False)
         self.stacked = kwargs.get('stacked', False)
         self.focus_enable = kwargs.get('focus_enable', False)
         self.resize = kwargs.get('resize', False)
+        self.no_data_message = kwargs.get('no_data_message', None)
+        self.xAxis_rotateLabel = kwargs.get('xAxis_rotateLabel', 0)
+        self.xAxis_staggerLabel = kwargs.get('xAxis_staggerLabel', False)
+        self.xAxis_showMaxMin = kwargs.get('xAxis_showMaxMin', True)
+        self.right_align_y_axis = kwargs.get('right_align_y_axis', False)
+        self.show_controls = kwargs.get('show_controls', True)
         self.show_legend = kwargs.get('show_legend', True)
         self.show_labels = kwargs.get('show_labels', True)
+        self.tooltip_separator = kwargs.get('tooltip_separator')
         self.tag_script_js = kwargs.get('tag_script_js', True)
         self.use_interactive_guideline = kwargs.get("use_interactive_guideline",
                                                     False)
@@ -131,12 +148,15 @@ class NVD3Chart(object):
         self.style = kwargs.get('style', '')
         self.date_format = kwargs.get('date_format', '%x')
         self.x_axis_date = kwargs.get('x_axis_date', False)
+        self.y_axis_scale_min = kwargs.get('y_axis_scale_min', '')
+        self.y_axis_scale_max = kwargs.get('y_axis_scale_max', '')
         #: x-axis contain date format or not
         # possible duplicate of x_axis_date
         self.date_flag = kwargs.get('date_flag', False)
         self.x_axis_format = kwargs.get('x_axis_format', '')
         # Load remote JS assets or use the local bower assets?
         self.remote_js_assets = kwargs.get('remote_js_assets', True)
+        self.callback = kwargs.get('callback', None)
 
         # None keywords attribute that should be modified by methods
         # We should change all these to _attr
@@ -153,22 +173,21 @@ class NVD3Chart(object):
         self.header_css = [
             '<link href="%s" rel="stylesheet" />' % h for h in
             (
-                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css' if self.remote_js_assets else self.assets_directory + 'nvd3/src/nv.d3.css',
+                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css' if self.remote_js_assets else self.assets_directory + 'nvd3/src/nv.d3.css',
             )
         ]
 
         self.header_js = [
             '<script src="%s"></script>' % h for h in
             (
-                'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js' if self.remote_js_assets else self.assets_directory + 'd3/d3.min.js',
-                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js' if self.remote_js_assets else self.assets_directory + 'nvd3/nv.d3.min.js'
+                'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js' if self.remote_js_assets else self.assets_directory + 'd3/d3.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.js' if self.remote_js_assets else self.assets_directory + 'nvd3/nv.d3.min.js'
             )
         ]
 
         #: Javascript code as string
         self.jschart = None
         self.custom_tooltip_flag = False
-        self.tooltip_condition_string = ''
         self.charttooltip = ''
         self.serie_no = 1
 
@@ -267,27 +286,11 @@ class NVD3Chart(object):
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
 
-                    if self.model == 'linePlusBarChart':
-                        if self.tooltip_condition_string:
-                            self.tooltip_condition_string += stab(5)
-                        self.tooltip_condition_string += stab(0) + "if(key.indexOf('" + name + "') > -1 ){\n" +\
-                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-                    elif self.model == 'cumulativeLineChart':
-                        self.tooltip_condition_string += stab(0) + "if(key == '" + name + "'){\n" +\
-                            stab(6) + "var y = " + _start + " String(e) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-                    else:
-                        self.tooltip_condition_string += stab(5) + "if(key == '" + name + "'){\n" +\
-                            stab(6) + "var y = " + _start + " String(graph.point.y) " + _end + ";\n" +\
-                            stab(5) + "}\n"
-
                 if self.model == 'pieChart':
                     _start = extra['tooltip']['y_start']
                     _end = extra['tooltip']['y_end']
                     _start = ("'" + str(_start) + "' + ") if _start else ''
                     _end = (" + '" + str(_end) + "'") if _end else ''
-                    self.tooltip_condition_string += "var y = " + _start + " String(y) " + _end + ";\n"
 
         # Increment series counter & append
         self.serie_no += 1
@@ -349,7 +352,7 @@ class NVD3Chart(object):
 
     def buildcontent(self):
         """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
+        will usually require the attribute `jquery_on_ready` to be set which
         will wrap the js in $(function(){<regular_js>};)
         """
         self.buildcontainer()
@@ -407,11 +410,6 @@ class NVD3Chart(object):
     def buildjschart(self):
         """generate javascript code for the chart"""
         self.jschart = ''
-
-        # add custom tooltip string in jschart
-        # default condition (if build_custom_tooltip is not called explicitly with date_flag=True)
-        if self.tooltip_condition_string == '':
-            self.tooltip_condition_string = 'var y = String(graph.point.y);\n'
 
         # Include data
         self.series_js = json.dumps(self.series)
@@ -473,7 +471,7 @@ class TemplateMixin(object):
     """
     def buildcontent(self):
         """Build HTML content only, no header or body tags. To be useful this
-        will usually require the attribute `juqery_on_ready` to be set which
+        will usually require the attribute `jquery_on_ready` to be set which
         will wrap the js in $(function(){<regular_js>};)
         """
         self.buildcontainer()

@@ -30,44 +30,11 @@ class multiBarChart(TemplateMixin, NVD3Chart):
         chart.add_serie(name="Serie 1", y=ydata1, x=xdata)
         chart.add_serie(name="Serie 2", y=ydata2, x=xdata)
         chart.buildhtml()
+        print(chart.content)
 
     Javascript generated:
 
-    .. raw:: html
-
-        <div id="multiBarChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-
-            data_multiBarChart=[{"values":
-                                [{"y": 6, "x": "one"},
-                                {"y": 12, "x": "two"},
-                                {"y": 9, "x": "three"},
-                                {"y": 16, "x": "four"}],
-                                "key": "Serie 1", "yAxis": "1"},
-                                {"values":
-                                    [{"y": 8, "x": "one"},
-                                    {"y": 14, "x": "two"},
-                                    {"y": 7, "x": "three"},
-                                    {"y": 11, "x": "four"}],
-                                "key": "Serie 2", "yAxis": "1"}];
-
-            nv.addGraph(function() {
-                var chart = nv.models.multiBarChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_multiBarChart;
-                        chart.yAxis
-                            .tickFormat(d3.format(',.2f'));
-                    chart.showLegend(true);
-                d3.select('#multiBarChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('width', 500)
-                    .attr('height', 400)
-                    .call(chart);
-            });
-
-
-        </script>
+    .. include:: ./examples/multiBarChart.html
 
     """
 

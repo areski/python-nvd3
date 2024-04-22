@@ -1,0 +1,62 @@
+..
+    _Generated with generated_examples.sh script
+
+.. raw:: html
+        
+            <div id="piechart"><svg style="width:400px;height:400px;"></svg></div>
+        
+        
+            <script>
+        
+        
+        
+            data_piechart=[{"values": [{"label": "Orange", "value": 3}, {"label": "Banana", "value": 4}, {"label": "Pear", "value": 0}, {"label": "Kiwi", "value": 1}, {"label": "Apple", "value": 5}, {"label": "Strawbery", "value": 7}, {"label": "Pineapple", "value": 3}], "key": "Serie 1"}];
+        
+            nv.addGraph(function() {
+                var chart = nv.models.pieChart();
+                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+                var datum = data_piechart[0].values;
+        
+                chart.color(d3.scale.category20c().range());
+        
+            chart.tooltip.contentGenerator(function(d, elem) {
+                  var x = String(d.data.label);
+                  var y = String(d.data.value);
+                      tooltip_str = '<center><b>'+x+'</b></center>' + y;
+                      return tooltip_str;
+                      });
+                chart.showLabels(true);
+        
+                    chart.donut(false);
+        
+            chart.showLegend(true);
+        
+        
+        
+        
+                chart
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value });
+        
+                chart.width(400);
+        
+                chart.height(400);
+        
+        
+        
+                    d3.select('#piechart svg')
+                    .datum(datum)
+                    .transition().duration(500)
+                    .attr('width', '400')
+                    .attr('height', 400)
+                    .call(chart);
+        
+        
+        
+        
+                });
+        
+        
+        
+            </script>
+        

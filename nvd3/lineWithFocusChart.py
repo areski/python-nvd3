@@ -23,52 +23,19 @@ class lineWithFocusChart(TemplateMixin, NVD3Chart):
 
         from nvd3 import lineWithFocusChart
         chart = lineWithFocusChart(name='lineWithFocusChart', x_is_date=True, x_axis_format="%d %b %Y")
-        xdata = [1365026400000000, 1365026500000000, 1365026600000000, 1365026700000000, 1365026800000000, 1365026900000000, 1365027000000000]
+        xdata = [1365026400000, 1365026500000, 1365026600000, 1365026700000, 1365026800000, 1365026900000, 1365027000000]
         ydata = [-6, 5, -1, 2, 4, 8, 10]
 
         extra_serie = {"tooltip": {"y_start": "", "y_end": " ext"},
                        "date_format": "%d %b %Y"}
         chart.add_serie(name="Serie 1", y=ydata, x=xdata, extra=extra_serie)
         chart.buildhtml()
+        print(chart.content)
 
     Javascript generated:
 
-    .. raw:: html
+    .. include:: ./examples/lineWithFocusChart.html
 
-        <div id="lineWithFocusChart"><svg style="height:450px; width:100%"></svg></div>
-        <script>
-            data_lineWithFocusChart=[{"values": [{"y": -6, "x": 1365026400000000}, {"y": 5, "x": 1365026500000000}, {"y": -1, "x": 1365026600000000}], "key": "Serie 1", "yAxis": "1"}];
-            nv.addGraph(function() {
-                var chart = nv.models.lineWithFocusChart();
-                chart.margin({top: 30, right: 60, bottom: 20, left: 60});
-                var datum = data_lineWithFocusChart;
-                        chart.yAxis
-                            .tickFormat(d3.format(',.2f'));
-                        chart.y2Axis
-                            .tickFormat(d3.format(',.2f'));
-                        chart.xAxis
-                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
-                        chart.x2Axis
-                            .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) });
-
-                    chart.tooltipContent(function(key, y, e, graph) {
-                        var x = d3.time.format("%d %b %Y")(new Date(parseInt(graph.point.x)));
-                        var y = String(graph.point.y);
-                                            if(key == 'Serie 1'){
-                                var y =  String(graph.point.y)  + ' ext';
-                            }
-
-                        tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
-                        return tooltip_str; });
-
-                    chart.showLegend(true);
-
-                d3.select('#lineWithFocusChart svg')
-                    .datum(datum)
-                    .transition().duration(500)
-                    .attr('height', 450)
-                    .call(chart); });
-        </script>
 
     """
 

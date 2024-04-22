@@ -39,9 +39,9 @@ if _ip and _ip.__module__.lower().startswith('ipy'):
             for chart_type in nvd3_all:
                 html_formatter.for_type_by_name('nvd3.' + chart_type, chart_type, _print_html)
 
-    def initialize_javascript(d3_js_url='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js',
-                              nvd3_js_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js',
-                              nvd3_css_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css',
+    def initialize_javascript(d3_js_url='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js',
+                              nvd3_js_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.js',
+                              nvd3_css_url='https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css',
                               use_remote=False):
         '''Initialize the ipython notebook to be able to display nvd3 results.
         by instructing IPython to load the nvd3 JS and css files, and the d3 JS file.
@@ -52,9 +52,9 @@ if _ip and _ip.__module__.lower().startswith('ipy'):
 
         use_remote: use remote hosts for d3.js, nvd3.js, and nv.d3.css (default False)
         * Note:  the following options are ignored if use_remote is False:
-        nvd3_css_url: location of nvd3 css file (default https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css)
-        nvd3_js_url: location of nvd3 javascript file (default  https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css)
-        d3_js_url: location of d3 javascript file (default https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js)
+        nvd3_css_url: location of nvd3 css file (default https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css)
+        nvd3_js_url: location of nvd3 javascript file (default  https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css)
+        d3_js_url: location of d3 javascript file (default https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js)
         '''
         from IPython.display import display, Javascript, HTML
 
@@ -71,7 +71,7 @@ if _ip and _ip.__module__.lower().startswith('ipy'):
                         rel="stylesheet"/>''' % (nvd3_css_url)))
         # The following two methods for loading the script file are redundant.
         # This is intentional.
-        # Ipython's loading of javscript in version 1.x is a bit squirrely, especially
+        # Ipython's loading of javascript in version 1.x is a bit squirrely, especially
         # when creating demos to view in nbviewer.
         # by trying twice, in two different ways (one using jquery and one using plain old
         # HTML), we maximize our chances of successfully loading the script.
