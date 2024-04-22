@@ -283,7 +283,7 @@ start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
 xdata = range(nb_element)
 xdata = list(map(lambda x: start_time + x * 1000000000, xdata))
 ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-ydata2 = map(lambda x: x * 2, ydata)
+ydata2 = list(map(lambda x: x * 2, ydata))
 
 tooltip_date = "%d %b %Y %H:%M:%S %p"
 extra_serie = {"tooltip": {"y_start": "There are ", "y_end": " calls"},
