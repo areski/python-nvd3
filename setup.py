@@ -22,7 +22,7 @@ test_requirements = [
 
 setup(
     name='python-nvd3',
-    version='0.14.0',
+    version='0.16.0',
     description="Python NVD3 - Chart Library for d3.js",
     long_description=readme + '\n\n' + history,
     keywords='plot, graph, nvd3, d3',
